@@ -266,6 +266,7 @@
     <Content Include="VendorMenu\dist\img\credit\visa.png" />
     <Content Include="VendorMenu\dist\img\default-150x150.png" />
     <Content Include="VendorMenu\dist\img\icons.png" />
+    <Content Include="VendorMenu\dist\img\logo_hrv.png" />
     <Content Include="VendorMenu\dist\img\photo1.png" />
     <Content Include="VendorMenu\dist\img\photo2.png" />
     <Content Include="VendorMenu\dist\img\photo3.jpg" />
