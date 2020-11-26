@@ -4,62 +4,99 @@
     Layout = Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles{
+    <link rel="stylesheet" href="~/VendorMenu/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/VendorMenu/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+}
+
 <div class="container">
 
+    <div class="well well-lg">
+        <a class="btn btn-outline-primary" id="BtnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-plus"></i> Nuevo </a>
+    </div>
 
-    <p>
-        @Html.ActionLink("Nuevo", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary" })
-    </p>
-    <table class="table table-striped border">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.id_usuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre_usuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.apellido_usuario)
-            </th>
+    @*<p>
+            @Html.ActionLink("Nuevo", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary" })
+        </p>*@
 
-            <th>
-                @Html.DisplayNameFor(model => model.estado_usuario)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Perfiles.nombre_perfil)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <table id="tabla" class="table table-bordered table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id_usuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre_usuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.apellido_usuario)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.estado_usuario)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Perfiles.nombre_perfil)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.login_usuario }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.login_usuario }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.login_usuario })
-                </td>
+                <th>IdUsuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Estado</th>
+                <th>Perfil</th>
+                <th>Opciones</th>
             </tr>
-        }
+
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id_usuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre_usuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.apellido_usuario)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estado_usuario)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Perfiles.nombre_perfil)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.login_usuario }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.login_usuario }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.login_usuario })
+                    </td>
+                </tr>
+            }
+        </tbody>
 
     </table>
 
 </div>
+
+@section scripts{
+    <script src="~/VendorMenu/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/VendorMenu/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/VendorMenu/datatables-buttons/js/dataTables.buttons.min.js"></script>
+
+    <script>
+        $('#tabla').DataTable({
+            //"columnDefs": [{
+            //    "data": null
+            //},
+            //{
+            //    "targets": 0,
+            //    "visible": false
+            //}],
+            //"language": {
+            //    "lengthMenu": "Mostrar MENU registros",
+            //    "zeroRecords": "No se encontraron resultados",
+            //    "info": "Mostrando registros del START al END de un total de TOTAL registros",
+            //    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            //    "infoFiltered": "(filtrado de un total de MAX registros)",
+            //    "sSearch": "Buscar:",
+            //    "oPaginate": {
+            //        "sFirst": "Primero",
+            //        "sLast": "Último",
+            //        "sNext": "Siguiente",
+            //        "sPrevious": "Anterior"
+            //    },
+            //    "sProcessing": "Procesando..."
+            //}
+        });
+
+    </script>
+}
