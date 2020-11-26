@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebApplication.Models.Perfiles>
+
+@{
+    Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <p>
+        @Html.ActionLink("Nuevo", "Create")
+    </p>
+
+    <table class="table table-striped border">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre_perfil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado_perfil)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre_perfil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado_perfil)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_perfil }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.id_perfil }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id_perfil })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
