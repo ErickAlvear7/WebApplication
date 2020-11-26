@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.Controllers.ConexionDTO;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -17,8 +18,10 @@ namespace WebApplication.Controllers
         // GET: Usuarios
         public ActionResult Index()
         {
-            var usuarios = db.Usuarios.Include(u => u.Perfiles);
-            return View(usuarios.ToList());
+            List<User> _listaUsuarios = new List<User>();
+            _listaUsuarios = new SeguridadDTO().FunGetUsuarios();   
+         
+            return View(_listaUsuarios);
         }
 
         // GET: Usuarios/Details/5

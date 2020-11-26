@@ -129,6 +129,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ConexionDTO\LoginDTO.cs" />
+    <Compile Include="Controllers\ConexionDTO\SeguridadDTO.cs" />
+    <Compile Include="Controllers\ConexionDTO\User.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -169,6 +171,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="JQuery\TablaIdioma.js" />
     <Content Include="Models\ModelSeguridad.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelSeguridad.Context.cs</LastGenOutput>

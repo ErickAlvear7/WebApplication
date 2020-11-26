@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="~/VendorMenu/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!--Tabla-->
     <link rel="stylesheet" href="~/VendorMenu/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/VendorMenu/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- summernote -->
     @*<link rel="stylesheet" href="~/VendorMenu/summernote/summernote-bs4.css">*@
     <!-- Google Font: Source Sans Pro -->
@@ -86,7 +85,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                               
+
                                 <li class="nav-item">
                                     <a href="/Perfiles/Index" class="nav-link">
                                         <i class="fas fa-user-edit nav-icon"></i>
@@ -101,7 +100,7 @@
                                 </li>
                             </ul>
                         </li>
-                     
+
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-home"></i>
@@ -124,26 +123,26 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>                                                                                                                                                                                                  
+                        </li>
                         @*<li class="nav-header">LABELS</li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-danger"></i>
-                                <p class="text">Important</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-warning"></i>
-                                <p>Warning</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Informational</p>
-                            </a>
-                        </li>*@
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon far fa-circle text-danger"></i>
+                                    <p class="text">Important</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon far fa-circle text-warning"></i>
+                                    <p>Warning</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon far fa-circle text-info"></i>
+                                    <p>Informational</p>
+                                </a>
+                            </li>*@
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -183,7 +182,10 @@
     <script src="~/VendorMenu/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/VendorMenu/dist/js/adminlte.js"></script>
+    <!--Tabla-->
+    <script src="~/VendorMenu/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/VendorMenu/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 
-    @RenderSection("scripts",required: false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>

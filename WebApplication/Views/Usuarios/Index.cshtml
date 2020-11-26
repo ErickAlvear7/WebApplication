@@ -5,15 +5,14 @@
 }
 
 @section styles{
-    <link rel="stylesheet" href="~/VendorMenu/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/VendorMenu/datatables-buttons/css/buttons.bootstrap4.min.css">
+    @*<link rel="stylesheet" href="~/VendorMenu/datatables-bs4/css/dataTables.bootstrap4.min.css">*@
 
 }
 
 <div class="container">
 
     <div class="well well-lg">
-        <a class="btn btn-outline-primary" id="BtnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-plus"></i> Nuevo </a>
+        <a class="btn btn-outline-primary" id="BtnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-plus"></i> Nuevo</a>
     </div>
 
     @*<p>
@@ -21,7 +20,7 @@
         </p>*@
 
     <table id="tabla" class="table table-bordered table-hover">
-        <thead>
+        <thead class="text-center">
             <tr>
                 <th>IdUsuario</th>
                 <th>Nombre</th>
@@ -55,9 +54,13 @@
                         @Html.DisplayFor(modelItem => item.Perfiles.nombre_perfil)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.login_usuario }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.login_usuario }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.login_usuario })
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.login_usuario })*@ |
+                        <button id="BtnEditar" class="btn btn-outline-info"><i class="fas fa-edit"></i></button>
+
+                        @*@Html.ActionLink("Details", "Details", new { id = item.login_usuario })*@ |
+                        <button id="BtnEliminar" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+
+                        @*@Html.ActionLink("Delete", "Delete", new { id = item.login_usuario })*@
                     </td>
                 </tr>
             }
@@ -68,35 +71,6 @@
 </div>
 
 @section scripts{
-    <script src="~/VendorMenu/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/VendorMenu/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/VendorMenu/datatables-buttons/js/dataTables.buttons.min.js"></script>
 
-    <script>
-        $('#tabla').DataTable({
-            //"columnDefs": [{
-            //    "data": null
-            //},
-            //{
-            //    "targets": 0,
-            //    "visible": false
-            //}],
-            //"language": {
-            //    "lengthMenu": "Mostrar MENU registros",
-            //    "zeroRecords": "No se encontraron resultados",
-            //    "info": "Mostrando registros del START al END de un total de TOTAL registros",
-            //    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-            //    "infoFiltered": "(filtrado de un total de MAX registros)",
-            //    "sSearch": "Buscar:",
-            //    "oPaginate": {
-            //        "sFirst": "Primero",
-            //        "sLast": "Último",
-            //        "sNext": "Siguiente",
-            //        "sPrevious": "Anterior"
-            //    },
-            //    "sProcessing": "Procesando..."
-            //}
-        });
-
-    </script>
+    <script src="~/JQuery/TablaIdioma.js"></script>
 }
