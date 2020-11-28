@@ -39,5 +39,32 @@ namespace WebApplication.Controllers.ConexionDTO
             }
             
         }
+
+        public List<Perfi> FunGetPerfiles()
+        {
+            try
+            {
+                var _per = _db.Perfiles.ToList();
+                List<Perfi> _perfil = new List<Perfi>();
+
+                foreach (var item in _per)
+                {
+                    _perfil.Add(new Perfi()
+                    {
+                        IdPerfil = item.id_perfil,
+                        Perfil = item.nombre_perfil,
+                        Estado = item.estado_perfil?"Activo":"Inactivo"
+                    });
+                }
+
+                return _perfil;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

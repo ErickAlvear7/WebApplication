@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication.Models.Usuarios>
+﻿@model IEnumerable<WebApplication.Controllers.ConexionDTO.User>
 
 @{
     Layout = Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,16 +15,15 @@
         <a class="btn btn-outline-primary" id="BtnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-plus"></i> Nuevo</a>
     </div>
 
-    @*<p>
-            @Html.ActionLink("Nuevo", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary" })
-        </p>*@
+    <p>
+            @*@Html.ActionLink("Nuevo", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary" })*@
+    </p>
 
     <table id="tabla" class="table table-bordered table-hover">
         <thead class="text-center">
             <tr>
                 <th>IdUsuario</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Usuario</th>
                 <th>Estado</th>
                 <th>Perfil</th>
                 <th>Opciones</th>
@@ -37,24 +36,21 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.id_usuario)
+                        @Html.DisplayFor(modelItem => item.UserId)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.nombre_usuario)
+                        @Html.DisplayFor(modelItem => item.Usuario)
                     </td>
+                 
                     <td>
-                        @Html.DisplayFor(modelItem => item.apellido_usuario)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.estado_usuario)
+                        @Html.DisplayFor(modelItem => item.Estado)
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.Perfiles.nombre_perfil)
+                        @Html.DisplayFor(modelItem => item.Perfil)
                     </td>
                     <td>
-                        @*@Html.ActionLink("Edit", "Edit", new { id = item.login_usuario })*@ |
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.login_usuario }) |*@
                         <button id="BtnEditar" class="btn btn-outline-info"><i class="fas fa-edit"></i></button>
 
                         @*@Html.ActionLink("Details", "Details", new { id = item.login_usuario })*@ |

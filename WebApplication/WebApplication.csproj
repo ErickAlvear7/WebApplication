@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ConexionDTO\LoginDTO.cs" />
+    <Compile Include="Controllers\ConexionDTO\Perfi.cs" />
     <Compile Include="Controllers\ConexionDTO\SeguridadDTO.cs" />
     <Compile Include="Controllers\ConexionDTO\User.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -171,6 +172,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ImgHrv\hrv3.jpg" />
+    <Content Include="ImgHrv\hrv4.jpg" />
+    <Content Include="ImgHrv\hrv5.jpg" />
+    <Content Include="ImgHrv\hrv6.jpg" />
     <Content Include="JQuery\TablaIdioma.js" />
     <Content Include="Models\ModelSeguridad.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -235,6 +240,7 @@
     <Content Include="VendorLogin\select2\select2.js" />
     <Content Include="VendorLogin\select2\select2.min.css" />
     <Content Include="VendorLogin\select2\select2.min.js" />
+    <Content Include="VendorMenu\bootstrap\css\bootstrap.min.css" />
     <Content Include="VendorMenu\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="VendorMenu\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="VendorMenu\bootstrap\js\bootstrap.js" />

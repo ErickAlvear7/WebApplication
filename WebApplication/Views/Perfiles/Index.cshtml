@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication.Models.Perfiles>
+﻿@model IEnumerable<WebApplication.Controllers.ConexionDTO.Perfi>
 
 @{
     Layout = Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,39 +6,51 @@
 
 <div class="container">
 
+    <div class="well well-lg">
+        <a class="btn btn-outline-primary" id="BtnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-plus"></i> Nuevo</a>
+    </div>
+
     <p>
-        @Html.ActionLink("Nuevo", "Create")
+        @*@Html.ActionLink("Nuevo", "Create")*@
     </p>
 
-    <table class="table table-striped border">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.nombre_perfil)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.estado_perfil)
-            </th>
+    <table id="tabla" class="table table-bordered table-hover">
 
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <thead class="text-center">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre_perfil)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estado_perfil)
-                </td>
-
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_perfil }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id_perfil }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id_perfil })
-                </td>
+                <th>IdPerfil</th>
+                <th>Perfil</th>
+                <th>Estado</th>
+                <th>Opciones</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdPerfil)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Perfil)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
 
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.id_perfil }) |*@
+                        <button id="BtnEditar" class="btn btn-outline-info"><i class="fas fa-edit"></i></button>
+                        @*@Html.ActionLink("Details", "Details", new { id = item.id_perfil })*@ |
+                        <button id="BtnEliminar" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        @*@Html.ActionLink("Delete", "Delete", new { id = item.id_perfil })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
+@section scripts{
+
+    <script src="~/JQuery/TablaIdioma.js"></script>
+}

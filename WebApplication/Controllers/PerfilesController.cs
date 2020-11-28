@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.Controllers.ConexionDTO;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -17,7 +18,9 @@ namespace WebApplication.Controllers
         // GET: Perfiles
         public ActionResult Index()
         {
-            return View(db.Perfiles.ToList());
+            List<Perfi> _listaPerfiles = new List<Perfi>();
+            _listaPerfiles = new SeguridadDTO().FunGetPerfiles();
+            return View(_listaPerfiles);
         }
 
         // GET: Perfiles/Details/5
