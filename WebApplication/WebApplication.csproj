@@ -176,6 +176,7 @@
     <Content Include="ImgHrv\hrv4.jpg" />
     <Content Include="ImgHrv\hrv5.jpg" />
     <Content Include="ImgHrv\hrv6.jpg" />
+    <Content Include="JQuery\Perfiles.js" />
     <Content Include="JQuery\TablaIdioma.js" />
     <Content Include="JQuery\Usuarios.js" />
     <Content Include="Models\ModelSeguridad.Context.tt">

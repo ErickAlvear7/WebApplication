@@ -4,17 +4,42 @@
     Layout = Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header" id="header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="modal-content">
+                    cargando..
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardar" class="btn btn-dark">Guardar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="well well-lg">
+    <a class="btn btn-outline-primary" id="btnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-plus"></i> Nuevo</a>
+</div>
+
+<p>
+    @*@Html.ActionLink("Nuevo", "Create")*@
+</p>
+
 <div class="container">
 
-    <div class="well well-lg">
-        <a class="btn btn-outline-primary" id="BtnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-plus"></i> Nuevo</a>
-    </div>
-
-    <p>
-        @*@Html.ActionLink("Nuevo", "Create")*@
-    </p>
-
-    <table id="tabla" class="table table-bordered table-hover">
+   <table id="tabla" class="table table-bordered table-hover">
 
         <thead class="text-center">
             <tr>
@@ -53,4 +78,5 @@
 @section scripts{
 
     <script src="~/JQuery/TablaIdioma.js"></script>
+    <script src="~/JQuery/Perfiles.js"></script>
 }

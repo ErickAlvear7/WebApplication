@@ -1,23 +1,15 @@
 ﻿@model WebApplication.Models.Perfiles
 
 @{
-    Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Perfil</title>
-</head>
-<body>
     @using (Html.BeginForm()) 
     {
         @Html.AntiForgeryToken()
         
-        <div class="form-horizontal">
-            <h4>Perfiles</h4>
+        <div class="form-horizontal">          
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -37,30 +29,14 @@
                     </div>
                 </div>
             </div>
-    
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.aux_peri, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.aux_peri, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.aux_peri, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-    
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.aux_perii, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.aux_perii, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.aux_perii, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-    
-            @*<div class="form-group">
+             
+            <div class="form-group">
                 @Html.LabelFor(model => model.creacion_perfil, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.creacion_perfil, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.creacion_perfil, "", new { @class = "text-danger" })
                 </div>
-            </div>*@
+            </div>
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -73,5 +49,4 @@
     <div>
         @Html.ActionLink("Regresar", "Index")
     </div>
-</body>
-</html>
+
