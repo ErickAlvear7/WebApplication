@@ -7,13 +7,13 @@ namespace WebApplication.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-        public ActionResult Index()
+        public ActionResult Indexv1()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(string user, string pass)
+        public ActionResult Indexv1(string user, string pass)
         {
             Usuarios _usu = new LoginDTO().FunGetUsuarios(user, pass);
             if(_usu == null)
