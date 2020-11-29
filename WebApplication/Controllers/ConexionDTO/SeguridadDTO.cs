@@ -23,7 +23,7 @@ namespace WebApplication.Controllers.ConexionDTO
                     {
                         UserId = item.id_perfil,
                         Perfil = item.Perfiles.nombre_perfil,
-                        Usuario = item.nombre_usuario+""+item.apellido_usuario,
+                        Usuario = item.nombre_usuario+" "+item.apellido_usuario,
                         Login = item.login_usuario,
                         Estado = item.estado_usuario?"Activo":"Inactivo"
                     });

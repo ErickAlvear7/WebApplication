@@ -177,6 +177,7 @@
     <Content Include="ImgHrv\hrv5.jpg" />
     <Content Include="ImgHrv\hrv6.jpg" />
     <Content Include="JQuery\TablaIdioma.js" />
+    <Content Include="JQuery\Usuarios.js" />
     <Content Include="Models\ModelSeguridad.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelSeguridad.Context.cs</LastGenOutput>

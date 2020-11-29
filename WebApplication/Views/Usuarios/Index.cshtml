@@ -26,23 +26,23 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                <button type="button" id="btnSave" class="btn btn-dark">Guardar</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardar" class="btn btn-dark">Guardar</button>
             </div>
 
         </div>
     </div>
 </div>
 
+<div class="well well-lg">
+    <a class="btn btn-outline-primary" id="btnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-plus"></i> Nuevo</a>
+</div>
+
+<p>
+    @*@Html.ActionLink("Nuevo", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary" })*@
+</p>
+
 <div class="container">
-
-    <div class="well well-lg">
-        <a class="btn btn-outline-primary" id="BtnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-plus"></i> Nuevo</a>
-    </div>
-
-    <p>
-            @*@Html.ActionLink("Nuevo", "Create", null, htmlAttributes: new { @class = "btn btn-outline-primary" })*@
-    </p>
 
     <table id="tabla" class="table table-bordered table-hover">
         <thead class="text-center">
@@ -66,7 +66,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Usuario)
                     </td>
-                 
+
                     <td>
                         @Html.DisplayFor(modelItem => item.Estado)
                     </td>
@@ -76,10 +76,10 @@
                     </td>
                     <td>
                         @*@Html.ActionLink("Edit", "Edit", new { id = item.login_usuario }) |*@
-                        <button id="BtnEditar" class="btn btn-outline-info"><i class="fas fa-edit"></i></button>
+                        <button id="btnEditar" class="btn btn-outline-info"><i class="fas fa-edit"></i></button>
 
                         @*@Html.ActionLink("Details", "Details", new { id = item.login_usuario })*@ |
-                        <button id="BtnEliminar" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                        <button id="btnEliminar" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
 
                         @*@Html.ActionLink("Delete", "Delete", new { id = item.login_usuario })*@
                     </td>
@@ -94,4 +94,5 @@
 @section scripts{
 
     <script src="~/JQuery/TablaIdioma.js"></script>
+    <script src="~/JQuery/Usuarios.js"></script>
 }
