@@ -172,10 +172,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="ImgHrv\hrv3.jpg" />
-    <Content Include="ImgHrv\hrv4.jpg" />
-    <Content Include="ImgHrv\hrv5.jpg" />
-    <Content Include="ImgHrv\hrv6.jpg" />
+    <Content Include="ImgHrv\equipo1 %28600 x 450%29.png" />
+    <Content Include="ImgHrv\hrv3 %28600 x 450%29.png" />
+    <Content Include="ImgHrv\hrv4 %28600 x 450%29.png" />
+    <Content Include="ImgHrv\hrv6 %28600 x 450%29.png" />
+    <Content Include="ImgHrv\local2 %28600 x 449%29.png" />
+    <Content Include="ImgHrv\local3 %28553 x 450%29.png" />
     <Content Include="JQuery\Perfiles.js" />
     <Content Include="JQuery\TablaIdioma.js" />
     <Content Include="JQuery\Usuarios.js" />
@@ -220,6 +222,7 @@
     <Content Include="VendorLoginV1\images\img-01.png" />
     <Content Include="VendorLoginV1\images\login1.png" />
     <Content Include="VendorLoginV1\images\login2.png" />
+    <Content Include="VendorLoginV1\images\login_pro.png" />
     <Content Include="VendorLoginV1\images\logo_hrv.png" />
     <Content Include="VendorLoginV1\js\main.js" />
     <Content Include="VendorLoginV1\vendor\animate\animate.css" />
