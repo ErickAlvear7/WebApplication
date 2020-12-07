@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using WebApplication.Models;
@@ -9,6 +11,8 @@ namespace WebApplication.Controllers.ConexionDTO
     public class SeguridadDTO
     {
         BDD_HRVEntities _db = new BDD_HRVEntities();
+        DataSet _dataSet = new DataSet();
+        SqlDataAdapter _dataAdapter = new SqlDataAdapter();
         public List<User> FunGetUsuarios()
         {
             try
@@ -66,5 +70,37 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
+        //Funcion consulta datos de SP_
+        public DataSet FunConsultaDatos(int tipo1, int tipo2, string var1, string var2, string conexion)
+        {
+            try
+            {
+
+                using (SqlConnection _conexion = new SqlConnection(conexion)) 
+                {
+                    using(SqlCommand _command = new SqlCommand())
+                    {
+                        _command.Connection = _conexion;
+                        _command.CommandTimeout = 9000;
+                        _command.CommandType = CommandType.StoredProcedure;
+                        _command.CommandText = "sp_ConsultaDatos";
+                        _command.Parameters.AddWithValue("@tipo_in1",tipo1);
+                        _command.Parameters.AddWithValue("@tipo_in2", tipo2);
+                        _command.Parameters.AddWithValue("@tipo_var1", var1);
+                        _command.Parameters.AddWithValue("@tipo_var2", var2);
+                        _dataAdapter.SelectCommand = _command;
+                        _dataAdapter.Fill(_dataSet);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return _dataSet;
+        }
+            
     }
 }

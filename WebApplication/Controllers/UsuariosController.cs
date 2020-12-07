@@ -14,6 +14,7 @@ namespace WebApplication.Controllers
     public class UsuariosController : Controller
     {
         private BDD_HRVEntities db = new BDD_HRVEntities();
+        DataSet _data = new DataSet();
 
         // GET: Usuarios
         public ActionResult Index()
@@ -49,20 +50,32 @@ namespace WebApplication.Controllers
         // POST: Usuarios/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_usuario,id_perfil,nombre_usuario,apellido_usuario,login_usuario,password_usuario,estado_usuario,aux_usui,aux_usuii,creacion_usuario")] Usuarios usuarios)
-        {
-            if (ModelState.IsValid)
-            {
-                usuarios.creacion_usuario = DateTime.Now;
-                db.Usuarios.Add(usuarios);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.id_perfil = new SelectList(db.Perfiles, "id_perfil", "nombre_perfil", usuarios.id_perfil);
-            return View(usuarios);
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(Usuarios usuarios)
+        {
+            usuarios.creacion_usuario = DateTime.Now;
+            //if (ModelState.IsValid)
+            //{             
+              
+            //}
+
+            db.Usuarios.Add(usuarios);
+            db.SaveChanges();
+
+            _data = new SeguridadDTO().FunConsultaDatos(0, 0, "", "", Session["_conexion"].ToString());
+            var _datos = _data.Tables[0].AsEnumerable().Select(u=> new { UserId =u[0].ToString(), Perfil=u[1].ToString(), 
+                         Usuario=u[2].ToString(), Login=u[3].ToString(),Estado=u[4].ToString() });
+
+            return Json(new { success = true, data = _datos, mesagge = "agregado correctamente", nameclass = "success" }, JsonRequestBehavior.AllowGet);
+
+
+            //return RedirectToAction("Index");
+
+            //ViewBag.id_perfil = new SelectList(db.Perfiles, "id_perfil", "nombre_perfil", usuarios.id_perfil);
+            //return View(usuarios);
         }
 
         // GET: Usuarios/Edit/5

@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="~/VendorMenu/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!--Tabla-->
     <link rel="stylesheet" href="~/VendorMenu/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <!-- summernote -->
-    @*<link rel="stylesheet" href="~/VendorMenu/summernote/summernote-bs4.css">*@
+    <!--alerta-->
+    <link rel="stylesheet" href="~/VendorMenu/sweetalert2/sweetalert2.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -28,7 +28,7 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand"style="        background-color: #343E47;">
+        <nav class="main-header navbar navbar-expand" style="        background-color: #343E47;">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -42,12 +42,12 @@
             <!-- Right navbar links -->
             @*<ul class="navbar-nav ml-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
-            </ul>*@
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                            <i class="fas fa-th-large"></i>
+                        </a>
+                    </li>
+                </ul>*@
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
@@ -89,13 +89,13 @@
                                 <li class="nav-item">
                                     <a href="/Perfiles/Index" class="nav-link">
                                         <i class="fas fa-user-edit nav-icon"></i>
-                                        <p>Perfil</p>
+                                        <p>Perfiles</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/Usuarios/Index" class="nav-link">
                                         <i class="fas fa-users nav-icon"></i>
-                                        <p>Usuario</p>
+                                        <p>Usuarios</p>
                                     </a>
                                 </li>
                             </ul>
@@ -166,18 +166,14 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
-    <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="~/VendorMenu/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="~/VendorMenu/jquery-ui/jquery-ui.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/VendorMenu/bootstrap/js/bootstrap.bundle.min.js"></script>
-
     <!-- Sparkline -->
     <script src="~/VendorMenu/sparklines/sparkline.js"></script>
-    <!-- Summernote -->
-    @*<script src="plugins/summernote/summernote-bs4.min.js"></script>*@
     <!-- overlayScrollbars -->
     <script src="~/VendorMenu/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -185,6 +181,10 @@
     <!--Tabla-->
     <script src="~/VendorMenu/datatables/jquery.dataTables.min.js"></script>
     <script src="~/VendorMenu/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!--alerta-->
+    <script src="~/VendorMenu/sweetalert2/sweetalert2.min.js"></script>
+    <!--Notify-->
+    <script src="~/JQuery/notify.min.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>

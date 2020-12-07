@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Configuration;
+using System.Web.Mvc;
 using WebApplication.Controllers.ConexionDTO;
 using WebApplication.Models;
 
@@ -22,6 +23,7 @@ namespace WebApplication.Controllers
             }
             else
             {
+                Session["_conexion"] = ConfigurationManager.AppSettings["SqlConn"];
                 return RedirectToAction("Index", "Menu");
             }
         }
