@@ -85,11 +85,14 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Usuarios usuarios = db.Usuarios.Find(id);
+
             if (usuarios == null)
             {
                 return HttpNotFound();
             }
+
             ViewBag.id_perfil = new SelectList(db.Perfiles, "id_perfil", "nombre_perfil", usuarios.id_perfil);
             return View(usuarios);
         }

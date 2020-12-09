@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
 
     $("#btnNuevo").click(function (eve) {
         eve.preventDefault();
@@ -68,7 +70,38 @@
 
             FunGrabarAjax();
         }
+
+        if (_opcion == 1) {
+
+        }
     });
+
+    $(document).on("click", "#btnEditar", function (eve) {
+        eve.preventDefault();
+        _opcion = 1;
+        _fila = $(this).closest("tr");
+        _data = $('#tabla').dataTable().fnGetData(_fila);
+        _login = _data[3];
+        $("#modal-content").load("/Usuarios/Edit/" + _login);
+        $(".modal-title").text("Editar Perfil");
+        $("#header").css("background-color", "#23BBB9");
+        $("#header").css("color", "white");
+        $("#myModal").modal("show");
+        //alert(_login);        
+    });
+
+    $(document).on("click", "#ChkEstado", function () {
+        _checked = $("#ChkEstado").is(":checked");
+        if (_checked) {
+            $("#LblEstado").text("Activo");
+            estado = true;
+        } else {
+            $("#LblEstado").text("Inactivo");
+            estado = false;
+        }
+    });
+     
+    
 
     function FunGrabarAjax() {
         $.ajax({

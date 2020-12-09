@@ -19,19 +19,20 @@
                     </div>
                 </div>
             </div>
-            <hr/>
+            <hr style="height: 2px; border-width: 0; color:blue; background-color:blue"/>
             <div class="row">
                 <div class="form-inline col-md-12">
-                    <label for="estado" class="control-label col-md-2">Activo:</label>
-                    <div class="col-md-4">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.estado_perfil)
-                            @Html.ValidationMessageFor(model => model.estado_perfil, "", new { @class = "text-danger" })
-                        </div>
+                    <label for="estado" class="control-label col-md-2">Estado:</label>
+                    @*<div class="col-md-4">*@
+                    <label for="estado" class="control-label col-md-3">Activo</label>
+                    <!--<-->@*/div>*@
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.estado_perfil)
+                        @Html.ValidationMessageFor(model => model.estado_perfil, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
-            <hr/>
+            
         </div>
         
         @*<div class="form-horizontal">          
