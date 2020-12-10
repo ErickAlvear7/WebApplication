@@ -53,7 +53,7 @@
                 </div>
                 <label for="password" class="control-label col-md-2">Contraseña:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.password_usuario, new { htmlAttributes = new { @class = "form-control",@id= "TxtPassword" } })
+                    @Html.EditorFor(model => model.password_usuario, new { htmlAttributes = new { @class = "form-control",@id= "TxtPassword",@type="password" } })
                     @*@Html.ValidationMessageFor(model => model.password_usuario, "", new { @class = "text-danger" })*@
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <label for="estado" class="control-label col-md-2">Estado:</label>
               
                 <div class="checkbox col-md-1">
-                    <label for="estado" class="control-label col-md-2">@LblEstado</label>
+                    <label for="estado" class="control-label col-md-2", id="LblEstado">@LblEstado</label>
                     @Html.CheckBox("Estado", @estado, htmlAttributes: new { @class = "form-check-input", @id = "ChkEstado" })
                     @*@Html.EditorFor(model => model.estado_usuario)*@
                     @*@Html.ValidationMessageFor(model => model.estado_usuario, "", new { @class = "text-danger" })*@

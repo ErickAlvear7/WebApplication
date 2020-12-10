@@ -2,6 +2,7 @@
 
 @{
     Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+    var disable = "";
 }
 
 @section styles{
@@ -77,6 +78,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Estado)
                 </td>
+                @{ 
+                    if (item.Login == "admin")
+                    {
+                        disable = "disabled=disabled";
+                    }
+                    else
+                    {
+                        disable = "";
+                    }
+                }
 
 
                 <td>
@@ -84,7 +95,7 @@
                     <button id="btnEditar" class="btn btn-outline-info btn-sm ml-3"><i class="fas fa-edit"></i></button>
 
                   
-                    <button id="btnEliminar" class="btn btn-outline-danger btn-sm ml-3"><i class="fas fa-trash-alt"></i></button>
+                    <button id="btnEliminar" @disable  class="btn btn-outline-danger btn-sm ml-3"><i class="fas fa-trash-alt"></i></button>
 
                 </td>
             </tr>

@@ -13,6 +13,7 @@ namespace WebApplication.Controllers.ConexionDTO
         BDD_HRVEntities _db = new BDD_HRVEntities();
         DataSet _dataSet = new DataSet();
         SqlDataAdapter _dataAdapter = new SqlDataAdapter();
+     
         public List<User> FunGetUsuarios()
         {
             try
@@ -100,6 +101,20 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
             return _dataSet;
+        }
+
+        public int FunConsulataLogin(string _login)
+        {
+            try
+            {
+                
+                return _db.Usuarios.Where(u => u.login_usuario == _login).FirstOrDefault().id_usuario;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
             
     }

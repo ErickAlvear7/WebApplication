@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WebApplication.Controllers.ConexionDTO;
 using WebApplication.Models;
@@ -15,6 +14,7 @@ namespace WebApplication.Controllers
     {
         private BDD_HRVEntities db = new BDD_HRVEntities();
         DataSet _data = new DataSet();
+        int _codigoId = 0;
 
         // GET: Usuarios
         public ActionResult Index()
@@ -59,11 +59,16 @@ namespace WebApplication.Controllers
             usuarios.creacion_usuario = DateTime.Now;
             //if (ModelState.IsValid)
             //{             
-              
-            //}
 
+            //}
+            _codigoId = new SeguridadDTO().FunConsulataLogin(usuarios.login_usuario);
+            if (_codigoId == 0)
+            {
+
+            }
             db.Usuarios.Add(usuarios);
             db.SaveChanges();
+          
 
             _data = new SeguridadDTO().FunConsultaDatos(0, 0, "", "", Session["_conexion"].ToString());
             var _datos = _data.Tables[0].AsEnumerable().Select(u=> new { UserId =u[0].ToString(), Perfil=u[1].ToString(), 
