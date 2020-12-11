@@ -22,7 +22,11 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" class="btn btn-outline-success">Guardar</button>
+                @*<button type="button" id="btnGuardar" class="btn btn-outline-success">Guardar</button>*@
+            <button class="btn btn-primary" id="btnGuardar" type="button">
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                 Guardar
+            </button>
             </div>
 
         </div>
@@ -64,11 +68,11 @@
                     </td>
 
                     <td>
-                        @*@Html.ActionLink("Edit", "Edit", new { id = item.id_perfil }) |*@
+                     
                         <button id="btnEditar" class="btn btn-outline-info"><i class="fas fa-edit"></i></button>
-                        @*@Html.ActionLink("Details", "Details", new { id = item.id_perfil })*@ |
+                   
                         <button id="btnEliminar" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                        @*@Html.ActionLink("Delete", "Delete", new { id = item.id_perfil })*@
+                   
                     </td>
                 </tr>
             }

@@ -62,19 +62,29 @@ namespace WebApplication.Controllers
 
             //}
             _codigoId = new SeguridadDTO().FunConsulataLogin(usuarios.login_usuario);
+
             if (_codigoId == 0)
             {
+                db.Usuarios.Add(usuarios);
+                db.SaveChanges();
 
+
+                _data = new SeguridadDTO().FunConsultaDatos(0, 0, "", "", Session["_conexion"].ToString());
+                var _datos = _data.Tables[0].AsEnumerable().Select(u => new {
+                    UserId = u[0].ToString(),
+                    Perfil = u[1].ToString(),
+                    Usuario = u[2].ToString(),
+                    Login = u[3].ToString(),
+                    Estado = u[4].ToString()
+                });
+
+                return Json(new { success = true, data = _datos, mesagge = "agregado correctamente", nameclass = "success" }, JsonRequestBehavior.AllowGet);
             }
-            db.Usuarios.Add(usuarios);
-            db.SaveChanges();
-          
-
-            _data = new SeguridadDTO().FunConsultaDatos(0, 0, "", "", Session["_conexion"].ToString());
-            var _datos = _data.Tables[0].AsEnumerable().Select(u=> new { UserId =u[0].ToString(), Perfil=u[1].ToString(), 
-                         Usuario=u[2].ToString(), Login=u[3].ToString(),Estado=u[4].ToString() });
-
-            return Json(new { success = true, data = _datos, mesagge = "agregado correctamente", nameclass = "success" }, JsonRequestBehavior.AllowGet);
+            else
+            {
+                return Json(new { success = false, data = "", mesagge = "usuario ya existe", nameclass = "error" }, JsonRequestBehavior.AllowGet);
+            }
+           
 
 
             //return RedirectToAction("Index");

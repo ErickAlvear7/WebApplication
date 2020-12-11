@@ -6,34 +6,39 @@
 }
 
 @section styles{
-    @*<link rel="stylesheet" href="~/VendorMenu/datatables-bs4/css/dataTables.bootstrap4.min.css">*@
+ 
 
 }
 
 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header" id="header">
-                <h4 class="modal-title"></h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div id="modal-content">
-                    cargando..
-                </div>
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
-                <button type="button" id="btnGuardar" class="btn btn-outline-success">Guardar</button>
-            </div>
+ @*Modal Header*@ 
+<div class="modal-header" id="header">
+    <h4 class="modal-title"></h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
+ @*Modal body*@ 
+<div class="modal-body">
+    <div id="modal-content">
+        cargando..
+    </div>
+</div>
+ @*Modal footer*@ 
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+            @*<button type="button" id="btnGuardar" class="btn btn-outline-success">Guardar</button>*@
+            <button class="btn btn-primary" id="btnGuardar" type="button">
+                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Guardar
+            </button>
+        </div>
 
         </div>
     </div>
 </div>
+
+
 
 <div class="well well-lg">
     <a class="btn btn-outline-primary" id="btnNuevo" data-toggle="modal" href="#myModal"><i class="fas fa-user-plus"></i></a>
@@ -61,44 +66,44 @@
         <tbody class="text-center">
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Perfil)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Usuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Login)
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Perfil)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Login)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                @{ 
-                    if (item.Login == "admin")
-                    {
-                        disable = "disabled=disabled";
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    @{
+                        if (item.Login == "admin")
+                        {
+                            disable = "disabled=disabled";
+                        }
+                        else
+                        {
+                            disable = "";
+                        }
                     }
-                    else
-                    {
-                        disable = "";
-                    }
-                }
 
 
-                <td>
-                  
-                    <button id="btnEditar" class="btn btn-outline-info btn-sm ml-3"><i class="fas fa-edit"></i></button>
+                    <td>
 
-                  
-                    <button id="btnEliminar" @disable  class="btn btn-outline-danger btn-sm ml-3"><i class="fas fa-trash-alt"></i></button>
+                        <button id="btnEditar" class="btn btn-outline-info btn-sm ml-3"><i class="fas fa-edit"></i></button>
 
-                </td>
-            </tr>
+
+                        <button id="btnEliminar" @disable class="btn btn-outline-danger btn-sm ml-3"><i class="fas fa-trash-alt"></i></button>
+
+                    </td>
+                </tr>
             }
         </tbody>
 
@@ -110,5 +115,5 @@
 
     <script src="~/JQuery/TablaIdioma.js"></script>
     <script src="~/JQuery/Usuarios.js"></script>
-    
+
 }

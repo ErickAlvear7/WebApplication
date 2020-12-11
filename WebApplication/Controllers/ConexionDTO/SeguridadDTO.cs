@@ -11,8 +11,13 @@ namespace WebApplication.Controllers.ConexionDTO
     public class SeguridadDTO
     {
         BDD_HRVEntities _db = new BDD_HRVEntities();
+        //Usuarios
         DataSet _dataSet = new DataSet();
         SqlDataAdapter _dataAdapter = new SqlDataAdapter();
+        //Perfiles
+        DataSet _dataS = new DataSet();
+        SqlDataAdapter _dataA = new SqlDataAdapter();
+       
      
         public List<User> FunGetUsuarios()
         {
@@ -71,7 +76,7 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
-        //Funcion consulta datos de SP_
+        //Funcion consulta datos_tabla ultimo registro de SP_USUARIOS
         public DataSet FunConsultaDatos(int tipo1, int tipo2, string var1, string var2, string conexion)
         {
             try
@@ -103,12 +108,42 @@ namespace WebApplication.Controllers.ConexionDTO
             return _dataSet;
         }
 
+        //Funcion sp consulta ultimo registro tabla perfiles
+        public DataSet FunConsultaPerfil(int tipo, string var, string coneccion)
+        {
+            try
+            {
+                using(SqlConnection _con = new SqlConnection(coneccion))
+                {
+                    using(SqlCommand _com = new SqlCommand())
+                    {
+                        _com.Connection = _con;
+                        _com.CommandTimeout = 9000;
+                        _com.CommandType = CommandType.StoredProcedure;
+                        _com.CommandText = "sp_ConsultaPerfil";
+                        _com.Parameters.AddWithValue("@var_int", tipo);
+                        _com.Parameters.AddWithValue("@var_char", var);
+                        _dataA.SelectCommand = _com;
+                        _dataA.Fill(_dataS);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return _dataS;
+        }
+
         public int FunConsulataLogin(string _login)
         {
             try
             {
-                
-                return _db.Usuarios.Where(u => u.login_usuario == _login).FirstOrDefault().id_usuario;
+
+                return _db.Usuarios.Where(u => u.login_usuario == _login).FirstOrDefault() == null ? 0 :
+                    _db.Usuarios.Where(u => u.login_usuario == _login).FirstOrDefault().id_perfil;
             }
             catch (Exception ex)
             {

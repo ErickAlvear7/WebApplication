@@ -127,6 +127,7 @@ $(document).ready(function () {
                     _button = '<button id="btnEditar" class="btn btn-outline-info btn-sm ml-3"><i class="fas fa-edit"></i></button><button id="btnEliminar" class="btn btn-outline-danger btn-sm ml-3"><i class="fas fa-trash-alt"></i></button>'
 
                     Tabla.row.add([_userId, _perfi, _usuario, _login, _estado, _button]).draw();
+
                     $.notify(datos.mesagge, {
                         globalPosition: "top-center",
                         className: datos.nameclass                     
@@ -134,7 +135,13 @@ $(document).ready(function () {
                     $("#myModal").modal("hide");
 
                 } else {
-                    $.notify("BOOM!", "error");
+                  
+                    Swal.fire({
+                        title: 'Upss..!!',
+                        text: datos.mesagge,
+                        icon: datos.nameclass
+                    });
+                   
                 }
             }
         });

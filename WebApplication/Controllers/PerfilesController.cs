@@ -14,6 +14,7 @@ namespace WebApplication.Controllers
     public class PerfilesController : Controller
     {
         private BDD_HRVEntities db = new BDD_HRVEntities();
+        DataSet _datSet = new DataSet();
 
         // GET: Perfiles
         public ActionResult Index()
@@ -48,17 +49,28 @@ namespace WebApplication.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_perfil,nombre_perfil,estado_perfil,aux_peri,aux_perii,creacion_perfil")] Perfiles perfiles)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create( Perfiles perfiles)
         {
-            if (ModelState.IsValid)
-            {
+
+                perfiles.creacion_perfil = DateTime.Now;
+            
                 db.Perfiles.Add(perfiles);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(perfiles);
+            //return RedirectToAction("Index");
+
+            _datSet = new SeguridadDTO().FunConsultaPerfil(0, "", Session["_conexion"].ToString());
+            var _datos = _datSet.Tables[0].AsEnumerable().Select(p => new
+            {
+                IdPerfil = p[0].ToString(),
+                Perfil = p[1].ToString(),
+                Estado = p[2].ToString()
+            });
+
+            return Json(new { success = true, data = _datos, mesagge = "agregado correctamente", nameclass = "success" }, JsonRequestBehavior.AllowGet);
+
+            //return View(perfiles);
         }
 
         // GET: Perfiles/Edit/5

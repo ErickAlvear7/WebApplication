@@ -9,59 +9,22 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="container">
+       <div class="container">
+           <hr style="height: 2px; border-width: 0; color:blue; background-color:blue" />
             <div class="row">
-                <div class="form-inline col-md-12">
-                    <label for="perfil" class="control-label col-md-2">Perfil:</label>
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.nombre_perfil, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.nombre_perfil, "", new { @class = "text-danger" })
+                 <div class="form-inline col-md-12">
+                   <label for="perfil" class="control-label col-md-2">Perfil:</label>
+                   <div class="col-md-5">
+                   <input class="form-control" id="TxtPerfil" maxlength="50" placeholder="nombre del perfil" type="text" style="text-transform:uppercase;" />
+                   @*@Html.EditorFor(model => model.nombre_perfil, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nombre_perfil, "", new { @class = "text-danger" })*@
                     </div>
-                </div>
+                 </div>
             </div>
-            <hr style="height: 2px; border-width: 0; color:blue; background-color:blue"/>
-            <div class="row">
-                <div class="form-inline col-md-12">
-                    <label for="estado" class="control-label col-md-2">Estado:</label>
-                    @*<div class="col-md-4">*@
-                    <label for="estado" class="control-label col-md-3">Activo</label>
-                    <!--<-->@*/div>*@
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.estado_perfil)
-                        @Html.ValidationMessageFor(model => model.estado_perfil, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            
-        </div>
+           <hr style="height: 2px; border-width: 0; color:blue; background-color:blue" />  
+       </div>
         
-        @*<div class="form-horizontal">          
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.nombre_perfil, htmlAttributes: new { @class = "control-label col-md-2" })
-
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.estado_perfil, htmlAttributes: new { @class = "control-label col-md-2" })
-
-            </div>
-             
-            <div class="form-group">
-                @Html.LabelFor(model => model.creacion_perfil, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.creacion_perfil, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.creacion_perfil, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>*@
+       
 
     }
     
