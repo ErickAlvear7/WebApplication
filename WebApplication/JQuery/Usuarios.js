@@ -1,5 +1,4 @@
 ﻿
-
 $(document).ready(function () {
     var _loginAnt = '';
     var txtEstado = '';
@@ -90,7 +89,17 @@ $(document).ready(function () {
         $("#header").css("background-color", "#23BBB9");
         $("#header").css("color", "white");
         $("#myModal").modal("show");
-        //alert(_login);        
+            
+    });
+
+    $(document).on("click", "#btnEliminar", function (eve) {
+        eve.preventDefault();
+        _fila = $(this);
+        _row = $(this).closest("tr");
+        _data = $('#tabla').dataTable().fnGetData(_row);
+        _login = _data[3]; 
+        _usuario = _data[2];
+        FunEliminarUsuario();
     });
 
     $(document).on("click", "#ChkEstado", function () {
@@ -106,7 +115,7 @@ $(document).ready(function () {
         }
     });
      
-    
+    //Funciones---->
 
     function FunGrabarAjax() {
         $.ajax({
@@ -197,5 +206,45 @@ $(document).ready(function () {
             }
         });
 
+    }
+
+    function FunEliminarUsuario() {
+
+        Swal.fire({
+            title: 'Esta seguro de eliminar el usuario ' + _usuario + '?',
+            text: "El registro sera elminado!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar!',
+            showLoaderOnConfirm: true,
+            preConfirm: function () {
+                return new Promise(function (resolve) {
+                    $.ajax({
+
+                        url: "/Usuarios/Delete",
+                        type: "POST",
+                        dataType: "json",
+                        data: { id: _login },
+                        success: function (data) {
+                            if (data.success == true) {
+                                Swal.close();
+                                Tabla.row(_fila.parents('tr')).remove().draw();
+                                $.notify(data.mesagge, {
+                                    globalPosition: "top-center",
+                                    className: datos.nameclass
+                                });
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+
+                    });
+
+                });
+            }
+        });
     }
 });
