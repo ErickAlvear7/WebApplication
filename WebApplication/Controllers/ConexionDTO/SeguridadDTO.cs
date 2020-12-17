@@ -151,6 +151,41 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
-            
+
+        //funcion para actualizar usuario
+        public DataSet FunUpdateUsuario(string _logAnt, string _logAct,int _perfilId, string _nombre, string _apellido, 
+                                        string _password, string _estado, string coneccion)
+        {
+            try
+            {
+                using (SqlConnection _con = new SqlConnection(coneccion))
+                {
+                    using (SqlCommand _com = new SqlCommand())
+                    {
+                        _com.Connection = _con;
+                        _com.CommandTimeout = 9000;
+                        _com.CommandType = CommandType.StoredProcedure;
+                        _com.CommandText = "sp_UpdateUsuario";
+                        _com.Parameters.AddWithValue("@var_loginAnt", _logAnt);
+                        _com.Parameters.AddWithValue("@var_login", _logAct);
+                        _com.Parameters.AddWithValue("@var_idPerfil", _perfilId);
+                        _com.Parameters.AddWithValue("@var_nombre", _nombre);
+                        _com.Parameters.AddWithValue("@var_apellido", _apellido);
+                        _com.Parameters.AddWithValue("@var_password", _password);
+                        _com.Parameters.AddWithValue("@var_estado", _estado);
+                        _dataA.SelectCommand = _com;
+                        _dataA.Fill(_dataS);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return _dataS;
+        }
+
     }
 }

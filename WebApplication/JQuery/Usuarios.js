@@ -1,6 +1,8 @@
 ﻿
 
 $(document).ready(function () {
+    var _loginAnt = '';
+    var txtEstado = '';
 
     $("#btnNuevo").click(function (eve) {
         eve.preventDefault();
@@ -73,6 +75,7 @@ $(document).ready(function () {
 
         if (_opcion == 1) {
 
+            FunEditarAjax();
         }
     });
 
@@ -81,9 +84,9 @@ $(document).ready(function () {
         _opcion = 1;
         _fila = $(this).closest("tr");
         _data = $('#tabla').dataTable().fnGetData(_fila);
-        _login = _data[3];
-        $("#modal-content").load("/Usuarios/Edit/" + _login);
-        $(".modal-title").text("Editar Perfil");
+        _loginAnt = _data[3];
+        $("#modal-content").load("/Usuarios/Edit/" + _loginAnt);
+        $(".modal-title").text("Editar Usuario");
         $("#header").css("background-color", "#23BBB9");
         $("#header").css("color", "white");
         $("#myModal").modal("show");
@@ -94,9 +97,11 @@ $(document).ready(function () {
         _checked = $("#ChkEstado").is(":checked");
         if (_checked) {
             $("#LblEstado").text("Activo");
+            txtEstado = "Activo";
             estado = true;
         } else {
             $("#LblEstado").text("Inactivo");
+            txtEstado = "Inactivo";
             estado = false;
         }
     });
@@ -147,5 +152,50 @@ $(document).ready(function () {
         });
     }
 
-    
+    function FunEditarAjax() {
+
+        $.ajax({
+            type:'POST',
+            url: '/Usuarios/Edit',
+            dataType: 'json',
+            data: {
+                login: _login, perfilId: _perfil, nombre: _nombres, apellido: _apellidos,
+                contra: _password, estado: txtEstado, loginAnt: _loginAnt               
+            },
+
+            success: function (datos) {
+                if (datos.success == true) {
+                    $.each(datos.data, function (i, item) {
+                        _userId = item.UserId;
+                        _perfi = item.Perfil;
+                        _usuario = item.Usuario;
+                        _login = item.Login;
+                        _estado = item.Estado
+                    });
+                    _button = '<button id="btnEditar" class="btn btn-outline-info btn-sm ml-3"><i class="fas fa-edit"></i></button><button id="btnEliminar" class="btn btn-outline-danger btn-sm ml-3"><i class="fas fa-trash-alt"></i></button>'
+
+               
+                    Tabla.row(_fila).data([_userId, _perfi, _usuario, _login, _estado, _button]).draw();
+
+                    $.notify(datos.mesagge, {
+                        globalPosition: "top-center",
+                        className: datos.nameclass
+                    });
+                    $("#myModal").modal("hide");
+
+                } else {
+
+                    Swal.fire({
+                        title: 'Upss..!!',
+                        text: datos.mesagge,
+                        icon: datos.nameclass
+                    });
+
+                }
+
+
+            }
+        });
+
+    }
 });

@@ -23,9 +23,12 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/VendorLoginV1/vendor/select2/select2.min.css">
     <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/VendorMenu/sweetalert2/sweetalert2.min.css">
+    <!---->
     <link rel="stylesheet" type="text/css" href="~/VendorLoginV1/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/VendorLoginV1/css/main.css">
     <!--===============================================================================================-->
+
 </head>
 <body>
 
@@ -41,16 +44,16 @@
                         INICIAR SESION
                     </span>
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="user" placeholder="Usuario">
+                    <div class="wrap-input100 validate-input" data-validate="ingrese usuario">
+                        <input class="input100" type="text" name="user" placeholder="Usuario" id="TxtUsuario">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="pass" placeholder="Contraseña">
+                    <div class="wrap-input100 validate-input" data-validate="ingrese contraseña">
+                        <input class="input100" type="password" name="pass" placeholder="Contraseña" id="TxtPassword">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
@@ -62,15 +65,20 @@
                             Login
                         </button>
                     </div>
+                    @*<div class="container-login100-form-btn">
+                        <button type="button" class="login100-form-btn" id="BtnLogin">
+                            Login
+                        </button>
+                    </div>*@
 
                     @*<div class="text-center p-t-12">
-                        <span class="txt1">
-                            Forgot
-                        </span>
-                        <a class="txt2" href="#">
-                            Username / Password?
-                        </a>
-                    </div>*@
+            <span class="txt1">
+                Forgot
+            </span>
+            <a class="txt2" href="#">
+                Username / Password?
+            </a>
+        </div>*@
 
                     <div class="text-center p-t-136">
                         <a class="txt2" href="#">
@@ -96,12 +104,36 @@
     <!--===============================================================================================-->
     <script src="~/VendorLoginV1/vendor/tilt/tilt.jquery.min.js"></script>
     <script>
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
     </script>
     <!--===============================================================================================-->
     <script src="~/VendorLoginV1/js/main.js"></script>
+    <!--LoginAjax-->
+    @*<script src="~/JQuery/Login.js"></script>*@
+    <!--Switalert2-->
+    <script src="~/VendorMenu/sweetalert2/sweetalert2.min.js"></script>
+
+    @{ 
+        if(ViewBag.error != null)
+        {
+           <script type="text/javascript">
+               //Swal.fire('usuario y/o contraseña incorrecto')
+
+               Swal.fire({
+                   position: 'top-end',
+                   icon: 'error',
+                   title: 'usuario y/o contraseña incorrecta',
+                   showConfirmButton: false,
+                   timer: 1500
+               })
+
+
+           </script>
+        }
+    }
 
 </body>
 </html>
+

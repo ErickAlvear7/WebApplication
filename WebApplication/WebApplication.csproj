@@ -178,6 +178,7 @@
     <Content Include="ImgHrv\hrv6 %28600 x 450%29.png" />
     <Content Include="ImgHrv\local2 %28600 x 449%29.png" />
     <Content Include="ImgHrv\local3 %28553 x 450%29.png" />
+    <Content Include="JQuery\Login.js" />
     <Content Include="JQuery\notify.min.js" />
     <Content Include="JQuery\Perfiles.js" />
     <Content Include="JQuery\TablaIdioma.js" />

@@ -116,17 +116,23 @@ namespace WebApplication.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_usuario,id_perfil,nombre_usuario,apellido_usuario,login_usuario,password_usuario,estado_usuario,aux_usui,aux_usuii,creacion_usuario")] Usuarios usuarios)
+    
+        public ActionResult Edit(string login, int perfilId, string nombre, string apellido, string contra,
+            string estado, string loginAnt)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(usuarios).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.id_perfil = new SelectList(db.Perfiles, "id_perfil", "nombre_perfil", usuarios.id_perfil);
-            return View(usuarios);
+            _data = new SeguridadDTO().FunUpdateUsuario(loginAnt, login, perfilId, nombre, apellido, contra, estado, Session["_conexion"].ToString());
+
+            _data = new SeguridadDTO().FunConsultaDatos(1, 0, login, "", Session["_conexion"].ToString());
+            var _datos = _data.Tables[0].AsEnumerable().Select(u => new {
+                UserId = u[0].ToString(),
+                Perfil = u[1].ToString(),
+                Usuario = u[2].ToString(),
+                Login = u[3].ToString(),
+                Estado = u[4].ToString()
+            });
+
+            return Json(new { success = true, data = _datos, mesagge = "modificado correctamente", nameclass = "info" }, JsonRequestBehavior.AllowGet);
+
         }
 
         // GET: Usuarios/Delete/5
