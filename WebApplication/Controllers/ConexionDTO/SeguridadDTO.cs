@@ -137,6 +137,7 @@ namespace WebApplication.Controllers.ConexionDTO
             return _dataS;
         }
 
+        //funcion consulta si usuario ya existe
         public int FunConsulataLogin(string _login)
         {
             try
@@ -152,7 +153,14 @@ namespace WebApplication.Controllers.ConexionDTO
             }
         }
 
-        //funcion para actualizar usuario
+        //funcion para consulta si perfil ya existe
+        public int FunConsultaPerfil(string _perfil)
+        {
+            return _db.Perfiles.Where(p => p.nombre_perfil == _perfil).FirstOrDefault() == null ? 0 :
+                  _db.Perfiles.Where(p => p.nombre_perfil == _perfil).FirstOrDefault().id_perfil;
+        }
+
+        //funcion para actualizar usuario con procedimiento almacenado sql-server
         public DataSet FunUpdateUsuario(string _logAnt, string _logAct,int _perfilId, string _nombre, string _apellido, 
                                         string _password, string _estado, string coneccion)
         {

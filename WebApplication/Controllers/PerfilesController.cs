@@ -15,6 +15,7 @@ namespace WebApplication.Controllers
     {
         private BDD_HRVEntities db = new BDD_HRVEntities();
         DataSet _datSet = new DataSet();
+        int _perfilId = 0;
 
         // GET: Perfiles
         public ActionResult Index()
@@ -54,21 +55,33 @@ namespace WebApplication.Controllers
         {
 
                 perfiles.creacion_perfil = DateTime.Now;
-            
+
+            _perfilId = new SeguridadDTO().FunConsultaPerfil(perfiles.nombre_perfil);
+
+            if(_perfilId == 0)
+            {
                 db.Perfiles.Add(perfiles);
                 db.SaveChanges();
 
-            //return RedirectToAction("Index");
+                //return RedirectToAction("Index");
 
-            _datSet = new SeguridadDTO().FunConsultaPerfil(0, "", Session["_conexion"].ToString());
-            var _datos = _datSet.Tables[0].AsEnumerable().Select(p => new
+                _datSet = new SeguridadDTO().FunConsultaPerfil(0, "", Session["_conexion"].ToString());
+                var _datos = _datSet.Tables[0].AsEnumerable().Select(p => new
+                {
+                    IdPerfil = p[0].ToString(),
+                    Perfil = p[1].ToString(),
+                    Estado = p[2].ToString()
+                });
+
+                return Json(new { success = true, data = _datos, mesagge = "agregado correctamente", nameclass = "success" }, JsonRequestBehavior.AllowGet);
+
+            }
+            else
             {
-                IdPerfil = p[0].ToString(),
-                Perfil = p[1].ToString(),
-                Estado = p[2].ToString()
-            });
-
-            return Json(new { success = true, data = _datos, mesagge = "agregado correctamente", nameclass = "success" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = false, data = "", mesagge = "perfil ya existe", nameclass = "success" }, JsonRequestBehavior.AllowGet);
+            }
+            
+              
 
             //return View(perfiles);
         }
@@ -121,13 +134,14 @@ namespace WebApplication.Controllers
 
         // POST: Perfiles/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+     
         public ActionResult DeleteConfirmed(int id)
         {
             Perfiles perfiles = db.Perfiles.Find(id);
             db.Perfiles.Remove(perfiles);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return Json(new { success = true, mesagge = "perfil eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

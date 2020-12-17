@@ -29,8 +29,19 @@
 
     });
 
+
+    $(document).on("click", "#btnEliminar", function (eve) {
+        eve.preventDefault();
+        _fila = $(this);
+        _row = $(this).closest("tr");
+        _datSet = $('#tabla').dataTable().fnGetData(_row);
+        _id = _datSet[0];
+        _perfil = _datSet[1];
+        FunEliminarPerfil();
+    });
+
   
-  
+   //funciones---->
 
     function FunGrabarPerfil() {
         $.ajax({
@@ -73,6 +84,46 @@
             }
         });
 
+    }
+
+    function FunEliminarPerfil() {
+
+        Swal.fire({
+            title: 'Esta seguro de eliminar el perfil ' + _perfil + '?',
+            text: "El registro sera elminado!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar!',
+            showLoaderOnConfirm: true,
+            preConfirm: function () {
+                return new Promise(function (resolve) {
+                    $.ajax({
+
+                        url: "/Perfiles/Delete",
+                        type: "POST",
+                        dataType: "json",
+                        data: { id: _id },
+                        success: function (data) {
+                            if (data.success == true) {
+                                Swal.close();
+                                Tabla.row(_fila.parents('tr')).remove().draw();
+                                $.notify(data.mesagge, {
+                                    globalPosition: "top-center",
+                                    className: datos.nameclass
+                                });
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+
+                    });
+
+                });
+            }
+        });
     }
 
 });
