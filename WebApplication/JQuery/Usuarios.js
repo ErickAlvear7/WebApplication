@@ -17,7 +17,7 @@ $(document).ready(function () {
         _perfil = $("#DdlPerfil").val();
         _nombres = $("#TxtNombre").val();
         _apellidos = $("#TxtApellido").val();
-        _login = $("#TxtLogin").val();
+        _login = $("#TxtLogin").val().trim;
         _password = $("#TxtPassword").val();
 
         if (_perfil == "") {
@@ -191,7 +191,7 @@ $(document).ready(function () {
                         className: datos.nameclass
                     });
                     $("#myModal").modal("hide");
-
+                    
                 } else {
 
                     Swal.fire({

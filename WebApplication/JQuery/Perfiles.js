@@ -111,7 +111,7 @@
                                 Tabla.row(_fila.parents('tr')).remove().draw();
                                 $.notify(data.mesagge, {
                                     globalPosition: "top-center",
-                                    className: datos.nameclass
+                                    className: data.nameclass
                                 });
                             }
                         },

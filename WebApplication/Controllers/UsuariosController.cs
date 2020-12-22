@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -102,6 +101,8 @@ namespace WebApplication.Controllers
             }
 
             Usuarios usuarios = db.Usuarios.Find(id);
+
+            usuarios.password_usuario = usuarios.password_usuario.Trim();
 
             if (usuarios == null)
             {
