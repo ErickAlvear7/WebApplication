@@ -11,13 +11,16 @@ $(document).ready(function () {
         $("#header").css("color", "white");
         _opcion = 0, _estado = true;
         _id = 0;
+ 
     });
+
+   
 
     $("#btnGuardar").click(function (eve) {
         _perfil = $("#DdlPerfil").val();
-        _nombres = $("#TxtNombre").val();
-        _apellidos = $("#TxtApellido").val();
-        _login = $("#TxtLogin").val().trim;
+        _nombres = $("#TxtNombre").val().toUpperCase();
+        _apellidos = $("#TxtApellido").val().toUpperCase();
+        _login = $("#TxtLogin").val();
         _password = $("#TxtPassword").val();
 
         if (_perfil == "") {
@@ -70,6 +73,7 @@ $(document).ready(function () {
         if (_opcion == 0) {
 
             FunGrabarAjax();
+           
         }
 
         if (_opcion == 1) {
@@ -247,4 +251,5 @@ $(document).ready(function () {
             }
         });
     }
+
 });

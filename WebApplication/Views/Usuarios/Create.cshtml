@@ -29,14 +29,14 @@
                 @*@Html.LabelFor(model => model.nombre_usuario, htmlAttributes: new { @class = "control-label col-md-2" })*@
                 <div class="col-md-4">
                     @*@Html.EditorFor(model => model.nombre_usuario, new { htmlAttributes = new { @class = "form-control" } })*@
-                    <input class="form-control" id="TxtNombre" maxlength="50" placeholder="ingrese nombres" type="text" style="text-transform:uppercase;" />
+                    <input class="form-control" id="TxtNombre" onkeyup="this.value = this.value.replace(/[^aA-zZ]/g, '')" placeholder="ingrese nombres" maxlength="50" type="text" style="text-transform:uppercase;" />
 
                 </div>
                 <label for="apellidos" class="control-label col-md-2">Apellidos:</label>
                 <div class="col-md-4">
                     @*@Html.EditorFor(model => model.apellido_usuario, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.apellido_usuario, "", new { @class = "text-danger" })*@
-                    <input class="form-control" id="TxtApellido" maxlength="50" placeholder="ingrese apellidos" type="text" style="text-transform:uppercase;" />
+                    <input class="form-control" id="TxtApellido" onkeyup="this.value = this.value.replace(/[^aA-zZ]/g, '')" maxlength="50" placeholder="ingrese apellidos" type="text" style="text-transform:uppercase;" />
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 <div class="col-md-4">
                     @*@Html.EditorFor(model => model.login_usuario, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.login_usuario, "", new { @class = "text-danger" })*@
-                    <input class="form-control" id="TxtLogin" maxlength="10" placeholder="usuario" type="text" />
+                    <input class="form-control" id="TxtLogin" onkeyup="this.value = this.value.replace(/[^a-z]/g, '')" maxlength="10" placeholder="usuario" type="text" />
                 </div>
                 <label for="password" class="control-label col-md-2">Contraseña:</label>
                 <div class="col-md-4">
