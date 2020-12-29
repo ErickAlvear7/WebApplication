@@ -27,5 +27,8 @@ namespace WebApplication.Models
     
         public virtual DbSet<Perfiles> Perfiles { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<CuidadClientes> CuidadClientes { get; set; }
+        public virtual DbSet<ProvinciaClientes> ProvinciaClientes { get; set; }
     }
 }

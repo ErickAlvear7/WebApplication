@@ -8,6 +8,12 @@
         <EntityTypeShape EntityType="BDD_HRVModel.Perfiles" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="BDD_HRVModel.Usuarios" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="BDD_HRVModel.FK_Usuarios_Perfiles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDD_HRVModel.Clientes" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BDD_HRVModel.CuidadClientes" Width="1.5" PointX="3.125" PointY="4.875" />
+        <EntityTypeShape EntityType="BDD_HRVModel.ProvinciaClientes" Width="1.5" PointX="0.875" PointY="4.875" />
+        <AssociationConnector Association="BDD_HRVModel.FK_Clientes_CuidadClientes" />
+        <AssociationConnector Association="BDD_HRVModel.FK_Clientes_ProvinciaClientes" />
+        <AssociationConnector Association="BDD_HRVModel.FK_CuidadClientes_ProvinciaClientes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

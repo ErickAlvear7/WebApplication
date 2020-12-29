@@ -4,7 +4,39 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BDD_HRVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDD_HRVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provincia_cliente" Type="int" Nullable="false" />
+          <Property Name="cuidad_cliente" Type="int" Nullable="false" />
+          <Property Name="nombre_cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ruc_cliente" Type="varchar" MaxLength="13" />
+          <Property Name="direccion_cliente" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="telefono1_cliente" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="telefono2_cliente" Type="varchar" MaxLength="10" />
+          <Property Name="email_cliente" Type="varchar" MaxLength="50" />
+          <Property Name="web_cliente" Type="varchar" MaxLength="50" />
+          <Property Name="contacto1_cliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="celular1_cliente" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="contacto2_cliente" Type="varchar" MaxLength="50" />
+          <Property Name="celular2_cliente" Type="varchar" MaxLength="10" />
+          <Property Name="estado_cliente" Type="bit" Nullable="false" />
+          <Property Name="aux1_cliente" Type="int" />
+          <Property Name="aux2_cliente" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="CuidadClientes">
+          <Key>
+            <PropertyRef Name="id_cuidad" />
+          </Key>
+          <Property Name="id_cuidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_provincia" Type="int" Nullable="false" />
+          <Property Name="nombre_cuidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="aux1_cuidad" Type="int" />
+          <Property Name="aux2_cuidad" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Perfiles">
           <Key>
             <PropertyRef Name="id_perfil" />
@@ -15,6 +47,15 @@
           <Property Name="aux_peri" Type="int" />
           <Property Name="aux_perii" Type="varchar" MaxLength="50" />
           <Property Name="creacion_perfil" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProvinciaClientes">
+          <Key>
+            <PropertyRef Name="id_provincia" />
+          </Key>
+          <Property Name="id_provincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_provincia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="aux1_provincia" Type="int" />
+          <Property Name="aux2_provincia" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -31,6 +72,42 @@
           <Property Name="aux_usuii" Type="varchar" MaxLength="50" />
           <Property Name="creacion_usuario" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Clientes_CuidadClientes">
+          <End Role="CuidadClientes" Type="Self.CuidadClientes" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuidadClientes">
+              <PropertyRef Name="id_cuidad" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="cuidad_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_ProvinciaClientes">
+          <End Role="ProvinciaClientes" Type="Self.ProvinciaClientes" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProvinciaClientes">
+              <PropertyRef Name="id_provincia" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="provincia_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CuidadClientes_ProvinciaClientes">
+          <End Role="ProvinciaClientes" Type="Self.ProvinciaClientes" Multiplicity="1" />
+          <End Role="CuidadClientes" Type="Self.CuidadClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProvinciaClientes">
+              <PropertyRef Name="id_provincia" />
+            </Principal>
+            <Dependent Role="CuidadClientes">
+              <PropertyRef Name="id_provincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Perfiles">
           <End Role="Perfiles" Type="Self.Perfiles" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -44,15 +121,29 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BDD_HRVModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuidadClientes" EntityType="Self.CuidadClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProvinciaClientes" EntityType="Self.ProvinciaClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clientes_CuidadClientes" Association="Self.FK_Clientes_CuidadClientes">
+            <End Role="CuidadClientes" EntitySet="CuidadClientes" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_ProvinciaClientes" Association="Self.FK_Clientes_ProvinciaClientes">
+            <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuidadClientes_ProvinciaClientes" Association="Self.FK_CuidadClientes_ProvinciaClientes">
+            <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
+            <End Role="CuidadClientes" EntitySet="CuidadClientes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usuarios_Perfiles" Association="Self.FK_Usuarios_Perfiles">
             <End Role="Perfiles" EntitySet="Perfiles" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BDD_HRVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -103,7 +194,105 @@
             <End Role="Perfiles" EntitySet="Perfiles" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
+          <EntitySet Name="Clientes" EntityType="BDD_HRVModel.Clientes" />
+          <EntitySet Name="CuidadClientes" EntityType="BDD_HRVModel.CuidadClientes" />
+          <EntitySet Name="ProvinciaClientes" EntityType="BDD_HRVModel.ProvinciaClientes" />
+          <AssociationSet Name="FK_Clientes_CuidadClientes" Association="BDD_HRVModel.FK_Clientes_CuidadClientes">
+            <End Role="CuidadClientes" EntitySet="CuidadClientes" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_ProvinciaClientes" Association="BDD_HRVModel.FK_Clientes_ProvinciaClientes">
+            <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CuidadClientes_ProvinciaClientes" Association="BDD_HRVModel.FK_CuidadClientes_ProvinciaClientes">
+            <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
+            <End Role="CuidadClientes" EntitySet="CuidadClientes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="provincia_cliente" Type="Int32" Nullable="false" />
+          <Property Name="cuidad_cliente" Type="Int32" Nullable="false" />
+          <Property Name="nombre_cliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ruc_cliente" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="direccion_cliente" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="telefono1_cliente" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="telefono2_cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="email_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="web_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contacto1_cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="celular1_cliente" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contacto2_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="celular2_cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="estado_cliente" Type="Boolean" Nullable="false" />
+          <Property Name="aux1_cliente" Type="Int32" />
+          <Property Name="aux2_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CuidadClientes" Relationship="BDD_HRVModel.FK_Clientes_CuidadClientes" FromRole="Clientes" ToRole="CuidadClientes" />
+          <NavigationProperty Name="ProvinciaClientes" Relationship="BDD_HRVModel.FK_Clientes_ProvinciaClientes" FromRole="Clientes" ToRole="ProvinciaClientes" />
+        </EntityType>
+        <EntityType Name="CuidadClientes">
+          <Key>
+            <PropertyRef Name="id_cuidad" />
+          </Key>
+          <Property Name="id_cuidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_provincia" Type="Int32" Nullable="false" />
+          <Property Name="nombre_cuidad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="aux1_cuidad" Type="Int32" />
+          <Property Name="aux2_cuidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clientes" Relationship="BDD_HRVModel.FK_Clientes_CuidadClientes" FromRole="CuidadClientes" ToRole="Clientes" />
+          <NavigationProperty Name="ProvinciaClientes" Relationship="BDD_HRVModel.FK_CuidadClientes_ProvinciaClientes" FromRole="CuidadClientes" ToRole="ProvinciaClientes" />
+        </EntityType>
+        <EntityType Name="ProvinciaClientes">
+          <Key>
+            <PropertyRef Name="id_provincia" />
+          </Key>
+          <Property Name="id_provincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_provincia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="aux1_provincia" Type="Int32" />
+          <Property Name="aux2_provincia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clientes" Relationship="BDD_HRVModel.FK_Clientes_ProvinciaClientes" FromRole="ProvinciaClientes" ToRole="Clientes" />
+          <NavigationProperty Name="CuidadClientes" Relationship="BDD_HRVModel.FK_CuidadClientes_ProvinciaClientes" FromRole="ProvinciaClientes" ToRole="CuidadClientes" />
+        </EntityType>
+        <Association Name="FK_Clientes_CuidadClientes">
+          <End Type="BDD_HRVModel.CuidadClientes" Role="CuidadClientes" Multiplicity="1" />
+          <End Type="BDD_HRVModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuidadClientes">
+              <PropertyRef Name="id_cuidad" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="cuidad_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_ProvinciaClientes">
+          <End Type="BDD_HRVModel.ProvinciaClientes" Role="ProvinciaClientes" Multiplicity="1" />
+          <End Type="BDD_HRVModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProvinciaClientes">
+              <PropertyRef Name="id_provincia" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="provincia_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CuidadClientes_ProvinciaClientes">
+          <End Type="BDD_HRVModel.ProvinciaClientes" Role="ProvinciaClientes" Multiplicity="1" />
+          <End Type="BDD_HRVModel.CuidadClientes" Role="CuidadClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProvinciaClientes">
+              <PropertyRef Name="id_provincia" />
+            </Principal>
+            <Dependent Role="CuidadClientes">
+              <PropertyRef Name="id_provincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -135,6 +324,50 @@
                 <ScalarProperty Name="aux_usui" ColumnName="aux_usui" />
                 <ScalarProperty Name="aux_usuii" ColumnName="aux_usuii" />
                 <ScalarProperty Name="creacion_usuario" ColumnName="creacion_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="BDD_HRVModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="aux2_cliente" ColumnName="aux2_cliente" />
+                <ScalarProperty Name="aux1_cliente" ColumnName="aux1_cliente" />
+                <ScalarProperty Name="estado_cliente" ColumnName="estado_cliente" />
+                <ScalarProperty Name="celular2_cliente" ColumnName="celular2_cliente" />
+                <ScalarProperty Name="contacto2_cliente" ColumnName="contacto2_cliente" />
+                <ScalarProperty Name="celular1_cliente" ColumnName="celular1_cliente" />
+                <ScalarProperty Name="contacto1_cliente" ColumnName="contacto1_cliente" />
+                <ScalarProperty Name="web_cliente" ColumnName="web_cliente" />
+                <ScalarProperty Name="email_cliente" ColumnName="email_cliente" />
+                <ScalarProperty Name="telefono2_cliente" ColumnName="telefono2_cliente" />
+                <ScalarProperty Name="telefono1_cliente" ColumnName="telefono1_cliente" />
+                <ScalarProperty Name="direccion_cliente" ColumnName="direccion_cliente" />
+                <ScalarProperty Name="ruc_cliente" ColumnName="ruc_cliente" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="cuidad_cliente" ColumnName="cuidad_cliente" />
+                <ScalarProperty Name="provincia_cliente" ColumnName="provincia_cliente" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuidadClientes">
+            <EntityTypeMapping TypeName="BDD_HRVModel.CuidadClientes">
+              <MappingFragment StoreEntitySet="CuidadClientes">
+                <ScalarProperty Name="aux2_cuidad" ColumnName="aux2_cuidad" />
+                <ScalarProperty Name="aux1_cuidad" ColumnName="aux1_cuidad" />
+                <ScalarProperty Name="nombre_cuidad" ColumnName="nombre_cuidad" />
+                <ScalarProperty Name="id_provincia" ColumnName="id_provincia" />
+                <ScalarProperty Name="id_cuidad" ColumnName="id_cuidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProvinciaClientes">
+            <EntityTypeMapping TypeName="BDD_HRVModel.ProvinciaClientes">
+              <MappingFragment StoreEntitySet="ProvinciaClientes">
+                <ScalarProperty Name="aux2_provincia" ColumnName="aux2_provincia" />
+                <ScalarProperty Name="aux1_provincia" ColumnName="aux1_provincia" />
+                <ScalarProperty Name="nombre_provincia" ColumnName="nombre_provincia" />
+                <ScalarProperty Name="id_provincia" ColumnName="id_provincia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
