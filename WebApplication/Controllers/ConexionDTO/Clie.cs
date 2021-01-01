@@ -20,4 +20,10 @@ namespace WebApplication.Controllers.ConexionDTO
         public string Cuidad { get; set; }
 
     }
+
+    public class NuevoCliente
+    {
+
+
+    }
 }

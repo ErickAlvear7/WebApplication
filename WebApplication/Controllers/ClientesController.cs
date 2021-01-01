@@ -46,28 +46,48 @@ namespace WebApplication.Controllers
         // GET: Clientes/Create
         public ActionResult Create()
         {
-            ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad");
+           
             ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia");
+            //ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad");
+            List<SelectListItem> _cuidades = new List<SelectListItem>()
+            {
+                new SelectListItem(){Value="0",Text="--Seleccione Cuidad--"},
+            };
+            ViewBag.Cuidad = _cuidades;
             return View();
+        }
+
+        public ActionResult FunFillCuidad(int pro)
+        {
+            var _cuidad = db.CuidadClientes.Where(c=>c.id_provincia==pro).Select(c => new { CuidadId = c.id_cuidad, Cuidad = c.nombre_cuidad }).ToList();
+            return Json(data: _cuidad, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Clientes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_cliente,provincia_cliente,cuidad_cliente,nombre_cliente,ruc_cliente,direccion_cliente,telefono1_cliente,telefono2_cliente,email_cliente,web_cliente,contacto1_cliente,celular1_cliente,contacto2_cliente,celular2_cliente,estado_cliente,aux1_cliente,aux2_cliente")] Clientes clientes)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(Clientes clientes)
         {
             if (ModelState.IsValid)
             {
                 db.Clientes.Add(clientes);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                //return RedirectToAction("Index");
+                return Json(new { success = true, redirectToUrl = Url.Action("Index", "Clientes") });
 
-            ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
-            ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia", clientes.provincia_cliente);
-            return View(clientes);
+            }
+            else
+            {
+                return Json(new { success = false, mensaje = "error" });
+            }
+            
+
+            //ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
+            //ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia", clientes.provincia_cliente);
+            //return View(clientes);
+          
         }
 
         // GET: Clientes/Edit/5
