@@ -15,17 +15,17 @@
     $("#BtnGuardar").click(function () {
         _prov = $('#DdlProv').val();
         _cuid = $('#DdlCuid').val();
-        _cli = $('#TxtCliente').val();
-        _ruc = $('#TxtRuc').val();
-        _direc = $('#TxtDirec').val();
-        _tel1 = $('#TxtTel1').val();
-        _tel2 = $('#TxtTel2').val();     
-        _email = $('#TxtEmail').val();
-        _web = $('#TxtWeb').val();
-        _con1 = $('#TxtContac1').val();
-        _cel1 = $('#TxtCel1').val();
-        _con2 = $('#TxtContac2').val();
-        _cel2 = $('#TxtCel2').val();
+        _cli = $('#TxtCliente').val().toUpperCase();
+        _ruc = $('#TxtRuc').val().trim();
+        _direc = $('#TxtDirec').val().toUpperCase();
+        _tel1 = $('#TxtTel1').val().trim();
+        _tel2 = $('#TxtTel2').val().trim();     
+        _email = $('#TxtEmail').val().trim();
+        _web = $('#TxtWeb').val().trim();
+        _con1 = $('#TxtContac1').val().toUpperCase();
+        _cel1 = $('#TxtCel1').val().trim();
+        _con2 = $('#TxtContac2').val().toUpperCase();
+        _cel2 = $('#TxtCel2').val().trim();
 
 
         if (_prov == '') {
@@ -41,7 +41,34 @@
 
         if (_cli == '') {
 
-            Swal.fire('campo requerido: nombre del cliente');
+            Swal.fire('campo requerido: Cliente');
+            return;
+        }
+
+        if (_direc == '') {
+
+            Swal.fire('campo requerido: Direccion');
+            return;
+        }
+      
+
+        if (_tel1.length < 9 ) {
+            Swal.fire('telefono 1 incorrecto');
+            return;
+        }
+    
+        if (_con1 == '') {
+
+            Swal.fire('campo requerido: Contacto 1');
+            return;
+        }
+        if (_cel1 == '') {
+
+            Swal.fire('campo requerido: Celular 1');
+            return;
+        }
+        if (_cel1.length < 9 && _cel1.length > 10) {
+            Swal.fire('celular 1 incorrecto');
             return;
         }
 

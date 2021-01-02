@@ -129,8 +129,8 @@
                   dataType: "JSON",
                   data: { pro: _prov },
                   success: function (response) {
-                      $("#DdlCuid").html("");                  
-                      $("#DdlCuid").append($('<option>--Seleccione Ciudad--</option>'));                 
+                      $("#DdlCuid").html("");
+                      $("#DdlCuid").append($('<option></option>').val("0").html("--Seleccione Cuidad--"));                 
                       $.each(response, function (index, value) {
                           $("#DdlCuid").append(
                               $('<option></option>').val(value.CuidadId).html(value.Cuidad));
