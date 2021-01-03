@@ -41,8 +41,8 @@
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Direccion:</label>
                 <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.direccion_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtDireccion" } })*@
-                    <textarea class="form-control" id="TxtDirec" maxlength="200" rows="3" onkeydown="return (event.keyCode != 13);"></textarea>
+                    @Html.EditorFor(model => model.direccion_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtDirec", maxlength="200" } })
+                    @*<textarea class="form-control" id="TxtDirec" maxlength="200" rows="2" onkeydown="return (event.keyCode != 13);"></textarea>*@
                 </div>
             </div>
             <hr />
@@ -92,11 +92,9 @@
         </form>
 
         <hr style="height: 2px; border-width: 0; color:blue; background-color:blue">
-
-        <hr />
-    
-        
-            <div class="btn-group btn-group-justified">
+          
+        <div class="container">
+             <div class="btn-group btn-group-justified">
                 <div class="btn-group">
                     <button type="button" id="BtnRegresar" class="btn btn-primary">Regresar</button>
                 </div>
@@ -104,9 +102,12 @@
                     <button type="button" id="BtnGuardar" class="btn btn-outline-success">Guardar</button>
                 </div>
             </div>
-        
 
         </div>
+           
+        
+
+    </div>
    
 }
 

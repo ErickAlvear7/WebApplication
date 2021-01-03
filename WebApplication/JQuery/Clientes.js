@@ -45,16 +45,44 @@
             return;
         }
 
+        if (_ruc != '') {
+            if (_ruc.length < 13 || _ruc.length > 13) {
+                Swal.fire('Ruc incorrecto');
+                return;
+            }
+        }
+
         if (_direc == '') {
 
             Swal.fire('campo requerido: Direccion');
             return;
         }
       
+        if (_tel1 == '') {
+            Swal.fire('campo requerido: Telefono 1');
+            return;
+        }
 
-        if (_tel1.length < 9 ) {
+        if (_tel1.length < 9 || _tel1.length > 9) {
             Swal.fire('telefono 1 incorrecto');
             return;
+        }
+
+        if (_tel2 != '') {
+
+            if (_tel2.length < 9 || _tel2.length > 9) {
+                Swal.fire('telefono 2 incorrecto');
+                return;
+            }
+        }
+
+        if (_email != '') {
+
+            if ($("#TxtEmail").val().indexOf('@', 0) == -1 || $("#TxtEmail").val().indexOf('.', 0) == -1) {
+                Swal.fire('e-mail incorrecto');
+                return;
+                
+            }
         }
     
         if (_con1 == '') {
@@ -67,9 +95,17 @@
             Swal.fire('campo requerido: Celular 1');
             return;
         }
-        if (_cel1.length < 9 && _cel1.length > 10) {
+
+        if (_cel1.length < 10 || _cel1.length > 10) {
             Swal.fire('celular 1 incorrecto');
             return;
+        }
+
+        if (_cel2 != '') {
+            if (_cel2.length < 10 || _cel1.length > 10) {
+                Swal.fire('celular 1 incorrecto');
+                return;
+            }
         }
 
         $.ajax({
