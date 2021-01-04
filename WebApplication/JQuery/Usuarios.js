@@ -7,7 +7,7 @@ $(document).ready(function () {
         eve.preventDefault();
         $("#modal-content").load("/Usuarios/Create");
         $(".modal-title").text("Nuevo Usuario");
-        $("#header").css("background-color", "#2F90F3");
+        $("#header").css("background-color", "#2A61DF");
         $("#header").css("color", "white");
         _opcion = 0, _estado = true;
         _id = 0;
@@ -17,11 +17,11 @@ $(document).ready(function () {
    
 
     $("#btnGuardar").click(function (eve) {
-        _perfil = $("#DdlPerfil").val();
-        _nombres = $("#TxtNombre").val().toUpperCase();
-        _apellidos = $("#TxtApellido").val().toUpperCase();
-        _login = $("#TxtLogin").val();
-        _password = $("#TxtPassword").val();
+        _perfil = $("#DdlPerfil").val().trim();
+        _nombres = $("#TxtNombre").val().trim().toUpperCase();
+        _apellidos = $("#TxtApellido").val().trim().toUpperCase();
+        _login = $("#TxtLogin").val().trim();
+        _password = $("#TxtPassword").val().trim();
 
         if (_perfil == "") {
             Swal.fire({
@@ -90,7 +90,7 @@ $(document).ready(function () {
         _loginAnt = _data[3];
         $("#modal-content").load("/Usuarios/Edit/" + _loginAnt);
         $(".modal-title").text("Editar Usuario");
-        $("#header").css("background-color", "#23BBB9");
+        $("#header").css("background-color", "#2A61DF");
         $("#header").css("color", "white");
         $("#myModal").modal("show");
             

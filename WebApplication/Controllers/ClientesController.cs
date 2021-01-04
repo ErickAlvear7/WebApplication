@@ -142,13 +142,14 @@ namespace WebApplication.Controllers
 
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Clientes clientes = db.Clientes.Find(id);
             db.Clientes.Remove(clientes);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return Json(new { success = true, mesagge = "registro eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

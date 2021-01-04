@@ -15,6 +15,8 @@ namespace WebApplication.Controllers.ConexionDTO
 
         public string Direccion { get; set; }
 
+        public string Contacto { get; set; }
+
         public string Estado { get; set; }
 
         public string Cuidad { get; set; }

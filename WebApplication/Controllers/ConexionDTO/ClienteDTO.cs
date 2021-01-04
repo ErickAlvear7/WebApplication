@@ -29,6 +29,7 @@ namespace WebApplication.Controllers.ConexionDTO
                                     Cliente = Cli.nombre_cliente,
                                     Ruc = Cli.ruc_cliente,
                                     Direccion = Cli.direccion_cliente,
+                                    Contacto = Cli.contacto1_cliente,
                                     Estado = Cli.estado_cliente ? "Activo" : "Inactivo",
                                     Cuidad = Cui.nombre_cuidad
                                 };

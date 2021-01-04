@@ -141,6 +141,54 @@
 
     });
 
+    $(document).on("click", "#BtnEliminar", function (eve) {
+        eve.preventDefault();
+        _fila = $(this);
+        _row = $(this).closest("tr");
+        _data = $('#tabla').dataTable().fnGetData(_row);
+        _id = _data[0];
+        _cliente = _data[1];
+        FunEliminarCliente();
+    });
 
+    function FunEliminarCliente() {
 
+        Swal.fire({
+            title: 'Esta seguro de eliminar el cliente ' + _cliente + '?',
+            text: "El registro sera elminado!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar!',
+            showLoaderOnConfirm: true,
+            preConfirm: function () {
+                return new Promise(function (resolve) {
+                    $.ajax({
+
+                        url: "/Clientes/Delete",
+                        type: "POST",
+                        dataType: "json",
+                        data: { id: _id },
+                        success: function (data) {
+                            if (data.success == true) {
+                                Swal.close();
+                                Tabla.row(_fila.parents('tr')).remove().draw();
+                                $.notify(data.mesagge, {
+                                    globalPosition: "top-center",
+                                    className: datos.nameclass
+                                });
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+
+                    });
+
+                });
+            }
+        });
+    }
+  
 });

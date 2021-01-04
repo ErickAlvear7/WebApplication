@@ -4,14 +4,14 @@
         eve.preventDefault();
         $("#modal-content").load("/Perfiles/Create");
         $(".modal-title").text("Nuevo Perfil");
-        $("#header").css("background-color", "#2F90F3");
+        $("#header").css("background-color", "#2A61DF");
         $("#header").css("color", "white");
         _opcion = 0, _estado = true;
         _id = 0;
     });
 
     $("#btnGuardar").click(function (eve) {
-        _perfilNombre = $("#TxtPerfil").val();
+        _perfilNombre = $("#TxtPerfil").val().trim();
         if (_perfilNombre == "") {
             Swal.fire({
                 icon: 'error',
