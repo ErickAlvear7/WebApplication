@@ -13,18 +13,18 @@
     });
 
     $("#BtnGuardar").click(function () {
-        _prov = $('#DdlProv').val();
-        _cuid = $('#DdlCuid').val();
-        _cli = $('#TxtCliente').val().toUpperCase();
-        _ruc = $('#TxtRuc').val().trim();
-        _direc = $('#TxtDirec').val().toUpperCase();
+        _prov = $('#DdlProv').val().trim();
+        _cuid = $('#DdlCuid').val().trim();
+        _cli = $('#TxtCliente').val().trim().toUpperCase();
+        _ruc = $('#TxtRuc').val().trim().trim();
+        _direc = $('#TxtDirec').val().trim().toUpperCase();
         _tel1 = $('#TxtTel1').val().trim();
         _tel2 = $('#TxtTel2').val().trim();     
-        _email = $('#TxtEmail').val().trim();
-        _web = $('#TxtWeb').val().trim();
-        _con1 = $('#TxtContac1').val().toUpperCase();
+        _email = $('#TxtEmail').val().trim().toLowerCase();
+        _web = $('#TxtWeb').val().trim().toLowerCase();
+        _con1 = $('#TxtContac1').val().trim().toUpperCase();
         _cel1 = $('#TxtCel1').val().trim();
-        _con2 = $('#TxtContac2').val().toUpperCase();
+        _con2 = $('#TxtContac2').val().trim().toUpperCase();
         _cel2 = $('#TxtCel2').val().trim();
 
 
@@ -103,7 +103,7 @@
 
         if (_cel2 != '') {
             if (_cel2.length < 10 || _cel1.length > 10) {
-                Swal.fire('celular 1 incorrecto');
+                Swal.fire('celular 2 incorrecto');
                 return;
             }
         }

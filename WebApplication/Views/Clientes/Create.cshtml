@@ -30,18 +30,18 @@
                 <label for="cliente" class="control-label col-md-2">Cliente:</label>
                 <div class="col-md-4">
                     @*<input class="form-control" id="TxtNombre" onkeyup="this.value = this.value.replace(/[^aA-zZ]/g, '')" placeholder="ingrese nombre de la empresa" maxlength="50" type="text" style="text-transform:uppercase;" />*@
-                    @Html.EditorFor(model => model.nombre_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtCliente" } })
+                    @Html.EditorFor(model => model.nombre_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtCliente", maxlength = "100", style = "text-transform:uppercase;" } })
                 </div>
                 <label for="ruc" class="control-label col-md-2">Ruc:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.ruc_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtRuc" } })
+                    @Html.EditorFor(model => model.ruc_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtRuc", maxlength = "13" } })
                 </div>
             </div>
             <hr />
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Direccion:</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.direccion_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtDirec", maxlength="200" } })
+                    @Html.EditorFor(model => model.direccion_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtDirec", maxlength="200", style = "text-transform:uppercase;" } })
                     @*<textarea class="form-control" id="TxtDirec" maxlength="200" rows="2" onkeydown="return (event.keyCode != 13);"></textarea>*@
                 </div>
             </div>
@@ -60,18 +60,18 @@
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Email:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.email_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtEmail" } })
+                    @Html.EditorFor(model => model.email_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtEmail", maxlength = "50", style = "text-transform:lowercase;" } })
                 </div>
                 <label for="direc" class="control-label col-md-2">Web:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.web_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtWeb" } })
+                    @Html.EditorFor(model => model.web_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtWeb", maxlength = "50", style = "text-transform:lowercase;" } })
                 </div>
             </div>
             <hr />
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Contacto 1:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.contacto1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtContac1" } })
+                    @Html.EditorFor(model => model.contacto1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtContac1", maxlength = "50", style = "text-transform:uppercase;" } })
                 </div>
                 <label for="direc" class="control-label col-md-2">Celular:</label>
                 <div class="col-md-2">
@@ -82,7 +82,7 @@
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Contacto 2:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.contacto2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtContac2" } })
+                    @Html.EditorFor(model => model.contacto2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtContac2", maxlength = "50", style = "text-transform:uppercase;" } })
                 </div>
                 <label for="direc" class="control-label col-md-2">Celular:</label>
                 <div class="col-md-2">
