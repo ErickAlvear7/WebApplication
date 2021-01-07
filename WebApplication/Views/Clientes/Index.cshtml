@@ -82,4 +82,21 @@
 @section scripts{
     <script src="~/JQuery/TablaIdioma.js"></script>
     <script src="~/JQuery/Clientes.js"></script>
+
+    @{ 
+
+        if(@TempData["Mensaje"] != null)
+        {
+            <script>
+                $(document).ready(function () {
+
+                    $.notify("Modificado con exito", {
+                        globalPosition: "top center",
+                        className: "success"
+                    });
+                });
+            </script>
+        }
+
+    }
 }

@@ -14,20 +14,12 @@ namespace WebApplication.Models
     
     public partial class CuidadClientes
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CuidadClientes()
-        {
-            this.Clientes = new HashSet<Clientes>();
-        }
-    
         public int id_cuidad { get; set; }
         public int id_provincia { get; set; }
         public string nombre_cuidad { get; set; }
         public Nullable<int> aux1_cuidad { get; set; }
         public string aux2_cuidad { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clientes> Clientes { get; set; }
         public virtual ProvinciaClientes ProvinciaClientes { get; set; }
     }
 }

@@ -128,7 +128,7 @@ $(document).ready(function () {
             dataType: 'json',
             data: {
                 id_usuario: _id, id_perfil: _perfil, nombre_usuario: _nombres, apellido_usuario: _apellidos,
-                login_usuario: _login, password_usuario: _password, estado_usuario: _estado, aux_usui: 0,
+                login_usuario: _login, password_usuario: _password, estado_usuario: estado, aux_usui: 0,
                 aux_usuii: "", creacion_usuario:""
             },
 

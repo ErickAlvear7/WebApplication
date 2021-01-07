@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WebApplication.Controllers.ConexionDTO;
 using WebApplication.Models;
@@ -75,6 +73,7 @@ namespace WebApplication.Controllers
                 db.Clientes.Add(clientes);
                 db.SaveChanges();
                 //return RedirectToAction("Index");
+                TempData["Mensaje"] = "ok";
                 return Json(new { success = true, redirectToUrl = Url.Action("Index", "Clientes") });
 
             }
@@ -102,8 +101,10 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
             ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia", clientes.provincia_cliente);
+        
+            ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes.Where(c=>c.id_provincia==clientes.provincia_cliente), "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
+          
             return View(clientes);
         }
 
@@ -111,18 +112,21 @@ namespace WebApplication.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_cliente,provincia_cliente,cuidad_cliente,nombre_cliente,ruc_cliente,direccion_cliente,telefono1_cliente,telefono2_cliente,email_cliente,web_cliente,contacto1_cliente,celular1_cliente,contacto2_cliente,celular2_cliente,estado_cliente,aux1_cliente,aux2_cliente")] Clientes clientes)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit(Clientes clientes)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(clientes).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                TempData["Mensaje"] = "ok";
+                //return RedirectToAction("Index");
+                return Json(new { success = true, redirectToUrl = Url.Action("Index", "Clientes") });
             }
             ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
             ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia", clientes.provincia_cliente);
-            return View(clientes);
+            //return View(clientes);
+            return Json(new { success = false, mensaje = "error" });
         }
 
         // GET: Clientes/Delete/5

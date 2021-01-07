@@ -31,8 +31,5 @@ namespace WebApplication.Models
         public bool estado_cliente { get; set; }
         public Nullable<int> aux1_cliente { get; set; }
         public string aux2_cliente { get; set; }
-    
-        public virtual CuidadClientes CuidadClientes { get; set; }
-        public virtual ProvinciaClientes ProvinciaClientes { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace WebApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProvinciaClientes()
         {
-            this.Clientes = new HashSet<Clientes>();
             this.CuidadClientes = new HashSet<CuidadClientes>();
         }
     
@@ -26,8 +25,6 @@ namespace WebApplication.Models
         public Nullable<int> aux1_provincia { get; set; }
         public string aux2_provincia { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clientes> Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CuidadClientes> CuidadClientes { get; set; }
     }

@@ -72,30 +72,6 @@
           <Property Name="aux_usuii" Type="varchar" MaxLength="50" />
           <Property Name="creacion_usuario" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Clientes_CuidadClientes">
-          <End Role="CuidadClientes" Type="Self.CuidadClientes" Multiplicity="1" />
-          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CuidadClientes">
-              <PropertyRef Name="id_cuidad" />
-            </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="cuidad_cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clientes_ProvinciaClientes">
-          <End Role="ProvinciaClientes" Type="Self.ProvinciaClientes" Multiplicity="1" />
-          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProvinciaClientes">
-              <PropertyRef Name="id_provincia" />
-            </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="provincia_cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CuidadClientes_ProvinciaClientes">
           <End Role="ProvinciaClientes" Type="Self.ProvinciaClientes" Multiplicity="1" />
           <End Role="CuidadClientes" Type="Self.CuidadClientes" Multiplicity="*" />
@@ -126,14 +102,6 @@
           <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProvinciaClientes" EntityType="Self.ProvinciaClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Clientes_CuidadClientes" Association="Self.FK_Clientes_CuidadClientes">
-            <End Role="CuidadClientes" EntitySet="CuidadClientes" />
-            <End Role="Clientes" EntitySet="Clientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clientes_ProvinciaClientes" Association="Self.FK_Clientes_ProvinciaClientes">
-            <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
-            <End Role="Clientes" EntitySet="Clientes" />
-          </AssociationSet>
           <AssociationSet Name="FK_CuidadClientes_ProvinciaClientes" Association="Self.FK_CuidadClientes_ProvinciaClientes">
             <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
             <End Role="CuidadClientes" EntitySet="CuidadClientes" />
@@ -197,19 +165,11 @@
           <EntitySet Name="Clientes" EntityType="BDD_HRVModel.Clientes" />
           <EntitySet Name="CuidadClientes" EntityType="BDD_HRVModel.CuidadClientes" />
           <EntitySet Name="ProvinciaClientes" EntityType="BDD_HRVModel.ProvinciaClientes" />
-          <AssociationSet Name="FK_Clientes_CuidadClientes" Association="BDD_HRVModel.FK_Clientes_CuidadClientes">
-            <End Role="CuidadClientes" EntitySet="CuidadClientes" />
-            <End Role="Clientes" EntitySet="Clientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clientes_ProvinciaClientes" Association="BDD_HRVModel.FK_Clientes_ProvinciaClientes">
-            <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
-            <End Role="Clientes" EntitySet="Clientes" />
-          </AssociationSet>
           <AssociationSet Name="FK_CuidadClientes_ProvinciaClientes" Association="BDD_HRVModel.FK_CuidadClientes_ProvinciaClientes">
             <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
             <End Role="CuidadClientes" EntitySet="CuidadClientes" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="id_cliente" />
@@ -231,8 +191,6 @@
           <Property Name="estado_cliente" Type="Boolean" Nullable="false" />
           <Property Name="aux1_cliente" Type="Int32" />
           <Property Name="aux2_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CuidadClientes" Relationship="BDD_HRVModel.FK_Clientes_CuidadClientes" FromRole="Clientes" ToRole="CuidadClientes" />
-          <NavigationProperty Name="ProvinciaClientes" Relationship="BDD_HRVModel.FK_Clientes_ProvinciaClientes" FromRole="Clientes" ToRole="ProvinciaClientes" />
         </EntityType>
         <EntityType Name="CuidadClientes">
           <Key>
@@ -243,7 +201,6 @@
           <Property Name="nombre_cuidad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="aux1_cuidad" Type="Int32" />
           <Property Name="aux2_cuidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Clientes" Relationship="BDD_HRVModel.FK_Clientes_CuidadClientes" FromRole="CuidadClientes" ToRole="Clientes" />
           <NavigationProperty Name="ProvinciaClientes" Relationship="BDD_HRVModel.FK_CuidadClientes_ProvinciaClientes" FromRole="CuidadClientes" ToRole="ProvinciaClientes" />
         </EntityType>
         <EntityType Name="ProvinciaClientes">
@@ -254,33 +211,8 @@
           <Property Name="nombre_provincia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="aux1_provincia" Type="Int32" />
           <Property Name="aux2_provincia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Clientes" Relationship="BDD_HRVModel.FK_Clientes_ProvinciaClientes" FromRole="ProvinciaClientes" ToRole="Clientes" />
           <NavigationProperty Name="CuidadClientes" Relationship="BDD_HRVModel.FK_CuidadClientes_ProvinciaClientes" FromRole="ProvinciaClientes" ToRole="CuidadClientes" />
         </EntityType>
-        <Association Name="FK_Clientes_CuidadClientes">
-          <End Type="BDD_HRVModel.CuidadClientes" Role="CuidadClientes" Multiplicity="1" />
-          <End Type="BDD_HRVModel.Clientes" Role="Clientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CuidadClientes">
-              <PropertyRef Name="id_cuidad" />
-            </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="cuidad_cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clientes_ProvinciaClientes">
-          <End Type="BDD_HRVModel.ProvinciaClientes" Role="ProvinciaClientes" Multiplicity="1" />
-          <End Type="BDD_HRVModel.Clientes" Role="Clientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProvinciaClientes">
-              <PropertyRef Name="id_provincia" />
-            </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="provincia_cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CuidadClientes_ProvinciaClientes">
           <End Type="BDD_HRVModel.ProvinciaClientes" Role="ProvinciaClientes" Multiplicity="1" />
           <End Type="BDD_HRVModel.CuidadClientes" Role="CuidadClientes" Multiplicity="*" />
@@ -293,7 +225,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
