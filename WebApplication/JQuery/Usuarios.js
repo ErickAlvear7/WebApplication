@@ -25,9 +25,8 @@ $(document).ready(function () {
 
         if (_perfil == "") {
             Swal.fire({
-                icon: 'error',
-                title: 'Ups...',
-                text: 'seleccione el perfil!',
+                icon: 'info',
+                text: 'seleccione el perfil',
 
             });
             return;
@@ -35,36 +34,36 @@ $(document).ready(function () {
 
         if (_nombres == "") {
             Swal.fire({
-                icon: 'error',
-                title: 'Ups...',
-                text: 'ingrese por lo menos un nombre!',
+                icon: 'info',
+                //title: 'Ups...',
+                text: 'ingrese por lo menos un nombre',
                
             });
             return;
         }
         if (_apellidos == "") {
             Swal.fire({
-                icon: 'error',
-                title: 'Ups...',
-                text: 'ingrese por lo menos un apellido!',
+                icon: 'info',
+                //title: 'Ups...',
+                text: 'ingrese por lo menos un apellido',
                
             });
             return;
         }
         if (_login == "") {
             Swal.fire({
-                icon: 'error',
-                title: 'Ups...',
-                text: 'ingrese un usuario!',
+                icon: 'info',
+                //title: 'Ups...',
+                text: 'ingrese un usuario',
              
             });
             return;
         }
         if (_password == "") {
             Swal.fire({
-                icon: 'error',
-                title: 'Ups...',
-                text: 'ingrese una contraseña!',
+                icon: 'info',
+                //title: 'Ups...',
+                text: 'ingrese una contraseña',
                
             });
             return;

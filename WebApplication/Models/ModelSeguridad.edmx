@@ -5,6 +5,25 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BDD_HRVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CabeceraEquipos">
+          <Key>
+            <PropertyRef Name="id_cabecera" />
+          </Key>
+          <Property Name="id_cabecera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_cabecera" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="descripcion_cabecera" Type="varchar" MaxLength="200" />
+          <Property Name="estado_cabecera" Type="bit" Nullable="false" />
+          <Property Name="creacion_cabecera" Type="datetime" Nullable="false" />
+          <Property Name="usuario_cabecera" Type="int" Nullable="false" />
+          <Property Name="terminal_cabecera" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="modificacion_cabecera" Type="datetime" Nullable="false" />
+          <Property Name="usuariomod_cabecera" Type="int" Nullable="false" />
+          <Property Name="terminalmod_cabecera" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="aux1_cabecera" Type="int" />
+          <Property Name="aux2_cabecera" Type="int" />
+          <Property Name="aux3_cabecera" Type="varchar" MaxLength="100" />
+          <Property Name="aux4_cabecera" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="id_cliente" />
@@ -36,6 +55,19 @@
           <Property Name="nombre_cuidad" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="aux1_cuidad" Type="int" />
           <Property Name="aux2_cuidad" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DetalleEquipos">
+          <Key>
+            <PropertyRef Name="id_detalle" />
+          </Key>
+          <Property Name="id_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_cabecera" Type="int" Nullable="false" />
+          <Property Name="nombre_detalle" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="valor_detalle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="aux1_detalle" Type="int" />
+          <Property Name="aux2_detalle" Type="int" />
+          <Property Name="aux3_detalle" Type="varchar" MaxLength="100" />
+          <Property Name="aux4_detalle" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Perfiles">
           <Key>
@@ -84,6 +116,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetalleEquipos_CabeceraEquipos">
+          <End Role="CabeceraEquipos" Type="Self.CabeceraEquipos" Multiplicity="1" />
+          <End Role="DetalleEquipos" Type="Self.DetalleEquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabeceraEquipos">
+              <PropertyRef Name="id_cabecera" />
+            </Principal>
+            <Dependent Role="DetalleEquipos">
+              <PropertyRef Name="id_cabecera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Perfiles">
           <End Role="Perfiles" Type="Self.Perfiles" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -97,14 +141,20 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BDD_HRVModelStoreContainer">
+          <EntitySet Name="CabeceraEquipos" EntityType="Self.CabeceraEquipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuidadClientes" EntityType="Self.CuidadClientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleEquipos" EntityType="Self.DetalleEquipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProvinciaClientes" EntityType="Self.ProvinciaClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CuidadClientes_ProvinciaClientes" Association="Self.FK_CuidadClientes_ProvinciaClientes">
             <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
             <End Role="CuidadClientes" EntitySet="CuidadClientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleEquipos_CabeceraEquipos" Association="Self.FK_DetalleEquipos_CabeceraEquipos">
+            <End Role="CabeceraEquipos" EntitySet="CabeceraEquipos" />
+            <End Role="DetalleEquipos" EntitySet="DetalleEquipos" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuarios_Perfiles" Association="Self.FK_Usuarios_Perfiles">
             <End Role="Perfiles" EntitySet="Perfiles" />
@@ -169,6 +219,12 @@
             <End Role="ProvinciaClientes" EntitySet="ProvinciaClientes" />
             <End Role="CuidadClientes" EntitySet="CuidadClientes" />
           </AssociationSet>
+          <EntitySet Name="CabeceraEquipos" EntityType="BDD_HRVModel.CabeceraEquipos" />
+          <EntitySet Name="DetalleEquipos" EntityType="BDD_HRVModel.DetalleEquipos" />
+          <AssociationSet Name="FK_DetalleEquipos_CabeceraEquipos" Association="BDD_HRVModel.FK_DetalleEquipos_CabeceraEquipos">
+            <End Role="CabeceraEquipos" EntitySet="CabeceraEquipos" />
+            <End Role="DetalleEquipos" EntitySet="DetalleEquipos" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Clientes">
           <Key>
@@ -222,6 +278,52 @@
             </Principal>
             <Dependent Role="CuidadClientes">
               <PropertyRef Name="id_provincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CabeceraEquipos">
+          <Key>
+            <PropertyRef Name="id_cabecera" />
+          </Key>
+          <Property Name="id_cabecera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_cabecera" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion_cabecera" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="estado_cabecera" Type="Boolean" Nullable="false" />
+          <Property Name="creacion_cabecera" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="usuario_cabecera" Type="Int32" Nullable="false" />
+          <Property Name="terminal_cabecera" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="modificacion_cabecera" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="usuariomod_cabecera" Type="Int32" Nullable="false" />
+          <Property Name="terminalmod_cabecera" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="aux1_cabecera" Type="Int32" />
+          <Property Name="aux2_cabecera" Type="Int32" />
+          <Property Name="aux3_cabecera" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="aux4_cabecera" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DetalleEquipos" Relationship="BDD_HRVModel.FK_DetalleEquipos_CabeceraEquipos" FromRole="CabeceraEquipos" ToRole="DetalleEquipos" />
+        </EntityType>
+        <EntityType Name="DetalleEquipos">
+          <Key>
+            <PropertyRef Name="id_detalle" />
+          </Key>
+          <Property Name="id_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_cabecera" Type="Int32" Nullable="false" />
+          <Property Name="nombre_detalle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="valor_detalle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="aux1_detalle" Type="Int32" />
+          <Property Name="aux2_detalle" Type="Int32" />
+          <Property Name="aux3_detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="aux4_detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CabeceraEquipos" Relationship="BDD_HRVModel.FK_DetalleEquipos_CabeceraEquipos" FromRole="DetalleEquipos" ToRole="CabeceraEquipos" />
+        </EntityType>
+        <Association Name="FK_DetalleEquipos_CabeceraEquipos">
+          <End Type="BDD_HRVModel.CabeceraEquipos" Role="CabeceraEquipos" Multiplicity="1" />
+          <End Type="BDD_HRVModel.DetalleEquipos" Role="DetalleEquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabeceraEquipos">
+              <PropertyRef Name="id_cabecera" />
+            </Principal>
+            <Dependent Role="DetalleEquipos">
+              <PropertyRef Name="id_cabecera" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -300,6 +402,40 @@
                 <ScalarProperty Name="aux1_provincia" ColumnName="aux1_provincia" />
                 <ScalarProperty Name="nombre_provincia" ColumnName="nombre_provincia" />
                 <ScalarProperty Name="id_provincia" ColumnName="id_provincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CabeceraEquipos">
+            <EntityTypeMapping TypeName="BDD_HRVModel.CabeceraEquipos">
+              <MappingFragment StoreEntitySet="CabeceraEquipos">
+                <ScalarProperty Name="aux4_cabecera" ColumnName="aux4_cabecera" />
+                <ScalarProperty Name="aux3_cabecera" ColumnName="aux3_cabecera" />
+                <ScalarProperty Name="aux2_cabecera" ColumnName="aux2_cabecera" />
+                <ScalarProperty Name="aux1_cabecera" ColumnName="aux1_cabecera" />
+                <ScalarProperty Name="terminalmod_cabecera" ColumnName="terminalmod_cabecera" />
+                <ScalarProperty Name="usuariomod_cabecera" ColumnName="usuariomod_cabecera" />
+                <ScalarProperty Name="modificacion_cabecera" ColumnName="modificacion_cabecera" />
+                <ScalarProperty Name="terminal_cabecera" ColumnName="terminal_cabecera" />
+                <ScalarProperty Name="usuario_cabecera" ColumnName="usuario_cabecera" />
+                <ScalarProperty Name="creacion_cabecera" ColumnName="creacion_cabecera" />
+                <ScalarProperty Name="estado_cabecera" ColumnName="estado_cabecera" />
+                <ScalarProperty Name="descripcion_cabecera" ColumnName="descripcion_cabecera" />
+                <ScalarProperty Name="nombre_cabecera" ColumnName="nombre_cabecera" />
+                <ScalarProperty Name="id_cabecera" ColumnName="id_cabecera" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleEquipos">
+            <EntityTypeMapping TypeName="BDD_HRVModel.DetalleEquipos">
+              <MappingFragment StoreEntitySet="DetalleEquipos">
+                <ScalarProperty Name="aux4_detalle" ColumnName="aux4_detalle" />
+                <ScalarProperty Name="aux3_detalle" ColumnName="aux3_detalle" />
+                <ScalarProperty Name="aux2_detalle" ColumnName="aux2_detalle" />
+                <ScalarProperty Name="aux1_detalle" ColumnName="aux1_detalle" />
+                <ScalarProperty Name="valor_detalle" ColumnName="valor_detalle" />
+                <ScalarProperty Name="nombre_detalle" ColumnName="nombre_detalle" />
+                <ScalarProperty Name="id_cabecera" ColumnName="id_cabecera" />
+                <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

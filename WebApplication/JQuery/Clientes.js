@@ -31,49 +31,82 @@
 
 
         if (_prov == '') {
+            Swal.fire({
+                icon: 'info',
+                text: 'seleccione provincia',
 
-            Swal.fire('seleccione provincia');
+            });
             return;
         }
         if (_cuid =='0') {
 
-            Swal.fire('seleccione cuidad');
+            Swal.fire({
+                icon: 'info',
+                text: 'seleccione cuidad',
+
+            });
             return;
         }
 
         if (_cli == '') {
 
-            Swal.fire('campo requerido: Cliente');
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Cliente',
+
+            });
             return;
         }
 
         if (_ruc != '') {
             if (_ruc.length < 13 || _ruc.length > 13) {
-                Swal.fire('Ruc incorrecto');
+                Swal.fire({
+                    icon: 'error',
+                    //title: 'Ups...',
+                    text: 'Ruc incorrecto',
+
+                });
                 return;
             }
         }
 
         if (_direc == '') {
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Direccion',
 
-            Swal.fire('campo requerido: Direccion');
+            });
             return;
         }
       
         if (_tel1 == '') {
-            Swal.fire('campo requerido: Telefono 1');
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Telefono 1',
+
+            });
             return;
         }
 
         if (_tel1.length < 9 || _tel1.length > 9) {
-            Swal.fire('telefono 1 incorrecto');
+            Swal.fire({
+                icon: 'error',
+                //title: 'Ups...',
+                text: 'Telefono 1 incorrecto',
+
+            });
             return;
         }
 
         if (_tel2 != '') {
 
             if (_tel2.length < 9 || _tel2.length > 9) {
-                Swal.fire('telefono 2 incorrecto');
+                Swal.fire({
+                    icon: 'error',
+                    //title: 'Ups...',
+                    text: 'Telefono 2 incorrecto',
+
+                });
                 return;
             }
         }
@@ -81,31 +114,53 @@
         if (_email != '') {
 
             if ($("#TxtEmail").val().indexOf('@', 0) == -1 || $("#TxtEmail").val().indexOf('.', 0) == -1) {
-                Swal.fire('e-mail incorrecto');
+                Swal.fire({
+                    icon: 'error',
+                    //title: 'Ups...',
+                    text: 'e-mail incorrecto',
+
+                });
                 return;
                 
             }
         }
     
         if (_con1 == '') {
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Contacto 1',
 
-            Swal.fire('campo requerido: Contacto 1');
+            });
             return;
         }
         if (_cel1 == '') {
 
-            Swal.fire('campo requerido: Celular 1');
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Celular 1',
+
+            });
             return;
         }
 
         if (_cel1.length < 10 || _cel1.length > 10) {
-            Swal.fire('celular 1 incorrecto');
+            Swal.fire({
+                icon: 'error',
+                //title: 'Ups...',
+                text: 'Celular 1 incorrecto',
+
+            });
             return;
         }
 
         if (_cel2 != '') {
             if (_cel2.length < 10 || _cel1.length > 10) {
-                Swal.fire('celular 2 incorrecto');
+                Swal.fire({
+                    icon: 'error',
+                    //title: 'Ups...',
+                    text: 'Celular 2 incorrecto',
+
+                });
                 return;
             }
         }
@@ -228,49 +283,82 @@
 
 
         if (_prov == '') {
+            Swal.fire({
+                icon: 'info',
+                text: 'seleccione provincia',
 
-            Swal.fire('seleccione provincia');
+            });
             return;
         }
         if (_cuid == '0') {
 
-            Swal.fire('seleccione cuidad');
+            Swal.fire({
+                icon: 'info',
+                text: 'seleccione cuidad',
+
+            });
             return;
         }
 
         if (_cli == '') {
 
-            Swal.fire('campo requerido: Cliente');
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Cliente',
+
+            });
             return;
         }
 
         if (_ruc != '') {
             if (_ruc.length < 13 || _ruc.length > 13) {
-                Swal.fire('Ruc incorrecto');
+                Swal.fire({
+                    icon: 'error',
+                    //title: 'Ups...',
+                    text: 'Ruc incorrecto',
+
+                });
                 return;
             }
         }
 
         if (_direc == '') {
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Direccion',
 
-            Swal.fire('campo requerido: Direccion');
+            });
             return;
         }
 
         if (_tel1 == '') {
-            Swal.fire('campo requerido: Telefono 1');
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Telefono 1',
+
+            });
             return;
         }
 
         if (_tel1.length < 9 || _tel1.length > 9) {
-            Swal.fire('telefono 1 incorrecto');
+            Swal.fire({
+                icon: 'error',
+                //title: 'Ups...',
+                text: 'Telefono 1 incorrecto',
+
+            });
             return;
         }
 
         if (_tel2 != '') {
 
             if (_tel2.length < 9 || _tel2.length > 9) {
-                Swal.fire('telefono 2 incorrecto');
+                Swal.fire({
+                    icon: 'error',
+                    //title: 'Ups...',
+                    text: 'Telefono 2 incorrecto',
+
+                });
                 return;
             }
         }
@@ -278,31 +366,53 @@
         if (_email != '') {
 
             if ($("#TxtEmail").val().indexOf('@', 0) == -1 || $("#TxtEmail").val().indexOf('.', 0) == -1) {
-                Swal.fire('e-mail incorrecto');
+                Swal.fire({
+                    icon: 'error',
+                    //title: 'Ups...',
+                    text: 'e-mail incorrecto',
+
+                });
                 return;
 
             }
         }
 
         if (_con1 == '') {
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Contacto 1',
 
-            Swal.fire('campo requerido: Contacto 1');
+            });
             return;
         }
         if (_cel1 == '') {
 
-            Swal.fire('campo requerido: Celular 1');
+            Swal.fire({
+                icon: 'info',
+                text: 'campo requerido: Celular 1',
+
+            });
             return;
         }
 
         if (_cel1.length < 10 || _cel1.length > 10) {
-            Swal.fire('celular 1 incorrecto');
+            Swal.fire({
+                icon: 'error',
+                //title: 'Ups...',
+                text: 'Celular 1 incorrecto',
+
+            });
             return;
         }
 
         if (_cel2 != '') {
             if (_cel2.length < 10 || _cel1.length > 10) {
-                Swal.fire('celular 2 incorrecto');
+                Swal.fire({
+                    icon: 'error',
+                    //title: 'Ups...',
+                    text: 'Celular 2 incorrecto',
+
+                });
                 return;
             }
         }
