@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
    
-    $("#TxtUsuario").val('');
-    $("#TxtPassword").val('');
+    $("#txtUsuario").val('');
+    $("#txtPassword").val('');
 
     $("#BtnLogin").click(function (eve) {
         eve.preventDefault();
-        _usuario = $("#TxtUsuario").val();
+        _usuario = $("#txtUsuario").val();
         if (_usuario == "") {
             Swal.fire({
                 position: 'top-end',
@@ -15,7 +15,7 @@
        
             return;
         }
-        _password = $("#TxtPassword").val();
+        _password = $("#txtPassword").val();
         if (_password == "") {
             Swal.fire({
                 position: 'top-end',
@@ -42,8 +42,8 @@
                         text: 'usuario y/o contraseña incorrecto',
 
                     });
-                    $("#TxtUsuario").val('');
-                    $("#TxtPassword").val('');
+                    $("#txtUsuario").val('');
+                    $("#txtPassword").val('');
                     
                 }
             }

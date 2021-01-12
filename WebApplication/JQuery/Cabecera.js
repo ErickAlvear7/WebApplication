@@ -9,7 +9,7 @@
     $("#btnAdd").click(function () {
         $("#formParam").trigger("reset");
         $("#divcheck").hide();
-        $("#header").css("background-color", "#6491C2");
+        $("#header").css("background-color", "#2A61DF");
         $("#header").css("color", "white");
         $(".modal-title").text("Nuevo Parametro");
         $("#btnAgregar").text("Agregar");
@@ -19,7 +19,7 @@
     });
 
     $('#btnAgregar').click(function () {
-        if ($.trim($('#TxtDetalle').val()).length == 0) {
+        if ($.trim($('#txtDetalle').val()).length == 0) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Información',
@@ -29,7 +29,7 @@
             return;
         }
 
-        if ($.trim($('#TxtValorV').val()).length == 0 && $.trim($('#TxtValorI').val()).length == 0) {
+        if ($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Información',
@@ -39,7 +39,7 @@
             return;
         }
 
-        if ($.trim($('#TxtValorV').val()).length > 0 && $.trim($('#TxtValorI').val()).length > 0) {
+        if ($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0) {
             Swal.fire({
                 icon: 'warning',
                 title: 'Información',
@@ -49,13 +49,13 @@
             return;
         }
 
-        _descripcion = $.trim($('#TxtDetalle').val());
-        _valorv = $.trim($('#TxtValorV').val());
+        _descripcion = $.trim($('#txtDetalle').val()).toUpperCase();
+        _valorv = $.trim($('#txtValorV').val()).toUpperCase();
 
-        if ($.trim($('#TxtValorI').val()).length == 0) {
+        if ($.trim($('#txtValorI').val()).length == 0) {
             _valori = 0;
         } else {
-            _valori = $.trim($('#TxtValorI').val());
+            _valori = $.trim($('#txtValorI').val());
         }
 
         if (_tipoSave == 'add') {
@@ -121,7 +121,7 @@
                 _output += '</tr>';
                 //console.log(_output);
 
-                $('#tblparameter').append(_output);
+                $('#tblParameter').append(_output);
 
                 _objeto = {
                     ArryId: _count,
@@ -229,11 +229,11 @@
             $("#ChkEstado").prop("checked", false);
             $("#LblEstado").text("Inactivo");
         }
-        $('#TxtDetalle').val(_descripcionold);
-        $('#TxtValorV').val(_valorvold);
-        $('#TxtValorI').val(_valoriold == 0 ? '' : _valoriold);
+        $('#txtDetalle').val(_descripcionold);
+        $('#txtValorV').val(_valorvold);
+        $('#txtValorI').val(_valoriold == 0 ? '' : _valoriold);
         $('#hidden_row_id').val(_row_id);
-        $("#header").css("background-color", "#6491C2");
+        $("#header").css("background-color", "#2A61DF");
         $("#header").css("color", "white");
         $(".modal-title").text("Editar Parametro");
         $("#divcheck").show();

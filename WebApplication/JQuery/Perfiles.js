@@ -11,11 +11,11 @@
     });
 
     $("#btnGuardar").click(function (eve) {
-        _perfilNombre = $("#TxtPerfil").val().trim();
+        _perfilNombre = $("#txtPerfil").val().trim();
         if (_perfilNombre == "") {
             Swal.fire({
-                icon: 'error',
-                title: 'Ups...',
+                icon: 'info',
+                //title: 'Ups...',
                 text: 'ingrese perfil',
 
             });

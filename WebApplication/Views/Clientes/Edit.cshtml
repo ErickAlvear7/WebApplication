@@ -32,11 +32,11 @@
 
                 <label for="prov" class="control-label col-md-2">Provincia:</label>
                 <div class="col-md-4">
-                    @Html.DropDownList("provincia_cliente", null, "--Seleccione Provincia--", htmlAttributes: new { @class = "form-control", @id = "DdlProv", @onchange = "FunGetCuidad();", style = "Width:100%" })
+                    @Html.DropDownList("provincia_cliente", null, "--Seleccione Provincia--", htmlAttributes: new { @class = "form-control", @id = "ddlProv", @onchange = "FunGetCuidad();", style = "Width:100%" })
                 </div>
                 <label for="cui" class="control-label col-md-2">Cuidad:</label>
                 <div class="col-md-4">
-                    @Html.DropDownList("cuidad_cliente", null, "--Seleccione Cuidad--", htmlAttributes: new { @class = "form-control", @id = "DdlCuid" })
+                    @Html.DropDownList("cuidad_cliente", null, "--Seleccione Cuidad--", htmlAttributes: new { @class = "form-control", @id = "ddlCuid" })
                 </div>
             </div>
             <hr />
@@ -44,18 +44,18 @@
                 <label for="cliente" class="control-label col-md-2">Cliente:</label>
                 <div class="col-md-4">
                     @*<input class="form-control" id="TxtNombre" onkeyup="this.value = this.value.replace(/[^aA-zZ]/g, '')" placeholder="ingrese nombre de la empresa" maxlength="50" type="text" style="text-transform:uppercase;" />*@
-                    @Html.EditorFor(model => model.nombre_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtCliente", maxlength = "100", style = "text-transform:uppercase;" } })
+                    @Html.EditorFor(model => model.nombre_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtCliente", maxlength = "100", style = "text-transform:uppercase;" } })
                 </div>
                 <label for="ruc" class="control-label col-md-2">Ruc:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.ruc_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtRuc", maxlength = "13" } })
+                    @Html.EditorFor(model => model.ruc_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtRuc", maxlength = "13" } })
                 </div>
             </div>
             <hr />
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Direccion:</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.direccion_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtDirec", maxlength = "200", style = "text-transform:uppercase;" } })
+                    @Html.EditorFor(model => model.direccion_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtDirec", maxlength = "200", style = "text-transform:uppercase;" } })
                     @*<textarea class="form-control" id="TxtDirec" maxlength="200" rows="2" onkeydown="return (event.keyCode != 13);"></textarea>*@
                 </div>
             </div>
@@ -63,44 +63,44 @@
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Telefono 1:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.telefono1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtTel1" } })
+                    @Html.EditorFor(model => model.telefono1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtTel1" } })
                 </div>
                 <label for="direc" class="control-label col-md-2">Telefono 2:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.telefono2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtTel2" } })
+                    @Html.EditorFor(model => model.telefono2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtTel2" } })
                 </div>
             </div>
             <hr />
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Email:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.email_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtEmail", maxlength = "50", style = "text-transform:lowercase;" } })
+                    @Html.EditorFor(model => model.email_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtEmail", maxlength = "50", style = "text-transform:lowercase;" } })
                 </div>
                 <label for="direc" class="control-label col-md-2">Web:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.web_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtWeb", maxlength = "50", style = "text-transform:lowercase;" } })
+                    @Html.EditorFor(model => model.web_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtWeb", maxlength = "50", style = "text-transform:lowercase;" } })
                 </div>
             </div>
             <hr />
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Contacto 1:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.contacto1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtContac1", maxlength = "50", style = "text-transform:uppercase;" } })
+                    @Html.EditorFor(model => model.contacto1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtContac1", maxlength = "50", style = "text-transform:uppercase;" } })
                 </div>
                 <label for="direc" class="control-label col-md-2">Celular:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.celular1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtCel1" } })
+                    @Html.EditorFor(model => model.celular1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtCel1" } })
                 </div>
             </div>
             <hr />
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Contacto 2:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.contacto2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtContac2", maxlength = "50", style = "text-transform:uppercase;" } })
+                    @Html.EditorFor(model => model.contacto2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtContac2", maxlength = "50", style = "text-transform:uppercase;" } })
                 </div>
                 <label for="direc" class="control-label col-md-2">Celular:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.celular2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "TxtCel2" } })
+                    @Html.EditorFor(model => model.celular2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtCel2" } })
                 </div>
             </div>
             <hr />
@@ -118,10 +118,10 @@
         <div class="container">
             <div class="btn-group btn-group-justified">
                 <div class="btn-group">
-                    <button type="button" id="BtnRegresar" class="btn btn-primary">Regresar</button>
+                    <button type="button" id="btnRegresar" class="btn btn-primary">Regresar</button>
                 </div>
                 <div class="btn-group">
-                    <button type="button" id="BtnModificar" class="btn btn-outline-success">Modificar</button>
+                    <button type="button" id="btnModificar" class="btn btn-outline-success">Modificar</button>
                 </div>
             </div>
 
@@ -138,7 +138,7 @@
 
         function FunGetCuidad() {
 
-            var _prov = $('#DdlProv').val();
+            var _prov = $('#ddlProv').val();
 
             $.ajax({
                 url: '/Clientes/FunFillCuidad',
@@ -146,10 +146,10 @@
                 dataType: "JSON",
                 data: { pro: _prov },
                 success: function (response) {
-                    $("#DdlCuid").html("");
-                    $("#DdlCuid").append($('<option></option>').val("0").html("--Seleccione Cuidad--"));
+                    $("#ddlCuid").html("");
+                    $("#ddlCuid").append($('<option></option>').val("0").html("--Seleccione Cuidad--"));
                     $.each(response, function (index, value) {
-                        $("#DdlCuid").append(
+                        $("#ddlCuid").append(
                             $('<option></option>').val(value.CuidadId).html(value.Cuidad));
                     });
                 }

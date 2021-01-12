@@ -19,7 +19,7 @@
                 @*@Html.LabelFor(model => model.id_perfil, "id_perfil", htmlAttributes: new { @class = "control-label col-md-2" })*@
                 <div class="col-md-9">
                     @*@Html.DropDownList("id_perfil", null, htmlAttributes: new { @class = "form-control" })*@
-                    @Html.DropDownList("id_perfil", null, "--Seleccione un Perfil--", htmlAttributes: new { @class = "form-control", @id = "DdlPerfil" })
+                    @Html.DropDownList("id_perfil", null, "--Seleccione un Perfil--", htmlAttributes: new { @class = "form-control", @id = "ddlPerfil" })
                 </div>
             </div>
         </div>
@@ -28,11 +28,11 @@
             <div class="form-inline col-md-12">
                 <label for="nombres" class="control-label col-md-2">Nombres:</label>              
                 <div class="col-md-4">              
-                    <input class="form-control" id="TxtNombre" onkeyup="this.value = this.value.replace(/[^aA-zZ]/g, '')" placeholder="ingrese nombres" maxlength="50" type="text" style="text-transform:uppercase;" />
+                    <input class="form-control" id="txtNombre" onkeyup="this.value = this.value.replace(/[^aA-zZ]/g, '')" placeholder="ingrese nombres" maxlength="50" type="text" style="text-transform:uppercase;" />
                 </div>
                 <label for="apellidos" class="control-label col-md-2">Apellidos:</label>
                 <div class="col-md-4">                    
-                    <input class="form-control" id="TxtApellido" onkeyup="this.value = this.value.replace(/[^aA-zZ]/g, '')" maxlength="50" placeholder="ingrese apellidos" type="text" style="text-transform:uppercase;" />
+                    <input class="form-control" id="txtApellido" onkeyup="this.value = this.value.replace(/[^aA-zZ]/g, '')" maxlength="50" placeholder="ingrese apellidos" type="text" style="text-transform:uppercase;" />
                 </div>
             </div>
         </div>
@@ -41,11 +41,11 @@
             <div class="form-inline col-md-12">
                 <label for="login" class="control-label col-md-2">Login:</label>
                 <div class="col-md-4">                
-                    <input class="form-control" id="TxtLogin" onkeyup="this.value = this.value.replace(/[^a-z]/g, '')" maxlength="10" placeholder="usuario" type="text" />
+                    <input class="form-control" id="txtLogin" onkeyup="this.value = this.value.replace(/[^a-z]/g, '')" maxlength="10" placeholder="usuario" type="text" />
                 </div>
                 <label for="password" class="control-label col-md-2">Contraseña:</label>
                 <div class="col-md-4">
-                    <input class="form-control" id="TxtPassword" maxlength="50" placeholder="contraseña" type="password" />
+                    <input class="form-control" id="txtPassword" maxlength="50" placeholder="contraseña" type="password" />
                 </div>
             </div>
         </div>

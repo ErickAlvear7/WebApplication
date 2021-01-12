@@ -246,6 +246,7 @@
     <Content Include="VendorLoginV1\images\img-01.png" />
     <Content Include="VendorLoginV1\images\login1.png" />
     <Content Include="VendorLoginV1\images\login2.png" />
+    <Content Include="VendorLoginV1\images\login3.png" />
     <Content Include="VendorLoginV1\images\login_pro.png" />
     <Content Include="VendorLoginV1\images\logo_hrv.png" />
     <Content Include="VendorLoginV1\js\main.js" />

@@ -28,7 +28,7 @@
             <div class="form-row">
                 <label for="perfil" class="control-label col-md-2">Perfil:</label>
                 <div class="col-md-4">
-                    @Html.DropDownList("id_perfil", null, "--Seleccione Perfil--", htmlAttributes: new { @class = "form-control",@id="DdlPerfil" })
+                    @Html.DropDownList("id_perfil", null, "--Seleccione Perfil--", htmlAttributes: new { @class = "form-control",@id="ddlPerfil" })
                     @*@Html.ValidationMessageFor(model => model.id_perfil, "", new { @class = "text-danger" })*@
                 </div>
             </div>
@@ -36,12 +36,12 @@
             <div class="form-row">
                 <label for="nombres" class="control-label col-md-2">Nombres:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.nombre_usuario, new { htmlAttributes = new { @class = "form-control",@id="TxtNombre", style = "text-transform:uppercase;" } })
+                    @Html.EditorFor(model => model.nombre_usuario, new { htmlAttributes = new { @class = "form-control",@id="txtNombre", style = "text-transform:uppercase;" } })
                     @*@Html.ValidationMessageFor(model => model.nombre_usuario, "", new { @class = "text-danger" })*@
                 </div>
                 <label for="apellidos" class="control-label col-md-2">Apellidos:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.apellido_usuario, new { htmlAttributes = new { @class = "form-control",@id="TxtApellido", style = "text-transform:uppercase;" } })
+                    @Html.EditorFor(model => model.apellido_usuario, new { htmlAttributes = new { @class = "form-control",@id="txtApellido", style = "text-transform:uppercase;" } })
                     @*@Html.ValidationMessageFor(model => model.apellido_usuario, "", new { @class = "text-danger" })*@
                 </div>
             </div>
@@ -49,11 +49,11 @@
             <div class="form-row">
                 <label for="login" class="control-label col-md-2">Login:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.login_usuario, new { htmlAttributes = new { @class = "form-control",@id="TxtLogin" } })
+                    @Html.EditorFor(model => model.login_usuario, new { htmlAttributes = new { @class = "form-control",@id="txtLogin" } })
                 </div>
                 <label for="password" class="control-label col-md-2">Contraseña:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.password_usuario, new { htmlAttributes = new { @class = "form-control",@id= "TxtPassword",@type="password" } })
+                    @Html.EditorFor(model => model.password_usuario, new { htmlAttributes = new { @class = "form-control",@id= "txtPassword",@type="password" } })
                     @*@Html.ValidationMessageFor(model => model.password_usuario, "", new { @class = "text-danger" })*@
                 </div>
             </div>

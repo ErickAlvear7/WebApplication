@@ -9,25 +9,25 @@
       
     });
 
-    $("#BtnRegresar").click(function () {
+    $("#btnRegresar").click(function () {
         window.location.href = "/Clientes/Index";
 
     });
 
-    $("#BtnGuardar").click(function () {
-        _prov = $('#DdlProv').val().trim();
-        _cuid = $('#DdlCuid').val().trim();
-        _cli = $('#TxtCliente').val().trim().toUpperCase();
-        _ruc = $('#TxtRuc').val().trim().trim();
-        _direc = $('#TxtDirec').val().trim().toUpperCase();
-        _tel1 = $('#TxtTel1').val().trim();
-        _tel2 = $('#TxtTel2').val().trim();     
-        _email = $('#TxtEmail').val().trim().toLowerCase();
-        _web = $('#TxtWeb').val().trim().toLowerCase();
-        _con1 = $('#TxtContac1').val().trim().toUpperCase();
-        _cel1 = $('#TxtCel1').val().trim();
-        _con2 = $('#TxtContac2').val().trim().toUpperCase();
-        _cel2 = $('#TxtCel2').val().trim();
+    $("#btnGuardar").click(function () {
+        _prov = $('#ddlProv').val().trim();
+        _cuid = $('#ddlCuid').val().trim();
+        _cli = $('#txtCliente').val().trim().toUpperCase();
+        _ruc = $('#txtRuc').val().trim().trim();
+        _direc = $('#txtDirec').val().trim().toUpperCase();
+        _tel1 = $('#txtTel1').val().trim();
+        _tel2 = $('#txtTel2').val().trim();     
+        _email = $('#txtEmail').val().trim().toLowerCase();
+        _web = $('#txtWeb').val().trim().toLowerCase();
+        _con1 = $('#txtContac1').val().trim().toUpperCase();
+        _cel1 = $('#txtCel1').val().trim();
+        _con2 = $('#txtContac2').val().trim().toUpperCase();
+        _cel2 = $('#txtCel2').val().trim();
 
 
         if (_prov == '') {
@@ -113,7 +113,7 @@
 
         if (_email != '') {
 
-            if ($("#TxtEmail").val().indexOf('@', 0) == -1 || $("#TxtEmail").val().indexOf('.', 0) == -1) {
+            if ($("#txtEmail").val().indexOf('@', 0) == -1 || $("#txtEmail").val().indexOf('.', 0) == -1) {
                 Swal.fire({
                     icon: 'error',
                     //title: 'Ups...',
@@ -194,7 +194,7 @@
 
     });
 
-    $(document).on("click", "#BtnEliminar", function (eve) {
+    $(document).on("click", "#btnEliminar", function (eve) {
         eve.preventDefault();
         _fila = $(this);
         _row = $(this).closest("tr");
@@ -257,7 +257,7 @@
         }
     });
 
-    $(document).on("click", "#BtnEditar", function (eve) {
+    $(document).on("click", "#btnEditar", function (eve) {
         eve.preventDefault();
         _fila = $(this).closest("tr");
         _data = $('#tabla').dataTable().fnGetData(_fila);
@@ -266,20 +266,20 @@
 
     });
 
-    $("#BtnModificar").click(function () {
-        _prov = $('#DdlProv').val().trim();
-        _cuid = $('#DdlCuid').val().trim();
-        _cli = $('#TxtCliente').val().trim().toUpperCase();
-        _ruc = $('#TxtRuc').val().trim().trim();
-        _direc = $('#TxtDirec').val().trim().toUpperCase();
-        _tel1 = $('#TxtTel1').val().trim();
-        _tel2 = $('#TxtTel2').val().trim();
-        _email = $('#TxtEmail').val().trim().toLowerCase();
-        _web = $('#TxtWeb').val().trim().toLowerCase();
-        _con1 = $('#TxtContac1').val().trim().toUpperCase();
-        _cel1 = $('#TxtCel1').val().trim();
-        _con2 = $('#TxtContac2').val().trim().toUpperCase();
-        _cel2 = $('#TxtCel2').val().trim();
+    $("#btnModificar").click(function () {
+        _prov = $('#ddlProv').val().trim();
+        _cuid = $('#ddlCuid').val().trim();
+        _cli = $('#txtCliente').val().trim().toUpperCase();
+        _ruc = $('#txtRuc').val().trim().trim();
+        _direc = $('#txtDirec').val().trim().toUpperCase();
+        _tel1 = $('#txtTel1').val().trim();
+        _tel2 = $('#txtTel2').val().trim();
+        _email = $('#txtEmail').val().trim().toLowerCase();
+        _web = $('#txtWeb').val().trim().toLowerCase();
+        _con1 = $('#txtContac1').val().trim().toUpperCase();
+        _cel1 = $('#txtCel1').val().trim();
+        _con2 = $('#txtContac2').val().trim().toUpperCase();
+        _cel2 = $('#txtCel2').val().trim();
 
 
         if (_prov == '') {
