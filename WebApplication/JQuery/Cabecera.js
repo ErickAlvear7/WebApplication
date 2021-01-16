@@ -6,6 +6,10 @@
         handle: ".modal-header"
     });
 
+    $('#btnRegresar').click(function () {
+        window.location.href = '/CabeceraEquipos/Index';
+    });
+
     $("#btnAdd").click(function () {
         $("#formParam").trigger("reset");
         $("#divcheck").hide();
@@ -21,9 +25,10 @@
     $('#btnAgregar').click(function () {
         if ($.trim($('#txtDetalle').val()).length == 0) {
             Swal.fire({
-                icon: 'warning',
+                icon: 'info',
                 title: 'Información',
-                text: 'Ingrese Detalle',
+                text: 'ingrese detalle..!',
+                type: 'warning',
                 showCloseButton: true,
             });
             return;
@@ -31,9 +36,10 @@
 
         if ($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0) {
             Swal.fire({
-                icon: 'warning',
+                icon: 'info',
                 title: 'Información',
-                text: 'Ingrese Valor Texto o Valor Entero..!',
+                text: 'ingrese  valor de texto o valor entero..!',
+                type: 'warning',
                 showCloseButton: true,
             });
             return;
@@ -41,9 +47,10 @@
 
         if ($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0) {
             Swal.fire({
-                icon: 'warning',
+                icon: 'info',
                 title: 'Información',
-                text: 'Ingrese Solo Valor Texto o Valor Entero..!',
+                text: 'ingrese solo valor de texto o entero..!',
+                type: 'warning',
                 showCloseButton: true,
             });
             return;
@@ -62,35 +69,38 @@
             $.each(_result, function (i, item) {
                 if (item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
                     Swal.fire({
+                        icon: 'info',
                         title: 'Información',
+                        text: 'Nombre del Parámetro ya Existe..!',
                         type: 'warning',
-                        text: 'Nombre del Parámetro ya Existe..!'
                     });
                     _continuar = false;
-                    return;
+                    return false;
                 } else {
                     $.each(_result, function (i, item) {
                         if (_valori == 0) {
                             if (item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
                                 Swal.fire({
+                                    icon: 'info',
                                     title: 'Información',
+                                    text: 'Velor texto del Parámetro ya Existe..!',
                                     type: 'warning',
-                                    text: 'Valor Texto de Parámetro ya Existe..!'
                                 });
                                 _continuar = false;
-                                return;
+                                return false;
                             } else {
                                 _continuar = true;
                             }
                         } else {
                             if (item.ArryPadeValorI == _valori) {
                                 Swal.fire({
+                                    icon: 'info',
                                     title: 'Información',
+                                    text: 'Velor entero del Parámetro ya Existe..!',
                                     type: 'warning',
-                                    text: 'Valor Entero de Parámetro ya Existe..!'
                                 });
                                 _continuar = false;
-                                return;
+                                return false;
                             } else {
                                 _continuar = true;
                             }
@@ -141,9 +151,10 @@
                 $.each(_result, function (i, _item) {
                     if (_item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
                         Swal.fire({
-                            icon: 'warning',
+                            icon: 'info',
                             title: 'Información',
-                            text: 'Nombre del Parámetro ya Existe..!'
+                            text: 'Nombre del Parámetro ya Existe..!',
+                            type: 'warning',
                         });
                         _continuar = false;
                         return false;
@@ -159,12 +170,13 @@
                         $.each(_result, function (i, _item) {
                             if (_item.ArryPadeValorI == _valori) {
                                 Swal.fire({
+                                    icon: 'info',
                                     title: 'Información',
+                                    text: 'Velor entero del Parámetro ya Existe..!',
                                     type: 'warning',
-                                    text: 'Valor Entero de Parámetro ya Existe..!'
                                 });
                                 _seguir = false;
-                                return;
+                                return false;
                             } else {
                                 _seguir = true;
                             }
@@ -175,12 +187,13 @@
                         $.each(_result, function (i, _item) {
                             if (_item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
                                 Swal.fire({
+                                    icon: 'info',
                                     title: 'Información',
+                                    text: 'Velor texto del Parámetro ya Existe..!',
                                     type: 'warning',
-                                    text: 'Valor Texto de Parámetro ya Existe..!'
                                 });
                                 _seguir = false;
-                                return;
+                                return false;
                             } else {
                                 _seguir = true;
                             }
@@ -256,6 +269,7 @@
         _row_id = $(this).attr("id");
         _descripcion = $('#detalle' + _row_id + '').val();
         Swal.fire({
+            icon:"info",
             title: 'Está Seguro de Borrar ' + _descripcion,
             text: 'El registro será eliminado..',
             type: 'warning',
@@ -336,40 +350,43 @@
     }
 
     $("#btnSave").click(function (eve) {
-        _nomparametro = $.trim($("#TxtParametro").val());
-        _descripcion = $.trim($("#TxtDescripcion").val());
+        _nomparametro = $.trim($("#txtParametro").val()).toUpperCase();
+        _descripcion = $.trim($("#txtDescripcion").val());
 
         if (_nomparametro == '') {
             Swal.fire({
+                icon: 'info',
                 title: 'Información',
+                text: 'ingrese nombre del parametro..!',
                 type: 'warning',
-                text: 'Ingrese Nombre del  Parámetro..!'
             });
             return;
         }
 
         if (_count == 0) {
             Swal.fire({
+                icon: 'info',
                 title: 'Información',
+                text: 'ingrese al menos un detalle..!',
                 type: 'warning',
-                text: 'Ingrese al menos un Parámetro..!'
             });
             return;
         }
 
         $.ajax({
-            url: "/Parametro_Cabecera/Create",
+            url: "/CabeceraEquipos/Create",
             type: "POST",
             dataType: "json",
-            data: { nomparametro: _nomparametro, descripcion: _descripcion, estado: true, detalles: _result },
+            data: { parametro: _nomparametro, descripcion: _descripcion, estado: true, detalles: _result },
             success: function (datos) {
                 if (datos.success == true) {
-                    window.location.href = datos.redirectToUrl;
+                    window.location.href = datos.miUrl;
                 } else {
                     Swal.fire({
+                        icon: 'info',
                         title: 'Información',
+                        text: 'Nombre del parametro ya existe..!',
                         type: 'warning',
-                        text: 'Nombre del Parámetro ya Existe..!'
                     });
                 }
             },
@@ -379,4 +396,15 @@
         });
 
     });
+
+    $(document).on("click", "#btnEditar", function (eve) {
+        eve.preventDefault();
+        _fila = $(this).closest("tr");
+        _data = $('#tabla').dataTable().fnGetData(_fila);
+        _id = _data[0];
+        window.location.href = "/CabeceraEquipos/Edit/" + _id;
+
+    });
+
+  
 });

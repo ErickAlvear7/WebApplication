@@ -14,7 +14,7 @@ namespace WebApplication.Controllers.ConexionDTO
         DataSet _dataSet = new DataSet();
 
 
-        public List<Clie> FunGetClientes()
+        public List<Catalogo> FunGetClientes()
         {
             try
             {
@@ -23,7 +23,7 @@ namespace WebApplication.Controllers.ConexionDTO
                                 from Cui in _db.CuidadClientes
                                 where Cli.provincia_cliente == Prov.id_provincia && Cli.cuidad_cliente == Cui.id_cuidad
                                 orderby Cli.cuidad_cliente
-                                select new Clie
+                                select new Catalogo
                                 {
                                     ClienteId = Cli.id_cliente,
                                     Cliente = Cli.nombre_cliente,
@@ -37,24 +37,7 @@ namespace WebApplication.Controllers.ConexionDTO
 
                 return __cliente.ToList();
 
-                                    //var _clie = _db.Clientes.ToList();
-                                    //List<Clie> _cliente = new List<Clie>();
-
-                //foreach (var item in _clie)
-                //{
-                //    _cliente.Add(new Clie()
-                //    {
-                //        ClienteId = item.id_cliente,
-                //        Cliente = item.nombre_cliente,
-                //        Ruc = item.ruc_cliente,
-                //        Direccion = item.direccion_cliente,
-                //        Estado = item.estado_cliente? "Activo" : "Inactivo",
-                //        Cuidad = item.CuidadClientes.nombre_cuidad
-                //    });
-                //}
-
-                //return _cliente;
-
+              
             }
             catch (Exception ex)
             {

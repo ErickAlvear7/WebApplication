@@ -64,8 +64,8 @@
           <Property Name="id_cabecera" Type="int" Nullable="false" />
           <Property Name="nombre_detalle" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="valor_detalle" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="aux1_detalle" Type="int" />
-          <Property Name="aux2_detalle" Type="int" />
+          <Property Name="valor_detallei" Type="int" Nullable="false" />
+          <Property Name="estado_detalle" Type="bit" Nullable="false" />
           <Property Name="aux3_detalle" Type="varchar" MaxLength="100" />
           <Property Name="aux4_detalle" Type="varchar" MaxLength="100" />
         </EntityType>
@@ -309,8 +309,8 @@
           <Property Name="id_cabecera" Type="Int32" Nullable="false" />
           <Property Name="nombre_detalle" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="valor_detalle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="aux1_detalle" Type="Int32" />
-          <Property Name="aux2_detalle" Type="Int32" />
+          <Property Name="valor_detallei" Type="Int32" Nullable="false" />
+          <Property Name="estado_detalle" Type="Boolean" Nullable="false" />
           <Property Name="aux3_detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="aux4_detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CabeceraEquipos" Relationship="BDD_HRVModel.FK_DetalleEquipos_CabeceraEquipos" FromRole="DetalleEquipos" ToRole="CabeceraEquipos" />
@@ -430,8 +430,8 @@
               <MappingFragment StoreEntitySet="DetalleEquipos">
                 <ScalarProperty Name="aux4_detalle" ColumnName="aux4_detalle" />
                 <ScalarProperty Name="aux3_detalle" ColumnName="aux3_detalle" />
-                <ScalarProperty Name="aux2_detalle" ColumnName="aux2_detalle" />
-                <ScalarProperty Name="aux1_detalle" ColumnName="aux1_detalle" />
+                <ScalarProperty Name="estado_detalle" ColumnName="estado_detalle" />
+                <ScalarProperty Name="valor_detallei" ColumnName="valor_detallei" />
                 <ScalarProperty Name="valor_detalle" ColumnName="valor_detalle" />
                 <ScalarProperty Name="nombre_detalle" ColumnName="nombre_detalle" />
                 <ScalarProperty Name="id_cabecera" ColumnName="id_cabecera" />

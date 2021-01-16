@@ -22,13 +22,15 @@ namespace WebApplication.Controllers
             {
                 ViewBag.error = "error";
                 return View();
-                //return Json(new { success = false, resul = Url.Action("Login", "Indexv1") }, JsonRequestBehavior.AllowGet);
+                
             }
             else
             {
                 Session["_conexion"] = ConfigurationManager.AppSettings["SqlConn"];
+                Session["_UsuarioId"] = _usu.id_usuario;
+                Session["_Host"] = Request.UserHostName;
                 return RedirectToAction("Index", "Menu");
-                //r/*eturn Json(new { success = true, resul = Url.Action("Index", "Menu") }, JsonRequestBehavior.AllowGet);*/
+            
             }
         }
     }

@@ -130,9 +130,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CabeceraEquiposController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
-    <Compile Include="Controllers\ConexionDTO\Clie.cs" />
+    <Compile Include="Controllers\ConexionDTO\Catalogo.cs" />
     <Compile Include="Controllers\ConexionDTO\ClienteDTO.cs" />
     <Compile Include="Controllers\ConexionDTO\LoginDTO.cs" />
+    <Compile Include="Controllers\ConexionDTO\ParametroDTO.cs" />
     <Compile Include="Controllers\ConexionDTO\Perfi.cs" />
     <Compile Include="Controllers\ConexionDTO\SeguridadDTO.cs" />
     <Compile Include="Controllers\ConexionDTO\User.cs" />
@@ -191,12 +192,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ImgHrv\CamaraFrigorifica.jpg" />
     <Content Include="ImgHrv\eq1.jpg" />
     <Content Include="ImgHrv\eq2.jpg" />
     <Content Include="ImgHrv\eq3.jpg" />
+    <Content Include="ImgHrv\Montajes.jpg" />
     <Content Include="ImgHrv\Quito.jpg" />
     <Content Include="ImgHrv\SanRafael.jpg" />
     <Content Include="ImgHrv\SantDomingo.jpg" />
+    <Content Include="ImgHrv\Ventilacion.jpg" />
     <Content Include="JQuery\Cabecera.js" />
     <Content Include="JQuery\CamposTexto.js" />
     <Content Include="JQuery\Clientes.js" />

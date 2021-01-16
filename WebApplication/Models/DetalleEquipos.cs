@@ -18,8 +18,8 @@ namespace WebApplication.Models
         public int id_cabecera { get; set; }
         public string nombre_detalle { get; set; }
         public string valor_detalle { get; set; }
-        public Nullable<int> aux1_detalle { get; set; }
-        public Nullable<int> aux2_detalle { get; set; }
+        public int valor_detallei { get; set; }
+        public bool estado_detalle { get; set; }
         public string aux3_detalle { get; set; }
         public string aux4_detalle { get; set; }
     

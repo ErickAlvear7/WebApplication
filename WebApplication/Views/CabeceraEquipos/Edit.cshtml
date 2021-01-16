@@ -4,132 +4,129 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>CabeceraEquipos</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id_cabecera)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.nombre_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nombre_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nombre_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="container">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.descripcion_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.descripcion_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.descripcion_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <form class="form-horizontal" role="form">
+            <div class="form-group col-md-12">
+                @Html.HiddenFor(model => model.id_cabecera)
+                <div class="container">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.estado_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.estado_cabecera)
-                    @Html.ValidationMessageFor(model => model.estado_cabecera, "", new { @class = "text-danger" })
+                                    <span class="label label-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><span style="color:blue">Parametro</span> <i class="fas fa-chevron-down"></i></span>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label>Parámetro</label>
+                                                @Html.EditorFor(model => model.nombre_cabecera, new { htmlAttributes = new { @class = "form-control", @maxLength = "80", @id = "txtParametro", style = "text-transform:uppercase;" } })
+                                                <span id="error_parametro" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Descripción</label>
+                                                <textarea name="descrip" id="txtDescripcion" class="form-control" maxlength="200" onkeydown="return (event.keyCode!=13);">@ViewBag.Descripcion</textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <span class="label label-primary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Detalle <i class="fas fa-chevron-down"></i></span>
+                                </h5>
+                            </div>
+
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div align="right" style="margin-bottom:5px;">
+                                                <button type="button" class="btn btn-outline-primary" id="btnAdd"><i class='fas fa-plus'></i> </button>
+                                            </div>
+                                            <br />
+                                            <div class="table-responsive">
+                                                <table id="tblParameter" class="table table-striped table-border table-condensed" style="width: 100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="display: none;">NOrden</th>
+                                                            <th>Detalle</th>
+                                                            <th>Codigo Texto</th>
+                                                            <th>Codigo Entero</th>
+                                                            <th>Estado</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @{
+                                                            foreach (var item in Model.DetalleEquipos)
+                                                            {
+                                                                <tr>                                                                
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.nombre_detalle)
+                                                                    </td>
+
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.valor_detalle)
+                                                                    </td>
+
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.valor_detallei)
+                                                                    </td>                                
+
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.estado_detalle)
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <button id="btnEditar" class="btn btn-outline-info btn-sm ml-3"><i class="fas fa-edit"></i></button>
+
+                                                                        <button id="btnEliminar" class="btn btn-outline-danger btn-sm ml-3"><i class="fas fa-trash-alt"></i></button>
+
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.creacion_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.creacion_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.creacion_cabecera, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.usuario_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usuario_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usuario_cabecera, "", new { @class = "text-danger" })
+            <div align="center">
+                <button type="button" class="btn btn-outline-primary" id="btnRegresar">Regresar</button>
+                <button type="button" class="btn btn-outline-success" id="btnSave">Guardar</button>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.terminal_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.terminal_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.terminal_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.modificacion_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.modificacion_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.modificacion_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.usuariomod_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usuariomod_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usuariomod_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.terminalmod_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.terminalmod_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.terminalmod_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.aux1_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.aux1_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.aux1_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.aux2_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.aux2_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.aux2_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.aux3_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.aux3_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.aux3_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.aux4_cabecera, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.aux4_cabecera, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.aux4_cabecera, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+        </form>
     </div>
+
+
+ }
+
+@section scripts{
+    <script src="~/JQuery/Cabecera.js"></script>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

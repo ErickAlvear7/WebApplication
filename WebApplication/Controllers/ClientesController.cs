@@ -20,7 +20,7 @@ namespace WebApplication.Controllers
         {
             ViewBag.Title = "Administrar Clientes";
           
-            List<Clie> _listaClientes = new List<Clie>();
+            List<Catalogo> _listaClientes = new List<Catalogo>();
             _listaClientes = new ClienteDTO().FunGetClientes();
 
             return View(_listaClientes);

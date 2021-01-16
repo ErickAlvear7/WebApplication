@@ -88,6 +88,8 @@
             return;
         }
 
+        
+
         if (_tel1.length < 9 || _tel1.length > 9) {
             Swal.fire({
                 icon: 'error',
