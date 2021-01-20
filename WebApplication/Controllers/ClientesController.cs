@@ -25,28 +25,13 @@ namespace WebApplication.Controllers
 
             return View(_listaClientes);
         }
-
-        // GET: Clientes/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Clientes clientes = db.Clientes.Find(id);
-            if (clientes == null)
-            {
-                return HttpNotFound();
-            }
-            return View(clientes);
-        }
-
+ 
         // GET: Clientes/Create
         public ActionResult Create()
         {
            
             ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia");
-            //ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad");
+          
             List<SelectListItem> _cuidades = new List<SelectListItem>()
             {
                 new SelectListItem(){Value="0",Text="--Seleccione Cuidad--"},
@@ -81,12 +66,7 @@ namespace WebApplication.Controllers
             {
                 return Json(new { success = false, mensaje = "error" });
             }
-            
-
-            //ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
-            //ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia", clientes.provincia_cliente);
-            //return View(clientes);
-          
+                          
         }
 
         // GET: Clientes/Edit/5
@@ -119,13 +99,12 @@ namespace WebApplication.Controllers
             {
                 db.Entry(clientes).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["Mensaje"] = "ok";
-                //return RedirectToAction("Index");
+                TempData["Mensaje"] = "ok";            
                 return Json(new { success = true, redirectToUrl = Url.Action("Index", "Clientes") });
             }
             ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
             ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia", clientes.provincia_cliente);
-            //return View(clientes);
+        
             return Json(new { success = false, mensaje = "error" });
         }
 

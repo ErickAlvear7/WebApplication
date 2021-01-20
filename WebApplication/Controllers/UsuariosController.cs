@@ -24,20 +24,6 @@ namespace WebApplication.Controllers
             return View(_listaUsuarios);
         }
 
-        // GET: Usuarios/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuarios usuarios = db.Usuarios.Find(id);
-            if (usuarios == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuarios);
-        }
 
         // GET: Usuarios/Create
         public ActionResult Create()
@@ -56,10 +42,7 @@ namespace WebApplication.Controllers
         public ActionResult Create(Usuarios usuarios)
         {
             usuarios.creacion_usuario = DateTime.Now;
-            //if (ModelState.IsValid)
-            //{             
-
-            //}
+           
             _codigoId = new SeguridadDTO().FunConsulataLogin(usuarios.login_usuario);
 
             if (_codigoId == 0)
@@ -83,13 +66,7 @@ namespace WebApplication.Controllers
             {
                 return Json(new { success = false, data = "", mesagge = "usuario ya existe", nameclass = "error" }, JsonRequestBehavior.AllowGet);
             }
-           
-
-
-            //return RedirectToAction("Index");
-
-            //ViewBag.id_perfil = new SelectList(db.Perfiles, "id_perfil", "nombre_perfil", usuarios.id_perfil);
-            //return View(usuarios);
+                      
         }
 
         // GET: Usuarios/Edit/5
@@ -159,7 +136,6 @@ namespace WebApplication.Controllers
             Usuarios usuarios = db.Usuarios.Find(id);
             db.Usuarios.Remove(usuarios);
             db.SaveChanges();
-            //return RedirectToAction("Index");
             return Json(new { success = true,  mesagge = "registro eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
         }
 

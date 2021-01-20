@@ -21,20 +21,7 @@ namespace WebApplication.Controllers
             return View(_parametros);
         }
 
-        // GET: CabeceraEquipos/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CabeceraEquipos cabeceraEquipos = db.CabeceraEquipos.Find(id);
-            if (cabeceraEquipos == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cabeceraEquipos);
-        }
+     
 
         // GET: CabeceraEquipos/Create
         public ActionResult Create()
@@ -46,15 +33,15 @@ namespace WebApplication.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Create(string parametro,string descripcion,bool estado,List<Detalle> detalles)
+     
+        public ActionResult Create(string parametro,string descripcion,string estado,List<Detalle> detalles)
         {
-           
+            var _estado = estado == "Activo" ? true : false;
             CabeceraEquipos _cabecera = new CabeceraEquipos();
             {
                 _cabecera.nombre_cabecera = parametro;
                 _cabecera.descripcion_cabecera = descripcion;
-                _cabecera.estado_cabecera = estado;
+                _cabecera.estado_cabecera = _estado;
                 _cabecera.creacion_cabecera = DateTime.Now;
                 _cabecera.usuario_cabecera = int.Parse(Session["_UsuarioId"].ToString());
                 _cabecera.terminal_cabecera = Session["_Host"].ToString();
@@ -72,17 +59,18 @@ namespace WebApplication.Controllers
 
             foreach (var _item in detalles)
             {
+                var _estadoDe = _item.ArryEstado == "Activo" ? true : false;
                 _cabecera.DetalleEquipos.Add(new DetalleEquipos()
                 {
                   
                     nombre_detalle = _item.ArryPadeNombre,
                     valor_detalle = _item.ArryPadeValorV,
                     valor_detallei = _item.ArryPadeValorI,
-                    estado_detalle = _item.ArryEstado,
+                    estado_detalle = _estadoDe,
                     aux3_detalle = "",
                     aux4_detalle =""
-                    
-                });
+
+                }); 
             }
 
             new ParametroDTO().FunGrabarNuevo(_cabecera);
@@ -103,6 +91,7 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Estado = cabeceraEquipos.estado_cabecera ? "Activo" : "Inactivo";
             ViewBag.Descripcion = cabeceraEquipos.descripcion_cabecera;
             return View(cabeceraEquipos);
         }
@@ -111,16 +100,47 @@ namespace WebApplication.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_cabecera,nombre_cabecera,descripcion_cabecera,estado_cabecera,creacion_cabecera,usuario_cabecera,terminal_cabecera,modificacion_cabecera,usuariomod_cabecera,terminalmod_cabecera,aux1_cabecera,aux2_cabecera,aux3_cabecera,aux4_cabecera")] CabeceraEquipos cabeceraEquipos)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit(int id,string nomparametro,string descripcion,string estadocab, List<Detalle> detalleparametros)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(cabeceraEquipos).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var _estado = estadocab == "Activo" ? true : false;
+                using (BDD_HRVEntities _db = new BDD_HRVEntities())
+                {
+                    CabeceraEquipos _cab = _db.CabeceraEquipos.Where(c => c.id_cabecera == id).FirstOrDefault();
+                    _cab.nombre_cabecera = nomparametro;
+                    _cab.descripcion_cabecera = descripcion;
+                    _cab.estado_cabecera = _estado;
+                    _cab.modificacion_cabecera = DateTime.Now;
+                    _cab.usuariomod_cabecera = int.Parse(Session["_UsuarioId"].ToString());
+                    _cab.terminalmod_cabecera = Session["_Host"].ToString();
+
+                    foreach (var _item in detalleparametros)
+                    {
+                        var _estadoDe = _item.ArryEstado == "Activo" ? true : false;
+                        _cab.DetalleEquipos.Add(new DetalleEquipos()
+                        {
+                            id_detalle = _item.ArrayId,
+                            nombre_detalle = _item.ArryPadeNombre,
+                            valor_detalle = _item.ArryPadeValorV,
+                            valor_detallei = _item.ArryPadeValorI,
+                            estado_detalle = _estadoDe,
+                            aux3_detalle = "",
+                            aux4_detalle = ""
+                        });
+                    }
+
+                }
+
             }
-            return View(cabeceraEquipos);
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }                     
+              
+              return null;                    
         }
 
         // GET: CabeceraEquipos/Delete/5
@@ -140,13 +160,13 @@ namespace WebApplication.Controllers
 
         // POST: CabeceraEquipos/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             CabeceraEquipos cabeceraEquipos = db.CabeceraEquipos.Find(id);
             db.CabeceraEquipos.Remove(cabeceraEquipos);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { success = true, mesagge = "registro eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

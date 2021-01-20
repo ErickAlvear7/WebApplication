@@ -204,6 +204,7 @@
     <Content Include="JQuery\Cabecera.js" />
     <Content Include="JQuery\CamposTexto.js" />
     <Content Include="JQuery\Clientes.js" />
+    <Content Include="JQuery\EditCabecera.js" />
     <Content Include="JQuery\Login.js" />
     <Content Include="JQuery\notify.min.js" />
     <Content Include="JQuery\Perfiles.js" />

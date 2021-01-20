@@ -24,20 +24,6 @@ namespace WebApplication.Controllers
             return View(_listaPerfiles);
         }
 
-        // GET: Perfiles/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Perfiles perfiles = db.Perfiles.Find(id);
-            if (perfiles == null)
-            {
-                return HttpNotFound();
-            }
-            return View(perfiles);
-        }
 
         // GET: Perfiles/Create
         public ActionResult Create()
@@ -61,9 +47,7 @@ namespace WebApplication.Controllers
             {
                 db.Perfiles.Add(perfiles);
                 db.SaveChanges();
-
-                //return RedirectToAction("Index");
-
+       
                 _datSet = new SeguridadDTO().FunConsultaPerfil(0, "", Session["_conexion"].ToString());
                 var _datos = _datSet.Tables[0].AsEnumerable().Select(p => new
                 {
@@ -79,10 +63,7 @@ namespace WebApplication.Controllers
             {
                 return Json(new { success = false, data = "", mesagge = "perfil ya existe", nameclass = "success" }, JsonRequestBehavior.AllowGet);
             }
-            
-              
-
-            //return View(perfiles);
+                         
         }
 
         // GET: Perfiles/Edit/5
@@ -139,7 +120,6 @@ namespace WebApplication.Controllers
             Perfiles perfiles = db.Perfiles.Find(id);
             db.Perfiles.Remove(perfiles);
             db.SaveChanges();
-            //return RedirectToAction("Index");
             return Json(new { success = true, mesagge = "perfil eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
         }
 

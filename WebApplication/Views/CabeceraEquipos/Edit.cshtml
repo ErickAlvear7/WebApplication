@@ -4,6 +4,43 @@
     ViewBag.Title = "Edit";
 }
 
+<div class="modal fade" id="modalPARAMETER" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" id="header">
+                <h5 class="modal-title" id="modalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formParam">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="detalle" class="col-form-label">Detalle</label>
+                        <input type="text" required class="form-control" id="txtDetalle" maxlength="80" style="text-transform:uppercase;">
+                    </div>
+                    <div class="form-group">
+                        <label for="valorv" class="col-form-label">Codigo Texto</label>
+                        <input type="text" class="form-control" id="txtValorV" maxlength="20" style="text-transform:uppercase;">
+                    </div>
+                    <div class="form-group">
+                        <label for="valori" class="col-form-label">Codigo Entero</label>
+                        <input type="text" class="form-control" id="txtValorI" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" maxlength="5">
+                    </div>
+                    <div class="form-check" id="divcheck">
+                        <input type="checkbox" class="form-check-input" id="chkEstadoDe">
+                        <label for="estadolabel" class="form-check-label" id="lblEstadoDe">Activo</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="row_id" id="hidden_row_id" />
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-outline-success" id="btnAgregar">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @using (Html.BeginForm())
 {
@@ -13,7 +50,7 @@
 
         <form class="form-horizontal" role="form">
             <div class="form-group col-md-12">
-                @Html.HiddenFor(model => model.id_cabecera)
+                @Html.HiddenFor(model => model.id_cabecera, new { @id = "txtIdCabecera" })
                 <div class="container">
                     <div id="accordion">
                         <div class="card">
@@ -38,6 +75,13 @@
                                                 <textarea name="descrip" id="txtDescripcion" class="form-control" maxlength="200" onkeydown="return (event.keyCode!=13);">@ViewBag.Descripcion</textarea>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="estado">Estado</label>
+                                            <div class="form-check">
+                                                @Html.CheckBoxFor(model => model.estado_cabecera, new { @class = "form-check-input", @id = "chkEstadoCab" })
+                                                <label for="estadolabel" class="form-check-label" id="lblEstadoCab">@ViewBag.Estado</label>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -60,10 +104,10 @@
                                             </div>
                                             <br />
                                             <div class="table-responsive">
-                                                <table id="tblParameter" class="table table-striped table-border table-condensed" style="width: 100%;">
+                                                <table id="tblDetalle" class="table table-striped table-border table-condensed" style="width: 100%;">
                                                     <thead>
                                                         <tr>
-                                                            <th style="display: none;">NOrden</th>
+                                                            <th style="display: none;">IdOrden</th>
                                                             <th>Detalle</th>
                                                             <th>Codigo Texto</th>
                                                             <th>Codigo Entero</th>
@@ -75,27 +119,39 @@
                                                         @{
                                                             foreach (var item in Model.DetalleEquipos)
                                                             {
-                                                                <tr>                                                                
+                                                                var _estado = item.estado_detalle ? "Activo" : "Inactivo";
+                                                                var btnCodigoDe = item.id_detalle;
+
+                                                                <tr id="fila_@btnCodigoDe">  
+                                                                    <td style="display: none;">
+                                                                        @Html.DisplayFor(modelItem => item.id_detalle)
+                                                                        <input type="hidden" name="hidden_codigo[]" id="codigo@(btnCodigoDe)" value="@item.id_detalle" />
+                                                                    </td>
+
                                                                     <td>
                                                                         @Html.DisplayFor(modelItem => item.nombre_detalle)
+                                                                        <input type="hidden" name="hidden_detalle[]" id="detalle@(btnCodigoDe)" value="@item.nombre_detalle" />
                                                                     </td>
 
                                                                     <td>
                                                                         @Html.DisplayFor(modelItem => item.valor_detalle)
+                                                                        <input type="hidden" name="hidden_valorv[]" id="valorv@(btnCodigoDe)" value="@item.valor_detalle" />
                                                                     </td>
 
                                                                     <td>
                                                                         @Html.DisplayFor(modelItem => item.valor_detallei)
+                                                                        <input type="hidden" name="hidden_valori[]" id="valori@(btnCodigoDe)" value="@item.valor_detallei" />
                                                                     </td>                                
 
                                                                     <td>
-                                                                        @Html.DisplayFor(modelItem => item.estado_detalle)
+                                                                        @Html.Raw(_estado)
+                                                                        <input type="hidden" name="hidden_estado[]" id="estado@(btnCodigoDe)" value="@item.estado_detalle" />
                                                                     </td>
 
                                                                     <td>
-                                                                        <button id="btnEditar" class="btn btn-outline-info btn-sm ml-3"><i class="fas fa-edit"></i></button>
+                                                                        <button type="button" id="@btnCodigoDe" class="btn btn-outline-info btn-sm ml-3 btnEdit"><i class="fas fa-edit"></i></button>
 
-                                                                        <button id="btnEliminar" class="btn btn-outline-danger btn-sm ml-3"><i class="fas fa-trash-alt"></i></button>
+                                                                        <button type="button" id="@btnCodigoDe" class="btn btn-outline-danger btn-sm ml-3"><i class="fas fa-trash-alt"></i></button>
 
                                                                     </td>
                                                                 </tr>
@@ -127,6 +183,6 @@
  }
 
 @section scripts{
-    <script src="~/JQuery/Cabecera.js"></script>
+    <script src="~/JQuery/EditCabecera.js"></script>
 }
 

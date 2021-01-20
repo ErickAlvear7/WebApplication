@@ -25,13 +25,15 @@ namespace WebApplication.Controllers.ConexionDTO
 
     public class Detalle
     {
+        public int ArrayId { get; set; }
+
         public string ArryPadeNombre { get; set; }
 
         public string ArryPadeValorV { get; set; }
 
         public int ArryPadeValorI { get; set; }
 
-        public bool ArryEstado { get; set; }
+        public string ArryEstado { get; set; }
 
     }
 

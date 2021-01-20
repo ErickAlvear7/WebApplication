@@ -2,20 +2,70 @@
 
     _tipoSave = 'add', _continuar = true, _result = [], _count = 0;
 
-    $("#modalPARAMETER").draggable({
-        handle: ".modal-header"
-    });
+    //Caotura los valores anteriores de la cabecera
+    _id = $('input#txtIdCabecera').val();
+    _nameparametroold = $('input#txtParametro').val();
 
     $('#btnRegresar').click(function () {
         window.location.href = '/CabeceraEquipos/Index';
     });
 
+    _checked = $("#ChkEstadoDe").is(":checked");
+    if (_checked) {
+        _estadode = "Activo";
+    } else {
+        _estadode = "Inactivo";
+    }
 
-    //Abrir nuevo Detalle con ventan modal (Create)
+    //Recorre la tabla detalle
+    $("#tblDetalle tbody tr").each(function (items) {
+        var _codigo, _detalle, _valorv, _valori, _estado;
+        $(this).children("td").each(function (index) {
+
+            switch (index) {
+                case 0:
+                    _codigo = $.trim($(this).text());
+                    break;
+                case 1:
+                    _detalle = $.trim($(this).text());
+                    break;
+                case 2:
+                    _valorv = $.trim($(this).text());
+                    break;
+                case 3:
+                    _valori = $.trim($(this).text());
+                    break;
+                case 4:
+                    _estado = $.trim($(this).text());
+                    break;
+            }
+        });
+
+        _nuevoestado = _estado == "Activo" ? true : false;
+
+        _objeto = {
+            ArryId: parseInt(_codigo),
+            ArryPadeNombre: _detalle,
+            ArryPadeValorV: _valorv,
+            ArryPadeValorI: parseInt(_valori),
+            ArryEstado: _nuevoestado,
+        }
+
+        _result.push(_objeto);
+        _count = parseInt(_codigo);
+
+    });
+
+
+    $("#modalPARAMETER").draggable({
+        handle: ".modal-header"
+    });
+
+    //Abre ventana modal nuevodetalle 
     $("#btnAdd").click(function () {
         $("#formParam").trigger("reset");
         $("#divcheck").hide();
-        $("#header").css("background-color", "#2A61DF");
+        $("#header").css("background-color", "#6491C2");
         $("#header").css("color", "white");
         $(".modal-title").text("Nuevo Parametro");
         $("#btnAgregar").text("Agregar");
@@ -24,14 +74,14 @@
         _estado = 'Activo';
     });
 
-    //Agregar nuevo detalle (Create) ventana modal
+    //ventana modal para grabar nuevo detalle con validaciones 
+
     $('#btnAgregar').click(function () {
         if ($.trim($('#txtDetalle').val()).length == 0) {
             Swal.fire({
                 icon: 'info',
                 title: 'Información',
-                text: 'ingrese detalle..!',
-                type: 'warning',
+                text: 'Ingrese Detalle',
                 showCloseButton: true,
             });
             return;
@@ -41,8 +91,7 @@
             Swal.fire({
                 icon: 'info',
                 title: 'Información',
-                text: 'ingrese  valor de texto o valor entero..!',
-                type: 'warning',
+                text: 'Ingrese Valor Texto o Valor Entero..!',
                 showCloseButton: true,
             });
             return;
@@ -52,15 +101,14 @@
             Swal.fire({
                 icon: 'info',
                 title: 'Información',
-                text: 'ingrese solo valor de texto o entero..!',
-                type: 'warning',
+                text: 'Ingrese Solo Valor Texto o Valor Entero..!',
                 showCloseButton: true,
             });
             return;
         }
 
-        _descripcion = $.trim($('#txtDetalle').val()).toUpperCase();
-        _valorv = $.trim($('#txtValorV').val()).toUpperCase();
+        _descripcion = $.trim($('#txtDetalle').val());
+        _valorv = $.trim($('#txtValorV').val());
 
         if ($.trim($('#txtValorI').val()).length == 0) {
             _valori = 0;
@@ -72,22 +120,21 @@
             $.each(_result, function (i, item) {
                 if (item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
                     Swal.fire({
-                        icon: 'info',
+                        icon: 'warning',
                         title: 'Información',
-                        text: 'Nombre del Parámetro ya Existe..!',
-                        type: 'warning',
+                        text: 'Nombre del Parámetro Existe..!'
                     });
                     _continuar = false;
                     return false;
-                } else {
+                }
+                else {
                     $.each(_result, function (i, item) {
                         if (_valori == 0) {
                             if (item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
                                 Swal.fire({
-                                    icon: 'info',
+                                    icon: 'warning',
                                     title: 'Información',
-                                    text: 'Velor texto del Parámetro ya Existe..!',
-                                    type: 'warning',
+                                    text: 'Valor Texto de Parámetro ya Existe..!'
                                 });
                                 _continuar = false;
                                 return false;
@@ -97,10 +144,9 @@
                         } else {
                             if (item.ArryPadeValorI == _valori) {
                                 Swal.fire({
-                                    icon: 'info',
+                                    icon: 'warning',
                                     title: 'Información',
-                                    text: 'Velor entero del Parámetro ya Existe..!',
-                                    type: 'warning',
+                                    text: 'Valor Entero de Parámetro ya Existe..!'
                                 });
                                 _continuar = false;
                                 return false;
@@ -112,14 +158,12 @@
                 }
             });
 
+            //console.log(_continuar);
+
             if (_continuar) {
                 //_count = _count + 1;
                 _count++;
-                let _deshabilitar = '';
-
-                if (_count == 1) {
-                    _deshabilitar = 'disabled="disabled"';
-                }
+             
 
                 _output = '<tr id="row_' + _count + '">';
                 _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _count + '" value="' + _count + '" /></td>';
@@ -128,22 +172,22 @@
                 _output += '<td>' + _valori + ' <input type="hidden" name="hidden_valori[]" id="valori' + _count + '" value="' + _valori + '" /></td>';
                 _output += '<td>' + _estado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _count + '" value="' + _estado + '" /></td>';
                 _output += '<td><div class="text-center"><div class="btn-group">'
-                _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _count + '"><i class="fa fa-file"></i></button>';
-                _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _count + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _count + '"><i class="fas fa-pen"></i></button>';
+                _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _count + '"><i class="fas fa-trash"></i></button></div></div></td>';
                 _output += '</tr>';
-              
+                $('#tblDetalle').append(_output);
 
-                $('#tblParameter').append(_output);
+                _nuevoestado = _estado == "Activo" ? true : false;
 
                 _objeto = {
-                    ArryId: _count,
+                    ArryId: 0,
                     ArryPadeNombre: _descripcion,
                     ArryPadeValorV: _valorv,
                     ArryPadeValorI: _valori,
-                    ArryEstado: _estado,
-                    ArryDisable: _deshabilitar
+                    ArryEstado: _nuevoestado
                 }
                 _result.push(_objeto);
+                //console.log(_result);
                 $("#modalPARAMETER").modal("hide");
             }
         }
@@ -153,10 +197,9 @@
                 $.each(_result, function (i, _item) {
                     if (_item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
                         Swal.fire({
-                            icon: 'info',
+                            icon: 'warning',
                             title: 'Información',
-                            text: 'Nombre del Parámetro ya Existe..!',
-                            type: 'warning',
+                            text: 'Nombre del Parámetro ya Existe..!'
                         });
                         _continuar = false;
                         return false;
@@ -172,13 +215,12 @@
                         $.each(_result, function (i, _item) {
                             if (_item.ArryPadeValorI == _valori) {
                                 Swal.fire({
-                                    icon: 'info',
                                     title: 'Información',
-                                    text: 'Velor entero del Parámetro ya Existe..!',
                                     type: 'warning',
+                                    text: 'Valor Entero de Parámetro ya Existe..!'
                                 });
                                 _seguir = false;
-                                return false;
+                                return;
                             } else {
                                 _seguir = true;
                             }
@@ -189,10 +231,9 @@
                         $.each(_result, function (i, _item) {
                             if (_item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
                                 Swal.fire({
-                                    icon: 'info',
                                     title: 'Información',
-                                    text: 'Velor texto del Parámetro ya Existe..!',
                                     type: 'warning',
+                                    text: 'Valor Texto de Parámetro ya Existe..!'
                                 });
                                 _seguir = false;
                                 return false;
@@ -206,48 +247,54 @@
 
             if (_seguir) {
                 _row_id = $('#hidden_row_id').val();
-                _output = '<td style="display: none;">' + _norden + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _row_id + '" value="' + _row_id + '" /></td>';
+                _output = '<td style="display: none;">' + _row_id + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _row_id + '" value="' + _row_id + '" /></td>';
                 _output += '<td>' + _descripcion + ' <input type="hidden" name="hidden_detalle[]" id="detalle' + _row_id + '" value="' + _descripcion + '" /></td>';
                 _output += '<td>' + _valorv + ' <input type="hidden" name="hidden_valorv[]" id="valorv' + _row_id + '" value="' + _valorv + '" /></td>';
                 _output += '<td>' + _valori + ' <input type="hidden" name="hidden_valori[]" id="valori' + _row_id + '" value="' + _valori + '" /></td>';
                 _output += '<td>' + _estado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _row_id + '" value="' + _estado + '" /></td>';
                 _output += '<td><div class="text-center"><div class="btn-group">'
-                _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _row_id + '"><i class="fa fa-file"></i></button>';
-                _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _row_id + '"><i class="fa fa-trash"></i></button></div></div></td>';
+                _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _row_id + '"><i class="fas fa-pen"></i></button>';
+                _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _row_id + '"><i class="fas fa-trash"></i></button></div></div></td>';
                 $('#row_' + _row_id + '').html(_output);
+
+                _nuevoestado = _estado == "Activo" ? true : false;
 
                 _objIndex = _result.findIndex((obj => obj.ArryId == _row_id));
                 _result[_objIndex].ArryPadeNombre = _descripcion;
                 _result[_objIndex].ArryPadeValorV = _valorv;
                 _result[_objIndex].ArryPadeValorI = _valori;
+                _result[_objIndex].ArryEstado = _nuevoestado;
                 $("#modalPARAMETER").modal("hide");
             }
         }
     });
 
-    //Editar nuevo detalle (tabla dinamica)
+    //editar detalles (ventana modal)
     $(document).on("click", ".btnEdit", function () {
         $("#formParam").trigger("reset");
         _row_id = $(this).attr("id");
-        _norden = $('#orden' + _row_id + '').val();
+        //_norden = $('#orden' + _row_id + '').val();
         _descripcionold = $('#detalle' + _row_id + '').val();
         _valorvold = $('#valorv' + _row_id + '').val();
         _valoriold = $('#valori' + _row_id + '').val();
         _estadoold = $('#estado' + _row_id + '').val();
-        _deshabilitar = $('#btnUp' + _row_id + '').attr('disabled');
         _tipoSave = 'edit';
+
         if (_estadoold == "Activo") {
             $("#ChkEstado").prop("checked", true);
             $("#LblEstado").text("Activo");
+            _estadocab = "Activo";
         } else {
             $("#ChkEstado").prop("checked", false);
             $("#LblEstado").text("Inactivo");
+            _estadocab = "Inactivo";
         }
+
         $('#txtDetalle').val(_descripcionold);
         $('#txtValorV').val(_valorvold);
         $('#txtValorI').val(_valoriold == 0 ? '' : _valoriold);
         $('#hidden_row_id').val(_row_id);
-        $("#header").css("background-color", "#2A61DF");
+        $("#header").css("background-color", "#6491C2");
         $("#header").css("color", "white");
         $(".modal-title").text("Editar Parametro");
         $("#divcheck").show();
@@ -255,26 +302,40 @@
         $("#modalPARAMETER").modal("show");
     });
 
-    $("#ChkEstado").click(function () {
-        _checked = $("#ChkEstado").is(":checked");
+    //Checkbox estado de la cabecera
+
+    $("#chkEstadoCab").click(function () {
+        _checked = $("#chkEstadoCab").is(":checked");
         if (_checked) {
-            $("#LblEstado").text("Activo");
-            _estado = 'Activo';
+            $("#lblEstadoCab").text("Activo");
+            _estadocab = "Activo";
         } else {
-            $("#LblEstado").text("Inactivo");
-            _estado = 'Inactivo';
+            $("#lblEstadoCab").text("Inactivo");
+            _estadocab = "Inactivo";
         }
     });
 
-    //Eliminar nuevo detalle (tabla dinamica)
+    //Checkbox estado del modal detalle
+    $("#chkEstadoDe").click(function () {
+        _checked = $("#chkEstadoDe").is(":checked");
+        if (_checked) {
+            $("#lblEstadoDe").text("Activo");
+            _estado = true;
+        } else {
+            $("#lblEstadoDe").text("Inactivo");
+            _estado = false;
+        }
+    });
+
+    //Elimnar detalle
+
     $(document).on("click", ".btnDelete", function () {
         _row_id = $(this).attr("id");
         _descripcion = $('#detalle' + _row_id + '').val();
         Swal.fire({
-            icon:"info",
+            icon: 'error',
             title: 'Está Seguro de Borrar ' + _descripcion,
             text: 'El registro será eliminado..',
-            type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -286,21 +347,14 @@
                     FunRemoveItemFromArr(_result, _descripcion);
                     $('#row_' + _row_id + '').remove();
                     _count--;
-                    //console.log(_count);
-                    if (_count > 0) {
-                        FunInactivaButton();
-                    }
+                 
                     FunReorganizarOrder(_result);
                 });
             }
         });
     });
 
-    function FunInactivaButton() {
-        x = document.getElementsByClassName("btnUp");
-        console.log(x[0].id);
-        $("#" + x[0].id).prop('disabled', true);
-    }
+   
 
     function FunRemoveItemFromArr(arr, deta) {
         $.each(arr, function (i, item) {
@@ -338,11 +392,11 @@
         _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _ordenx + '"><i class="fa fa-file"></i></button>';
         _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _ordenx + '"><i class="fa fa-trash"></i></button></div></div></td>';
         $('#row_' + _rowmod + '').html(_output);
-        console.log(_output);
+
     }
 
     function FunCambiarId() {
-        $("#tblparameter tbody tr").each(function (index) {
+        $("#tblDetalle tbody tr").each(function (index) {
             id = $(this).attr('id');
             underScoreIndex = id.indexOf('_');
             id = id.substring(0, underScoreIndex + 1) + (parseInt(index) + 1);
@@ -350,18 +404,16 @@
         });
     }
 
-    //Guardar Nuevo_Parametro_Detalle
-
-    $("#btnGuardarPa").click(function (eve) {
-        _nomparametro = $.trim($("#txtParametro").val()).toUpperCase();
+    //Guardar parametro y detalle
+    $("#btnSave").click(function (eve) {
+        _nomparametro = $.trim($("#txtParametro").val());
         _descripcion = $.trim($("#txtDescripcion").val());
 
         if (_nomparametro == '') {
             Swal.fire({
                 icon: 'info',
                 title: 'Información',
-                text: 'ingrese nombre del parametro..!',
-                type: 'warning',
+                text: 'Ingrese Nombre del  Parámetro..!'
             });
             return;
         }
@@ -370,26 +422,25 @@
             Swal.fire({
                 icon: 'info',
                 title: 'Información',
-                text: 'ingrese al menos un detalle..!',
-                type: 'warning',
+                text: 'Ingrese al menos un Detalle..!'
             });
             return;
         }
 
         $.ajax({
-            url: "/CabeceraEquipos/Create",
+            url: "/CabeceraEquipos/Edit",
             type: "POST",
             dataType: "json",
-            data: { parametro: _nomparametro, descripcion: _descripcion, estado: true, detalles: _result },
+            data: { id: _id, nomparametro: _nomparametro, descripcion: _descripcion, estadocab: _estadocab, detalleparametros: _result },
             success: function (datos) {
                 if (datos.success == true) {
                     window.location.href = datos.miUrl;
+                    //windows.location.href = '/Parametro_Cabecera/Index';
                 } else {
                     Swal.fire({
-                        icon: 'info',
                         title: 'Información',
-                        text: 'Nombre del parametro ya existe..!',
                         type: 'warning',
+                        text: 'Nombre del Parámetro ya Existe..!'
                     });
                 }
             },
@@ -399,67 +450,4 @@
         });
 
     });
-
-    //editar cabecera_detalle_index
-
-    $(document).on("click", "#btnEditar", function (eve) {
-        eve.preventDefault();
-        _fila = $(this).closest("tr");
-        _data = $('#tabla').dataTable().fnGetData(_fila);
-        _id = _data[0];
-        window.location.href = "/CabeceraEquipos/Edit/" + _id;
-
-    });
-
-    //Eliminar cabecera(index)
-    $(document).on("click", "#btnEliminar", function (eve) {
-        eve.preventDefault();
-        _fila = $(this);
-        _row = $(this).closest("tr");
-        _data = $('#tabla').dataTable().fnGetData(_row);
-        _id = _data[0];
-        _parametro = _data[1];
-        FunEliminarCabecera();
-    });
-
-    function FunEliminarCabecera() {
-
-        Swal.fire({
-            title: 'Esta seguro de eliminar el parametro ' + _parametro + '?',
-            text: "El registro sera elminado!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, Eliminar!',
-            showLoaderOnConfirm: true,
-            preConfirm: function () {
-                return new Promise(function (resolve) {
-                    $.ajax({
-
-                        url: "/CabeceraEquipos/Delete",
-                        type: "POST",
-                        dataType: "json",
-                        data: { id: _id },
-                        success: function (data) {
-                            if (data.success == true) {
-                                Swal.close();
-                                Tabla.row(_fila.parents('tr')).remove().draw();
-                                $.notify(data.mesagge, {
-                                    globalPosition: "top-center",
-                                    className: datos.nameclass
-                                });
-                            }
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        }
-
-                    });
-
-                });
-            }
-        });
-    }
-  
 });
