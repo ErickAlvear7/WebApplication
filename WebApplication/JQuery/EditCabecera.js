@@ -6,14 +6,34 @@
     _id = $('input#txtIdCabecera').val();
     _nameparametroold = $('input#txtParametro').val();
 
+    $("#modalPARAMETER").draggable({
+        handle: ".modal-header"
+    });
+
     $('#btnRegresar').click(function () {
         window.location.href = '/CabeceraEquipos/Index';
     });
 
+    //Checkbox estado de la cabecera
+
+    $("#chkEstadoCab").click(function () {
+        _checked = $("#chkEstadoCab").is(":checked");
+        if (_checked) {
+            $("#lblEstadoCab").text("Activo");
+            _estadocab = "Activo";
+        } else {
+            $("#lblEstadoCab").text("Inactivo");
+            _estadocab = "Inactivo";
+        }
+    });
+
+    //estado detalle (modal-edit)
     _checked = $("#ChkEstadoDe").is(":checked");
     if (_checked) {
+        $("#lblEstadoDe").text("Activo");
         _estadode = "Activo";
     } else {
+        $("#lblEstadoDe").text("Activo");
         _estadode = "Inactivo";
     }
 
@@ -56,16 +76,14 @@
 
     });
 
-
-    $("#modalPARAMETER").draggable({
-        handle: ".modal-header"
-    });
+    console.log(_result);
+   
 
     //Abre ventana modal nuevodetalle 
     $("#btnAdd").click(function () {
         $("#formParam").trigger("reset");
         $("#divcheck").hide();
-        $("#header").css("background-color", "#6491C2");
+        $("#header").css("background-color", "#2A61DF");
         $("#header").css("color", "white");
         $(".modal-title").text("Nuevo Parametro");
         $("#btnAgregar").text("Agregar");
@@ -172,8 +190,8 @@
                 _output += '<td>' + _valori + ' <input type="hidden" name="hidden_valori[]" id="valori' + _count + '" value="' + _valori + '" /></td>';
                 _output += '<td>' + _estado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _count + '" value="' + _estado + '" /></td>';
                 _output += '<td><div class="text-center"><div class="btn-group">'
-                _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _count + '"><i class="fas fa-pen"></i></button>';
-                _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _count + '"><i class="fas fa-trash"></i></button></div></div></td>';
+                _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _count + '"><i class="fas fa-edit"></i></button>';
+                _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _count + '"><i class="fas fa-trash-alt"></i></button></div></div></td>';
                 _output += '</tr>';
                 $('#tblDetalle').append(_output);
 
@@ -253,10 +271,11 @@
                 _output += '<td>' + _valori + ' <input type="hidden" name="hidden_valori[]" id="valori' + _row_id + '" value="' + _valori + '" /></td>';
                 _output += '<td>' + _estado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _row_id + '" value="' + _estado + '" /></td>';
                 _output += '<td><div class="text-center"><div class="btn-group">'
-                _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _row_id + '"><i class="fas fa-pen"></i></button>';
-                _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _row_id + '"><i class="fas fa-trash"></i></button></div></div></td>';
+                _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _row_id + '"><i class="fas fa-edit"></i></button>';
+                _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _row_id + '"><i class="fas fa-trash-alt"></i></button></div></div></td>';
                 $('#row_' + _row_id + '').html(_output);
 
+                console.log(_output);
                 _nuevoestado = _estado == "Activo" ? true : false;
 
                 _objIndex = _result.findIndex((obj => obj.ArryId == _row_id));
@@ -281,12 +300,12 @@
         _tipoSave = 'edit';
 
         if (_estadoold == "Activo") {
-            $("#ChkEstado").prop("checked", true);
-            $("#LblEstado").text("Activo");
+            $("#chkEstadoDe").prop("checked", true);
+            $("#lblEstadoDe").text("Activo");
             _estadocab = "Activo";
         } else {
-            $("#ChkEstado").prop("checked", false);
-            $("#LblEstado").text("Inactivo");
+            $("#chkEstadoDe").prop("checked", false);
+            $("#lblEstadoDe").text("Inactivo");
             _estadocab = "Inactivo";
         }
 
@@ -294,7 +313,7 @@
         $('#txtValorV').val(_valorvold);
         $('#txtValorI').val(_valoriold == 0 ? '' : _valoriold);
         $('#hidden_row_id').val(_row_id);
-        $("#header").css("background-color", "#6491C2");
+        $("#header").css("background-color", "#2A61DF");
         $("#header").css("color", "white");
         $(".modal-title").text("Editar Parametro");
         $("#divcheck").show();
@@ -302,28 +321,17 @@
         $("#modalPARAMETER").modal("show");
     });
 
-    //Checkbox estado de la cabecera
 
-    $("#chkEstadoCab").click(function () {
-        _checked = $("#chkEstadoCab").is(":checked");
-        if (_checked) {
-            $("#lblEstadoCab").text("Activo");
-            _estadocab = "Activo";
-        } else {
-            $("#lblEstadoCab").text("Inactivo");
-            _estadocab = "Inactivo";
-        }
-    });
 
     //Checkbox estado del modal detalle
     $("#chkEstadoDe").click(function () {
         _checked = $("#chkEstadoDe").is(":checked");
         if (_checked) {
             $("#lblEstadoDe").text("Activo");
-            _estado = true;
+            _estado = 'Activo';
         } else {
             $("#lblEstadoDe").text("Inactivo");
-            _estado = false;
+            _estado = 'Inactivo';
         }
     });
 
@@ -371,26 +379,27 @@
         _otroval = 0;
         $.each(arr, function (i, item) {
             _otroval = _otroval + 1;
-            if (_otroval == 1) {
-                item['ArryDisable'] = 'disabled="disabled"';
-            } else {
-                item['ArryDisable'] = '';
-            }
-            FunOrderDelete(_otroval, item.ArryId, item.ArryPadeNombre, item.ArryPadeValorV, item.ArryPadeValorI, item.ArryEstado, item.ArryDisable);
+            //if (_otroval == 1) {
+            //    item['ArryDisable'] = 'disabled="disabled"';
+            //} else {
+            //    item['ArryDisable'] = '';
+            //}
+            FunOrderDelete(_otroval, item.ArryId, item.ArryPadeNombre, item.ArryPadeValorV, item.ArryPadeValorI, item.ArryEstado);
             item['ArryId'] = parseInt(_otroval);
         });
         FunCambiarId();
     }
 
-    function FunOrderDelete(_ordenx, _rowmod, _descripcion, _valorv, _valori, _estado, _disable) {
+    function FunOrderDelete(_ordenx, _rowmod, _descripcion, _valorv, _valori, _estado) {
+        _nuevoestado = _estado == true ? 'Activo' : 'Inactivo';
         _output = '<td style="display: none;">' + _ordenx + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _ordenx + '" value="' + _ordenx + '" /></td>';
         _output += '<td>' + _descripcion + ' <input type="hidden" name="hidden_detalle[]" id="detalle' + _ordenx + '" value="' + _descripcion + '" /></td>';
         _output += '<td>' + _valorv + ' <input type="hidden" name="hidden_valorv[]" id="valorv' + _ordenx + '" value="' + _valorv + '" /></td>';
         _output += '<td>' + _valori + ' <input type="hidden" name="hidden_valori[]" id="valori' + _ordenx + '" value="' + _valori + '" /></td>';
-        _output += '<td>' + _estado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _ordenx + '" value="' + _estado + '" /></td>';
+        _output += '<td>' + _nuevoestado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _ordenx + '" value="' + _estado + '" /></td>';
         _output += '<td><div class="text-center"><div class="btn-group">'
-        _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _ordenx + '"><i class="fa fa-file"></i></button>';
-        _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _ordenx + '"><i class="fa fa-trash"></i></button></div></div></td>';
+        _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _ordenx + '"><i class="fa fa-edit"></i></button>';
+        _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _ordenx + '"><i class="fa fa-alt"></i></button></div></div></td>';
         $('#row_' + _rowmod + '').html(_output);
 
     }

@@ -25,7 +25,7 @@ namespace WebApplication.Controllers.ConexionDTO
 
     public class Detalle
     {
-        public int ArrayId { get; set; }
+        public int ArryId { get; set; }
 
         public string ArryPadeNombre { get; set; }
 
@@ -33,7 +33,7 @@ namespace WebApplication.Controllers.ConexionDTO
 
         public int ArryPadeValorI { get; set; }
 
-        public string ArryEstado { get; set; }
+        public bool ArryEstado { get; set; }
 
     }
 

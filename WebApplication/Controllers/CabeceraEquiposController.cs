@@ -11,6 +11,7 @@ namespace WebApplication.Controllers
 {
     public class CabeceraEquiposController : Controller
     {
+        string _mensaje;
         private BDD_HRVEntities db = new BDD_HRVEntities();
 
         // GET: CabeceraEquipos
@@ -59,14 +60,14 @@ namespace WebApplication.Controllers
 
             foreach (var _item in detalles)
             {
-                var _estadoDe = _item.ArryEstado == "Activo" ? true : false;
+                //var _estadoDe = _item.ArryEstado == "Activo" ? true : false;
                 _cabecera.DetalleEquipos.Add(new DetalleEquipos()
                 {
                   
                     nombre_detalle = _item.ArryPadeNombre,
                     valor_detalle = _item.ArryPadeValorV,
                     valor_detallei = _item.ArryPadeValorI,
-                    estado_detalle = _estadoDe,
+                    estado_detalle = _item.ArryEstado,
                     aux3_detalle = "",
                     aux4_detalle =""
 
@@ -106,9 +107,11 @@ namespace WebApplication.Controllers
             try
             {
                 var _estado = estadocab == "Activo" ? true : false;
+
                 using (BDD_HRVEntities _db = new BDD_HRVEntities())
                 {
-                    CabeceraEquipos _cab = _db.CabeceraEquipos.Where(c => c.id_cabecera == id).FirstOrDefault();
+
+                    CabeceraEquipos _cab = _db.CabeceraEquipos.AsNoTracking().Where(c => c.id_cabecera == id).FirstOrDefault();
                     _cab.nombre_cabecera = nomparametro;
                     _cab.descripcion_cabecera = descripcion;
                     _cab.estado_cabecera = _estado;
@@ -118,20 +121,43 @@ namespace WebApplication.Controllers
 
                     foreach (var _item in detalleparametros)
                     {
-                        var _estadoDe = _item.ArryEstado == "Activo" ? true : false;
-                        _cab.DetalleEquipos.Add(new DetalleEquipos()
+                        if (new ParametroDTO().FunGetParametroDetalle(id, _item.ArryId) == 0)
                         {
-                            id_detalle = _item.ArrayId,
-                            nombre_detalle = _item.ArryPadeNombre,
-                            valor_detalle = _item.ArryPadeValorV,
-                            valor_detallei = _item.ArryPadeValorI,
-                            estado_detalle = _estadoDe,
-                            aux3_detalle = "",
-                            aux4_detalle = ""
-                        });
-                    }
+                            _cab.DetalleEquipos.Add(new DetalleEquipos()
+                            {
+                                id_cabecera = id,
+                                id_detalle = _item.ArryId,
+                                nombre_detalle = _item.ArryPadeNombre,
+                                valor_detalle = _item.ArryPadeValorV == null ? "" : _item.ArryPadeValorV,
+                                valor_detallei = _item.ArryPadeValorI,
+                                estado_detalle = _item.ArryEstado,
+                                aux3_detalle = "",
+                                aux4_detalle = ""
 
+                            });
+                        }
+                        else
+                        {
+                            DetalleEquipos _detalle = _cab.DetalleEquipos.Where(d => d.id_detalle == _item.ArryId).FirstOrDefault();
+                            _detalle.nombre_detalle = _item.ArryPadeNombre;
+                            _detalle.valor_detalle = _item.ArryPadeValorV == null ? "" : _item.ArryPadeValorV;
+                            _detalle.valor_detallei = _item.ArryPadeValorI;
+                            _detalle.estado_detalle = _item.ArryEstado;
+                        }
+                    }
+                    _mensaje = new ParametroDTO().FunGrabarEditar(_cab);
                 }
+
+
+                if (_mensaje == "OK")
+                {
+                    TempData["Mensaje"] = "OK";
+                    return Json(new { success = true, miUrl = Url.Action("Index", "CabeceraEquipos") });
+                }
+                else
+                {
+                    return Json(new { success = false, miUrl = "ERROR" });
+                }         
 
             }
             catch (Exception ex)
@@ -140,7 +166,7 @@ namespace WebApplication.Controllers
                 throw ex;
             }                     
               
-              return null;                    
+                           
         }
 
         // GET: CabeceraEquipos/Delete/5
