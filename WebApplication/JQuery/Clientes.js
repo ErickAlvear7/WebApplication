@@ -31,84 +31,56 @@
 
 
         if (_prov == '') {
-            Swal.fire({
-                icon: 'info',
-                text: 'seleccione provincia',
-
-            });
+           
+            var notification = alertify.notify('seleccione provincia..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_cuid =='0') {
 
-            Swal.fire({
-                icon: 'info',
-                text: 'seleccione cuidad',
-
-            });
+            var notification = alertify.notify('seleccione cuidad..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cli == '') {
 
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Cliente',
-
-            });
+           
+            var notification = alertify.notify('campo requerido: Cliente..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_ruc != '') {
             if (_ruc.length < 13 || _ruc.length > 13) {
-                Swal.fire({
-                    icon: 'error',
-                    //title: 'Ups...',
-                    text: 'Ruc incorrecto',
-
-                });
+            
+                var notification = alertify.notify('Ruc incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
             }
         }
 
         if (_direc == '') {
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Direccion',
 
-            });
+            var notification = alertify.notify('campo requerido: Direccion..!', 'warning ', 5, function () { console.log('dismissed'); });
+            
             return;
         }
       
         if (_tel1 == '') {
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Telefono 1',
 
-            });
+            var notification = alertify.notify('campo requerido: Telefono 1..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         
 
         if (_tel1.length < 9 || _tel1.length > 9) {
-            Swal.fire({
-                icon: 'error',
-                //title: 'Ups...',
-                text: 'Telefono 1 incorrecto',
-
-            });
+ 
+            var notification = alertify.notify('Telefono 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_tel2 != '') {
 
             if (_tel2.length < 9 || _tel2.length > 9) {
-                Swal.fire({
-                    icon: 'error',
-                    //title: 'Ups...',
-                    text: 'Telefono 2 incorrecto',
-
-                });
+                var notification = alertify.notify('Telefono 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
             }
         }
@@ -116,53 +88,33 @@
         if (_email != '') {
 
             if ($("#txtEmail").val().indexOf('@', 0) == -1 || $("#txtEmail").val().indexOf('.', 0) == -1) {
-                Swal.fire({
-                    icon: 'error',
-                    //title: 'Ups...',
-                    text: 'e-mail incorrecto',
-
-                });
+                var notification = alertify.notify('e-mail incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
                 
             }
         }
     
         if (_con1 == '') {
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Contacto 1',
 
-            });
+            var notification = alertify.notify('campo requerido: Contacto 1', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_cel1 == '') {
 
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Celular 1',
-
-            });
+            var notification = alertify.notify('campo requerido: Celular 1', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cel1.length < 10 || _cel1.length > 10) {
-            Swal.fire({
-                icon: 'error',
-                //title: 'Ups...',
-                text: 'Celular 1 incorrecto',
 
-            });
+            var notification = alertify.notify('Celular 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cel2 != '') {
             if (_cel2.length < 10 || _cel1.length > 10) {
-                Swal.fire({
-                    icon: 'error',
-                    //title: 'Ups...',
-                    text: 'Celular 2 incorrecto',
 
-                });
+                var notification = alertify.notify('Celular 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
             }
         }
@@ -208,42 +160,66 @@
 
     function FunEliminarCliente() {
 
-        Swal.fire({
-            title: 'Esta seguro de eliminar el cliente ' + _cliente + '?',
-            text: "El registro sera elminado!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, Eliminar!',
-            showLoaderOnConfirm: true,
-            preConfirm: function () {
-                return new Promise(function (resolve) {
-                    $.ajax({
+        //Swal.fire({
+        //    title: 'Esta seguro de eliminar el cliente ' + _cliente + '?',
+        //    text: "El registro sera elminado!",
+        //    icon: 'warning',
+        //    showCancelButton: true,
+        //    confirmButtonColor: '#3085d6',
+        //    cancelButtonColor: '#d33',
+        //    confirmButtonText: 'Si, Eliminar!',
+        //    showLoaderOnConfirm: true,
+        //    preConfirm: function () {
+        //        return new Promise(function (resolve) {
+        //            $.ajax({
 
-                        url: "/Clientes/Delete",
-                        type: "POST",
-                        dataType: "json",
-                        data: { id: _id },
-                        success: function (data) {
-                            if (data.success == true) {
-                                Swal.close();
-                                Tabla.row(_fila.parents('tr')).remove().draw();
-                                $.notify(data.mesagge, {
-                                    globalPosition: "top-center",
-                                    className: datos.nameclass
-                                });
-                            }
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        }
+        //                url: "/Clientes/Delete",
+        //                type: "POST",
+        //                dataType: "json",
+        //                data: { id: _id },
+        //                success: function (data) {
+        //                    if (data.success == true) {
+        //                        Swal.close();
+        //                        Tabla.row(_fila.parents('tr')).remove().draw();
+        //                        $.notify(data.mesagge, {
+        //                            globalPosition: "top-center",
+        //                            className: datos.nameclass
+        //                        });
+        //                    }
+        //                },
+        //                error: function (error) {
+        //                    console.log(error);
+        //                }
 
-                    });
+        //            });
 
-                });
-            }
-        });
+        //        });
+        //    }
+        //});
+        alertify.confirm('desea eliminar el cliente ' + _cliente + '?', 'cliente sera eliminado..!', function () {
+            alertify.success('cliente eliminado')
+            $.ajax({
+                url: "/Clientes/Delete",
+                type: "POST",
+                dataType: "json",
+                data: { id: _id },
+                success: function (data) {
+                    if (data.success == true) {
+                        Swal.close();
+                        Tabla.row(_fila.parents('tr')).remove().draw();
+                        $.notify(data.mesagge, {
+                            globalPosition: "top-center",
+                            className: datos.nameclass
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+
+            });
+        }
+            , function () { alertify.error('cancelado') });
     }
 
     $(document).on("click", "#ChkEstado", function () {
@@ -285,136 +261,90 @@
 
 
         if (_prov == '') {
-            Swal.fire({
-                icon: 'info',
-                text: 'seleccione provincia',
 
-            });
+            var notification = alertify.notify('seleccione provincia..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_cuid == '0') {
 
-            Swal.fire({
-                icon: 'info',
-                text: 'seleccione cuidad',
-
-            });
+            var notification = alertify.notify('seleccione cuidad..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cli == '') {
 
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Cliente',
 
-            });
+            var notification = alertify.notify('campo requerido: Cliente..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_ruc != '') {
             if (_ruc.length < 13 || _ruc.length > 13) {
-                Swal.fire({
-                    icon: 'error',
-                    //title: 'Ups...',
-                    text: 'Ruc incorrecto',
 
-                });
+                var notification = alertify.notify('Ruc incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
             }
         }
 
         if (_direc == '') {
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Direccion',
 
-            });
+            var notification = alertify.notify('campo requerido: Direccion..!', 'warning ', 5, function () { console.log('dismissed'); });
+
             return;
         }
 
         if (_tel1 == '') {
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Telefono 1',
 
-            });
+            var notification = alertify.notify('campo requerido: Telefono 1..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
-        if (_tel1.length < 9 || _tel1.length > 9) {
-            Swal.fire({
-                icon: 'error',
-                //title: 'Ups...',
-                text: 'Telefono 1 incorrecto',
 
-            });
+
+        if (_tel1.length < 9 || _tel1.length > 9) {
+
+            var notification = alertify.notify('Telefono 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_tel2 != '') {
 
             if (_tel2.length < 9 || _tel2.length > 9) {
-                Swal.fire({
-                    icon: 'error',
-                    //title: 'Ups...',
-                    text: 'Telefono 2 incorrecto',
-
-                });
+                var notification = alertify.notify('Telefono 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
             }
         }
 
         if (_email != '') {
 
-            if ($("#TxtEmail").val().indexOf('@', 0) == -1 || $("#TxtEmail").val().indexOf('.', 0) == -1) {
-                Swal.fire({
-                    icon: 'error',
-                    //title: 'Ups...',
-                    text: 'e-mail incorrecto',
-
-                });
+            if ($("#txtEmail").val().indexOf('@', 0) == -1 || $("#txtEmail").val().indexOf('.', 0) == -1) {
+                var notification = alertify.notify('e-mail incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
 
             }
         }
 
         if (_con1 == '') {
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Contacto 1',
 
-            });
+            var notification = alertify.notify('campo requerido: Contacto 1', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_cel1 == '') {
 
-            Swal.fire({
-                icon: 'info',
-                text: 'campo requerido: Celular 1',
-
-            });
+            var notification = alertify.notify('campo requerido: Celular 1', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cel1.length < 10 || _cel1.length > 10) {
-            Swal.fire({
-                icon: 'error',
-                //title: 'Ups...',
-                text: 'Celular 1 incorrecto',
 
-            });
+            var notification = alertify.notify('Celular 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cel2 != '') {
             if (_cel2.length < 10 || _cel1.length > 10) {
-                Swal.fire({
-                    icon: 'error',
-                    //title: 'Ups...',
-                    text: 'Celular 2 incorrecto',
 
-                });
+                var notification = alertify.notify('Celular 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
             }
         }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dashboard</title>
+    <title>HRV</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="~/VendorMenu/sweetalert2/sweetalert2.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!--Alertify-->
+    <link rel="stylesheet" href="~/VendorMenu/alertify/css/alertify.min.css">
+    <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/default.min.css">
+    <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/semantic.min.css">
+    <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/bootstrap.min.css">
 
     @RenderSection("styles", required: false)
 
@@ -39,7 +44,7 @@
                 </li>
             </ul>
 
-        
+
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
@@ -48,7 +53,7 @@
             <a href="index3.html" class="brand-link">
                 <img src="~/VendorMenu/dist/img/logo_hrv.png" alt="AdminLTE Logo" class="img-rounded"
                      style="opacity: .8">
-             
+
             </a>
 
             <!-- Sidebar -->
@@ -56,11 +61,11 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     @*<div class="image">
-                        <img src="~/VendorMenu/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block">Erick Alvear</a>
-                    </div>*@
+                            <img src="~/VendorMenu/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block">Erick Alvear</a>
+                        </div>*@
                     <span style="width:300px;text-align:center; color:chartreuse">MENU DE OPCIONES</span>
                 </div>
 
@@ -133,11 +138,11 @@
                                     </a>
                                 </li>
                                 @*<li class="nav-item">
-                                    <a href="pages/charts/flot.html" class="nav-link">
-                                        <i class="fas fa-wrench nav-icon"></i>
-                                        <p>Orden</p>
-                                    </a>
-                                </li>*@
+                                        <a href="pages/charts/flot.html" class="nav-link">
+                                            <i class="fas fa-wrench nav-icon"></i>
+                                            <p>Orden</p>
+                                        </a>
+                                    </li>*@
                             </ul>
                         </li>
 
@@ -183,8 +188,9 @@
     <script src="~/VendorMenu/sweetalert2/sweetalert2.min.js"></script>
     <!--Notify-->
     <script src="~/JQuery/notify.min.js"></script>
-    <!---->
-  
+    <!--alertify-->
+    <script src="~/VendorMenu/alertify/js/alertify.min.js"></script>
+
 
     @RenderSection("scripts", required: false)
 </body>

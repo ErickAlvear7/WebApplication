@@ -24,48 +24,26 @@ $(document).ready(function () {
         _password = $("#txtPassword").val().trim();
 
         if (_perfil == "") {
-            Swal.fire({
-                icon: 'info',
-                text: 'seleccione el perfil',
 
-            });
+            var notification = alertify.notify('seleccione el perfil..!', 'secondary', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_nombres == "") {
-            Swal.fire({
-                icon: 'info',
-                //title: 'Ups...',
-                text: 'ingrese por lo menos un nombre',
-               
-            });
+
+            var notification = alertify.notify('ingrese nombre..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_apellidos == "") {
-            Swal.fire({
-                icon: 'info',
-                //title: 'Ups...',
-                text: 'ingrese por lo menos un apellido',
-               
-            });
+            var notification = alertify.notify('ingrese apellido..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_login == "") {
-            Swal.fire({
-                icon: 'info',
-                //title: 'Ups...',
-                text: 'ingrese un usuario',
-             
-            });
+            var notification = alertify.notify('ingrese un usuario..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_password == "") {
-            Swal.fire({
-                icon: 'info',
-                //title: 'Ups...',
-                text: 'ingrese una contraseña',
-               
-            });
+            var notification = alertify.notify('ingrese una contraseña..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -213,42 +191,68 @@ $(document).ready(function () {
 
     function FunEliminarUsuario() {
 
-        Swal.fire({
-            title: 'Esta seguro de eliminar el usuario ' + _usuario + '?',
-            text: "El registro sera elminado!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, Eliminar!',
-            showLoaderOnConfirm: true,
-            preConfirm: function () {
-                return new Promise(function (resolve) {
-                    $.ajax({
+        //Swal.fire({
+        //    title: 'Esta seguro de eliminar el usuario ' + _usuario + '?',
+        //    text: "El registro sera elminado!",
+        //    icon: 'warning',
+        //    showCancelButton: true,
+        //    confirmButtonColor: '#3085d6',
+        //    cancelButtonColor: '#d33',
+        //    confirmButtonText: 'Si, Eliminar!',
+        //    showLoaderOnConfirm: true,
+        //    preConfirm: function () {
+        //        return new Promise(function (resolve) {
+        //            $.ajax({
 
-                        url: "/Usuarios/Delete",
-                        type: "POST",
-                        dataType: "json",
-                        data: { id: _login },
-                        success: function (data) {
-                            if (data.success == true) {
-                                Swal.close();
-                                Tabla.row(_fila.parents('tr')).remove().draw();
-                                $.notify(data.mesagge, {
-                                    globalPosition: "top-center",
-                                    className: datos.nameclass
-                                });
-                            }
-                        },
-                        error: function (error) {
-                            console.log(error);
-                        }
+        //                url: "/Usuarios/Delete",
+        //                type: "POST",
+        //                dataType: "json",
+        //                data: { id: _login },
+        //                success: function (data) {
+        //                    if (data.success == true) {
+        //                        Swal.close();
+        //                        Tabla.row(_fila.parents('tr')).remove().draw();
+        //                        $.notify(data.mesagge, {
+        //                            globalPosition: "top-center",
+        //                            className: datos.nameclass
+        //                        });
+        //                    }
+        //                },
+        //                error: function (error) {
+        //                    console.log(error);
+        //                }
 
-                    });
+        //            });
 
-                });
-            }
-        });
+        //        });
+        //    }
+        //});
+       
+
+        alertify.confirm('desea eliminar el usuario ' + _usuario + '?', 'el registro se eliminara..!', function () {
+            alertify.success('usuario eliminado')
+            $.ajax({
+                url: "/Usuarios/Delete",
+                type: "POST",
+                dataType: "json",
+                data: { id: _login },
+                success: function (data) {
+                    if (data.success == true) {
+                        Swal.close();
+                        Tabla.row(_fila.parents('tr')).remove().draw();
+                        $.notify(data.mesagge, {
+                            globalPosition: "top-center",
+                            className: datos.nameclass
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+
+            });
+        }
+            , function () { alertify.error('cancelado') });
     }
 
 });
