@@ -57,7 +57,6 @@ namespace WebApplication.Controllers
             {
                 db.Clientes.Add(clientes);
                 db.SaveChanges();
-                //return RedirectToAction("Index");
                 TempData["Mensaje"] = "ok";
                 return Json(new { success = true, redirectToUrl = Url.Action("Index", "Clientes") });
 
@@ -131,7 +130,6 @@ namespace WebApplication.Controllers
             Clientes clientes = db.Clientes.Find(id);
             db.Clientes.Remove(clientes);
             db.SaveChanges();
-            //return RedirectToAction("Index");
             return Json(new { success = true, mesagge = "registro eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
         }
 

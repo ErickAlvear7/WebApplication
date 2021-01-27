@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers.ConexionDTO
@@ -66,7 +65,7 @@ namespace WebApplication.Controllers.ConexionDTO
             {
                 using (BDD_HRVEntities _db = new BDD_HRVEntities())
                 {
-                    //var dtbase = new Base_TitulacionEntities();
+                   
                     _db.CabeceraEquipos.Add(_cabecera);
                     _db.Entry(_cabecera).State = System.Data.Entity.EntityState.Modified;
 
@@ -116,6 +115,18 @@ namespace WebApplication.Controllers.ConexionDTO
                 else _codigo = 1;
 
                 return _codigo;
+
+            }
+        }
+
+        public int FunGetParametro(int cabid)
+        {
+            using (BDD_HRVEntities _db = new BDD_HRVEntities())
+            {
+
+                List<DetalleEquipos> _listaCab = _db.DetalleEquipos.Where(d => d.id_cabecera == cabid).ToList();
+              
+               return _listaCab.Count;
 
             }
         }

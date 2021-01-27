@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -35,14 +34,14 @@ namespace WebApplication.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
      
-        public ActionResult Create(string parametro,string descripcion,string estado,List<Detalle> detalles)
+        public ActionResult Create(string parametro,string descripcion,bool estado,List<Detalle> detalles)
         {
-            var _estado = estado == "Activo" ? true : false;
+            //var _estado = estado == "Activo" ? true : false;
             CabeceraEquipos _cabecera = new CabeceraEquipos();
             {
                 _cabecera.nombre_cabecera = parametro;
                 _cabecera.descripcion_cabecera = descripcion;
-                _cabecera.estado_cabecera = _estado;
+                _cabecera.estado_cabecera = estado;
                 _cabecera.creacion_cabecera = DateTime.Now;
                 _cabecera.usuario_cabecera = int.Parse(Session["_UsuarioId"].ToString());
                 _cabecera.terminal_cabecera = Session["_Host"].ToString();
@@ -119,31 +118,38 @@ namespace WebApplication.Controllers
                     _cab.usuariomod_cabecera = int.Parse(Session["_UsuarioId"].ToString());
                     _cab.terminalmod_cabecera = Session["_Host"].ToString();
 
+
+
                     foreach (var _item in detalleparametros)
                     {
-                        if (new ParametroDTO().FunGetParametroDetalle(id, _item.ArryId) == 0)
+                        if (!string.IsNullOrEmpty(_item.ArryPadeNombre))
                         {
-                            _cab.DetalleEquipos.Add(new DetalleEquipos()
+                            if (new ParametroDTO().FunGetParametroDetalle(id, _item.ArryId) == 0)
                             {
-                                id_cabecera = id,
-                                id_detalle = _item.ArryId,
-                                nombre_detalle = _item.ArryPadeNombre,
-                                valor_detalle = _item.ArryPadeValorV == null ? "" : _item.ArryPadeValorV,
-                                valor_detallei = _item.ArryPadeValorI,
-                                estado_detalle = _item.ArryEstado,
-                                aux3_detalle = "",
-                                aux4_detalle = ""
+                                _cab.DetalleEquipos.Add(new DetalleEquipos()
+                                {
+                                    id_cabecera = id,
+                                    id_detalle = _item.ArryId,
+                                    nombre_detalle = _item.ArryPadeNombre,
+                                    valor_detalle = _item.ArryPadeValorV == null ? "" : _item.ArryPadeValorV,
+                                    valor_detallei = _item.ArryPadeValorI,
+                                    estado_detalle = _item.ArryEstado,
+                                    aux3_detalle = "",
+                                    aux4_detalle = ""
 
-                            });
+                                });
+                            }
+                            else
+                            {
+                                DetalleEquipos _detalle = _cab.DetalleEquipos.Where(d => d.id_detalle == _item.ArryId).FirstOrDefault();
+                                _detalle.nombre_detalle = _item.ArryPadeNombre;
+                                _detalle.valor_detalle = _item.ArryPadeValorV == null ? "" : _item.ArryPadeValorV;
+                                _detalle.valor_detallei = _item.ArryPadeValorI;
+                                _detalle.estado_detalle = _item.ArryEstado;
+                            }
                         }
-                        else
-                        {
-                            DetalleEquipos _detalle = _cab.DetalleEquipos.Where(d => d.id_detalle == _item.ArryId).FirstOrDefault();
-                            _detalle.nombre_detalle = _item.ArryPadeNombre;
-                            _detalle.valor_detalle = _item.ArryPadeValorV == null ? "" : _item.ArryPadeValorV;
-                            _detalle.valor_detallei = _item.ArryPadeValorI;
-                            _detalle.estado_detalle = _item.ArryEstado;
-                        }
+                        
+                        
                     }
                     _mensaje = new ParametroDTO().FunGrabarEditar(_cab);
                 }
@@ -186,14 +192,44 @@ namespace WebApplication.Controllers
 
         // POST: CabeceraEquipos/Delete/5
         [HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
+    
         public ActionResult DeleteConfirmed(int id)
         {
-            CabeceraEquipos cabeceraEquipos = db.CabeceraEquipos.Find(id);
-            db.CabeceraEquipos.Remove(cabeceraEquipos);
-            db.SaveChanges();
-            return Json(new { success = true, mesagge = "registro eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
+            if(new ParametroDTO().FunGetParametro(id)==0)
+            {
+                CabeceraEquipos cabeceraEquipos = db.CabeceraEquipos.Find(id);
+                db.CabeceraEquipos.Remove(cabeceraEquipos);
+                db.SaveChanges();
+                return Json(new { success = true, mensaje = "borrrado con exito" });
+            }
+            else
+            {
+                return Json(new { success = false, mensaje = "no se puede eliminar existen detalles asociados..!!" });
+            }
+   
+           
         }
+
+        [HttpPost]
+        public ActionResult DeleteDetalle(int idCab, int idDet)
+        {
+            var _eliminar = db.DetalleEquipos.SingleOrDefault(pd => pd.id_cabecera == idCab && pd.id_detalle == idDet);
+            if(_eliminar != null)
+            {
+                db.DetalleEquipos.Remove(_eliminar);
+                db.SaveChanges();
+                return Json(new { success = true, mensaje = "borrrado con exito" });
+            }
+            else
+            {
+                return Json(new { success = false, mensaje = "error" });
+            }
+            //DetalleEquipos _detalleEquipos = db.DetalleEquipos.Find(id);
+            //db.DetalleEquipos.Remove(_detalleEquipos);
+            //db.SaveChanges();
+         
+        }
+
 
         protected override void Dispose(bool disposing)
         {

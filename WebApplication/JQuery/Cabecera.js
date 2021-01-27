@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
 
-    _tipoSave = 'add', _continuar = true, _result = [], _count = 0;
+    //variables globales
+    var _tipoSave = 'add', _continuar = true, _seguir = true, _result = [],
+        _count = 0, _estadoModal = 'Activo', _descripcionold, _valorvold,
+        _row_id, _estadoold, _valoriold, notification;
 
     $("#modalPARAMETER").draggable({
         handle: ".modal-header"
@@ -21,7 +24,7 @@
         $("#btnAgregar").text("Agregar");
         $("#modalPARAMETER").modal("show");
         _tipoSave = 'add';
-        _estado = 'Activo';
+       
     });
 
     //Agregar nuevo detalle (Create) ventana modal
@@ -34,6 +37,7 @@
                 type: 'warning',
                 showCloseButton: true,
             });
+           
             return;
         }
 
@@ -115,24 +119,20 @@
             if (_continuar) {
                 //_count = _count + 1;
                 _count++;
-                let _deshabilitar = '';
-
-                if (_count == 1) {
-                    _deshabilitar = 'disabled="disabled"';
-                }
+               
 
                 _output = '<tr id="row_' + _count + '">';
                 _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _count + '" value="' + _count + '" /></td>';
                 _output += '<td>' + _descripcion + ' <input type="hidden" name="hidden_detalle[]" id="detalle' + _count + '" value="' + _descripcion + '" /></td>';
                 _output += '<td>' + _valorv + ' <input type="hidden" name="hidden_valorv[]" id="valorv' + _count + '" value="' + _valorv + '" /></td>';
                 _output += '<td>' + _valori + ' <input type="hidden" name="hidden_valori[]" id="valori' + _count + '" value="' + _valori + '" /></td>';
-                _output += '<td>' + _estado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _count + '" value="' + _estado + '" /></td>';
+                _output += '<td>' + _estadoModal + ' <input type="hidden" name="hidden_estado[]" id="estado' + _count + '" value="' + _estadoModal + '" /></td>';
                 _output += '<td><div class="text-center"><div class="btn-group">'
                 _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _count + '"><i class="fa fa-edit"></i></button>';
                 _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _count + '"><i class="fa fa-trash-alt"></i></button></div></div></td>';
                 _output += '</tr>';
 
-                console.log(_output);
+                //console.log(_output);
               
 
                 $('#tblParameter').append(_output);
@@ -142,7 +142,7 @@
                     ArryPadeNombre: _descripcion,
                     ArryPadeValorV: _valorv,
                     ArryPadeValorI: _valori,
-                    ArryEstado: _estado,
+                    ArryEstado: true,
                     
                 }
                 _result.push(_objeto);
@@ -209,21 +209,24 @@
             }
 
             if (_seguir) {
+                let _row_id, _output, _objIndex;
                 _row_id = $('#hidden_row_id').val();
-                _output = '<td style="display: none;">' + _norden + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _row_id + '" value="' + _row_id + '" /></td>';
+                _output = '<td style="display: none;">' + _row_id + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _row_id + '" value="' + _row_id + '" /></td>';
                 _output += '<td>' + _descripcion + ' <input type="hidden" name="hidden_detalle[]" id="detalle' + _row_id + '" value="' + _descripcion + '" /></td>';
                 _output += '<td>' + _valorv + ' <input type="hidden" name="hidden_valorv[]" id="valorv' + _row_id + '" value="' + _valorv + '" /></td>';
                 _output += '<td>' + _valori + ' <input type="hidden" name="hidden_valori[]" id="valori' + _row_id + '" value="' + _valori + '" /></td>';
-                _output += '<td>' + _estado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _row_id + '" value="' + _estado + '" /></td>';
+                _output += '<td>' + _estadoModal + ' <input type="hidden" name="hidden_estado[]" id="estado' + _row_id + '" value="' + _estadoModal + '" /></td>';
                 _output += '<td><div class="text-center"><div class="btn-group">'
                 _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _row_id + '"><i class="fa fa-edit"></i></button>';
                 _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _row_id + '"><i class="fa fa-trash-alt"></i></button></div></div></td>';
                 $('#row_' + _row_id + '').html(_output);
 
+                let estado = _estadoModal == 'Activo' ? true : false;
                 _objIndex = _result.findIndex((obj => obj.ArryId == _row_id));
                 _result[_objIndex].ArryPadeNombre = _descripcion;
                 _result[_objIndex].ArryPadeValorV = _valorv;
                 _result[_objIndex].ArryPadeValorI = _valori;
+                _result[_objIndex].ArryEstado = estado;
                 $("#modalPARAMETER").modal("hide");
             }
         }
@@ -231,21 +234,20 @@
 
     //Editar nuevo detalle (tabla dinamica)
     $(document).on("click", ".btnEdit", function () {
+        
         $("#formParam").trigger("reset");
         _row_id = $(this).attr("id");
-        _norden = $('#orden' + _row_id + '').val();
         _descripcionold = $('#detalle' + _row_id + '').val();
         _valorvold = $('#valorv' + _row_id + '').val();
         _valoriold = $('#valori' + _row_id + '').val();
         _estadoold = $('#estado' + _row_id + '').val();
-        _deshabilitar = $('#btnUp' + _row_id + '').attr('disabled');
         _tipoSave = 'edit';
         if (_estadoold == "Activo") {
-            $("#ChkEstado").prop("checked", true);
-            $("#LblEstado").text("Activo");
+            $("#chkEstado").prop("checked", true);
+            $("#lblEstado").text("Activo");
         } else {
-            $("#ChkEstado").prop("checked", false);
-            $("#LblEstado").text("Inactivo");
+            $("#chkEstado").prop("checked", false);
+            $("#lblEstado").text("Inactivo");
         }
         $('#txtDetalle').val(_descripcionold);
         $('#txtValorV').val(_valorvold);
@@ -259,14 +261,15 @@
         $("#modalPARAMETER").modal("show");
     });
 
-    $("#ChkEstado").click(function () {
-        _checked = $("#ChkEstado").is(":checked");
+    //cambiar evento checkbox modal 
+    $("#chkEstado").click(function () {
+        _checked = $("#chkEstado").is(":checked");
         if (_checked) {
-            $("#LblEstado").text("Activo");
-            _estado = 'Activo';
+            $("#lblEstado").text("Activo");
+            _estadoModal = 'Activo';
         } else {
-            $("#LblEstado").text("Inactivo");
-            _estado = 'Inactivo';
+            $("#lblEstado").text("Inactivo");
+            _estadoModal = 'Inactivo';
         }
     });
 
@@ -417,16 +420,11 @@
 
     //Eliminar cabecera(index)
     $(document).on("click", "#btnEliminar", function (eve) {
-        eve.preventDefault();
-        _fila = $(this);
-        _row = $(this).closest("tr");
-        _data = $('#tabla').dataTable().fnGetData(_row);
+        _fil = $(this);
+        _fila = $(this).closest("tr");
+        _data = $('#tabla').dataTable().fnGetData(_fila);
         _id = _data[0];
         _parametro = _data[1];
-        FunEliminarCabecera();
-    });
-
-    function FunEliminarCabecera() {
 
         Swal.fire({
             title: 'Esta seguro de eliminar el parametro ' + _parametro + '?',
@@ -439,19 +437,25 @@
             showLoaderOnConfirm: true,
             preConfirm: function () {
                 return new Promise(function (resolve) {
+                    Swal.close();             
                     $.ajax({
-
                         url: "/CabeceraEquipos/Delete",
                         type: "POST",
                         dataType: "json",
                         data: { id: _id },
                         success: function (data) {
                             if (data.success == true) {
-                                Swal.close();
-                                Tabla.row(_fila.parents('tr')).remove().draw();
-                                $.notify(data.mesagge, {
+                                Tabla.row(_fil.parents('tr')).remove().draw();
+                                $.notify(data.mensaje, {
                                     globalPosition: "top-center",
-                                    className: datos.nameclass
+                                    className: "success"
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Información',
+                                    text: data.mensaje,
+                                    type: 'warning',
                                 });
                             }
                         },
@@ -464,6 +468,9 @@
                 });
             }
         });
-    }
+       
+    });
+
+   
   
 });

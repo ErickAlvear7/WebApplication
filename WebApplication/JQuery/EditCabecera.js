@@ -1,10 +1,17 @@
 ﻿$(document).ready(function () {
 
-    _tipoSave = 'add', _continuar = true, _result = [], _count = 0;
+    var _tipoSave = 'add', _continuar = true, _result = [], _count = 0, _estadocab, _seguir = true;
 
     //Caotura los valores anteriores de la cabecera
     _id = $('input#txtIdCabecera').val();
     _nameparametroold = $('input#txtParametro').val();
+
+    _checked = $("#ChkEstadoCab").is(":checked");
+    if (_checked) {
+        _estadocab = "Activo";
+    } else {
+        _estadocab = "Inactivo";
+    }
 
     $("#modalPARAMETER").draggable({
         handle: ".modal-header"
@@ -13,6 +20,8 @@
     $('#btnRegresar').click(function () {
         window.location.href = '/CabeceraEquipos/Index';
     });
+
+
 
     //Checkbox estado de la cabecera
 
@@ -25,7 +34,10 @@
             $("#lblEstadoCab").text("Inactivo");
             _estadocab = "Inactivo";
         }
+        //alert(_estadocab);
     });
+
+   
 
     //estado detalle (modal-edit)
     _checked = $("#ChkEstadoDe").is(":checked");
@@ -133,6 +145,7 @@
         } else {
             _valori = $.trim($('#txtValorI').val());
         }
+      
 
         if (_tipoSave == 'add') {
             $.each(_result, function (i, item) {
@@ -209,6 +222,7 @@
                 $("#modalPARAMETER").modal("hide");
             }
         }
+        
         else {
             _continuar = false, _seguir = false;
             if (_descripcionold.toUpperCase() != _descripcion.toUpperCase()) {
@@ -227,6 +241,7 @@
                 });
             } else _continuar = true;
 
+         
             if (_continuar) {
                 if (_valori != 0) {
                     if (_valoriold != _valori) {
@@ -238,11 +253,15 @@
                                     text: 'Valor Entero de Parámetro ya Existe..!'
                                 });
                                 _seguir = false;
-                                return;
+                                return false;
                             } else {
+
                                 _seguir = true;
                             }
                         });
+                    } else {
+
+                        _seguir = true;
                     }
                 } else {
                     if (_valorvold.toUpperCase() != _valorv.toUpperCase()) {
@@ -262,7 +281,7 @@
                     } else _seguir = true;
                 }
             }
-
+            //alert(_seguir);
             if (_seguir) {
                 _row_id = $('#hidden_row_id').val();
                 _output = '<td style="display: none;">' + _row_id + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _row_id + '" value="' + _row_id + '" /></td>';
@@ -298,6 +317,7 @@
         _valoriold = $('#valori' + _row_id + '').val();
         _estadoold = $('#estado' + _row_id + '').val();
         _tipoSave = 'edit';
+       
 
         if (_estadoold == "Activo") {
             $("#chkEstadoDe").prop("checked", true);
@@ -335,14 +355,14 @@
         }
     });
 
-    //Elimnar detalle
+    //Elimnar detalle tabla dinamica
 
     $(document).on("click", ".btnDelete", function () {
         _row_id = $(this).attr("id");
         _descripcion = $('#detalle' + _row_id + '').val();
         Swal.fire({
-            icon: 'error',
-            title: 'Está Seguro de Borrar ' + _descripcion,
+            icon: 'info',
+            title: 'Está Seguro de Borrar ' + _descripcion + '?',
             text: 'El registro será eliminado..',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -363,7 +383,7 @@
     });
 
    
-
+    // Funcion eliminar detalle de base de datos
     function FunRemoveItemFromArr(arr, deta) {
         $.each(arr, function (i, item) {
             if (item.ArryPadeNombre == deta) {
@@ -373,47 +393,57 @@
                 _continuar = true;
             }
         });
+
+        $.ajax({
+            url: "/CabeceraEquipos/DeleteDetalle",
+            type: "POST",
+            dataType: "json",
+            data: { idCab: _id ,idDet:_row_id},
+            success: function (datos) {
+                if (datos.success == true) {
+                    //notify    
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
     };
 
     function FunReorganizarOrder(arr) {
         _otroval = 0;
         $.each(arr, function (i, item) {
-            _otroval = _otroval + 1;
-            //if (_otroval == 1) {
-            //    item['ArryDisable'] = 'disabled="disabled"';
-            //} else {
-            //    item['ArryDisable'] = '';
-            //}
+            _otroval = _otroval + 1;        
             FunOrderDelete(_otroval, item.ArryId, item.ArryPadeNombre, item.ArryPadeValorV, item.ArryPadeValorI, item.ArryEstado);
-            item['ArryId'] = parseInt(_otroval);
+            //item['ArryId'] = parseInt(_otroval);
         });
-        FunCambiarId();
+        //FunCambiarId();
     }
 
     function FunOrderDelete(_ordenx, _rowmod, _descripcion, _valorv, _valori, _estado) {
         _nuevoestado = _estado == true ? 'Activo' : 'Inactivo';
-        _output = '<td style="display: none;">' + _ordenx + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _ordenx + '" value="' + _ordenx + '" /></td>';
-        _output += '<td>' + _descripcion + ' <input type="hidden" name="hidden_detalle[]" id="detalle' + _ordenx + '" value="' + _descripcion + '" /></td>';
-        _output += '<td>' + _valorv + ' <input type="hidden" name="hidden_valorv[]" id="valorv' + _ordenx + '" value="' + _valorv + '" /></td>';
-        _output += '<td>' + _valori + ' <input type="hidden" name="hidden_valori[]" id="valori' + _ordenx + '" value="' + _valori + '" /></td>';
-        _output += '<td>' + _nuevoestado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _ordenx + '" value="' + _estado + '" /></td>';
+        _output = '<td style="display: none;">' + _rowmod + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _rowmod + '" value="' + _rowmod + '" /></td>';
+        _output += '<td>' + _descripcion + ' <input type="hidden" name="hidden_detalle[]" id="detalle' + _rowmod + '" value="' + _descripcion + '" /></td>';
+        _output += '<td>' + _valorv + ' <input type="hidden" name="hidden_valorv[]" id="valorv' + _rowmod + '" value="' + _valorv + '" /></td>';
+        _output += '<td>' + _valori + ' <input type="hidden" name="hidden_valori[]" id="valori' + _rowmod + '" value="' + _valori + '" /></td>';
+        _output += '<td>' + _nuevoestado + ' <input type="hidden" name="hidden_estado[]" id="estado' + _rowmod + '" value="' + _nuevoestado + '" /></td>';
         _output += '<td><div class="text-center"><div class="btn-group">'
-        _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _ordenx + '"><i class="fa fa-edit"></i></button>';
-        _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _ordenx + '"><i class="fa fa-alt"></i></button></div></div></td>';
+        _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _rowmod + '"><i class="fas fa-edit"></i></button>';
+        _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _rowmod + '"><i class="fas fa-trash-alt"></i></button></div></div></td>';
         $('#row_' + _rowmod + '').html(_output);
-
+        _count = _rowmod;
     }
 
-    function FunCambiarId() {
-        $("#tblDetalle tbody tr").each(function (index) {
-            id = $(this).attr('id');
-            underScoreIndex = id.indexOf('_');
-            id = id.substring(0, underScoreIndex + 1) + (parseInt(index) + 1);
-            $(this).attr('id', id);
-        });
-    }
+    //function FunCambiarId() {
+    //    $("#tblDetalle tbody tr").each(function (index) {
+    //        id = $(this).attr('id');
+    //        underScoreIndex = id.indexOf('_');
+    //        id = id.substring(0, underScoreIndex + 1) + (parseInt(index) + 1);
+    //        $(this).attr('id', id);
+    //    });
+    //}
 
-    //Guardar parametro y detalle
+    //Guardar parametro y detalle editados
     $("#btnSave").click(function (eve) {
         _nomparametro = $.trim($("#txtParametro").val());
         _descripcion = $.trim($("#txtDescripcion").val());
@@ -436,6 +466,18 @@
             return;
         }
 
+        if (_result.length == 0) {
+            _objeto = {
+                ArryId:0,
+                ArryPadeNombre:'',
+                ArryPadeValorV:'',
+                ArryPadeValorI: 0,
+                ArryEstado: false,
+            }
+
+            _result.push(_objeto);
+        }
+
         $.ajax({
             url: "/CabeceraEquipos/Edit",
             type: "POST",
@@ -443,8 +485,7 @@
             data: { id: _id, nomparametro: _nomparametro, descripcion: _descripcion, estadocab: _estadocab, detalleparametros: _result },
             success: function (datos) {
                 if (datos.success == true) {
-                    window.location.href = datos.miUrl;
-                    //windows.location.href = '/Parametro_Cabecera/Index';
+                    window.location.href = datos.miUrl;               
                 } else {
                     Swal.fire({
                         title: 'Información',
