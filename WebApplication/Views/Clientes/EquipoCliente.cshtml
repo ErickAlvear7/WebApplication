@@ -9,27 +9,27 @@
 
 @using (Html.BeginForm())
 {
-    <div class="container">
+<div class="container">
 
-        <form class="form-horizontal" role="form">
-            <div class="form-row">
-                <div class="col-md-12">
-                    <table id="tabla" class="table table-bordered">
+    <form class="form-horizontal" role="form">
+        <div class="form-row">
+            <div class="col-md-12">
+                <table id="tabla" class="table table-bordered">
 
-                        <thead class="text-center bg-info">
-                            <tr>
-                                <th>Cliente</th>
-                                <th>Contacto</th>
-                                <th>Telefono</th>
-                                <th>Celular</th>
-                            </tr>
+                    <thead class="text-center bg-info">
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Contacto</th>
+                            <th>Telefono</th>
+                            <th>Celular</th>
+                        </tr>
 
-                        </thead>
+                    </thead>
 
-                        <tbody class="text-center">
+                    <tbody class="text-center">
 
-                            @foreach (var item in Model)
-                            {
+                        @foreach (var item in Model)
+                        {
                             <tr>
 
                                 <td>
@@ -46,69 +46,132 @@
                                     @Html.DisplayFor(modelItem => item.Celular)
                                 </td>
                             </tr>
-                            }
+                        }
 
-                        </tbody>
+                    </tbody>
 
-                    </table>
+                </table>
 
-                </div>
             </div>
-                     
-            <br />
-            
-            <div id="accordion">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h4 class="mb-0">
+        </div>
+    </form>
+    <div class="container">
+        <form class="form-horizontal" role="form">
+            <div class="form-group col-md-12">
+                <div class="container">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h4 class="mb-0">
 
-                            <span class="label label-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><span style="color:blue">Equipo</span> <i class="fas fa-plus"></i></span>
-                        </h4>
-                    </div>
+                                    <span class="label label-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><span style="color:cornflowerblue">Equipo</span> <i class="fas fa-chevron-down float-lg-right"></i></span>
+                                </h4>
+                            </div>
 
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="table">
-                                        <div class="form-row">                                
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" id="txtNombreEquipo" maxlength="100" placeholder="nombre del equipo" style="text-transform:uppercase;">
-                                            </div>                                                  
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="table">
+                                                <div class="form-row">
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="txtNombreEquipo" maxlength="100" placeholder="nombre del equipo" style="text-transform:uppercase;">
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="form-row">
+                                                    <div class="col-md-4">
+                                                        @Html.DropDownList("grupo_equipo", null, "---Seleccione Grupo---", htmlAttributes: new { @class = "form-control", @id = "ddlGrupoEquipo", style = "Width:100%" })
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.DropDownList("marca_equipo", null, "---Seleccione Marca---", htmlAttributes: new { @class = "form-control", @id = "ddlMarcaEquipo", style = "Width:100%" })
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        @Html.DropDownList("modelo_equipo", null, "---Seleccione Modelo---", htmlAttributes: new { @class = "form-control", @id = "ddlModeloEquipo", style = "Width:100%" })
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <div class="form-row">
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="txtSerie" maxlength="50" placeholder="serie del equipo" style="text-transform:uppercase;">
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <div class="form-row">
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="txtVoltaje" maxlength="50" placeholder="voltaje del equipo" style="text-transform:uppercase;">
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <div class="form-row">
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="txtPresion" maxlength="50" placeholder="presion del equipo" style="text-transform:uppercase;">
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
-                                        <br/>
-                                        <div class="form-row">
-                                            <div class="col-md-4">
-                                                @Html.DropDownList("grupo_equipo", null, "---Seleccione Grupo---", htmlAttributes: new { @class = "form-control", @id = "ddlGrupoEquipo", style = "Width:100%" })
-                                            </div>
-                                            <div class="col-md-4">
-                                                @Html.DropDownList("marca_equipo", null, "---Seleccione Marca---", htmlAttributes: new { @class = "form-control", @id = "ddlGrupoEquipo", style = "Width:100%" })
-                                            </div>
-                                            <div class="col-md-4">
-                                                @Html.DropDownList("modelo_equipo", null, "---Seleccione Modelo---", htmlAttributes: new { @class = "form-control", @id = "ddlGrupoEquipo", style = "Width:100%" })
-                                            </div>
-                                        </div>
+
+
                                     </div>
                                 </div>
-                                   
-
                             </div>
+
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h4 class="mb-0">
+
+                                    <span class="label label-primary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne"><span style="color: cornflowerblue">Agregar</span> <i class="fas fa-chevron-down float-lg-right"></i></span>
+                                </h4>
+                            </div>
+
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div align="right" style="margin-bottom:5px;">
+                                                <button type="button" class="btn btn-outline-primary" id="btnAgregarEquipo"><i class='fas fa-plus'></i> </button>
+                                            </div>
+                                            <br />
+                                            <div class="table-responsive">
+                                                <table id="tblEquipo" class="table table-striped table-border table-condensed" style="width: 100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="display: none;">NOrden</th>
+                                                            <th>Equipo</th>
+                                                            <th>Grupo</th>
+                                                            <th>Marca</th>
+                                                            <th>Modelo</th>
+                                                            <th>Serie</th>
+                                                            <th>Voltaje</th>
+                                                            <th>Presion</th>
+                                                            <th class="text-center">Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
                 </div>
-            </div>   
+            </div>
+
         </form>
-        <br/>
     </div>
+  
+
+</div>
     <div class="container">
-        <div class="btn-group btn-group-justified text-center">
-            <div class="btn-group">
-                <button type="button" id="btnRegresar" class="btn btn-primary">Regresar</button>
-            </div>
-            <div class="btn-group">
-                <button type="button" id="btnGuardar" class="btn btn-outline-success">Guardar</button>
-            </div>
+        <div align="center">
+            <button type="button" class="btn btn-outline-primary" id="btnRegresar">Regresar</button>
+            <button type="button" class="btn btn-outline-success" id="btnGuardarPa">Guardar</button>
         </div>
 
     </div>

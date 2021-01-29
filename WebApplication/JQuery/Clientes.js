@@ -154,7 +154,7 @@
         _row = $(this).closest("tr");
         _data = $('#tabla').dataTable().fnGetData(_row);
         _id = _data[0];
-        _cliente = _data[1];
+        _cliente = _data[3];
         FunEliminarCliente();
     });
 

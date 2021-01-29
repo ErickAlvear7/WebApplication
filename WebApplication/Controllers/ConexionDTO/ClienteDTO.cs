@@ -76,5 +76,27 @@ namespace WebApplication.Controllers.ConexionDTO
             }
         }
 
+        public List<CabeceraDetalle> FunGetCabDet(string _nombre)
+        {
+
+            try
+            {
+                var _query = from cab in _db.CabeceraEquipos
+                             join det in _db.DetalleEquipos on cab.id_cabecera equals det.id_cabecera
+                             where cab.nombre_cabecera == _nombre
+                             select new CabeceraDetalle
+                             {
+                                 CodId = det.valor_detalle,
+                                 Detalle = det.nombre_detalle
+                             };
+                return _query.ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
     }
 }

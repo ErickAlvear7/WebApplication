@@ -55,5 +55,13 @@ namespace WebApplication.Controllers.ConexionDTO
         public string Estado { get; set; }
     }
 
+    public class CabeceraDetalle
+    {
+        public string CodId { get; set; }
+        public string Detalle { get; set; }
+
+    }
+
+
                    
 }

@@ -264,11 +264,11 @@
         });
     });
 
-    function FunInactivaButton() {
-        x = document.getElementsByClassName("btnUp");
-        console.log(x[0].id);
-        $("#" + x[0].id).prop('disabled', true);
-    }
+    //function FunInactivaButton() {
+    //    x = document.getElementsByClassName("btnUp");
+    //    console.log(x[0].id);
+    //    $("#" + x[0].id).prop('disabled', true);
+    //}
 
     function FunRemoveItemFromArr(arr, deta) {
         $.each(arr, function (i, item) {
