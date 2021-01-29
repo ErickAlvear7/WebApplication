@@ -70,11 +70,7 @@
 
                 } else {
 
-                    //Swal.fire({
-                    //    title: 'Upss..!!',
-                    //    text: datos.mesagge,
-                    //    icon: datos.nameclass
-                    //});
+                  
                     var notification = alertify.notify('perfil ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                 }
             }
@@ -84,42 +80,7 @@
 
     function FunEliminarPerfil() {
 
-        //Swal.fire({
-        //    title: 'Esta seguro de eliminar el perfil ' + _perfil + '?',
-        //    text: "El registro sera elminado!",
-        //    icon: 'warning',
-        //    showCancelButton: true,
-        //    confirmButtonColor: '#3085d6',
-        //    cancelButtonColor: '#d33',
-        //    confirmButtonText: 'Si, Eliminar!',
-        //    showLoaderOnConfirm: true,
-        //    preConfirm: function () {
-        //        return new Promise(function (resolve) {
-        //            $.ajax({
 
-        //                url: "/Perfiles/Delete",
-        //                type: "POST",
-        //                dataType: "json",
-        //                data: { id: _id },
-        //                success: function (data) {
-        //                    if (data.success == true) {
-        //                        Swal.close();
-        //                        Tabla.row(_fila.parents('tr')).remove().draw();
-        //                        $.notify(data.mesagge, {
-        //                            globalPosition: "top-center",
-        //                            className: data.nameclass
-        //                        });
-        //                    }
-        //                },
-        //                error: function (error) {
-        //                    console.log(error);
-        //                }
-
-        //            });
-
-        //        });
-        //    }
-        //});
 
         alertify.confirm('desea eliminar el perfil ' + _perfil + '?', 'perfil sera eliminado..!', function () {
             alertify.success('perfil eliminado')
@@ -132,10 +93,7 @@
                     if (data.success == true) {
                         Swal.close();
                         Tabla.row(_fila.parents('tr')).remove().draw();
-                        //$.notify(data.mesagge, {
-                        //    globalPosition: "top-center",
-                        //    className: data.nameclass
-                        //});
+                      
                     }
                 },
                 error: function (error) {

@@ -197,12 +197,13 @@
     <Content Include="ImgHrv\eq2.jpg" />
     <Content Include="ImgHrv\eq3.jpg" />
     <Content Include="ImgHrv\Montajes.jpg" />
-    <Content Include="ImgHrv\Quito.jpg" />
-    <Content Include="ImgHrv\SanRafael.jpg" />
-    <Content Include="ImgHrv\SantDomingo.jpg" />
+    <Content Include="ImgHrv\n1.jpg" />
+    <Content Include="ImgHrv\n2.jpg" />
+    <Content Include="ImgHrv\n3.jpg" />
     <Content Include="ImgHrv\Ventilacion.jpg" />
     <Content Include="JQuery\Cabecera.js" />
     <Content Include="JQuery\CamposTexto.js" />
+    <Content Include="JQuery\ClienteEquipo.js" />
     <Content Include="JQuery\Clientes.js" />
     <Content Include="JQuery\EditCabecera.js" />
     <Content Include="JQuery\Login.js" />
@@ -782,6 +783,7 @@
     <Content Include="Views\CabeceraEquipos\Create.cshtml" />
     <Content Include="Views\CabeceraEquipos\Edit.cshtml" />
     <Content Include="Views\CabeceraEquipos\Index.cshtml" />
+    <Content Include="Views\Clientes\EquipoCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

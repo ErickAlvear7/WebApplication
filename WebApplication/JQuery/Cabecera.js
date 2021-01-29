@@ -30,38 +30,20 @@
     //Agregar nuevo detalle (Create) ventana modal
     $('#btnAgregar').click(function () {
         if ($.trim($('#txtDetalle').val()).length == 0) {
-            //Swal.fire({
-            //    icon: 'info',
-            //    title: 'Información',
-            //    text: 'ingrese detalle..!',
-            //    type: 'warning',
-            //    showCloseButton: true,
-            //});
+         
             var notification = alertify.notify('ingrese detalle..!', 'warning', 5, function () { console.log('dismissed'); });
            
             return;
         }
 
         if ($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0) {
-            //Swal.fire({
-            //    icon: 'info',
-            //    title: 'Información',
-            //    text: 'ingrese  valor de texto o valor entero..!',
-            //    type: 'warning',
-            //    showCloseButton: true,
-            //});
+         
             var notification = alertify.notify('valor de texto o entero..?', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if ($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0) {
-            //Swal.fire({
-            //    icon: 'info',
-            //    title: 'Información',
-            //    text: 'ingrese solo valor de texto o entero..!',
-            //    type: 'warning',
-            //    showCloseButton: true,
-            //});
+          
             var notification = alertify.notify('solo valor de texto o entero..!', 'error', 5, function () { console.log('dismissed'); });
             return;
         }
@@ -78,12 +60,7 @@
         if (_tipoSave == 'add') {
             $.each(_result, function (i, item) {
                 if (item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
-                    //Swal.fire({
-                    //    icon: 'info',
-                    //    title: 'Información',
-                    //    text: 'Nombre del Parámetro ya Existe..!',
-                    //    type: 'warning',
-                    //});
+                
                     var notification = alertify.notify('nombre del parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                     _continuar = false;
                     return false;
@@ -91,12 +68,7 @@
                     $.each(_result, function (i, item) {
                         if (_valori == 0) {
                             if (item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
-                                //Swal.fire({
-                                //    icon: 'info',
-                                //    title: 'Información',
-                                //    text: 'Velor texto del Parámetro ya Existe..!',
-                                //    type: 'warning',
-                                //});
+                             
                                 var notification = alertify.notify('valor texto parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                                 _continuar = false;
                                 return false;
@@ -105,12 +77,7 @@
                             }
                         } else {
                             if (item.ArryPadeValorI == _valori) {
-                                //Swal.fire({
-                                //    icon: 'info',
-                                //    title: 'Información',
-                                //    text: 'Velor entero del Parámetro ya Existe..!',
-                                //    type: 'warning',
-                                //});
+                           
                                 var notification = alertify.notify('valor entero parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                                 _continuar = false;
                                 return false;
@@ -162,12 +129,7 @@
             if (_descripcionold.toUpperCase() != _descripcion.toUpperCase()) {
                 $.each(_result, function (i, _item) {
                     if (_item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
-                        //Swal.fire({
-                        //    icon: 'info',
-                        //    title: 'Información',
-                        //    text: 'Nombre del Parámetro ya Existe..!',
-                        //    type: 'warning',
-                        //});
+                       
                         var notification = alertify.notify('nombre del parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                         _continuar = false;
                         return false;
@@ -182,12 +144,7 @@
                     if (_valoriold != _valori) {
                         $.each(_result, function (i, _item) {
                             if (_item.ArryPadeValorI == _valori) {
-                                //Swal.fire({
-                                //    icon: 'info',
-                                //    title: 'Información',
-                                //    text: 'Velor entero del Parámetro ya Existe..!',
-                                //    type: 'warning',
-                                //});
+                            
                                 var notification = alertify.notify('valor entero del parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                                 _seguir = false;
                                 return false;
@@ -200,12 +157,7 @@
                     if (_valorvold.toUpperCase() != _valorv.toUpperCase()) {
                         $.each(_result, function (i, _item) {
                             if (_item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
-                                //Swal.fire({
-                                //    icon: 'info',
-                                //    title: 'Información',
-                                //    text: 'Velor texto del Parámetro ya Existe..!',
-                                //    type: 'warning',
-                                //});
+                             
                                 var notification = alertify.notify('valor texto del parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                                 _seguir = false;
                                 return false;
@@ -422,50 +374,9 @@
         _id = _data[0];
         _parametro = _data[1];
 
-        //Swal.fire({
-        //    title: 'Esta seguro de eliminar el parametro ' + _parametro + '?',
-        //    text: "El registro sera elminado!",
-        //    icon: 'warning',
-        //    showCancelButton: true,
-        //    confirmButtonColor: '#3085d6',
-        //    cancelButtonColor: '#d33',
-        //    confirmButtonText: 'Si, Eliminar!',
-        //    showLoaderOnConfirm: true,
-        //    preConfirm: function () {
-        //        return new Promise(function (resolve) {
-        //            Swal.close();             
-        //            $.ajax({
-        //                url: "/CabeceraEquipos/Delete",
-        //                type: "POST",
-        //                dataType: "json",
-        //                data: { id: _id },
-        //                success: function (data) {
-        //                    if (data.success == true) {
-        //                        Tabla.row(_fil.parents('tr')).remove().draw();
-        //                        $.notify(data.mensaje, {
-        //                            globalPosition: "top-center",
-        //                            className: "success"
-        //                        });
-        //                    } else {
-        //                        Swal.fire({
-        //                            icon: 'warning',
-        //                            title: 'Información',
-        //                            text: data.mensaje,
-        //                            type: 'warning',
-        //                        });
-        //                    }
-        //                },
-        //                error: function (error) {
-        //                    console.log(error);
-        //                }
 
-        //            });
-
-        //        });
-        //    }
-        //});
         alertify.confirm('desea eliminar el parametro ' + _parametro + '?', 'el parametro sera eliminado..!', function () {
-            //alertify.success('eliminado')
+         
             $.ajax({
                 url: "/CabeceraEquipos/Delete",
                 type: "POST",
@@ -474,19 +385,13 @@
                 success: function (data) {
                     if (data.success == true) {
                         Tabla.row(_fil.parents('tr')).remove().draw();
-                        //$.notify(data.mensaje, {
-                        //    globalPosition: "top-center",
-                        //    className: "success"
-                        //});
+                     
                         alertify.success('paramentro eliminado')
                     } else {
-                        //Swal.fire({
-                        //    icon: 'warning',
-                        //    title: 'Información',
-                        //    text: data.mensaje,
-                        //    type: 'warning',
-                        //});
-                        var notification = alertify.notify('hay detalles asociados..!', 'error ', 5, function () { console.log('dismissed'); });
+                   
+                        var notification = alertify.notify('hay detalles asociados..!', 'error ', 5, function () {
+                            console.log('dismissed');
+                        });
                     }
                 },
                 error: function (error) {
@@ -495,9 +400,11 @@
 
             });
         }
-            , function () { alertify.error('cancelado') });
+            , function () { alertify.error('cancelado') });    
        
     });
+
+
 
    
   

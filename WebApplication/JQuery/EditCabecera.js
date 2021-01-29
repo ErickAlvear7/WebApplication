@@ -108,35 +108,20 @@
 
     $('#btnAgregar').click(function () {
         if ($.trim($('#txtDetalle').val()).length == 0) {
-            //Swal.fire({
-            //    icon: 'info',
-            //    title: 'Información',
-            //    text: 'Ingrese Detalle',
-            //    showCloseButton: true,
-            //});
+         
             var notification = alertify.notify('ingrese un detalle..!', 'warning ', 5, function () { console.log('dismissed'); });
 
             return;
         }
 
         if ($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0) {
-            //Swal.fire({
-            //    icon: 'info',
-            //    title: 'Información',
-            //    text: 'Ingrese Valor Texto o Valor Entero..!',
-            //    showCloseButton: true,
-            //});
+          
             var notification = alertify.notify('ingrese valor texto o entero..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if ($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0) {
-            //Swal.fire({
-            //    icon: 'info',
-            //    title: 'Información',
-            //    text: 'Ingrese Solo Valor Texto o Valor Entero..!',
-            //    showCloseButton: true,
-            //});
+         
             var notification = alertify.notify('solo valor texto o entero..?', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
@@ -154,11 +139,7 @@
         if (_tipoSave == 'add') {
             $.each(_result, function (i, item) {
                 if (item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
-                    //Swal.fire({
-                    //    icon: 'warning',
-                    //    title: 'Información',
-                    //    text: 'Nombre del Parámetro Existe..!'
-                    //});
+               
                     var notification = alertify.notify('parametro ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                     _continuar = false;
                     return false;
@@ -167,11 +148,7 @@
                     $.each(_result, function (i, item) {
                         if (_valori == 0) {
                             if (item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
-                                //Swal.fire({
-                                //    icon: 'warning',
-                                //    title: 'Información',
-                                //    text: 'Valor Texto de Parámetro ya Existe..!'
-                                //});
+                             
                                 var notification = alertify.notify('valor texto ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                                 _continuar = false;
                                 return false;
@@ -180,11 +157,7 @@
                             }
                         } else {
                             if (item.ArryPadeValorI == _valori) {
-                                //Swal.fire({
-                                //    icon: 'warning',
-                                //    title: 'Información',
-                                //    text: 'Valor Entero de Parámetro ya Existe..!'
-                                //});
+                            
                                 var notification = alertify.notify('valor entero ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                                 _continuar = false;
                                 return false;
@@ -235,11 +208,7 @@
             if (_descripcionold.toUpperCase() != _descripcion.toUpperCase()) {
                 $.each(_result, function (i, _item) {
                     if (_item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
-                        //Swal.fire({
-                        //    icon: 'warning',
-                        //    title: 'Información',
-                        //    text: 'Nombre del Parámetro ya Existe..!'
-                        //});
+                 
                         var notification = alertify.notify('parametro ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                         _continuar = false;
                         return false;
@@ -255,11 +224,7 @@
                     if (_valoriold != _valori) {
                         $.each(_result, function (i, _item) {
                             if (_item.ArryPadeValorI == _valori) {
-                                //Swal.fire({
-                                //    title: 'Información',
-                                //    type: 'warning',
-                                //    text: 'Valor Entero de Parámetro ya Existe..!'
-                                //});
+                            
                                 var notification = alertify.notify('valor entero ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                                 _seguir = false;
                                 return false;
@@ -276,11 +241,7 @@
                     if (_valorvold.toUpperCase() != _valorv.toUpperCase()) {
                         $.each(_result, function (i, _item) {
                             if (_item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
-                                //Swal.fire({
-                                //    title: 'Información',
-                                //    type: 'warning',
-                                //    text: 'Valor Texto de Parámetro ya Existe..!'
-                                //});
+                            
                                 var notification = alertify.notify('valor texto ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                                 _seguir = false;
                                 return false;
@@ -321,7 +282,6 @@
     $(document).on("click", ".btnEdit", function () {
         $("#formParam").trigger("reset");
         _row_id = $(this).attr("id");
-        //_norden = $('#orden' + _row_id + '').val();
         _descripcionold = $('#detalle' + _row_id + '').val();
         _valorvold = $('#valorv' + _row_id + '').val();
         _valoriold = $('#valori' + _row_id + '').val();
@@ -370,26 +330,7 @@
     $(document).on("click", ".btnDelete", function () {
         _row_id = $(this).attr("id");
         _descripcion = $('#detalle' + _row_id + '').val();
-        //Swal.fire({
-        //    icon: 'info',
-        //    title: 'Está Seguro de Borrar ' + _descripcion + '?',
-        //    text: 'El registro será eliminado..',
-        //    showCancelButton: true,
-        //    confirmButtonColor: '#3085d6',
-        //    cancelButtonColor: '#d33',
-        //    confirmButtonText: 'Eliminar',
-        //    showLoaderOnConfirm: true,
-        //    preConfirm: function () {
-        //        return new Promise(function (resolve) {
-        //            Swal.close();
-        //            FunRemoveItemFromArr(_result, _descripcion);
-        //            $('#row_' + _row_id + '').remove();
-        //            _count--;
-                 
-        //            FunReorganizarOrder(_result);
-        //        });
-        //    }
-        //});
+    
         alertify.confirm('desea eliminar el detalle ' + _descripcion + '?', 'el detalle sera eliminado..!', function () {
             alertify.success('detalle eliminado')
             FunRemoveItemFromArr(_result, _descripcion);
@@ -435,9 +376,9 @@
         $.each(arr, function (i, item) {
             _otroval = _otroval + 1;        
             FunOrderDelete(_otroval, item.ArryId, item.ArryPadeNombre, item.ArryPadeValorV, item.ArryPadeValorI, item.ArryEstado);
-            //item['ArryId'] = parseInt(_otroval);
+           
         });
-        //FunCambiarId();
+     
     }
 
     function FunOrderDelete(_ordenx, _rowmod, _descripcion, _valorv, _valori, _estado) {
@@ -454,14 +395,6 @@
         _count = _rowmod;
     }
 
-    //function FunCambiarId() {
-    //    $("#tblDetalle tbody tr").each(function (index) {
-    //        id = $(this).attr('id');
-    //        underScoreIndex = id.indexOf('_');
-    //        id = id.substring(0, underScoreIndex + 1) + (parseInt(index) + 1);
-    //        $(this).attr('id', id);
-    //    });
-    //}
 
     //Guardar parametro y detalle editados
     $("#btnSave").click(function (eve) {
@@ -469,21 +402,13 @@
         _descripcion = $.trim($("#txtDescripcion").val());
 
         if (_nomparametro == '') {
-            //Swal.fire({
-            //    icon: 'info',
-            //    title: 'Información',
-            //    text: 'Ingrese Nombre del  Parámetro..!'
-            //});
+           
             var notification = alertify.notify('nombre del parametro..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_count == 0) {
-            //Swal.fire({
-            //    icon: 'info',
-            //    title: 'Información',
-            //    text: 'Ingrese al menos un Detalle..!'
-            //});
+        
             var notification = alertify.notify('ingrese detalle..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
@@ -509,11 +434,7 @@
                 if (datos.success == true) {
                     window.location.href = datos.miUrl;               
                 } else {
-                    //Swal.fire({
-                    //    title: 'Información',
-                    //    type: 'warning',
-                    //    text: 'Nombre del Parámetro ya Existe..!'
-                    //});
+                  
                     var notification = alertify.notify('nombre del parametro ya exixte..!', 'error ', 5, function () { console.log('dismissed'); });
                 }
             },

@@ -50,7 +50,6 @@ namespace WebApplication.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Create(Clientes clientes)
         {
             if (ModelState.IsValid)
@@ -91,7 +90,6 @@ namespace WebApplication.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Edit(Clientes clientes)
         {
             if (ModelState.IsValid)
@@ -108,29 +106,49 @@ namespace WebApplication.Controllers
         }
 
         // GET: Clientes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Clientes clientes = db.Clientes.Find(id);
-            if (clientes == null)
-            {
-                return HttpNotFound();
-            }
-            return View(clientes);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Clientes clientes = db.Clientes.Find(id);
+        //    if (clientes == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(clientes);
+        //}
 
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Clientes clientes = db.Clientes.Find(id);
             db.Clientes.Remove(clientes);
             db.SaveChanges();
             return Json(new { success = true, mesagge = "registro eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult EquipoCliente(int id)
+        {
+            List<Catalogo> _listaClientes = new List<Catalogo>();
+            _listaClientes = new ClienteDTO().FunGetClientesEquipo(id);
+
+        
+
+            var _query = from cab in db.CabeceraEquipos
+                         join det in db.DetalleEquipos on cab.id_cabecera equals det.id_cabecera
+                         where cab.nombre_cabecera == "grupo"
+                         select new
+                         {
+                             CodId = det.id_detalle,
+                             Detalle = det.nombre_detalle
+                         };
+
+            ViewBag.grupo_equipo = new SelectList(_query, "CodId", "Detalle",0);
+            return View(_listaClientes);
         }
 
         protected override void Dispose(bool disposing)

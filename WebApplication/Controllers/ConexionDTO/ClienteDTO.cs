@@ -31,13 +31,43 @@ namespace WebApplication.Controllers.ConexionDTO
                                     Direccion = Cli.direccion_cliente,
                                     Contacto = Cli.contacto1_cliente,
                                     Estado = Cli.estado_cliente ? "Activo" : "Inactivo",
-                                    Cuidad = Cui.nombre_cuidad
+                                    Cuidad = Cui.nombre_cuidad,
+                                    Provincia = Prov.nombre_provincia
+                                    
                                 };
 
 
                 return __cliente.ToList();
 
               
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public List<Catalogo> FunGetClientesEquipo(int id)
+        {
+            try
+            {
+                var __cliente = from cli in _db.Clientes
+                                where cli.id_cliente == id
+                               
+                                select new Catalogo
+                                {
+                                    ClienteId = cli.id_cliente,
+                                    Cliente = cli.nombre_cliente,
+                                    Telefono = cli.telefono1_cliente,
+                                    Celular = cli.celular1_cliente,
+                                    Contacto = cli.contacto1_cliente
+                                };
+
+
+                return __cliente.ToList();
+
+
             }
             catch (Exception ex)
             {

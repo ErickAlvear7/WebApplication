@@ -21,6 +21,12 @@ namespace WebApplication.Controllers.ConexionDTO
 
         public string Cuidad { get; set; }
 
+        public string Telefono { get; set; }
+
+        public string Celular { get; set; }
+
+        public string Provincia { get; set; }
+
     }
 
     public class Detalle
