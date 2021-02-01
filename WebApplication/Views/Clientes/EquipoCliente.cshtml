@@ -64,7 +64,7 @@
                             <div class="card-header" id="headingOne">
                                 <h4 class="mb-0">
 
-                                    <span class="label label-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><span style="color:cornflowerblue">Equipo</span> <i class="fas fa-chevron-down float-lg-right"></i></span>
+                                    <span class="label label-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><span style="color:cornflowerblue"><i class="fas fa-cog"></i> Equipo</span><i class="fas fa-chevron-down float-lg-right"></i></span>
                                 </h4>
                             </div>
 
@@ -73,42 +73,50 @@
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <div class="table">
-                                                <div class="form-row">
+                                                <div class="row justify-content-center">
+                                                    <label for="prov" class="control-label col-md-1">Equipo:</label>
                                                     <div class="col-md-4">
                                                         <input type="text" class="form-control" id="txtNombreEquipo" maxlength="100" placeholder="nombre del equipo" style="text-transform:uppercase;">
                                                     </div>
-                                                </div>
-                                                <br />
-                                                <div class="form-row">
+                                                    <label for="prov" class="control-label col-md-1">Grupo:</label>
                                                     <div class="col-md-4">
                                                         @Html.DropDownList("grupo_equipo", null, "---Seleccione Grupo---", htmlAttributes: new { @class = "form-control", @id = "ddlGrupoEquipo", style = "Width:100%" })
                                                     </div>
+                                                </div>
+                                                <hr />
+                                                <div class="form-row justify-content-center">
+                                                    <label for="prov" class="control-label col-md-1">Marca:</label>
                                                     <div class="col-md-4">
                                                         @Html.DropDownList("marca_equipo", null, "---Seleccione Marca---", htmlAttributes: new { @class = "form-control", @id = "ddlMarcaEquipo", style = "Width:100%" })
                                                     </div>
+                                                    <label for="prov" class="control-label col-md-1">Modelo:</label>
                                                     <div class="col-md-4">
                                                         @Html.DropDownList("modelo_equipo", null, "---Seleccione Modelo---", htmlAttributes: new { @class = "form-control", @id = "ddlModeloEquipo", style = "Width:100%" })
                                                     </div>
                                                 </div>
                                                 <hr />
-                                                <div class="form-row">
+                                                <div class="form-row justify-content-center">
+                                                    <label for="prov" class="control-label col-md-1">Serie:</label>
                                                     <div class="col-md-4">
                                                         <input type="text" class="form-control" id="txtSerie" maxlength="50" placeholder="serie del equipo" style="text-transform:uppercase;">
                                                     </div>
-                                                </div>
-                                                <hr />
-                                                <div class="form-row">
+                                                    <label for="prov" class="control-label col-md-1">Voltaje:</label>
                                                     <div class="col-md-4">
                                                         <input type="text" class="form-control" id="txtVoltaje" maxlength="50" placeholder="voltaje del equipo" style="text-transform:uppercase;">
                                                     </div>
                                                 </div>
                                                 <hr />
-                                                <div class="form-row">
+                                                <div class="form-row justify-content-center">
+                                                    <label for="prov" class="control-label col-md-1">Presion:</label>
                                                     <div class="col-md-4">
                                                         <input type="text" class="form-control" id="txtPresion" maxlength="50" placeholder="presion del equipo" style="text-transform:uppercase;">
                                                     </div>
-
+                                                    <label for="prov" class="control-label col-md-1">Amp:</label>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="txtAmperaje" maxlength="50" placeholder="amperaje del equipo" style="text-transform:uppercase;">
+                                                    </div>
                                                 </div>
+                                                                   
                                             </div>
                                         </div>
 
@@ -122,7 +130,7 @@
                             <div class="card-header" id="headingOne">
                                 <h4 class="mb-0">
 
-                                    <span class="label label-primary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne"><span style="color: cornflowerblue">Agregar</span> <i class="fas fa-chevron-down float-lg-right"></i></span>
+                                    <span class="label label-primary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne"><span style="color: cornflowerblue"><i class="fas fa-cogs"></i></span> <i class="fas fa-chevron-down float-lg-right"></i></span>
                                 </h4>
                             </div>
 
@@ -131,7 +139,7 @@
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <div align="right" style="margin-bottom:5px;">
-                                                <button type="button" class="btn btn-outline-primary" id="btnAgregarEquipo"><i class='fas fa-plus'></i> </button>
+                                                <button type="button" class="btn btn-outline-primary" id="btnAgregar"><i class='fas fa-plus'></i> </button>
                                             </div>
                                             <br />
                                             <div class="table-responsive">
@@ -171,7 +179,7 @@
     <div class="container">
         <div align="center">
             <button type="button" class="btn btn-outline-primary" id="btnRegresar">Regresar</button>
-            <button type="button" class="btn btn-outline-success" id="btnGuardarPa">Guardar</button>
+            <button type="button" class="btn btn-outline-success" id="btnGuardar">Guardar</button>
         </div>
 
     </div>

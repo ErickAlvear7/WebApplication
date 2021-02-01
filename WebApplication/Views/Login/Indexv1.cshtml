@@ -27,11 +27,17 @@
     <!---->
     <link rel="stylesheet" type="text/css" href="~/VendorLoginV1/css/util.css">
     <link rel="stylesheet" type="text/css" href="~/VendorLoginV1/css/main.css">
+
+    <!--Alertify-->
+    <link rel="stylesheet" href="~/VendorMenu/alertify/css/alertify.min.css">
+    <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/default.min.css">
+    <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/semantic.min.css">
+    <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/bootstrap.min.css">
     <!--===============================================================================================-->
 
 </head>
 <body>
-    
+
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -40,10 +46,10 @@
                 </div>
 
                 <form method="post" class="login100-form validate-form">
-                  
-                    <br/>
-                    <br/>
-                    <br/>
+
+                    <br />
+                    <br />
+                    <br />
 
                     <div class="wrap-input100 validate-input" data-validate="ingrese usuario">
                         <input class="input100" type="text" name="user" placeholder="Usuario" id="txtUsuario">
@@ -66,10 +72,10 @@
                             Iniciar Sesion
                         </button>
                     </div>
-       
+
 
                     <div class="text-center p-t-136">
-                      
+
                     </div>
                 </form>
             </div>
@@ -95,27 +101,20 @@
     </script>
     <!--===============================================================================================-->
     <script src="~/VendorLoginV1/js/main.js"></script>
+    <!--alertify-->
+    <script src="~/VendorMenu/alertify/js/alertify.min.js"></script>
     <!--LoginAjax-->
-    @*<script src="~/JQuery/Login.js"></script>*@
-    <!--Switalert2-->
+  
     <script src="~/VendorMenu/sweetalert2/sweetalert2.min.js"></script>
 
-    @{ 
-        if(ViewBag.error != null)
+    @{
+        if (ViewBag.error != null)
         {
-           <script type="text/javascript">
-               //Swal.fire('usuario y/o contraseña incorrecto')
+            <script type="text/javascript">            
 
-               Swal.fire({
-                   position: 'top-end',
-                   icon: 'error',
-                   title: 'usuario y/o contraseña incorrecta',
-                   showConfirmButton: false,
-                   timer: 1500
-               })
+                var notification = alertify.notify('usuario y/o contraseña incorrecto', 'error', 5, function () { console.log('dismissed'); });
 
-
-           </script>
+            </script>
         }
     }
 

@@ -39,6 +39,7 @@
         if ($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0) {
          
             var notification = alertify.notify('valor de texto o entero..?', 'warning', 5, function () { console.log('dismissed'); });
+
             return;
         }
 
