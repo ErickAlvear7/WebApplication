@@ -78,7 +78,7 @@
                     _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _count + '"><i class="fas fa-trash"></i></button></div></div></td>';
                     _output += '</tr>';
 
-                    $('#datosequipo').append(_output);
+                    $('#tblEquipo').append(_output);
 
                     _objeto = {
                         ArryId: _count,
@@ -114,7 +114,7 @@
             }
 
             if (_seguir) {
-                //_rowid = $('#hidden_rowid').val();
+            
                 _rowid = $('#hidden_row_id').val();
 
                 _output += '<td style="display: none;">' + _rowid + ' <input type="hidden" name="hidden_equipoid[]" id="equipoid' + _rowid + '" value="' + _rowid + '" /></td>';
@@ -160,7 +160,6 @@
         $(document).on("click", ".btnEdit", function () {
             $("#formParam").trigger("reset");
             _rowid = $(this).attr("id");
-            alert(_rowid);
             _equipoid = $('#equipoid' + _rowid + '').val();
             _grupoid = $('#grupoid' + _rowid + '').val();
             _equipoold = $('#equipo' + _rowid + '').val();
@@ -201,13 +200,13 @@
             }
         });
 
-        $("#ChkEstado").click(function () {
-            _checked = $("#ChkEstado").is(":checked");
+        $("#chkEstado").click(function () {
+            _checked = $("#chkEstado").is(":checked");
             if (_checked) {
-                $("#LblEstado").text("Activo");
+                $("#lblEstado").text("Activo");
                 _estado = 'Activo';
             } else {
-                $("#LblEstado").text("Inactivo");
+                $("#lblEstado").text("Inactivo");
                 _estado = 'Inactivo';
             }
         });
@@ -231,10 +230,10 @@
             }
 
             $.ajax({
-                url: "/Clientes/SaveEquipoCliente",
+                url: "/Clientes/GuardarEquipoCliente",
                 type: "POST",
                 dataType: "json",
-                data: { clieteid: _clieid, equipos: _result },
+                data: { clienteId: _clieid, equipos: _result },
                 success: function (datos) {
                     if (datos.success == true) {
                         window.location.href = datos.miUrl;

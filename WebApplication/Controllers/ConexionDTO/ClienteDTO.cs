@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers.ConexionDTO
@@ -12,6 +12,7 @@ namespace WebApplication.Controllers.ConexionDTO
         BDD_HRVEntities _db = new BDD_HRVEntities();
 
         DataSet _dataSet = new DataSet();
+        SqlDataAdapter _dataAdapter = new SqlDataAdapter();
 
 
         public List<Catalogo> FunGetClientes()
@@ -96,6 +97,50 @@ namespace WebApplication.Controllers.ConexionDTO
 
                 throw ex;
             }
+        }
+
+        public DataSet FunGrabarEquipos(int tipo, int clieId, string grupo, string marca, string equipo, string modelo, string refri,
+            string serie, string voltaje, string amperaje, string presion, string estado, int usuario, string terminal, string conexion)
+        {
+
+            try
+            {
+
+                using (SqlConnection _conexion = new SqlConnection(conexion))
+                {
+                    using (SqlCommand _command = new SqlCommand())
+                    {
+                        _command.Connection = _conexion;
+                        _command.CommandTimeout = 9000;
+                        _command.CommandType = CommandType.StoredProcedure;
+                        _command.CommandText = "sp_InsertarEquipo";
+                        _command.Parameters.AddWithValue("@in_tipo", tipo);
+                        _command.Parameters.AddWithValue("@in_clienteid", clieId);
+                        _command.Parameters.AddWithValue("@e_grupo", grupo);
+                        _command.Parameters.AddWithValue("@e_marca", marca);
+                        _command.Parameters.AddWithValue("@e_nombre", equipo);
+                        _command.Parameters.AddWithValue("@e_modelo", modelo);
+                        _command.Parameters.AddWithValue("@e_refrig", refri);
+                        _command.Parameters.AddWithValue("@e_serie", serie);
+                        _command.Parameters.AddWithValue("@e_voltaje", voltaje);
+                        _command.Parameters.AddWithValue("@e_amperaje", amperaje);
+                        _command.Parameters.AddWithValue("@e_presion", presion);
+                        _command.Parameters.AddWithValue("@e_estado", estado);
+                        _command.Parameters.AddWithValue("@e_usuario", usuario);
+                        _command.Parameters.AddWithValue("@e_terminal", terminal);
+                        _dataAdapter.SelectCommand = _command;
+                        _dataAdapter.Fill(_dataSet);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            return _dataSet;
+
         }
 
     }

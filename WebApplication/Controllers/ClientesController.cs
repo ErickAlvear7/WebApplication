@@ -105,21 +105,7 @@ namespace WebApplication.Controllers
             return Json(new { success = false, mensaje = "error" });
         }
 
-        // GET: Clientes/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Clientes clientes = db.Clientes.Find(id);
-        //    if (clientes == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(clientes);
-        //}
-
+      
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
@@ -139,11 +125,26 @@ namespace WebApplication.Controllers
             List<CabeceraDetalle> _grupo = new ClienteDTO().FunGetCabDet("Grupo");
             List<CabeceraDetalle> _marca = new ClienteDTO().FunGetCabDet("Marca");
             List<CabeceraDetalle> _modelo = new ClienteDTO().FunGetCabDet("Modelo");
-
+            ViewBag.ClienteId = id;
             ViewBag.grupo_equipo = new SelectList(_grupo, "CodId", "Detalle",0);
             ViewBag.marca_equipo = new SelectList(_marca, "CodId", "Detalle", 0);
             ViewBag.modelo_equipo = new SelectList(_modelo, "CodId", "Detalle", 0);
             return View(_listaClientes);
+        }
+
+        [HttpPost]
+        public ActionResult GuardarEquipoCliente(int clienteId, List<Equipo> equipos)
+        {
+         
+            foreach (var item in equipos)
+            {
+                new ClienteDTO().FunGrabarEquipos(0,clienteId, item.ArryGrupo, item.ArryMarca, item.ArryEquipo, item.ArryModelo,
+                    "", item.ArrySerie, item.ArryVoltaje, item.ArryAmperaje, item.ArryPresion, item.ArryEstado, int.Parse(Session["_UsuarioId"].ToString()),
+                    Session["_Host"].ToString(), Session["_conexion"].ToString());
+            }
+
+            TempData["Mensaje"] = "ok";
+            return Json(new { success = true, miUrl = Url.Action("Index", "Clientes") });
         }
 
         protected override void Dispose(bool disposing)

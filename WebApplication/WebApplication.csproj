@@ -157,6 +157,9 @@
     <Compile Include="Models\DetalleEquipos.cs">
       <DependentUpon>ModelSeguridad.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Equipos.cs">
+      <DependentUpon>ModelSeguridad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModelSeguridad.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

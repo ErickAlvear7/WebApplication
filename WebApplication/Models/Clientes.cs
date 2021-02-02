@@ -14,6 +14,12 @@ namespace WebApplication.Models
     
     public partial class Clientes
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Clientes()
+        {
+            this.Equipos = new HashSet<Equipos>();
+        }
+    
         public int id_cliente { get; set; }
         public int provincia_cliente { get; set; }
         public int cuidad_cliente { get; set; }
@@ -31,5 +37,8 @@ namespace WebApplication.Models
         public bool estado_cliente { get; set; }
         public Nullable<int> aux1_cliente { get; set; }
         public string aux2_cliente { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipos> Equipos { get; set; }
     }
 }

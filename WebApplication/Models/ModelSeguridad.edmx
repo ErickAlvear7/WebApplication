@@ -69,6 +69,29 @@
           <Property Name="aux3_detalle" Type="varchar" MaxLength="100" />
           <Property Name="aux4_detalle" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Equipos">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+          </Key>
+          <Property Name="id_equipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+          <Property Name="grupo_equipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="marca_quipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombre_equipo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="modelo_equipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="refrigeracion_equipo" Type="varchar" MaxLength="50" />
+          <Property Name="serie_equipo" Type="varchar" MaxLength="50" />
+          <Property Name="voltaje_equipo" Type="varchar" MaxLength="50" />
+          <Property Name="amperaje_equipo" Type="varchar" MaxLength="50" />
+          <Property Name="presion_equipo" Type="varchar" MaxLength="50" />
+          <Property Name="estado_equipo" Type="bit" />
+          <Property Name="creacion_equipo" Type="datetime" Nullable="false" />
+          <Property Name="usuario_equipo" Type="int" Nullable="false" />
+          <Property Name="terminal_equipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="modificacion_equipo" Type="datetime" Nullable="false" />
+          <Property Name="usuariomod_equipo" Type="int" Nullable="false" />
+          <Property Name="terminalmod_equipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Perfiles">
           <Key>
             <PropertyRef Name="id_perfil" />
@@ -128,6 +151,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Equipos_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="Equipos">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Perfiles">
           <End Role="Perfiles" Type="Self.Perfiles" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -145,6 +180,7 @@
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuidadClientes" EntityType="Self.CuidadClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleEquipos" EntityType="Self.DetalleEquipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProvinciaClientes" EntityType="Self.ProvinciaClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
@@ -155,6 +191,10 @@
           <AssociationSet Name="FK_DetalleEquipos_CabeceraEquipos" Association="Self.FK_DetalleEquipos_CabeceraEquipos">
             <End Role="CabeceraEquipos" EntitySet="CabeceraEquipos" />
             <End Role="DetalleEquipos" EntitySet="DetalleEquipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipos_Clientes" Association="Self.FK_Equipos_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Equipos" EntitySet="Equipos" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuarios_Perfiles" Association="Self.FK_Usuarios_Perfiles">
             <End Role="Perfiles" EntitySet="Perfiles" />
@@ -225,6 +265,11 @@
             <End Role="CabeceraEquipos" EntitySet="CabeceraEquipos" />
             <End Role="DetalleEquipos" EntitySet="DetalleEquipos" />
           </AssociationSet>
+          <EntitySet Name="Equipos" EntityType="BDD_HRVModel.Equipos" />
+          <AssociationSet Name="FK_Equipos_Clientes" Association="BDD_HRVModel.FK_Equipos_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Equipos" EntitySet="Equipos" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Clientes">
           <Key>
@@ -247,6 +292,7 @@
           <Property Name="estado_cliente" Type="Boolean" Nullable="false" />
           <Property Name="aux1_cliente" Type="Int32" />
           <Property Name="aux2_cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Equipos" Relationship="BDD_HRVModel.FK_Equipos_Clientes" FromRole="Clientes" ToRole="Equipos" />
         </EntityType>
         <EntityType Name="CuidadClientes">
           <Key>
@@ -324,6 +370,42 @@
             </Principal>
             <Dependent Role="DetalleEquipos">
               <PropertyRef Name="id_cabecera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Equipos">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+          </Key>
+          <Property Name="id_equipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <Property Name="grupo_equipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="marca_quipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_equipo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="modelo_equipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="refrigeracion_equipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="serie_equipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="voltaje_equipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="amperaje_equipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="presion_equipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado_equipo" Type="Boolean" />
+          <Property Name="creacion_equipo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="usuario_equipo" Type="Int32" Nullable="false" />
+          <Property Name="terminal_equipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="modificacion_equipo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="usuariomod_equipo" Type="Int32" Nullable="false" />
+          <Property Name="terminalmod_equipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clientes" Relationship="BDD_HRVModel.FK_Equipos_Clientes" FromRole="Equipos" ToRole="Clientes" />
+        </EntityType>
+        <Association Name="FK_Equipos_Clientes">
+          <End Type="BDD_HRVModel.Clientes" Role="Clientes" Multiplicity="1" />
+          <End Type="BDD_HRVModel.Equipos" Role="Equipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="Equipos">
+              <PropertyRef Name="id_cliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -436,6 +518,30 @@
                 <ScalarProperty Name="nombre_detalle" ColumnName="nombre_detalle" />
                 <ScalarProperty Name="id_cabecera" ColumnName="id_cabecera" />
                 <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipos">
+            <EntityTypeMapping TypeName="BDD_HRVModel.Equipos">
+              <MappingFragment StoreEntitySet="Equipos">
+                <ScalarProperty Name="terminalmod_equipo" ColumnName="terminalmod_equipo" />
+                <ScalarProperty Name="usuariomod_equipo" ColumnName="usuariomod_equipo" />
+                <ScalarProperty Name="modificacion_equipo" ColumnName="modificacion_equipo" />
+                <ScalarProperty Name="terminal_equipo" ColumnName="terminal_equipo" />
+                <ScalarProperty Name="usuario_equipo" ColumnName="usuario_equipo" />
+                <ScalarProperty Name="creacion_equipo" ColumnName="creacion_equipo" />
+                <ScalarProperty Name="estado_equipo" ColumnName="estado_equipo" />
+                <ScalarProperty Name="presion_equipo" ColumnName="presion_equipo" />
+                <ScalarProperty Name="amperaje_equipo" ColumnName="amperaje_equipo" />
+                <ScalarProperty Name="voltaje_equipo" ColumnName="voltaje_equipo" />
+                <ScalarProperty Name="serie_equipo" ColumnName="serie_equipo" />
+                <ScalarProperty Name="refrigeracion_equipo" ColumnName="refrigeracion_equipo" />
+                <ScalarProperty Name="modelo_equipo" ColumnName="modelo_equipo" />
+                <ScalarProperty Name="nombre_equipo" ColumnName="nombre_equipo" />
+                <ScalarProperty Name="marca_quipo" ColumnName="marca_quipo" />
+                <ScalarProperty Name="grupo_equipo" ColumnName="grupo_equipo" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
