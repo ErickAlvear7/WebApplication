@@ -121,11 +121,13 @@ namespace WebApplication.Controllers
         {
             List<Catalogo> _listaClientes = new List<Catalogo>();
             _listaClientes = new ClienteDTO().FunGetClientesEquipo(id);
+            List<Equipo> _equipos = new ClienteDTO().FunGetEquipos(id);
 
             List<CabeceraDetalle> _grupo = new ClienteDTO().FunGetCabDet("Grupo");
             List<CabeceraDetalle> _marca = new ClienteDTO().FunGetCabDet("Marca");
             List<CabeceraDetalle> _modelo = new ClienteDTO().FunGetCabDet("Modelo");
             ViewBag.ClienteId = id;
+            ViewBag.Equipos = _equipos;
             ViewBag.grupo_equipo = new SelectList(_grupo, "CodId", "Detalle",0);
             ViewBag.marca_equipo = new SelectList(_marca, "CodId", "Detalle", 0);
             ViewBag.modelo_equipo = new SelectList(_modelo, "CodId", "Detalle", 0);

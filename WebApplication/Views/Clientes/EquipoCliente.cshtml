@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<WebApplication.Controllers.ConexionDTO.Catalogo>
 
 @{
-
+    List<WebApplication.Controllers.ConexionDTO.Equipo> _equipos = ViewBag.Equipos;
 }
 
 <title>@ViewBag.titulo</title>
@@ -77,22 +77,22 @@
                                                 <div class="row justify-content-center">
                                                     <label for="prov" class="control-label col-md-1">Equipo:</label>
                                                     <div class="col-md-4">
-                                                        <input type="text" class="form-control" id="txtNombreEquipo" maxlength="100" placeholder="nombre del equipo" style="text-transform:uppercase;">
+                                                        <input type="text" class="form-control" id="txtEquipo" maxlength="100" placeholder="nombre del equipo" style="text-transform:uppercase;">
                                                     </div>
                                                     <label for="prov" class="control-label col-md-1">Grupo:</label>
                                                     <div class="col-md-4">
-                                                        @Html.DropDownList("grupo_equipo", null, "---Seleccione Grupo---", htmlAttributes: new { @class = "form-control", @id = "ddlGrupoEquipo", style = "Width:100%" })
+                                                        @Html.DropDownList("grupo_equipo", null, "---Seleccione Grupo---", htmlAttributes: new { @class = "form-control", @id = "ddlGrupo", style = "Width:100%" })
                                                     </div>
                                                 </div>
                                                 <hr />
                                                 <div class="form-row justify-content-center">
                                                     <label for="prov" class="control-label col-md-1">Marca:</label>
                                                     <div class="col-md-4">
-                                                        @Html.DropDownList("marca_equipo", null, "---Seleccione Marca---", htmlAttributes: new { @class = "form-control", @id = "ddlMarcaEquipo", style = "Width:100%" })
+                                                        @Html.DropDownList("marca_equipo", null, "---Seleccione Marca---", htmlAttributes: new { @class = "form-control", @id = "ddlMarca", style = "Width:100%" })
                                                     </div>
                                                     <label for="prov" class="control-label col-md-1">Modelo:</label>
                                                     <div class="col-md-4">
-                                                        @Html.DropDownList("modelo_equipo", null, "---Seleccione Modelo---", htmlAttributes: new { @class = "form-control", @id = "ddlModeloEquipo", style = "Width:100%" })
+                                                        @Html.DropDownList("modelo_equipo", null, "---Seleccione Modelo---", htmlAttributes: new { @class = "form-control", @id = "ddlModelo", style = "Width:100%" })
                                                     </div>
                                                 </div>
                                                 <hr />
@@ -159,11 +159,65 @@
                                                             <th>Equipo</th>
                                                             <th>Marca</th>
                                                             <th>Modelo</th>
-                                                            <th>Estado</th>                                                          
+                                                            <th>Estado</th>
+                                                            <th style="display: none;">Serie</th>
+                                                            <th style="display: none;">Voltaje</th>
+                                                            <th style="display: none;">Amperaje</th>
+                                                            <th style="display: none;">Presion</th>
                                                             <th class="text-center">Opciones</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody></tbody>
+                                                    <tbody>
+                                                        @foreach (var item in _equipos)
+                                                        {
+                                                            <tr id="row_@item.ArryEquipoId">
+                                                                <td style="display: none;">
+                                                                    @Html.DisplayFor(modelItem => item.ArryEquipoId)
+                                                                    <input type="hidden" name="hidden_equipoid[]" id="equipoid@(item.ArryEquipoId)" value="@item.ArryEquipoId" />
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.ArryGrupo)
+                                                                    <input type="hidden" name="hidden_grupo[]" id="grupoid@(item.ArryEquipoId)" value="@item.ArryGrupoId" />
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.ArryEquipo)
+                                                                    <input type="hidden" name="hidden_equipo[]" id="equipo@(item.ArryEquipoId)" value="@item.ArryEquipo" />
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.ArryMarca)
+                                                                    <input type="hidden" name="hidden_marca[]" id="marcaid@(item.ArryEquipoId)" value="@item.ArryMarcaId" />
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.ArryModelo)
+                                                                    <input type="hidden" name="hidden_modelo[]" id="modeloid@(item.ArryEquipoId)" value="@item.ArryModeloId" />
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.ArryEstado)
+                                                                    <input type="hidden" name="hidden_estado[]" id="estado@(item.ArryEquipoId)" value="@item.ArryEstado" />
+                                                                </td>
+                                                                <td style="display: none;">
+                                                                    <input type="hidden" name="hidden_serie[]" id="serie@(item.ArryEquipoId)" value="@item.ArrySerie" />
+                                                                </td>
+                                                                <td style="display: none;">
+                                                                    <input type="hidden" name="hidden_voltaje[]" id="voltaje@(item.ArryEquipoId)" value="@item.ArryVoltaje" />
+                                                                </td>
+                                                                <td style="display: none;">
+                                                                    <input type="hidden" name="hidden_amperaje[]" id="amperaje@(item.ArryEquipoId)" value="@item.ArryAmperaje" />
+                                                                </td>
+                                                                <td style="display: none;">
+                                                                    <input type="hidden" name="hidden_presion[]" id="presion@(item.ArryEquipoId)" value="@item.ArryPresion" />
+                                                                </td>
+                                                                <td>
+                                                                    <div class="text-center">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="@item.ArryEquipoId"><i class="fas fa-pen"></i></button>
+                                                                            <button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" disabled id="@item.ArryEquipoId"><i class="fas fa-trash"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>

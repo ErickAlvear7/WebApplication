@@ -64,9 +64,13 @@ namespace WebApplication.Controllers.ConexionDTO
 
     public class Equipo
     {
+        public int ArryEquipoId { get; set; }
+        public string ArryGrupoId { get; set; }
         public string ArryGrupo { get; set; }
+        public string ArryMarcaId { get; set; }
         public string ArryMarca { get; set; }
         public string ArryEquipo { get; set; }
+        public string ArryModeloId { get; set; }
         public string ArryModelo { get; set; }
         public string ArrySerie { get; set; }
         public string ArryVoltaje { get; set; }

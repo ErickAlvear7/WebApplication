@@ -239,37 +239,45 @@
     $(document).on("click", ".btnDelete", function () {
         _row_id = $(this).attr("id");
         _descripcion = $('#detalle' + _row_id + '').val();
-        Swal.fire({
-            icon:"info",
-            title: 'Está Seguro de Borrar ' + _descripcion,
-            text: 'El registro será eliminado..',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Eliminar',
-            showLoaderOnConfirm: true,
-            preConfirm: function () {
-                return new Promise(function (resolve) {
-                    Swal.close();
-                    FunRemoveItemFromArr(_result, _descripcion);
-                    $('#row_' + _row_id + '').remove();
+        //Swal.fire({
+        //    icon:"info",
+        //    title: 'Está Seguro de Borrar ' + _descripcion,
+        //    text: 'El registro será eliminado..',
+        //    type: 'warning',
+        //    showCancelButton: true,
+        //    confirmButtonColor: '#3085d6',
+        //    cancelButtonColor: '#d33',
+        //    confirmButtonText: 'Eliminar',
+        //    showLoaderOnConfirm: true,
+        //    preConfirm: function () {
+        //        return new Promise(function (resolve) {
+        //            Swal.close();
+        //            FunRemoveItemFromArr(_result, _descripcion);
+        //            $('#row_' + _row_id + '').remove();
+        //            _count--;
+        //            if (_count > 0) {
+        //                FunInactivaButton();
+        //            }
+        //            FunReorganizarOrder(_result);
+        //        });
+        //    }
+        //});
+
+        alertify.confirm('desea elimnar detalle' + _descripcion + '?', 'sera eliminado..!', function () {
+            alertify.success('Ok')
+            Swal.close();
+                   FunRemoveItemFromArr(_result, _descripcion);
+                   $('#row_' + _row_id + '').remove();
                     _count--;
-                    //console.log(_count);
                     if (_count > 0) {
                         FunInactivaButton();
                     }
                     FunReorganizarOrder(_result);
-                });
-            }
-        });
+        }
+            , function () { alertify.error('cancelado') });
     });
 
-    //function FunInactivaButton() {
-    //    x = document.getElementsByClassName("btnUp");
-    //    console.log(x[0].id);
-    //    $("#" + x[0].id).prop('disabled', true);
-    //}
+    
 
     function FunRemoveItemFromArr(arr, deta) {
         $.each(arr, function (i, item) {

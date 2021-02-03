@@ -143,5 +143,42 @@ namespace WebApplication.Controllers.ConexionDTO
 
         }
 
+        public List<Equipo> FunGetEquipos(int clieid)
+        {
+            var _query = from equipos in _db.Equipos
+                         where equipos.id_cliente == clieid
+                         select new Equipo
+                         {
+                             ArryEquipoId = equipos.id_equipo,
+                             ArryGrupoId = equipos.nombre_equipo,
+                             ArryGrupo = (from detalle in _db.DetalleEquipos
+                                          join cabecera in _db.CabeceraEquipos on detalle.id_cabecera equals (cabecera.id_cabecera)
+                                          where cabecera.nombre_cabecera == "GRUPO" &&
+                                          detalle.valor_detalle == equipos.grupo_equipo
+                                          select detalle.nombre_detalle).FirstOrDefault(),
+                             ArryMarcaId = equipos.marca_quipo,
+                             ArryMarca = (from detalle in _db.DetalleEquipos
+                                          join cabecera in _db.CabeceraEquipos on detalle.id_cabecera equals (cabecera.id_cabecera)
+                                          where cabecera.nombre_cabecera == "MARCA" &&
+                                          detalle.valor_detalle == equipos.marca_quipo
+                                          select detalle.nombre_detalle).FirstOrDefault(),
+                             ArryModeloId = equipos.modelo_equipo,
+                             ArryEquipo = equipos.nombre_equipo,
+                             ArryModelo = (from detalle in _db.DetalleEquipos
+                                           join cabecera in _db.CabeceraEquipos on detalle.id_cabecera equals (cabecera.id_cabecera)
+                                           where cabecera.nombre_cabecera == "MODELO" &&
+                                           detalle.valor_detalle == equipos.modelo_equipo
+                                           select detalle.nombre_detalle).FirstOrDefault(),
+                             ArrySerie = equipos.serie_equipo,
+                             ArryVoltaje = equipos.voltaje_equipo,
+                             ArryAmperaje = equipos.amperaje_equipo,
+                             ArryPresion = equipos.presion_equipo,
+                             ArryEstado = equipos.estado_equipo == true ? "Activo" : "Inactivo"
+                         };
+
+            return _query.ToList();
+        }
+
+
     }
 }

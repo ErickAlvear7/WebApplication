@@ -335,9 +335,9 @@
             alertify.success('detalle eliminado')
             FunRemoveItemFromArr(_result, _descripcion);
             $('#row_' + _row_id + '').remove();
-            _count--;
+            //_count--;
 
-            FunReorganizarOrder(_result);
+            //FunReorganizarOrder(_result);
         }
             , function () { alertify.error('cancelado') });
     });
@@ -371,15 +371,7 @@
         });
     };
 
-    function FunReorganizarOrder(arr) {
-        _otroval = 0;
-        $.each(arr, function (i, item) {
-            _otroval = _otroval + 1;        
-            FunOrderDelete(_otroval, item.ArryId, item.ArryPadeNombre, item.ArryPadeValorV, item.ArryPadeValorI, item.ArryEstado);
-           
-        });
-     
-    }
+
 
     function FunOrderDelete(_ordenx, _rowmod, _descripcion, _valorv, _valori, _estado) {
         _nuevoestado = _estado == true ? 'Activo' : 'Inactivo';
