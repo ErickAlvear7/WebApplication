@@ -14,31 +14,30 @@
                     _equipoid = $.trim($(this).text());
                     break;
                 case 1:
-                    _grupoid = $.trim($(this).text());
+                    _grupoid = $('#grupoid' + _equipoid).val();
                     break;
                 case 2:
-                    _marcaid = $.trim($(this).text());
-                    break;
-                case 3:
                     _equipo = $.trim($(this).text());
                     break;
-                case 4:
-                    _modeloid = $.trim($(this).text());
+                case 3:
+                    _marcaid = $('#marcaid' + _equipoid).val();
                     break;
+                case 4:
+                    _modeloid = $('#modeloid' + _equipoid).val();
                 case 5:
-                    _presion = $.trim($(this).text());
+                    _estado = $.trim($(this).text());
                     break;
                 case 6:
                     _serie = $.trim($(this).text());
                     break;
                 case 7:
-                    _voltaje = $.trim($(this).text());
+                    _voltaje = $('#voltaje' + _equipoid).val();
                     break;
                 case 8:
-                    _amperaje = $.trim($(this).text());
+                    _amperaje = $('#amperaje' + _equipoid).val();
                     break;
                 case 9:
-                    _presion = $.trim($(this).text());
+                    _presion = $('#presion' + _equipoid).val();
                     break;
             }
         });
@@ -46,10 +45,10 @@
         _objeto = {
             ArryId: parseInt(_equipoid),
             ArryEquipoId: parseInt(_equipoid),
-            ArryGrupo: _grupoid,
-            ArryMarca: _marcaid,
+            ArryGrupoId: _grupoid,
+            ArryMarcaId: _marcaid,
             ArryEquipo: _equipo,
-            ArryModelo: _modeloid,
+            ArryModeloId: _modeloid,
             ArrySerie: _serie,
             ArryVoltaje: _voltaje,
             ArryAmperaje: _amperaje,
@@ -58,15 +57,14 @@
         }
 
         _result.push(_objeto);
-        //_count = parseInt(_codigo);
+ 
         _count = parseInt(_equipoid);
 
 
     });
 
     $('#btnRegresar').click(function () {
-
-          window.location.href = '/Clientes/Index';
+        window.location.href = '/Clientes/Index';
     });
 
 
@@ -87,25 +85,32 @@
         _presion = $('#txtPresion').val();
 
         if (_equipo.length == 0) {
-            var notification = alertify.notify('ingrese equipo..!', 'info', 5, function () { console.log('dismissed'); });
+            var notification = alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
+            return;
+            
+        }
+
+        if (_grupoid == '') {
+            var notification = alertify.notify('seleccione grupo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
-        if (_grupo == '') {
-            var notification = alertify.notify('seleccione grupo..!', 'info', 5, function () { console.log('dismissed'); });
+        if (_marcaid == '') {
+            var notification = alertify.notify('seleccione marca..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
-        if (_marca == '') {
-            var notification = alertify.notify('seleccione marca..!', 'info', 5, function () { console.log('dismissed'); });
+        if (_modeloid == '') {
+            var notification = alertify.notify('seleccione modelo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_tipoSave == 'add') {
+            _estado = 'Activo';
 
             $.each(_result, function (i, item) {
                 if (item.ArryEquipo.toUpperCase() == _equipo.toUpperCase()) {
-                    var notification = alertify.notify('nombre del equipo ya existe..!', 'error', 5, function () { console.log('dismissed'); });
+                    var notification = alertify.notify('equipo existe..!', 'warning', 5, function () { console.log('dismissed'); });
                     _continuar = false;
                     return false;
                 }
@@ -140,10 +145,10 @@
                 _objeto = {
                     ArryId: _count,
                     ArryEquipoId: 0,
-                    ArryGrupo: _grupoid,
-                    ArryMarca: _marcaid,
+                    ArryGrupoId: _grupoid,
+                    ArryMarcaId: _marcaid,
                     ArryEquipo: _equipo,
-                    ArryModelo: _modeloid,
+                    ArryModeloId: _modeloid,
                     ArrySerie: _serie,
                     ArryVoltaje: _voltaje,
                     ArryAmperaje: _amperaje,
@@ -161,7 +166,7 @@
             if (_equipoold.toUpperCase() != _equipo.toUpperCase()) {
                 $.each(_result, function (i, _item) {
                     if (_item.ArryEquipo.toUpperCase() == _equipo.toUpperCase()) {
-                        var notification = alertify.notify('nombre del equipo ya existe..!', 'error', 5, function () { console.log('dismissed'); });
+                        var notification = alertify.notify('equipo existe..!', 'warning', 5, function () { console.log('dismissed'); });
                         _seguir = false;
                         return false;
                     } else {
@@ -173,7 +178,25 @@
 
         if (_seguir) {
 
-            _rowid = $('#hidden_row_id').val();
+            _objIndex = _result.findIndex((obj => obj.ArryId == _rowid));
+            _nuevoid = _result[_objIndex].ArryEquipoId;
+            _result[_objIndex].ArryGrupoId = _grupoid;
+            _result[_objIndex].ArryMarcaId = _marcaid;
+            _result[_objIndex].ArryEquipo = _equipo;
+            _result[_objIndex].ArryModeloId = _modeloid;
+            _result[_objIndex].ArrySerie = _serie;
+            _result[_objIndex].ArryVoltaje = _voltaje;
+            _result[_objIndex].ArryAmperaje = _amperaje;
+            _result[_objIndex].ArryPresion = _presion;
+            _result[_objIndex].ArryEstado = _estado;
+
+            if (_nuevoid == 0) {
+                _disabled = '';
+            } else {
+                _disabled = 'disabled';
+            }
+
+        
             _output += '<td style="display: none;">' + _rowid + ' <input type="hidden" name="hidden_equipoid[]" id="equipoid' + _rowid + '" value="' + _rowid + '" /></td>';
             _output += '<td style="display: none;">' + _grupoid + ' <input type="hidden" name="hidden_grupo[]" id="grupoid' + _rowid + '" value="' + _grupoid + '" /></td>';
             _output += '<td>' + _grupo + ' <input type="hidden" name="hidden_grupo[]" id="grupo' + _rowid + '" value="' + _grupo + '" /></td>';
@@ -193,24 +216,14 @@
 
             $('#row_' + _rowid + '').html(_output);
 
-            _objIndex = _result.findIndex((obj => obj.ArryId == _rowid));
-            _result[_objIndex].ArryGrupo = _grupoid;
-            _result[_objIndex].ArryMarca = _marcaid;
-            _result[_objIndex].ArryEquipo = _equipo;
-            _result[_objIndex].ArryModelo = _modeloid;
-            _result[_objIndex].ArrySerie = _serie;
-            _result[_objIndex].ArryVoltaje = _voltaje;
-            _result[_objIndex].ArryAmperaje = _amperaje;
-            _result[_objIndex].ArryPresion = _presion;
-            _result[_objIndex].ArryEstado = _estado;
+       
+
             FunLimpiarCampos();
 
-            $("#divestado").show();
+            $("#divestado").hide();
             $("#btnAgregar").text("Agregar");
             $('#btnAgregar').attr('class', 'btn btn-outline-primary');
             _tipoSave = 'add';
-
-            console.log(_result);
         }
 
     });
@@ -247,47 +260,29 @@
         _tipoSave = 'edit';
 
         if (_estadoold == "Activo") {
-            $("#ChkEstado").prop("checked", true);
-            $("#LblEstado").text("Activo");
+            $("#chkEstado").prop("checked", true);
+            $("#lblEstado").text("Activo");
         } else {
-            $("#ChkEstado").prop("checked", false);
-            $("#LblEstado").text("Inactivo");
+            $("#chkEstado").prop("checked", false);
+            $("#lblEstado").text("Inactivo");
         }
     });
 
     $(document).on("click", ".btnDelete", function () {
         _rowid = $(this).attr("id");
         _equipo = $('#equipo' + _rowid + '').val();
-        //Swal.fire({
-        //    icon: 'error',
-        //    title: 'Está Seguro de Borrar ' + _equipo,
-        //    text: 'El registro será eliminado..',
-        //    showCancelButton: true,
-        //    confirmButtonColor: '#3085d6',
-        //    cancelButtonColor: '#d33',
-        //    confirmButtonText: 'Eliminar',
-        //    showLoaderOnConfirm: true,
-        //    preConfirm: function () {
-        //        return new Promise(function (resolve) {
-        //            Swal.close();
-        //            FunRemoveItemFromArr(_result, _equipo);
-        //            $('#row_' + _rowid + '').remove();
-        //        });
-        //    }
-        //});
-
-        alertify.confirm('desea eliminar ' + _equipo + '?', 'el equipo sera eliminado..!', function () {
+  
+        alertify.confirm('desea eliminar el equipo ' + _equipo + '?' ,'el equipo será eliminado', function () {
             alertify.success('Ok')
-            Swal.close();
-                FunRemoveItemFromArr(_result, _equipo);
-                 $('#row_' + _rowid + '').remove();
+            FunRemoveItemFromArr(_result, _equipo);
+            $('#row_' + _rowid + '').remove();
         }
             , function () { alertify.error('cancelado') });
     });
 
-    function FunRemoveItemFromArr(arr, deta) {
+    function FunRemoveItemFromArr(arr, nombreequipo) {
         $.each(arr, function (i, item) {
-            if (item.ArryPadeNombre == deta) {
+            if (item.ArryEquipo == nombreequipo) {
                 arr.splice(i, 1);
                 return false;
             } else {
@@ -319,12 +314,14 @@
         $('#txtPresion').val('');
 
         _seguir = false;
+        _continuar = false;
+        _estado = 'Activo';
         $("#divestado").hide();
     }
 
     $('#btnGuardar').click(function () {
         if (_result.length == 0) {
-            var notification = alertify.notify('ingrese un equipo..!', 'info', 5, function () { console.log('dismissed'); });
+            var notification = alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -332,12 +329,14 @@
             url: "/Clientes/GuardarEquipoCliente",
             type: "POST",
             dataType: "json",
-            data: { clieteid: _clieid, equipos: _result },
+            data: { clienteId: _clieid, equipos: _result },
             success: function (datos) {
                 if (datos.success == true) {
-                    window.location.href = datos.miUrl;                
+                    window.location.href = datos.miUrl;
+                  
                 } else {
-                    var notification = alertify.notify('nombre del parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
+                    var notification = alertify.notify('equipo existe..!', 'danger', 5, function () { console.log('dismissed'); });
+                    return;
                 }
             },
             error: function (error) {

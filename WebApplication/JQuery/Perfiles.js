@@ -4,7 +4,7 @@
         eve.preventDefault();
         $("#modal-content").load("/Perfiles/Create");
         $(".modal-title").text("Nuevo Perfil");
-        $("#header").css("background-color", "#2A61DF");
+        $("#header").css("background-color", "#7AA1A");
         $("#header").css("color", "white");
         _opcion = 0, _estado = true;
         _id = 0;

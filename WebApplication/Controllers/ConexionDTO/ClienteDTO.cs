@@ -99,48 +99,52 @@ namespace WebApplication.Controllers.ConexionDTO
             }
         }
 
-        public DataSet FunGrabarEquipos(int tipo, int clieId, string grupo, string marca, string equipo, string modelo, string refri,
-            string serie, string voltaje, string amperaje, string presion, string estado, int usuario, string terminal, string conexion)
+        public DataSet FunGrabarEquipos(int tipo, int clieid, int equipoid, string grupo, string marca, string equipo, string modelo, string refri,
+    string serie, string voltaje, string amperaje, string presion, string estado, int usuario, string terminal,
+    string auxv1, string auxv2, string auxv3, int auxi1, int auxi2, int auxi3, string conexion)
         {
-
             try
             {
-
-                using (SqlConnection _conexion = new SqlConnection(conexion))
+                using (SqlConnection con = new SqlConnection(conexion))
                 {
-                    using (SqlCommand _command = new SqlCommand())
+                    using (SqlCommand comm = new SqlCommand())
                     {
-                        _command.Connection = _conexion;
-                        _command.CommandTimeout = 9000;
-                        _command.CommandType = CommandType.StoredProcedure;
-                        _command.CommandText = "sp_InsertarEquipo";
-                        _command.Parameters.AddWithValue("@in_tipo", tipo);
-                        _command.Parameters.AddWithValue("@in_clienteid", clieId);
-                        _command.Parameters.AddWithValue("@e_grupo", grupo);
-                        _command.Parameters.AddWithValue("@e_marca", marca);
-                        _command.Parameters.AddWithValue("@e_nombre", equipo);
-                        _command.Parameters.AddWithValue("@e_modelo", modelo);
-                        _command.Parameters.AddWithValue("@e_refrig", refri);
-                        _command.Parameters.AddWithValue("@e_serie", serie);
-                        _command.Parameters.AddWithValue("@e_voltaje", voltaje);
-                        _command.Parameters.AddWithValue("@e_amperaje", amperaje);
-                        _command.Parameters.AddWithValue("@e_presion", presion);
-                        _command.Parameters.AddWithValue("@e_estado", estado);
-                        _command.Parameters.AddWithValue("@e_usuario", usuario);
-                        _command.Parameters.AddWithValue("@e_terminal", terminal);
-                        _dataAdapter.SelectCommand = _command;
+                        comm.Connection = con;
+                        comm.CommandTimeout = 9000;
+                        comm.CommandType = CommandType.StoredProcedure;
+                        comm.CommandText = "sp_InsertarEquipo";
+                        comm.Parameters.AddWithValue("@in_tipo", tipo);
+                        comm.Parameters.AddWithValue("@in_clieid", clieid);
+                        comm.Parameters.AddWithValue("@in_equipoid", equipoid);
+                        comm.Parameters.AddWithValue("@in_grupo", grupo);
+                        comm.Parameters.AddWithValue("@in_marca", marca);
+                        comm.Parameters.AddWithValue("@in_equipo", equipo);
+                        comm.Parameters.AddWithValue("@in_modelo", modelo);
+                        comm.Parameters.AddWithValue("@in_refrigera", refri);
+                        comm.Parameters.AddWithValue("@in_serie", serie);
+                        comm.Parameters.AddWithValue("@in_voltaje", voltaje);
+                        comm.Parameters.AddWithValue("@in_amperaje", amperaje);
+                        comm.Parameters.AddWithValue("@in_presion", presion);
+                        comm.Parameters.AddWithValue("@in_estado", estado);
+                        comm.Parameters.AddWithValue("@in_usuario", usuario);
+                        comm.Parameters.AddWithValue("@in_terminal", terminal);
+                        comm.Parameters.AddWithValue("@in_auxv1", auxv1);
+                        comm.Parameters.AddWithValue("@in_auxv2", auxv2);
+                        comm.Parameters.AddWithValue("@in_auxv3", auxv3);
+                        comm.Parameters.AddWithValue("@in_auxi1", auxi1);
+                        comm.Parameters.AddWithValue("@in_auxi2", auxi2);
+                        comm.Parameters.AddWithValue("@in_auxi3", auxi3);
+
+                        _dataAdapter.SelectCommand = comm;
                         _dataAdapter.Fill(_dataSet);
                     }
                 }
-
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             return _dataSet;
-
         }
 
         public List<Equipo> FunGetEquipos(int clieid)
@@ -150,7 +154,7 @@ namespace WebApplication.Controllers.ConexionDTO
                          select new Equipo
                          {
                              ArryEquipoId = equipos.id_equipo,
-                             ArryGrupoId = equipos.nombre_equipo,
+                             ArryGrupoId = equipos.grupo_equipo,
                              ArryGrupo = (from detalle in _db.DetalleEquipos
                                           join cabecera in _db.CabeceraEquipos on detalle.id_cabecera equals (cabecera.id_cabecera)
                                           where cabecera.nombre_cabecera == "GRUPO" &&

@@ -137,14 +137,14 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult GuardarEquipoCliente(int clienteId, List<Equipo> equipos)
         {
-         
+
             foreach (var item in equipos)
             {
-                new ClienteDTO().FunGrabarEquipos(0,clienteId, item.ArryGrupo, item.ArryMarca, item.ArryEquipo, item.ArryModelo,
-                    "", item.ArrySerie, item.ArryVoltaje, item.ArryAmperaje, item.ArryPresion, item.ArryEstado, int.Parse(Session["_UsuarioId"].ToString()),
-                    Session["_Host"].ToString(), Session["_conexion"].ToString());
+                new ClienteDTO().FunGrabarEquipos(0, clienteId, item.ArryEquipoId, item.ArryGrupoId, item.ArryMarcaId, item.ArryEquipo, item.ArryModeloId,
+                    "", item.ArrySerie ?? "", item.ArryVoltaje ?? "",
+                    item.ArryAmperaje ?? "", item.ArryPresion ?? "", item.ArryEstado,
+                    int.Parse(Session["_UsuarioId"].ToString()), Session["_Host"].ToString(), "", "", "", 0, 0, 0, Session["_conexion"].ToString());
             }
-
             TempData["Mensaje"] = "ok";
             return Json(new { success = true, miUrl = Url.Action("Index", "Clientes") });
         }

@@ -7,7 +7,7 @@ $(document).ready(function () {
         eve.preventDefault();
         $("#modal-content").load("/Usuarios/Create");
         $(".modal-title").text("Nuevo Usuario");
-        $("#header").css("background-color", "#2A61DF");
+        $("#header").css("background-color", "#7AA1A4");
         $("#header").css("color", "white");
         _opcion = 0, _estado = true;
         _id = 0;
@@ -25,7 +25,7 @@ $(document).ready(function () {
 
         if (_perfil == "") {
 
-            var notification = alertify.notify('seleccione el perfil..!', 'secondary', 5, function () { console.log('dismissed'); });
+            var notification = alertify.notify('seleccione el perfil..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
         _loginAnt = _data[3];
         $("#modal-content").load("/Usuarios/Edit/" + _loginAnt);
         $(".modal-title").text("Editar Usuario");
-        $("#header").css("background-color", "#2A61DF");
+        $("#header").css("background-color", "#7AA1A4");
         $("#header").css("color", "white");
         $("#myModal").modal("show");
             

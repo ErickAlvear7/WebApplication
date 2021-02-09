@@ -95,7 +95,7 @@
     $("#btnAdd").click(function () {
         $("#formParam").trigger("reset");
         $("#divcheck").hide();
-        $("#header").css("background-color", "#2A61DF");
+        $("#header").css("background-color", "#7AA1A");
         $("#header").css("color", "white");
         $(".modal-title").text("Nuevo Parametro");
         $("#btnAgregar").text("Agregar");
