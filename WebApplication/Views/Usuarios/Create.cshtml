@@ -14,12 +14,9 @@
     <div class="container">
         <div class="row">
             <div class="form-inline col-md-12">
-                @*<label for="nombres" class="control-label col-md-2">Perfil:</label>*@
                 @Html.Label("Perfil:", htmlAttributes: new { @class = "control-label col-md-2" })
-                @*@Html.LabelFor(model => model.id_perfil, "id_perfil", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                <div class="col-md-9">
-                    @*@Html.DropDownList("id_perfil", null, htmlAttributes: new { @class = "form-control" })*@
-                    @Html.DropDownList("id_perfil", null, "--Seleccione un Perfil--", htmlAttributes: new { @class = "form-control", @id = "ddlPerfil" })
+                <div class="col-md-9">                  
+                 @Html.DropDownList("id_perfil", null, "--Seleccione un Perfil--", htmlAttributes: new { @class = "form-control", @id = "ddlPerfil" })
                 </div>
             </div>
         </div>

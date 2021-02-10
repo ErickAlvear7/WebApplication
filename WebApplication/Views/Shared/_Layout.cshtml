@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/default.min.css">
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/semantic.min.css">
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/bootstrap.min.css">
+    <!--Select2-->
+    <link rel="stylesheet" href="~/VendorMenu/select2/css/select2.min.css">
 
     @RenderSection("styles", required: false)
 
@@ -60,13 +62,13 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                  
+
                     <span style="width:400px;text-align:center; color:chartreuse">MODULOS</span>
                 </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2 pace-loading-bar-gray-dark">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">                     
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-user-lock" style="color:red; font-size:20px"></i>
@@ -108,9 +110,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/charts/flot.html" class="nav-link">
+                                    <a href="/Clientes/OrdenesTrabajo" class="nav-link">
                                         <i class="fas fa-boxes nav-icon"></i>
-                                        <p>Equipo</p>
+                                        <p>Ordenes</p>
                                     </a>
                                 </li>
                             </ul>
@@ -129,7 +131,7 @@
                                         <i class="fas fa-sitemap nav-icon"></i>
                                         <p>Parametro</p>
                                     </a>
-                                </li>                           
+                                </li>
                             </ul>
                         </li>
 
@@ -177,7 +179,8 @@
     <script src="~/JQuery/notify.min.js"></script>
     <!--alertify-->
     <script src="~/VendorMenu/alertify/js/alertify.min.js"></script>
-
+    <!--Select2-->
+    <script src="~/VendorMenu/select2/js/select2.min.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>

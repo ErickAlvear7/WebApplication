@@ -148,6 +148,13 @@ namespace WebApplication.Controllers
             TempData["Mensaje"] = "ok";
             return Json(new { success = true, miUrl = Url.Action("Index", "Clientes") });
         }
+        [HttpGet]
+        public ActionResult OrdenesTrabajo()
+        {
+            List<Catalogo> _cliente = new ClienteDTO().FunGetClientes();
+            ViewBag.Cliente = new SelectList(_cliente, "ClienteId", "Cliente");
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -787,6 +787,7 @@
     <Content Include="Views\CabeceraEquipos\Edit.cshtml" />
     <Content Include="Views\CabeceraEquipos\Index.cshtml" />
     <Content Include="Views\Clientes\EquipoCliente.cshtml" />
+    <Content Include="Views\Clientes\OrdenesTrabajo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,9 +18,9 @@
     $("#btnAdd").click(function () {
         $("#formParam").trigger("reset");
         $("#divcheck").hide();
-        $("#header").css("background-color", "#7AA1A");
-        $("#header").css("color", "white");
-        $(".modal-title").text("Nuevo Parametro");
+        $("#header").css("background-color", "#DEFAF9");
+        $("#header").css("color", "gray");
+        $(".modal-title").text("Nuevo Detalle");
         $("#btnAgregar").text("Agregar");
         $("#modalPARAMETER").modal("show");
         _tipoSave = 'add';
@@ -91,10 +91,8 @@
             });
 
             if (_continuar) {
-                //_count = _count + 1;
-                _count++;
-               
-
+             
+                _count++;               
                 _output = '<tr id="row_' + _count + '">';
                 _output += '<td style="display: none;">' + _count + ' <input type="hidden" name="hidden_codigo[]" id="codigo' + _count + '" value="' + _count + '" /></td>';
                 _output += '<td>' + _descripcion + ' <input type="hidden" name="hidden_detalle[]" id="detalle' + _count + '" value="' + _descripcion + '" /></td>';
@@ -105,10 +103,7 @@
                 _output += '<button type="button" name="btnEdit" class="btn btn-outline-info btn-sm ml-3 btnEdit" id="' + _count + '"><i class="fa fa-edit"></i></button>';
                 _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _count + '"><i class="fa fa-trash-alt"></i></button></div></div></td>';
                 _output += '</tr>';
-
-                //console.log(_output);
-              
-
+                
                 $('#tblParameter').append(_output);
 
                 _objeto = {
@@ -215,9 +210,9 @@
         $('#txtValorV').val(_valorvold);
         $('#txtValorI').val(_valoriold == 0 ? '' : _valoriold);
         $('#hidden_row_id').val(_row_id);
-        $("#header").css("background-color", "#7AA1A");
-        $("#header").css("color", "white");
-        $(".modal-title").text("Editar Parametro");
+        $("#header").css("background-color", "#DEFAF9");
+        $("#header").css("color", "gray");
+        $(".modal-title").text("Editar Detalle");
         $("#divcheck").show();
         $("#btnAgregar").text("Modificar");
         $("#modalPARAMETER").modal("show");
@@ -238,31 +233,7 @@
     //Eliminar nuevo detalle (tabla dinamica)
     $(document).on("click", ".btnDelete", function () {
         _row_id = $(this).attr("id");
-        _descripcion = $('#detalle' + _row_id + '').val();
-        //Swal.fire({
-        //    icon:"info",
-        //    title: 'Está Seguro de Borrar ' + _descripcion,
-        //    text: 'El registro será eliminado..',
-        //    type: 'warning',
-        //    showCancelButton: true,
-        //    confirmButtonColor: '#3085d6',
-        //    cancelButtonColor: '#d33',
-        //    confirmButtonText: 'Eliminar',
-        //    showLoaderOnConfirm: true,
-        //    preConfirm: function () {
-        //        return new Promise(function (resolve) {
-        //            Swal.close();
-        //            FunRemoveItemFromArr(_result, _descripcion);
-        //            $('#row_' + _row_id + '').remove();
-        //            _count--;
-        //            if (_count > 0) {
-        //                FunInactivaButton();
-        //            }
-        //            FunReorganizarOrder(_result);
-        //        });
-        //    }
-        //});
-
+        _descripcion = $('#detalle' + _row_id + '').val();   
         alertify.confirm('desea elimnar detalle' + _descripcion + '?', 'sera eliminado..!', function () {
             alertify.success('Ok')
             Swal.close();

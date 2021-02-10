@@ -1,11 +1,12 @@
 ﻿$(document).ready(function () {
+    var _perfilNombre, _opcion, _perfil, _id;
 
     $("#btnNuevo").click(function (eve) {
         eve.preventDefault();
         $("#modal-content").load("/Perfiles/Create");
-        $(".modal-title").text("Nuevo Perfil");
-        $("#header").css("background-color", "#7AA1A");
-        $("#header").css("color", "white");
+        $(".modal-title").text("Perfil");
+        $("#header").css("background-color", "#DEFAF9");
+        $("#header").css("color", "gray");
         _opcion = 0, _estado = true;
         _id = 0;
     });

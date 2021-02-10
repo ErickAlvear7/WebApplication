@@ -1,14 +1,15 @@
 ﻿
 $(document).ready(function () {
-    var _loginAnt = '';
+    var _loginAnt = '', _perfil, _nombres, _apellidos, _login, _password, _opcion, _id, _usuario, _login,
+        txtEstado, _button, _checked;
     var estado = '';
 
     $("#btnNuevo").click(function (eve) {
         eve.preventDefault();
         $("#modal-content").load("/Usuarios/Create");
-        $(".modal-title").text("Nuevo Usuario");
-        $("#header").css("background-color", "#7AA1A4");
-        $("#header").css("color", "white");
+        $(".modal-title").text("Usuario");
+        $("#header").css("background-color", "#DEFAF9");
+        $("#header").css("color", "gray");
         _opcion = 0, _estado = true;
         _id = 0;
  
@@ -67,8 +68,8 @@ $(document).ready(function () {
         _loginAnt = _data[3];
         $("#modal-content").load("/Usuarios/Edit/" + _loginAnt);
         $(".modal-title").text("Editar Usuario");
-        $("#header").css("background-color", "#7AA1A4");
-        $("#header").css("color", "white");
+        $("#header").css("background-color", "#DEFAF9");
+        $("#header").css("color", "gray");
         $("#myModal").modal("show");
             
     });
@@ -190,8 +191,7 @@ $(document).ready(function () {
     }
 
     function FunEliminarUsuario() {
-
-     
+ 
         alertify.confirm('desea eliminar el usuario ' + _usuario + '?', 'el registro se eliminara..!', function () {
             alertify.success('usuario eliminado')
             $.ajax({
@@ -216,6 +216,8 @@ $(document).ready(function () {
             });
         }
             , function () { alertify.error('cancelado') });
+
+ 
     }
 
 });
