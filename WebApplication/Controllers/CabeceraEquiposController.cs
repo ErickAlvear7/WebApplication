@@ -36,7 +36,7 @@ namespace WebApplication.Controllers
      
         public ActionResult Create(string parametro,string descripcion,bool estado,List<Detalle> detalles)
         {
-            //var _estado = estado == "Activo" ? true : false;
+         
             CabeceraEquipos _cabecera = new CabeceraEquipos();
             {
                 _cabecera.nombre_cabecera = parametro;
@@ -59,7 +59,7 @@ namespace WebApplication.Controllers
 
             foreach (var _item in detalles)
             {
-                //var _estadoDe = _item.ArryEstado == "Activo" ? true : false;
+               
                 _cabecera.DetalleEquipos.Add(new DetalleEquipos()
                 {
                   
@@ -100,7 +100,7 @@ namespace WebApplication.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+     
         public ActionResult Edit(int id,string nomparametro,string descripcion,string estadocab, List<Detalle> detalleparametros)
         {
             try
@@ -223,11 +223,7 @@ namespace WebApplication.Controllers
             else
             {
                 return Json(new { success = false, mensaje = "error" });
-            }
-            //DetalleEquipos _detalleEquipos = db.DetalleEquipos.Find(id);
-            //db.DetalleEquipos.Remove(_detalleEquipos);
-            //db.SaveChanges();
-         
+            }       
         }
 
 

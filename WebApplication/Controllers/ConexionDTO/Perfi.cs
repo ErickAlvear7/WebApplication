@@ -7,9 +7,13 @@ namespace WebApplication.Controllers.ConexionDTO
 {
     public class Perfi
     {
+        #region VariablesPerfil
+
+       
         public int IdPerfil { get; set; }
         public string Perfil { get; set; }
 
         public string Estado { get; set; }
     }
+    #endregion
 }

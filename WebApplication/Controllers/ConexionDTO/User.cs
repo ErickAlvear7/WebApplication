@@ -7,6 +7,7 @@ namespace WebApplication.Controllers.ConexionDTO
 {
     public class User
     {
+        #region Variables
         public int UserId { get; set; }
 
         public string Perfil { get; set; }
@@ -18,4 +19,5 @@ namespace WebApplication.Controllers.ConexionDTO
         public string Estado { get; set; }
 
     }
+    #endregion
 }

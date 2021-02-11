@@ -31,6 +31,20 @@
         handle: ".modal-header"
     }); 
 
+    TblClientes = $('#tblclientes').DataTable({
+        "searching": false,
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": true,
+        "bInfo": false,
+        "columnDefs": [{
+            "data": null
+        },
+        { targets: 'no-sort' },
+        { orderable: false, targets: '_all' }
+        ]
+    });  
+
 
 
 });

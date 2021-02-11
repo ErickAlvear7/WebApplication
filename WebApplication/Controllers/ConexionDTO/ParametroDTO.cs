@@ -9,10 +9,17 @@ namespace WebApplication.Controllers.ConexionDTO
 {
     public class ParametroDTO
     {
+        #region Variables
+
+        
         BDD_HRVEntities _db = new BDD_HRVEntities();
         string _mensaje;
         int _codigo;
+        #endregion
 
+        #region FuncionGrabarCabecera
+
+       
         public void FunGrabarNuevo(CabeceraEquipos _cabecera)
         {
             try
@@ -31,7 +38,11 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw;
             }
         }
+        #endregion
 
+        #region FuncionObtenerCabecera
+
+        
         public List<Cabecera> FunGetCabecera()
         {
             try
@@ -58,7 +69,11 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
+        #endregion
 
+        #region FuncionGrabarEditarCabecera
+
+      
         public string FunGrabarEditar(CabeceraEquipos _cabecera)
         {
             try
@@ -103,7 +118,11 @@ namespace WebApplication.Controllers.ConexionDTO
 
             return _mensaje;
         }
+        #endregion
 
+        #region FuncionObtenerParametroDetalle
+
+       
         public int FunGetParametroDetalle(int pacaid, int padeid)
         {
             using (BDD_HRVEntities _db = new BDD_HRVEntities())
@@ -118,17 +137,22 @@ namespace WebApplication.Controllers.ConexionDTO
 
             }
         }
+        #endregion
 
+        #region FuncionObtenerParametro
+
+        
         public int FunGetParametro(int cabid)
         {
             using (BDD_HRVEntities _db = new BDD_HRVEntities())
             {
 
-                List<DetalleEquipos> _listaCab = _db.DetalleEquipos.Where(d => d.id_cabecera == cabid).ToList();
+                List<DetalleEquipos> _listaCabecera = _db.DetalleEquipos.Where(d => d.id_cabecera == cabid).ToList();
               
-               return _listaCab.Count;
+               return _listaCabecera.Count;
 
             }
         }
+        #endregion
     }
 }

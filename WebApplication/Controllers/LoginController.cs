@@ -17,8 +17,8 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult Indexv1(string user, string pass)
         {
-            Usuarios _usu = new LoginDTO().FunGetUsuarios(user, pass);
-            if(_usu == null)
+            Usuarios _usuario = new LoginDTO().FunGetUsuarios(user, pass);
+            if(_usuario == null)
             {
                 ViewBag.error = "error";
                 return View();
@@ -27,7 +27,7 @@ namespace WebApplication.Controllers
             else
             {
                 Session["_conexion"] = ConfigurationManager.AppSettings["SqlConn"];
-                Session["_UsuarioId"] = _usu.id_usuario;
+                Session["_UsuarioId"] = _usuario.id_usuario;
                 Session["_Host"] = Request.UserHostName;
                 return RedirectToAction("Index", "Menu");
             

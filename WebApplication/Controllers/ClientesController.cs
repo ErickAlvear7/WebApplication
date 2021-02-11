@@ -152,8 +152,29 @@ namespace WebApplication.Controllers
         public ActionResult OrdenesTrabajo()
         {
             List<Catalogo> _cliente = new ClienteDTO().FunGetClientes();
-            ViewBag.Cliente = new SelectList(_cliente, "ClienteId", "Cliente");
+            ViewBag.Cliente = new SelectList(_cliente, "ClienteId", "Cliente",0);
+            List<SelectListItem> _equipos = new List<SelectListItem>() {
+                new SelectListItem() { Value="0", Text="--Seleccione Equipo--" },
+           };
+            List<CabeceraDetalle> _trabajo = new ClienteDTO().FunGetCabDet("tipoTrabajo");
+            ViewBag.Equipos = _equipos;
+            ViewBag.TipoTrabajo = new SelectList(_trabajo, "CodId", "Detalle", 0);
+            ViewBag.Tecnicos = new SelectList(db.Usuarios.Where(p=>p.Perfiles.nombre_perfil=="Tecnico"),"id_usuario","nombre_usuario");
             return View();
+            
+        }
+        public ActionResult FunFillClientes(int cliid)
+        {
+
+            List<Catalogo> _cliente = new ClienteDTO().FunGetClientesEquipo(cliid);
+            return Json(data: _cliente, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult FunFillEquipos(int cliid)
+        {
+            List<CabeceraDetalle> _equipos = new ClienteDTO().FunGetEquipoClientes(cliid);
+            return Json(data: _equipos, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

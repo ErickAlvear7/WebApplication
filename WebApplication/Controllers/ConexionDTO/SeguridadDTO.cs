@@ -10,6 +10,9 @@ namespace WebApplication.Controllers.ConexionDTO
 {
     public class SeguridadDTO
     {
+        #region Variables
+
+       
         BDD_HRVEntities _db = new BDD_HRVEntities();
         //Usuarios
         DataSet _dataSet = new DataSet();
@@ -17,19 +20,20 @@ namespace WebApplication.Controllers.ConexionDTO
         //Perfiles
         DataSet _dataS = new DataSet();
         SqlDataAdapter _dataA = new SqlDataAdapter();
-       
-     
+        #endregion
+
+        #region FuncionObterUsuariosPerfil     
         public List<User> FunGetUsuarios()
         {
             try
             {
 
                 var _user = _db.Usuarios.ToList();
-                List<User> _usu = new List<User>();
+                List<User> _usuario = new List<User>();
 
                 foreach (var item in _user)
                 {
-                    _usu.Add(new User()
+                    _usuario.Add(new User()
                     {
                         UserId = item.id_perfil,
                         Perfil = item.Perfiles.nombre_perfil,
@@ -39,7 +43,7 @@ namespace WebApplication.Controllers.ConexionDTO
                     });
                 }
 
-                return _usu;
+                return _usuario;
 
             }
             catch (Exception ex)
@@ -49,17 +53,19 @@ namespace WebApplication.Controllers.ConexionDTO
             }
             
         }
+        #endregion
 
+        #region FuncionObtenerPerfiles    
         public List<Perfi> FunGetPerfiles()
         {
             try
             {
-                var _per = _db.Perfiles.ToList();
-                List<Perfi> _perfil = new List<Perfi>();
+                var _perfil = _db.Perfiles.ToList();
+                List<Perfi> _perfiles = new List<Perfi>();
 
-                foreach (var item in _per)
+                foreach (var item in _perfil)
                 {
-                    _perfil.Add(new Perfi()
+                    _perfiles.Add(new Perfi()
                     {
                         IdPerfil = item.id_perfil,
                         Perfil = item.nombre_perfil,
@@ -67,7 +73,7 @@ namespace WebApplication.Controllers.ConexionDTO
                     });
                 }
 
-                return _perfil;
+                return _perfiles;
 
             }
             catch (Exception ex)
@@ -76,7 +82,11 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
-        //Funcion consulta datos_tabla ultimo registro de SP_USUARIOS
+        #endregion
+      
+        #region FuncionSpUltimoRegistroUsuario
+
+        
         public DataSet FunConsultaDatos(int tipo1, int tipo2, string var1, string var2, string conexion)
         {
             try
@@ -107,8 +117,9 @@ namespace WebApplication.Controllers.ConexionDTO
             }
             return _dataSet;
         }
+        #endregion
 
-        //Funcion sp consulta ultimo registro tabla perfiles
+        #region FuncionUltimoRegistroPerfil            
         public DataSet FunConsultaPerfil(int tipo, string var, string coneccion)
         {
             try
@@ -136,8 +147,9 @@ namespace WebApplication.Controllers.ConexionDTO
             }
             return _dataS;
         }
+        #endregion
 
-        //funcion consulta si usuario ya existe
+        #region FuncionConsultaUsuarioExiste
         public int FunConsulataLogin(string _login)
         {
             try
@@ -152,14 +164,19 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
+        #endregion
 
-        //funcion para consulta si perfil ya existe
+        #region FuncionConsultaPerfilExiste
         public int FunConsultaPerfil(string _perfil)
         {
             return _db.Perfiles.Where(p => p.nombre_perfil == _perfil).FirstOrDefault() == null ? 0 :
                   _db.Perfiles.Where(p => p.nombre_perfil == _perfil).FirstOrDefault().id_perfil;
         }
+        #endregion
 
+        #region FuncionActualizarUsuarioConSP
+
+       
         //funcion para actualizar usuario con procedimiento almacenado sql-server
         public DataSet FunUpdateUsuario(string _logAnt, string _logAct,int _perfilId, string _nombre, string _apellido, 
                                         string _password, string _estado, string coneccion)
@@ -194,6 +211,6 @@ namespace WebApplication.Controllers.ConexionDTO
             }
             return _dataS;
         }
-
+        #endregion
     }
 }

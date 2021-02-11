@@ -8,6 +8,7 @@ namespace WebApplication.Controllers.ConexionDTO
 {
     public class LoginDTO
     {
+        #region FuncionObtenerUsuarios
         public Usuarios FunGetUsuarios(string user,string pass)
         {
             Usuarios _usuarios = new Usuarios();
@@ -29,5 +30,6 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
+        #endregion
     }
 }

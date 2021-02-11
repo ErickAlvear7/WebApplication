@@ -5,6 +5,9 @@ using System.Web;
 
 namespace WebApplication.Controllers.ConexionDTO
 {
+    #region CatalogoCliente
+
+    
     public class Catalogo
     {
         public int ClienteId { get; set; }
@@ -28,7 +31,11 @@ namespace WebApplication.Controllers.ConexionDTO
         public string Provincia { get; set; }
 
     }
+    #endregion
 
+    #region CatalogoDetalle
+
+   
     public class Detalle
     {
         public int ArryId { get; set; }
@@ -42,7 +49,11 @@ namespace WebApplication.Controllers.ConexionDTO
         public bool ArryEstado { get; set; }
 
     }
+    #endregion
 
+    #region CatalogoCabecera
+
+   
     public class Cabecera
     {
 
@@ -54,14 +65,22 @@ namespace WebApplication.Controllers.ConexionDTO
 
         public string Estado { get; set; }
     }
+    #endregion
 
+    #region CatalogoCabeceraDetalle
+
+   
     public class CabeceraDetalle
     {
         public string CodId { get; set; }
         public string Detalle { get; set; }
 
     }
+    #endregion
 
+    #region CatalogoEquipo
+
+    
     public class Equipo
     {
         public int ArryEquipoId { get; set; }
@@ -79,9 +98,9 @@ namespace WebApplication.Controllers.ConexionDTO
         public string ArryEstado { get; set; }
 
     }
+    #endregion
 
 
 
 
-                   
 }

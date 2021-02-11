@@ -9,31 +9,37 @@ namespace WebApplication.Controllers.ConexionDTO
 {
     public class ClienteDTO
     {
+        #region Variables
+
+        
         BDD_HRVEntities _db = new BDD_HRVEntities();
 
         DataSet _dataSet = new DataSet();
         SqlDataAdapter _dataAdapter = new SqlDataAdapter();
+        #endregion
+
+        #region FuncionObtenerClientes
 
 
         public List<Catalogo> FunGetClientes()
         {
             try
             {
-                var __cliente = from Cli in _db.Clientes
-                                from Prov in _db.ProvinciaClientes
-                                from Cui in _db.CuidadClientes
-                                where Cli.provincia_cliente == Prov.id_provincia && Cli.cuidad_cliente == Cui.id_cuidad
-                                orderby Cli.cuidad_cliente
+                var __cliente = from cliente in _db.Clientes
+                                from provincia in _db.ProvinciaClientes
+                                from cuidad in _db.CuidadClientes
+                                where cliente.provincia_cliente == provincia.id_provincia && cliente.cuidad_cliente == cuidad.id_cuidad
+                                orderby cliente.cuidad_cliente
                                 select new Catalogo
                                 {
-                                    ClienteId = Cli.id_cliente,
-                                    Cliente = Cli.nombre_cliente,
-                                    Ruc = Cli.ruc_cliente,
-                                    Direccion = Cli.direccion_cliente,
-                                    Contacto = Cli.contacto1_cliente,
-                                    Estado = Cli.estado_cliente ? "Activo" : "Inactivo",
-                                    Cuidad = Cui.nombre_cuidad,
-                                    Provincia = Prov.nombre_provincia
+                                    ClienteId = cliente.id_cliente,
+                                    Cliente = cliente.nombre_cliente,
+                                    Ruc = cliente.ruc_cliente,
+                                    Direccion = cliente.direccion_cliente,
+                                    Contacto = cliente.contacto1_cliente,
+                                    Estado = cliente.estado_cliente ? "Activo" : "Inactivo",
+                                    Cuidad = cuidad.nombre_cuidad,
+                                    Provincia = provincia.nombre_provincia
                                     
                                 };
 
@@ -48,21 +54,26 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
+        #endregion
 
+        #region FuncionObtenerClienteEquipo
+
+        
         public List<Catalogo> FunGetClientesEquipo(int id)
         {
             try
             {
-                var __cliente = from cli in _db.Clientes
-                                where cli.id_cliente == id
+                var __cliente = from cliente in _db.Clientes
+                                where cliente.id_cliente == id
                                
                                 select new Catalogo
                                 {
-                                    ClienteId = cli.id_cliente,
-                                    Cliente = cli.nombre_cliente,
-                                    Telefono = cli.telefono1_cliente,
-                                    Celular = cli.celular1_cliente,
-                                    Contacto = cli.contacto1_cliente
+                                    ClienteId = cliente.id_cliente,
+                                    Cliente = cliente.nombre_cliente,
+                                    Telefono = cliente.telefono1_cliente,
+                                    Celular = cliente.celular1_cliente,
+                                    Contacto = cliente.contacto1_cliente,
+                                    Direccion = cliente.direccion_cliente
                                 };
 
 
@@ -76,19 +87,23 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
+        #endregion
 
+        #region FuncionObtenerCabeceraDetalle
+
+       
         public List<CabeceraDetalle> FunGetCabDet(string _nombre)
         {
 
             try
             {
-                var _query = from cab in _db.CabeceraEquipos
-                             join det in _db.DetalleEquipos on cab.id_cabecera equals det.id_cabecera
-                             where cab.nombre_cabecera == _nombre
+                var _query = from cabecera in _db.CabeceraEquipos
+                             join detalle in _db.DetalleEquipos on cabecera.id_cabecera equals detalle.id_cabecera
+                             where cabecera.nombre_cabecera == _nombre
                              select new CabeceraDetalle
                              {
-                                 CodId = det.valor_detalle,
-                                 Detalle = det.nombre_detalle
+                                 CodId = detalle.valor_detalle,
+                                 Detalle = detalle.nombre_detalle
                              };
                 return _query.ToList();
             }
@@ -98,7 +113,11 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
+        #endregion
 
+        #region FuncionGrabarEquipos
+
+        
         public DataSet FunGrabarEquipos(int tipo, int clieid, int equipoid, string grupo, string marca, string equipo, string modelo, string refri,
     string serie, string voltaje, string amperaje, string presion, string estado, int usuario, string terminal,
     string auxv1, string auxv2, string auxv3, int auxi1, int auxi2, int auxi3, string conexion)
@@ -146,7 +165,11 @@ namespace WebApplication.Controllers.ConexionDTO
             }
             return _dataSet;
         }
+        #endregion
 
+        #region FuncionObtenerEquipo
+
+        
         public List<Equipo> FunGetEquipos(int clieid)
         {
             var _query = from equipos in _db.Equipos
@@ -182,7 +205,22 @@ namespace WebApplication.Controllers.ConexionDTO
 
             return _query.ToList();
         }
+        #endregion
 
+        #region FuncionObtenerEquipoClientes
 
+        
+        public List<CabeceraDetalle> FunGetEquipoClientes(int clieid)
+        {
+            var _query = from equipos in _db.Equipos
+                         where equipos.id_cliente == clieid
+                         select new CabeceraDetalle
+                         {
+                             CodId = equipos.id_equipo.ToString(),
+                             Detalle = equipos.nombre_equipo
+                         };
+            return _query.ToList();
+        }
+        #endregion
     }
 }
