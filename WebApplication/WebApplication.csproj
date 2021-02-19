@@ -175,6 +175,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelSeguridad.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrdenesTrabajo.cs">
+      <DependentUpon>ModelSeguridad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Perfiles.cs">
       <DependentUpon>ModelSeguridad.tt</DependentUpon>
     </Compile>
@@ -211,6 +214,7 @@
     <Content Include="JQuery\EditCabecera.js" />
     <Content Include="JQuery\Login.js" />
     <Content Include="JQuery\notify.min.js" />
+    <Content Include="JQuery\Ordenes.js" />
     <Content Include="JQuery\Perfiles.js" />
     <Content Include="JQuery\TablaIdioma.js" />
     <Content Include="JQuery\Usuarios.js" />
@@ -322,6 +326,31 @@
     <Content Include="VendorMenu\datatables-buttons\js\dataTables.buttons.min.js" />
     <Content Include="VendorMenu\datatables\jquery.dataTables.js" />
     <Content Include="VendorMenu\datatables\jquery.dataTables.min.js" />
+    <Content Include="VendorMenu\datepicker\css\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="VendorMenu\datepicker\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="VendorMenu\datepicker\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="VendorMenu\datepicker\css\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="VendorMenu\datepicker\css\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="VendorMenu\datepicker\css\images\ui-icons_222222_256x240.png" />
+    <Content Include="VendorMenu\datepicker\css\images\ui-icons_454545_256x240.png" />
+    <Content Include="VendorMenu\datepicker\css\jquery-ui.css" />
+    <Content Include="VendorMenu\datepicker\js\jquery-ui.js" />
+    <Content Include="VendorMenu\daterangepicker\daterangepicker.css" />
+    <Content Include="VendorMenu\daterangepicker\daterangepicker.js" />
+    <Content Include="VendorMenu\daterangepicker\drp.png" />
+    <Content Include="VendorMenu\daterangepicker\example\amd\index.html" />
+    <Content Include="VendorMenu\daterangepicker\example\amd\main.js" />
+    <Content Include="VendorMenu\daterangepicker\example\amd\require.js" />
+    <Content Include="VendorMenu\daterangepicker\example\browserify\bundle.js" />
+    <Content Include="VendorMenu\daterangepicker\example\browserify\index.html" />
+    <Content Include="VendorMenu\daterangepicker\example\browserify\main.js" />
+    <Content Include="VendorMenu\daterangepicker\moment.min.js" />
+    <Content Include="VendorMenu\daterangepicker\package.js" />
+    <Content Include="VendorMenu\daterangepicker\website.css" />
+    <Content Include="VendorMenu\daterangepicker\website.js" />
+    <Content Include="VendorMenu\daterangepicker\website\index.html" />
+    <Content Include="VendorMenu\daterangepicker\website\website.css" />
+    <Content Include="VendorMenu\daterangepicker\website\website.js" />
     <Content Include="VendorMenu\dist\css\adminlte.css" />
     <Content Include="VendorMenu\dist\css\adminlte.min.css" />
     <Content Include="VendorMenu\dist\css\alt\adminlte.components.css" />
@@ -393,6 +422,33 @@
     <Content Include="VendorMenu\fontawesome-free\webfonts\fa-brands-400.svg" />
     <Content Include="VendorMenu\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="VendorMenu\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <Content Include="VendorMenu\inputmask\bindings\inputmask.binding.js" />
+    <Content Include="VendorMenu\inputmask\inputmask.js" />
+    <Content Include="VendorMenu\inputmask\inputmask.min.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\bindings\inputmask.binding.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\global\window.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\inputmask.date.extensions.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\inputmask.extensions.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\inputmask.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\inputmask.numeric.extensions.js" />
+    <Content Include="VendorMenu\inputmask\inputmask\jquery.inputmask.js" />
+    <Content Include="VendorMenu\inputmask\jquery.inputmask.bundle.js" />
+    <Content Include="VendorMenu\inputmask\jquery.inputmask.js" />
+    <Content Include="VendorMenu\inputmask\jquery.inputmask.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\bindings\inputmask.binding.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\global\window.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\inputmask.date.extensions.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\inputmask.extensions.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\inputmask.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\inputmask.numeric.extensions.min.js" />
+    <Content Include="VendorMenu\inputmask\min\inputmask\jquery.inputmask.min.js" />
+    <Content Include="VendorMenu\inputmask\min\jquery.inputmask.bundle.min.js" />
     <Content Include="VendorMenu\jquery-ui\AUTHORS.txt" />
     <Content Include="VendorMenu\jquery-ui\external\jquery\jquery.js" />
     <Content Include="VendorMenu\jquery-ui\images\ui-icons_444444_256x240.png" />
@@ -638,6 +694,10 @@
     <Content Include="VendorMenu\sweetalert2\sweetalert2.js" />
     <Content Include="VendorMenu\sweetalert2\sweetalert2.min.css" />
     <Content Include="VendorMenu\sweetalert2\sweetalert2.min.js" />
+    <Content Include="VendorMenu\tempusdominus-bootstrap-4\css\tempusdominus-bootstrap-4.css" />
+    <Content Include="VendorMenu\tempusdominus-bootstrap-4\css\tempusdominus-bootstrap-4.min.css" />
+    <Content Include="VendorMenu\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.js" />
+    <Content Include="VendorMenu\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -788,6 +848,8 @@
     <Content Include="Views\CabeceraEquipos\Index.cshtml" />
     <Content Include="Views\Clientes\EquipoCliente.cshtml" />
     <Content Include="Views\Clientes\OrdenesTrabajo.cshtml" />
+    <Content Include="VendorMenu\daterangepicker\bower.json" />
+    <Content Include="VendorMenu\daterangepicker\example\browserify\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

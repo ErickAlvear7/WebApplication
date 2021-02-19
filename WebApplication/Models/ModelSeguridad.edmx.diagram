@@ -17,6 +17,8 @@
         <AssociationConnector Association="BDD_HRVModel.FK_DetalleEquipos_CabeceraEquipos" />
         <EntityTypeShape EntityType="BDD_HRVModel.Equipos" Width="1.5" PointX="7.625" PointY="6.75" />
         <AssociationConnector Association="BDD_HRVModel.FK_Equipos_Clientes" />
+        <EntityTypeShape EntityType="BDD_HRVModel.OrdenesTrabajo" Width="1.5" PointX="9.875" PointY="7.5" />
+        <AssociationConnector Association="BDD_HRVModel.FK_OdenesTrabajo_Equipos" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

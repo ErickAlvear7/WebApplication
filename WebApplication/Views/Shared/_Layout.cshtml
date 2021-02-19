@@ -4,29 +4,32 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>HRV</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/VendorMenu/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="~/VendorMenu/dist/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="~/VendorMenu/dist/css/adminlte.min.css">
+    <!--tempus-->
+    <link href="~/VendorMenu/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="~/VendorMenu/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!--datarangerpicker-->
+    <link rel="stylesheet" href="~/VendorMenu/daterangepicker/daterangepicker.css">
     <!--Tabla-->
     <link rel="stylesheet" href="~/VendorMenu/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <!--alerta-->
     <link rel="stylesheet" href="~/VendorMenu/sweetalert2/sweetalert2.min.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!--Alertify-->
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/alertify.min.css">
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/default.min.css">
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/semantic.min.css">
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/bootstrap.min.css">
-    <!--Select2-->
-    <link rel="stylesheet" href="~/VendorMenu/select2/css/select2.min.css">
+    <!--Select2-->  
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/VendorMenu/dist/css/adminlte.min.css">
 
     @RenderSection("styles", required: false)
 
@@ -151,13 +154,13 @@
             </div>
             <!-- /.content -->
         </div>
-
-        <!-- Control Sidebar -->
+   
         <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+        
+        </aside>  
     </div>
+
+
     <!-- jQuery -->
     <script src="~/VendorMenu/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -166,6 +169,12 @@
     <script src="~/VendorMenu/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Sparkline -->
     <script src="~/VendorMenu/sparklines/sparkline.js"></script>
+    <!--moment-->
+    <script src="~/VendorMenu/moment/moment.min.js"></script>
+    <!--datarangerpicker-->
+    <script src="~/VendorMenu/daterangepicker/daterangepicker.js"></script>
+    <!--tempus-->
+    <script src="~/VendorMenu/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- overlayScrollbars -->
     <script src="~/VendorMenu/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
@@ -179,8 +188,10 @@
     <script src="~/JQuery/notify.min.js"></script>
     <!--alertify-->
     <script src="~/VendorMenu/alertify/js/alertify.min.js"></script>
-    <!--Select2-->
-    <script src="~/VendorMenu/select2/js/select2.min.js"></script>
+   <!--Inputmask-->
+    <script src="~/VendorMenu/inputmask/jquery.inputmask.min.js"></script>
+   
+
 
     @RenderSection("scripts", required: false)
 </body>

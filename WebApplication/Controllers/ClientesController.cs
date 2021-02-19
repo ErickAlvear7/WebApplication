@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -67,7 +69,8 @@ namespace WebApplication.Controllers
                           
         }
 
-        // GET: Clientes/Edit/5
+
+        #region GET: Clientes/Edit
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,14 +83,16 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
             ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia", clientes.provincia_cliente);
-        
-            ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes.Where(c=>c.id_provincia==clientes.provincia_cliente), "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
-          
-            return View(clientes);
-        }
 
-        // POST: Clientes/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+            ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes.Where(c => c.id_provincia == clientes.provincia_cliente), "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
+
+            return View(clientes);
+        } 
+        #endregion
+
+
+
+        #region POST: Clientes/Edit
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public ActionResult Edit(Clientes clientes)
@@ -96,17 +101,19 @@ namespace WebApplication.Controllers
             {
                 db.Entry(clientes).State = EntityState.Modified;
                 db.SaveChanges();
-                TempData["Mensaje"] = "ok";            
+                TempData["Mensaje"] = "ok";
                 return Json(new { success = true, redirectToUrl = Url.Action("Index", "Clientes") });
             }
             ViewBag.cuidad_cliente = new SelectList(db.CuidadClientes, "id_cuidad", "nombre_cuidad", clientes.cuidad_cliente);
             ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia", clientes.provincia_cliente);
-        
+
             return Json(new { success = false, mensaje = "error" });
         }
+        #endregion
 
-      
-        // POST: Clientes/Delete/5
+
+
+        #region POST: Clientes/Delete
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -114,7 +121,10 @@ namespace WebApplication.Controllers
             db.Clientes.Remove(clientes);
             db.SaveChanges();
             return Json(new { success = true, mesagge = "registro eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
-        }
+        } 
+        #endregion
+
+
 
         [HttpGet]
         public ActionResult EquipoCliente(int id)
@@ -134,6 +144,8 @@ namespace WebApplication.Controllers
             return View(_listaClientes);
         }
 
+
+
         [HttpPost]
         public ActionResult GuardarEquipoCliente(int clienteId, List<Equipo> equipos)
         {
@@ -148,18 +160,22 @@ namespace WebApplication.Controllers
             TempData["Mensaje"] = "ok";
             return Json(new { success = true, miUrl = Url.Action("Index", "Clientes") });
         }
+
+
         [HttpGet]
         public ActionResult OrdenesTrabajo()
         {
+
             List<Catalogo> _cliente = new ClienteDTO().FunGetClientes();
             ViewBag.Cliente = new SelectList(_cliente, "ClienteId", "Cliente",0);
             List<SelectListItem> _equipos = new List<SelectListItem>() {
                 new SelectListItem() { Value="0", Text="--Seleccione Equipo--" },
            };
-            List<CabeceraDetalle> _trabajo = new ClienteDTO().FunGetCabDet("tipoTrabajo");
+            List<CabeceraDetalle> _trabajo = new ClienteDTO().FunGetCabDet("Tipo Trabajo");
+            List<CabeceraDetalle> _tecnico = new ClienteDTO().FunGetTecnicos();
             ViewBag.Equipos = _equipos;
             ViewBag.TipoTrabajo = new SelectList(_trabajo, "CodId", "Detalle", 0);
-            ViewBag.Tecnicos = new SelectList(db.Usuarios.Where(p=>p.Perfiles.nombre_perfil=="Tecnico"),"id_usuario","nombre_usuario");
+            ViewBag.Tecnicos = new SelectList(_tecnico, "CodId", "Detalle",0);
             return View();
             
         }
@@ -176,6 +192,46 @@ namespace WebApplication.Controllers
             List<CabeceraDetalle> _equipos = new ClienteDTO().FunGetEquipoClientes(cliid);
             return Json(data: _equipos, JsonRequestBehavior.AllowGet);
         }
+
+        #region GrabarOrdenTrabajo
+        [HttpPost]
+        public ActionResult GuardarOrdenTrabajo(int clienteid, int equipoid, string tipotrabajo, int operario, string problema, string nota,
+            string fechaini, string fechafin)
+        {
+            try
+            {
+                OrdenesTrabajo _orden = new OrdenesTrabajo();
+                {
+                    _orden.id_equipo = equipoid;
+                    _orden.orden_tipotrabajo = tipotrabajo;
+                    _orden.orden_tecnico = operario;
+                    _orden.orden_problema = problema;
+                    _orden.orden_estado = "INICIADO";
+                    _orden.orden_notas = nota;
+                    _orden.orden_fechainicio = DateTime.ParseExact(fechaini, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+                    _orden.orden_fechafin = DateTime.ParseExact(fechafin, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+                    _orden.orden_auxvar = "";
+                    _orden.orden_auxint = 0;
+
+                }
+
+                new ClienteDTO().FunGrabarOT(_orden);
+
+                TempData["Mensaje"] = "OK";
+                return Json(new { success = true, miUrl = Url.Action("Index", "Clientes") });
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            
+
+        }
+
+        #endregion
+
 
         protected override void Dispose(bool disposing)
         {

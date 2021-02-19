@@ -222,5 +222,33 @@ namespace WebApplication.Controllers.ConexionDTO
             return _query.ToList();
         }
         #endregion
+
+        #region FunObneterTecnicos
+        public List<CabeceraDetalle> FunGetTecnicos()
+        {
+            var _query = from user in _db.Usuarios
+                         join perfil in _db.Perfiles on user.id_perfil equals perfil.id_perfil
+                         where perfil.nombre_perfil == "Tecnico"
+                         select new CabeceraDetalle
+                         {
+                             CodId = user.id_usuario.ToString(),
+                             Detalle = user.nombre_usuario + " " + user.apellido_usuario
+                         };
+
+            return _query.ToList();
+        }
+        #endregion
+
+        #region FuncionGrabarOT
+        public void FunGrabarOT(OrdenesTrabajo _orden)
+        {
+            using (BDD_HRVEntities _db = new BDD_HRVEntities())
+            {
+                _db.OrdenesTrabajo.Add(_orden);
+                _db.SaveChanges();
+            }
+        }
+
+        #endregion
     }
 }

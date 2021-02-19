@@ -14,6 +14,12 @@ namespace WebApplication.Models
     
     public partial class Equipos
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Equipos()
+        {
+            this.OrdenesTrabajo = new HashSet<OrdenesTrabajo>();
+        }
+    
         public int id_equipo { get; set; }
         public int id_cliente { get; set; }
         public string grupo_equipo { get; set; }
@@ -34,5 +40,7 @@ namespace WebApplication.Models
         public string terminalmod_equipo { get; set; }
     
         public virtual Clientes Clientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdenesTrabajo> OrdenesTrabajo { get; set; }
     }
 }

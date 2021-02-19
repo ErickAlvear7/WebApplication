@@ -3,103 +3,154 @@
     <title>@ViewBag.Title</title>
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
 
-    <div class="container">
-        <form class="form-horizontal" role="form">
-            <div class="form-group col-md-12">
-                <div class="container">
-                    <div class="form-row">
-                        <label for="prov" class="control-label col-md-2">Cliente:</label>
-                        <div class="col-md-10">
-                            @Html.DropDownList("Cliente", null, "--Seleccione Cliente--", htmlAttributes: new { @class = "form-control", @id = "ddlCliente", @onchange = "FunGetClienteEquipo();" })
-                        </div>
-                    </div>
-                    <br />
-                    <div class="table-responsive" id="divCliente" style="display:none">
-                        <table id="tblclientes" class="table table-striped table-border table-condensed" style="width: 100%;">
-                            <thead class="text-center">
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Direccion</th>
-                                    <th>Contacto</th>
-                                    <th>Telefono</th>
-                                    <th>Celular</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th></th>
-                                    <th style="width:100%"></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <nav>
-                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-orden-tab" data-toggle="tab" href="#nav-orden" role="tab" aria-controls="nav-orden" aria-selected="true">Orden de Trabajo</a>
-                            <a class="nav-item nav-link" id="nav-detalle-tab" data-toggle="tab" href="#nav-detalle" role="tab" aria-controls="nav-detalle" aria-selected="false">Descripción Trabajo</a>
-                        </div>
-                    </nav>
-                    <br><br>
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-orden" role="tabpanel" aria-labelledby="nav-orden-tab">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="form-row">
-                                        <label for="equipo" class="control-label col-md-2">Equipo:</label>
-                                        <div class="col-md-4">
-                                            @Html.DropDownList("Equipos", null, htmlAttributes: new { @class = "form-control", @id = "ddlEquipo" })
-                                        </div>
-                                        <label for="equipo" class="control-label col-md-2">Tipo Trabajo:</label>
-                                        <div class="col-md-4">
-                                            @Html.DropDownList("TipoTrabajo", null, "--Seleccione Tipo Trabajo--", htmlAttributes: new { @class = "form-control", @id = "ddlTipoTrabajo" })
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <div class="form-row">
-                                        <label for="equipo" class="control-label col-md-2">Técnico Asignado:</label>
-                                        <div class="col-md-4">
-                                            @Html.DropDownList("Tecnicos", null, "--Seleccione Técnico--", htmlAttributes: new { @class = "form-control", @id = "ddlTecnicos" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="nav-detalle" role="tabpanel" aria-labelledby="nav-detalle-tab">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div align="right" style="margin-bottom:5px;">
-                                        <button type="button" class="btn btn-outline-secondary" id="btnAdd"><i class='fas fa-plus'></i> Agregar</button>
-                                    </div>
-                                    <br />
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <hr />
-                    <div align="center">
-                        <button type="button" class="btn btn-outline-secondary" id="btnRegresar"><i class='fa fade-in-up'></i> Regresar</button>
-                        <button type="button" class="btn btn-outline-primary" id="btnSave"><i class='fa fa-save'></i> Guardar</button>
-                    </div>
-                </div>
-
-            </div>
-        </form>
-    </div>
+@section styles{
+    <link href="~/VendorMenu/datepicker/css/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/VendorMenu/select2/css/select2.css">
 }
 
-@section scripts{
 
+<div class="container">
+    <form class="form-horizontal" role="form">
+        <div class="form-group col-md-12">
+            <div class="container">
+                <div class="form-row">
+                    <label for="prov" class="control-label col-md-1"></label>
+                    <div class="col-md-10">
+                        @Html.DropDownList("Cliente", null, "---Seleccione Cliente---", htmlAttributes: new { @class = "form-control select2", @id = "ddlCliente", style = "text-align:center;", @onchange = "FunGetClienteEquipo();" })
+                    </div>
+                </div>
+                <br />
+                <div class="table-responsive" id="divCliente" style="display:none">
+                    <table id="tblclientes" class="table table-striped table-border table-condensed" style="width: 100%;">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Direccion</th>
+                                <th>Contacto</th>
+                                <th>Telefono</th>
+                                <th>Celular</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-orden-tab" data-toggle="tab" href="#nav-orden" role="tab" aria-controls="nav-orden" aria-selected="true">Orden de Trabajo</a>
+                        <a class="nav-item nav-link" id="nav-detalle-tab" data-toggle="tab" href="#nav-detalle" role="tab" aria-controls="nav-detalle" aria-selected="false">Descripción Trabajo</a>
+                    </div>
+                </nav>
+                <br><br>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-orden" role="tabpanel" aria-labelledby="nav-orden-tab">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="form-row">
+                                    <label for="equipo" class="control-label col-md-4"></label>
+                                    <div class="col-md-5">
+                                        @Html.DropDownList("Equipos", null, htmlAttributes: new { @class = "form-control select2", @id = "ddlEquipo", style = "text-align:center;" })
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-row">
+                                    <label for="equipo" class="control-label col-md-4"></label>
+                                    <div class="col-md-5">
+                                        @Html.DropDownList("TipoTrabajo", null, "---Seleccione Tipo Trabajo---", htmlAttributes: new { @class = "form-control select2", style = "text-align:center;", @id = "ddlTipoTrabajo" })
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-row">
+                                    <label for="equipo" class="control-label col-md-4"></label>
+                                    <div class="col-md-5">
+                                        @Html.DropDownList("Tecnicos", null, "---Seleccione Técnico---", htmlAttributes: new { @class = "form-control select2", style = "text-align:center;", @id = "ddlTecnicos" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-detalle" role="tabpanel" aria-labelledby="nav-detalle-tab">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div align="right" style="margin-bottom:5px;">
+                                    <button type="button" class="btn btn-outline-primary" id="btnAdd"><i class='fas fa-plus'></i></button>
+                                </div>
+                                <div class="form-row">
+                                    <label for="descripcion" class="control-label col-md-2"></label>
+                                    <div class="col-md-4">
+                                        <textarea name="descrip" id="txtDescripcion" placeholder="descripcion del trabajo" maxlength="500" class="form-control" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    </div>
+                                    <label for="notas" class="control-label col-md-1"></label>
+                                    <div class="col-md-4">
+                                        <textarea name="notas" id="txtNotas" placeholder="notas generales" class="form-control" maxlength="500" onkeydown="return (event.keyCode!=13);"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-row">
+                                    <label for="fechaini" class="control-label col-md-2">Fecha Inicio:</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="txtFechaInicio" placeholder="dd/mm/yyyy" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask />
+                                    </div>
+                                    <label for="notas" class="control-label col-md-2">Hora Inicio:</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group date" id="txtHoraInicio" data-target-input="nearest">
+                                            <input type="text" id="txtHoraIni" class="form-control datetimepicker-input" data-target="#txtHoraInicio" />
+                                            <div class="input-group-append" data-target="#txtHoraInicio" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-row">
+                                    <label for="fechafin" class="control-label col-md-2">Fecha Fin:</label>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" id="txtFechaFin" placeholder="dd/mm/yyyy" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask />
+                                        @*<div class="input-group date" id="txtFechaFin" data-target-input="nearest">
+                                                <input type="text" id="txtFechaFi" class="form-control datetimepicker-input" data-target="#TxtFechaFin" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                                <input type="text" id="txtFechaFi" class="form-control datetimepicker-input" data-target="#txtFechaFin" />
+                                                <div class="input-group-append" data-target="#txtFechaFin" data-toggle="datetimepicker">
+                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>*@
+                                    </div>
+                                    <label for="horafin" class="control-label col-md-2">Hora Fin:</label>
+                                    <div class="col-md-4">
+                                        <div class="input-group date" id="txtHoraFin" data-target-input="nearest">
+                                            <input type="text"id="txtHoraFi" class="form-control datetimepicker-input" data-target="#txtHoraFin" />
+                                            <div class="input-group-append" data-target="#txtHoraFin" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <div class="container text-center">
+                    <div class="btn-group btn-group-justified">
+                        <button type="button" class="btn btn-outline-primary btn-sm ml-1" id="btnRegresar">Regresar</button>
+                        <button type="button" class="btn btn-outline-success btn-sm ml-1" id="btnGuardar">Guardar</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+@section scripts{
+    <script src="~/VendorMenu/select2/js/select2.min.js"></script>
+    <script src="~/JQuery/Ordenes.js"></script>
     <script src="~/JQuery/TablaIdioma.js"></script>
+
 
     <script>
         function FunGetClienteEquipo() {
@@ -122,7 +173,7 @@
                         _tel = value.Telefono;
                         _cel = value.Celular;
                     });
-                 
+
                     TblClientes.row.add([_clie, _direc, _contac, _tel, _cel]).draw();
                 }
             });
