@@ -1,6 +1,10 @@
 ﻿$(document).ready(function () {
 
-    var _tipoSave = 'add', _continuar = true, _result = [], _count = 0, _estadocab, _seguir = true;
+    var _tipoSave = 'add', _continuar = true, _result = [], _count = 0, _estado, _estadocab, _seguir = true;
+    var _id, _checked, _nameparametroold, _estadode, _nuevoestado, _descripcion, _valorv, _valori;
+    var _row_id, _descripcionold, _valorvold, _valoriold, _estadoold, _nomparametro;
+    var notification;
+    var _output;
 
     //Caotura los valores anteriores de la cabecera
     _id = $('input#txtIdCabecera').val();
@@ -51,7 +55,7 @@
 
     //Recorre la tabla detalle
     $("#tblDetalle tbody tr").each(function (items) {
-        var _codigo, _detalle, _valorv, _valori, _estado;
+        let _codigo, _detalle, _valorv, _valori, _estado;
         $(this).children("td").each(function (index) {
 
             switch (index) {
@@ -88,7 +92,6 @@
 
     });
 
-    console.log(_result);
    
 
     //Abre ventana modal nuevodetalle 
@@ -109,20 +112,20 @@
     $('#btnAgregar').click(function () {
         if ($.trim($('#txtDetalle').val()).length == 0) {
          
-            var notification = alertify.notify('ingrese un detalle..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese un detalle..!', 'warning ', 5, function () { console.log('dismissed'); });
 
             return;
         }
 
         if ($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0) {
           
-            var notification = alertify.notify('ingrese valor texto o entero..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese valor texto o entero..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if ($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0) {
          
-            var notification = alertify.notify('solo valor texto o entero..?', 'error ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('solo valor texto o entero..?', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -140,7 +143,7 @@
             $.each(_result, function (i, item) {
                 if (item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
                
-                    var notification = alertify.notify('parametro ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
+                    notification = alertify.notify('parametro ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                     _continuar = false;
                     return false;
                 }
@@ -149,7 +152,7 @@
                         if (_valori == 0) {
                             if (item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
                              
-                                var notification = alertify.notify('valor texto ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
+                                notification = alertify.notify('valor texto ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                                 _continuar = false;
                                 return false;
                             } else {
@@ -158,7 +161,7 @@
                         } else {
                             if (item.ArryPadeValorI == _valori) {
                             
-                                var notification = alertify.notify('valor entero ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
+                                notification = alertify.notify('valor entero ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                                 _continuar = false;
                                 return false;
                             } else {
@@ -265,7 +268,6 @@
                 _output += '<button type="button" name="btnDelete" class="btn btn-outline-danger btn-sm ml-3 btnDelete" id="' + _row_id + '"><i class="fas fa-trash-alt"></i></button></div></div></td>';
                 $('#row_' + _row_id + '').html(_output);
 
-                console.log(_output);
                 _nuevoestado = _estado == "Activo" ? true : false;
 
                 _objIndex = _result.findIndex((obj => obj.ArryId == _row_id));
@@ -395,13 +397,13 @@
 
         if (_nomparametro == '') {
            
-            var notification = alertify.notify('nombre del parametro..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('nombre del parametro..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_count == 0) {
         
-            var notification = alertify.notify('ingrese detalle..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese detalle..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 

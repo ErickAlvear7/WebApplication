@@ -1,8 +1,11 @@
 ﻿
 $(document).ready(function () {
+
     var _loginAnt = '', _perfil, _nombres, _apellidos, _login, _password, _opcion, _id, _usuario, _login,
         txtEstado, _button, _checked;
     var estado = '';
+    var notification;
+    var _fila, _data, _row, _checked;
 
     $("#btnNuevo").click(function (eve) {
         eve.preventDefault();
@@ -26,25 +29,25 @@ $(document).ready(function () {
 
         if (_perfil == "") {
 
-            var notification = alertify.notify('seleccione el perfil..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('seleccione el perfil..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_nombres == "") {
 
-            var notification = alertify.notify('ingrese nombre..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese nombre..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_apellidos == "") {
-            var notification = alertify.notify('ingrese apellido..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese apellido..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_login == "") {
-            var notification = alertify.notify('ingrese un usuario..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese un usuario..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_password == "") {
-            var notification = alertify.notify('ingrese una contraseña..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese una contraseña..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 

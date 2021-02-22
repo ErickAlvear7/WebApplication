@@ -13,27 +13,33 @@ namespace WebApplication.Controllers
 {
     public class ClientesController : Controller
     {
+        #region variables
+
         private BDD_HRVEntities db = new BDD_HRVEntities();
         DataSet _data = new DataSet();
-       
+        #endregion
 
-        // GET: Clientes
+
+
+        #region GET: Clientes
         public ActionResult Index()
         {
             ViewBag.Title = "Administrar Clientes";
-          
+
             List<Catalogo> _listaClientes = new List<Catalogo>();
             _listaClientes = new ClienteDTO().FunGetClientes();
 
             return View(_listaClientes);
         }
- 
-        // GET: Clientes/Create
+        #endregion
+
+
+        #region GET: Clientes/Create
         public ActionResult Create()
         {
-           
+
             ViewBag.provincia_cliente = new SelectList(db.ProvinciaClientes, "id_provincia", "nombre_provincia");
-          
+
             List<SelectListItem> _cuidades = new List<SelectListItem>()
             {
                 new SelectListItem(){Value="0",Text="--Seleccione Cuidad--"},
@@ -41,14 +47,19 @@ namespace WebApplication.Controllers
             ViewBag.Cuidad = _cuidades;
             return View();
         }
+        #endregion
 
+
+        #region GET: Cuidades
         public ActionResult FunFillCuidad(int pro)
         {
-            var _cuidad = db.CuidadClientes.Where(c=>c.id_provincia==pro).Select(c => new { CuidadId = c.id_cuidad, Cuidad = c.nombre_cuidad }).ToList();
+            var _cuidad = db.CuidadClientes.Where(c => c.id_provincia == pro).Select(c => new { CuidadId = c.id_cuidad, Cuidad = c.nombre_cuidad }).ToList();
             return Json(data: _cuidad, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        // POST: Clientes/Create
+
+        #region POST: Clientes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,8 +77,9 @@ namespace WebApplication.Controllers
             {
                 return Json(new { success = false, mensaje = "error" });
             }
-                          
-        }
+
+        } 
+        #endregion
 
 
         #region GET: Clientes/Edit
@@ -121,10 +133,11 @@ namespace WebApplication.Controllers
             db.Clientes.Remove(clientes);
             db.SaveChanges();
             return Json(new { success = true, mesagge = "registro eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
-        } 
+        }
         #endregion
 
 
+        #region GET: EquipoCliente
 
         [HttpGet]
         public ActionResult EquipoCliente(int id)
@@ -138,14 +151,16 @@ namespace WebApplication.Controllers
             List<CabeceraDetalle> _modelo = new ClienteDTO().FunGetCabDet("Modelo");
             ViewBag.ClienteId = id;
             ViewBag.Equipos = _equipos;
-            ViewBag.grupo_equipo = new SelectList(_grupo, "CodId", "Detalle",0);
+            ViewBag.grupo_equipo = new SelectList(_grupo, "CodId", "Detalle", 0);
             ViewBag.marca_equipo = new SelectList(_marca, "CodId", "Detalle", 0);
             ViewBag.modelo_equipo = new SelectList(_modelo, "CodId", "Detalle", 0);
             return View(_listaClientes);
         }
+        #endregion
 
 
 
+        #region POST: GuardarEquipoCliente
         [HttpPost]
         public ActionResult GuardarEquipoCliente(int clienteId, List<Equipo> equipos)
         {
@@ -160,14 +175,16 @@ namespace WebApplication.Controllers
             TempData["Mensaje"] = "ok";
             return Json(new { success = true, miUrl = Url.Action("Index", "Clientes") });
         }
+        #endregion
 
 
+        #region GET: OrdenesTrabajo
         [HttpGet]
         public ActionResult OrdenesTrabajo()
         {
 
             List<Catalogo> _cliente = new ClienteDTO().FunGetClientes();
-            ViewBag.Cliente = new SelectList(_cliente, "ClienteId", "Cliente",0);
+            ViewBag.Cliente = new SelectList(_cliente, "ClienteId", "Cliente", 0);
             List<SelectListItem> _equipos = new List<SelectListItem>() {
                 new SelectListItem() { Value="0", Text="--Seleccione Equipo--" },
            };
@@ -175,10 +192,14 @@ namespace WebApplication.Controllers
             List<CabeceraDetalle> _tecnico = new ClienteDTO().FunGetTecnicos();
             ViewBag.Equipos = _equipos;
             ViewBag.TipoTrabajo = new SelectList(_trabajo, "CodId", "Detalle", 0);
-            ViewBag.Tecnicos = new SelectList(_tecnico, "CodId", "Detalle",0);
+            ViewBag.Tecnicos = new SelectList(_tecnico, "CodId", "Detalle", 0);
             return View();
-            
+
         }
+        #endregion
+
+
+        #region GET:Clientes
         public ActionResult FunFillClientes(int cliid)
         {
 
@@ -186,14 +207,19 @@ namespace WebApplication.Controllers
             return Json(data: _cliente, JsonRequestBehavior.AllowGet);
 
         }
+        #endregion
 
+
+        #region GET: Equipos
         public ActionResult FunFillEquipos(int cliid)
         {
             List<CabeceraDetalle> _equipos = new ClienteDTO().FunGetEquipoClientes(cliid);
             return Json(data: _equipos, JsonRequestBehavior.AllowGet);
-        }
+        } 
+        #endregion
 
-        #region GrabarOrdenTrabajo
+
+        #region POST:GrabarOrdenTrabajo
         [HttpPost]
         public ActionResult GuardarOrdenTrabajo(int clienteid, int equipoid, string tipotrabajo, int operario, string problema, string nota,
             string fechaini, string fechafin)
@@ -206,7 +232,7 @@ namespace WebApplication.Controllers
                     _orden.orden_tipotrabajo = tipotrabajo;
                     _orden.orden_tecnico = operario;
                     _orden.orden_problema = problema;
-                    _orden.orden_estado = "INICIADO";
+                    _orden.orden_estado = "INI";
                     _orden.orden_notas = nota;
                     _orden.orden_fechainicio = DateTime.ParseExact(fechaini, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
                     _orden.orden_fechafin = DateTime.ParseExact(fechafin, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
@@ -218,7 +244,7 @@ namespace WebApplication.Controllers
                 new ClienteDTO().FunGrabarOT(_orden);
 
                 TempData["Mensaje"] = "OK";
-                return Json(new { success = true, miUrl = Url.Action("Index", "Clientes") });
+                return Json(new { success = true, miUrl = Url.Action("OrdenIndex", "Clientes") });
             }
             catch (Exception ex)
             {
@@ -230,6 +256,17 @@ namespace WebApplication.Controllers
 
         }
 
+        #endregion
+
+
+        #region GET: OrdenIndex
+        [HttpGet]
+        public ActionResult OrdenIndex()
+        {
+            List<OrdenIndex> _orden = new ClienteDTO().FunGetOrdenCliente();
+
+            return View(_orden);
+        } 
         #endregion
 
 

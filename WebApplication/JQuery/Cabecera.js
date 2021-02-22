@@ -2,8 +2,10 @@
 
     //variables globales
     var _tipoSave = 'add', _continuar = true, _seguir = true, _result = [],
-        _count = 0, _estadoModal = 'Activo', _descripcionold, _valorvold,
-        _row_id, _estadoold, _valoriold, notification;
+        _count = 0, _estadoModal = 'Activo', _descripcionold, _valorvold, _otroval,
+        _row_id, _estadoold, _valoriold, _nomparametro;
+    var notification;
+    var _descripcion, _valorv, _valori, _fila, _fil, _data, _id, _parametro;
 
     $("#modalPARAMETER").draggable({
         handle: ".modal-header"
@@ -31,21 +33,21 @@
     $('#btnAgregar').click(function () {
         if ($.trim($('#txtDetalle').val()).length == 0) {
          
-            var notification = alertify.notify('ingrese detalle..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese detalle..!', 'warning', 5, function () { console.log('dismissed'); });
            
             return;
         }
 
         if ($.trim($('#txtValorV').val()).length == 0 && $.trim($('#txtValorI').val()).length == 0) {
          
-            var notification = alertify.notify('valor de texto o entero..?', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('valor de texto o entero..?', 'warning', 5, function () { console.log('dismissed'); });
 
             return;
         }
 
         if ($.trim($('#txtValorV').val()).length > 0 && $.trim($('#txtValorI').val()).length > 0) {
           
-            var notification = alertify.notify('solo valor de texto o entero..!', 'error', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('solo valor de texto o entero..!', 'error', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -62,7 +64,7 @@
             $.each(_result, function (i, item) {
                 if (item.ArryPadeNombre.toUpperCase() == _descripcion.toUpperCase()) {
                 
-                    var notification = alertify.notify('nombre del parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
+                    notification = alertify.notify('nombre del parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                     _continuar = false;
                     return false;
                 } else {
@@ -70,7 +72,7 @@
                         if (_valori == 0) {
                             if (item.ArryPadeValorV.toUpperCase() == _valorv.toUpperCase()) {
                              
-                                var notification = alertify.notify('valor texto parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
+                                notification = alertify.notify('valor texto parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                                 _continuar = false;
                                 return false;
                             } else {
@@ -79,7 +81,7 @@
                         } else {
                             if (item.ArryPadeValorI == _valori) {
                            
-                                var notification = alertify.notify('valor entero parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
+                                notification = alertify.notify('valor entero parametro ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                                 _continuar = false;
                                 return false;
                             } else {
@@ -306,13 +308,13 @@
 
         if (_nomparametro == '') {
             
-            var notification = alertify.notify('ingrese nombre del parametro..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese nombre del parametro..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_count == 0) {
            
-            var notification = alertify.notify('ingrese detalle..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese detalle..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -369,7 +371,7 @@
                         alertify.success('paramentro eliminado')
                     } else {
                    
-                        var notification = alertify.notify('hay detalles asociados..!', 'error ', 5, function () {
+                         notification = alertify.notify('hay detalles asociados..!', 'error ', 5, function () {
                             console.log('dismissed');
                         });
                     }

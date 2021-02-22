@@ -12,42 +12,49 @@ namespace WebApplication.Controllers
 {
     public class PerfilesController : Controller
     {
+        #region variables
         private BDD_HRVEntities db = new BDD_HRVEntities();
         DataSet _datSet = new DataSet();
         int _perfilId = 0;
+        #endregion
 
-        // GET: Perfiles
+
+        #region GET: Perfiles
         public ActionResult Index()
         {
             List<Perfi> _listaPerfiles = new List<Perfi>();
             _listaPerfiles = new SeguridadDTO().FunGetPerfiles();
             return View(_listaPerfiles);
         }
+        #endregion
 
 
-        // GET: Perfiles/Create
+
+        #region GET: Perfiles/Create
         public ActionResult Create()
         {
             return View();
         }
+        #endregion
 
-        // POST: Perfiles/Create
+
+        #region POST: Perfiles/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Create( Perfiles perfiles)
+        public ActionResult Create(Perfiles perfiles)
         {
 
-                perfiles.creacion_perfil = DateTime.Now;
+            perfiles.creacion_perfil = DateTime.Now;
 
             _perfilId = new SeguridadDTO().FunConsultaPerfil(perfiles.nombre_perfil);
 
-            if(_perfilId == 0)
+            if (_perfilId == 0)
             {
                 db.Perfiles.Add(perfiles);
                 db.SaveChanges();
-       
+
                 _datSet = new SeguridadDTO().FunConsultaPerfil(0, "", Session["_conexion"].ToString());
                 var _datos = _datSet.Tables[0].AsEnumerable().Select(p => new
                 {
@@ -63,10 +70,12 @@ namespace WebApplication.Controllers
             {
                 return Json(new { success = false, data = "", mesagge = "perfil ya existe", nameclass = "success" }, JsonRequestBehavior.AllowGet);
             }
-                         
-        }
 
-        // GET: Perfiles/Edit/5
+        }
+        #endregion
+
+
+        #region GET: Perfiles/Edit
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,8 +89,10 @@ namespace WebApplication.Controllers
             }
             return View(perfiles);
         }
+        #endregion
 
-        // POST: Perfiles/Edit/5
+
+        #region POST: Perfiles/Edit
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -96,8 +107,10 @@ namespace WebApplication.Controllers
             }
             return View(perfiles);
         }
+        #endregion
 
-        // GET: Perfiles/Delete/5
+
+        #region GET: Perfiles/Delete
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,17 +124,20 @@ namespace WebApplication.Controllers
             }
             return View(perfiles);
         }
+        #endregion
 
-        // POST: Perfiles/Delete/5
+
+        #region POST: Perfiles/Delete
         [HttpPost, ActionName("Delete")]
-     
+
         public ActionResult DeleteConfirmed(int id)
         {
             Perfiles perfiles = db.Perfiles.Find(id);
             db.Perfiles.Remove(perfiles);
             db.SaveChanges();
             return Json(new { success = true, mesagge = "perfil eliminado", nameclass = "success" }, JsonRequestBehavior.AllowGet);
-        }
+        } 
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

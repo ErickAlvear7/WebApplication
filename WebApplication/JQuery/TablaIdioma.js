@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+
+
    Tabla= $('#tabla').DataTable({
 
         "columnDefs": [{
@@ -7,7 +9,7 @@
         },
         {
             "targets": 0,
-            "visible": false
+            //"visible": false
         }],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros",

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,7 +8,7 @@ namespace WebApplication.Controllers.ConexionDTO
 {
     #region CatalogoCliente
 
-    
+
     public class Catalogo
     {
         public int ClienteId { get; set; }
@@ -35,7 +36,7 @@ namespace WebApplication.Controllers.ConexionDTO
 
     #region CatalogoDetalle
 
-   
+
     public class Detalle
     {
         public int ArryId { get; set; }
@@ -53,7 +54,7 @@ namespace WebApplication.Controllers.ConexionDTO
 
     #region CatalogoCabecera
 
-   
+
     public class Cabecera
     {
 
@@ -69,7 +70,7 @@ namespace WebApplication.Controllers.ConexionDTO
 
     #region CatalogoCabeceraDetalle
 
-   
+
     public class CabeceraDetalle
     {
         public string CodId { get; set; }
@@ -80,7 +81,7 @@ namespace WebApplication.Controllers.ConexionDTO
 
     #region CatalogoEquipo
 
-    
+
     public class Equipo
     {
         public int ArryEquipoId { get; set; }
@@ -100,7 +101,29 @@ namespace WebApplication.Controllers.ConexionDTO
     }
     #endregion
 
+    #region CatalogoOrdenTrabajo
+
+    public class OrdenIndex
+
+    {
+
+        public string Cliente { get; set; }
+
+        public string Equipo { get; set; }
+
+        public string TipoTrabajo { get; set; }
+
+        public string Estado { get; set; }
+
+        public string Problema { get; set; }
 
 
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
+
+        public DateTime? FechaInicio { get; set; }
+
+    } 
+    #endregion
 
 }

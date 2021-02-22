@@ -850,6 +850,7 @@
     <Content Include="Views\Clientes\OrdenesTrabajo.cshtml" />
     <Content Include="VendorMenu\daterangepicker\bower.json" />
     <Content Include="VendorMenu\daterangepicker\example\browserify\README.md" />
+    <Content Include="Views\Clientes\OrdenIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

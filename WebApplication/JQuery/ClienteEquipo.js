@@ -1,7 +1,8 @@
 ﻿$(document).ready(function () {
-    var _equipo, _grupo, _marca, _result = [], _continuar = true, _output, _count = 0, _grupoid, _marcaid, _modeloid, _estado = 'Activo',
+    var _equipo, _grupo, _marca, _modelo, _result = [], _continuar = true, _output, _count = 0, _grupoid, _marcaid, _modeloid, _estado = 'Activo',
         _objeto, _serie, _voltaje, _amperaje, _presion, _tipoSave = 'add', _checked, _estadoold, _equipoold, _seguir = false, _objIndex,
-        _clieid, _equipoid, _disabled;
+        _clieid, _equipoid, _disabled, _rowid;
+    var notification;
 
     _clieid = $('#clienteid').val();
 
@@ -85,23 +86,23 @@
         _presion = $('#txtPresion').val();
 
         if (_equipo.length == 0) {
-            var notification = alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
             
         }
 
         if (_grupoid == '') {
-            var notification = alertify.notify('seleccione grupo..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('seleccione grupo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_marcaid == '') {
-            var notification = alertify.notify('seleccione marca..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('seleccione marca..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_modeloid == '') {
-            var notification = alertify.notify('seleccione modelo..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('seleccione modelo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -321,7 +322,7 @@
 
     $('#btnGuardar').click(function () {
         if (_result.length == 0) {
-            var notification = alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -335,7 +336,7 @@
                     window.location.href = datos.miUrl;
                   
                 } else {
-                    var notification = alertify.notify('equipo existe..!', 'danger', 5, function () { console.log('dismissed'); });
+                    notification = alertify.notify('equipo existe..!', 'danger', 5, function () { console.log('dismissed'); });
                     return;
                 }
             },

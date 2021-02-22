@@ -53,7 +53,7 @@
     <table id="tabla" class="table table-bordered table-hover">
         <thead class="text-center">
             <tr>
-                <th>IdUsuario</th>
+                <th style="display:none;">IdUsuario</th>
                 <th>Perfil</th>
                 <th>Usuario</th>
                 <th>Login</th>
@@ -67,7 +67,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="display:none;">
                         @Html.DisplayFor(modelItem => item.UserId)
                     </td>
                     <td>

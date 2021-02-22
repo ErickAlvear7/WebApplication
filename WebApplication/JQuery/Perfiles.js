@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
+
     var _perfilNombre, _opcion, _perfil, _id;
+    var notification;
+    var _fila, _row, _datSet, _perfil, _button;
 
     $("#btnNuevo").click(function (eve) {
         eve.preventDefault();
@@ -15,7 +18,7 @@
         _perfilNombre = $("#txtPerfil").val().trim();
         if (_perfilNombre == "") {
 
-            var notification = alertify.notify('ingrese un perfil..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('ingrese un perfil..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -72,7 +75,7 @@
                 } else {
 
                   
-                    var notification = alertify.notify('perfil ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
+                    notification = alertify.notify('perfil ya existe..!', 'error ', 5, function () { console.log('dismissed'); });
                 }
             }
         });

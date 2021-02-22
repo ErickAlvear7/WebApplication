@@ -1,21 +1,29 @@
 ﻿$(document).ready(function () {
-    var _fecha_inicio, _fecha_fin, _hora_inicio
-
+    var _clienteid, _equipoid, _tipotrabajo, _tecnico, _descripcion, _nota, _fechainicio, _fechafin, _horafin;
+    var notification;
+    var _fecha_inicio, _fecha_fin, _fechaactual;
     var fecha = new Date();
     var hora = fecha.getHours() + ":" + fecha.getMinutes();
 
     _fecha_inicio = moment(fecha).format("DD/MM/YYYY");
     _fecha_fin = moment(fecha, "DD/MM/YYYY").add(1, 'days').format("DD/MM/YYYY");
-    //_hora_inicio = moment(h).format('HH:MM');	
+
 
     $('#txtFechaInicio').val(_fecha_inicio);
     $('#txtFechaFin').val(_fecha_fin);
     $('#txtHoraIni').val(hora);
-    $('#txtHoraFi').val(hora);	  
+    $('#txtHoraFi').val(hora);	 
+
+
+    $('#btnRegresar').click(function () {
+
+        window.location.href = "OrdenIndex";
+
+    });
 
 
 
-    $('#txtFechaInicio').datepicker(
+    $('.formatofecha').datepicker(
         {
             inline: true,
             dateFormat: "dd/mm/yy",
@@ -29,30 +37,7 @@
             yearRange: "-100:+5"
         });
 
-    $('#txtFechaFin').datepicker(
-        {
-            inline: true,
-            dateFormat: "dd/mm/yy",
-            monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-            monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-            dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-            numberOfMonths: 1,
-            showButtonPanel: true,
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-100:+5"
-        });
 
-
-
-    //Timepicker
-    $('#txtHoraInicio').datetimepicker({
-        format: 'hh:mm'
-    });
-
-    $('#txtHoraFin').datetimepicker({
-        format: 'hh:mm '
-    });
 
     $('.select2').select2();
 
@@ -73,42 +58,64 @@
 
         if (_clienteid == '') {
            
-            var notification = alertify.notify('seleccione cliente..!', 'warning', 5, function () { console.log('dismissed'); });
+             notification = alertify.notify('seleccione cliente..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_equipoid == '0') {
-            var notification = alertify.notify('seleccione equipo..!', 'warning', 5, function () { console.log('dismissed'); });
+             notification = alertify.notify('seleccione equipo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_tipotrabajo == '') {
-            var notification = alertify.notify('seleccione trabajo..!', 'warning', 5, function () { console.log('dismissed'); });
+             notification = alertify.notify('seleccione trabajo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_tecnico == '') {
-            var notification = alertify.notify('seleccione tecnico..!', 'warning', 5, function () { console.log('dismissed'); });
+             notification = alertify.notify('seleccione tecnico..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_descripcion == '') {
-            var notification = alertify.notify('ingrese descripcion..!', 'warning', 5, function () { console.log('dismissed'); });
+             notification = alertify.notify('ingrese descripcion..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_fechainicio == '') {
-            var notification = alertify.notify('ingrese fecha inicio..!', 'warning', 5, function () { console.log('dismissed'); });
+             notification = alertify.notify('ingrese fecha inicio..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_horainicio == '') {
-            var notification = alertify.notify('ingrese hora inicio..!', 'warning', 5, function () { console.log('dismissed'); });
+             notification = alertify.notify('ingrese hora inicio..!', 'warning', 5, function () { console.log('dismissed'); });
+            return;
+        }
+
+        if (_horafin == '') {
+             notification = alertify.notify('ingrese hora fin..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         var _fechainiot = _fechainicio + " " + _horainicio;
         var _fechafinot = _fechafin + " " + _horafin;
+
+        _fechaactual = moment(fecha, "DD/MM/YYYY HH:mm").add(40, 'minutes').format("DD/MM/YYYY HH:mm");
+
+        if (_fechainiot < _fechaactual) {
+
+            notification = alertify.notify('La Fecha de Inicio no Puede ser Menor a la Actual..!', 'danger', 5, function () { console.log('dismissed'); });
+            return;
+        }
+
+
+
+        if (_fechafinot < _fechainiot) {
+
+            notification = alertify.notify('La Fecha Fin no Puede ser Menor a la Fecha Inicio..!', 'danger', 5, function () { console.log('dismissed'); });
+            return;
+        }
+
 
         $.ajax({
             url: "/Clientes/GuardarOrdenTrabajo",
@@ -121,9 +128,9 @@
             success: function (datos) {
                 if (datos.success == true) {
                     window.location.href = datos.miUrl;
-                    //window.location.href = '/Tbl_Clientes/Index';
+                
                 } else {
-                    var notification = alertify.notify('ya existe..!', 'error', 5, function () { console.log('dismissed'); });
+                     notification = alertify.notify('ya existe..!', 'error', 5, function () { console.log('dismissed'); });
                     return;
                 }
             },

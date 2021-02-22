@@ -19,7 +19,7 @@
 
         <thead class="text-center">
             <tr>
-                <th>ClienteId</th>
+                <th style="display:none;">ClienteId</th>
                 <th>Provincia</th>
                 <th>Cuidad</th>
                 <th>Cliente</th>
@@ -35,7 +35,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="display:none;">
                         @Html.DisplayFor(modelItem => item.ClienteId)
                     </td>
                     <td>

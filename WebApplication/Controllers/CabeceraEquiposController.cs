@@ -10,10 +10,13 @@ namespace WebApplication.Controllers
 {
     public class CabeceraEquiposController : Controller
     {
+        #region variables
         string _mensaje;
         private BDD_HRVEntities db = new BDD_HRVEntities();
+        #endregion
 
-        // GET: CabeceraEquipos
+
+        #region GET: CabeceraEquipos
         public ActionResult Index()
         {
             ViewBag.Title = "Cabecere";
@@ -21,22 +24,26 @@ namespace WebApplication.Controllers
             return View(_parametros);
         }
 
-     
+        #endregion
 
-        // GET: CabeceraEquipos/Create
+
+
+        #region GET: CabeceraEquipos/Create
         public ActionResult Create()
         {
             return View();
         }
+        #endregion
 
-        // POST: CabeceraEquipos/Create
+
+        #region POST: CabeceraEquipos/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-     
-        public ActionResult Create(string parametro,string descripcion,bool estado,List<Detalle> detalles)
+
+        public ActionResult Create(string parametro, string descripcion, bool estado, List<Detalle> detalles)
         {
-         
+
             CabeceraEquipos _cabecera = new CabeceraEquipos();
             {
                 _cabecera.nombre_cabecera = parametro;
@@ -55,22 +62,22 @@ namespace WebApplication.Controllers
 
             }
 
-           
+
 
             foreach (var _item in detalles)
             {
-               
+
                 _cabecera.DetalleEquipos.Add(new DetalleEquipos()
                 {
-                  
+
                     nombre_detalle = _item.ArryPadeNombre,
                     valor_detalle = _item.ArryPadeValorV,
                     valor_detallei = _item.ArryPadeValorI,
                     estado_detalle = _item.ArryEstado,
                     aux3_detalle = "",
-                    aux4_detalle =""
+                    aux4_detalle = ""
 
-                }); 
+                });
             }
 
             new ParametroDTO().FunGrabarNuevo(_cabecera);
@@ -78,8 +85,10 @@ namespace WebApplication.Controllers
 
             return Json(new { success = true, miUrl = Url.Action("Index", "CabeceraEquipos") });
         }
+        #endregion
 
-        // GET: CabeceraEquipos/Edit/5
+
+        #region GET: CabeceraEquipos/Edit
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,13 +104,15 @@ namespace WebApplication.Controllers
             ViewBag.Descripcion = cabeceraEquipos.descripcion_cabecera;
             return View(cabeceraEquipos);
         }
+        #endregion
 
-        // POST: CabeceraEquipos/Edit/5
+
+        #region POST: CabeceraEquipos/Edit
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-     
-        public ActionResult Edit(int id,string nomparametro,string descripcion,string estadocab, List<Detalle> detalleparametros)
+
+        public ActionResult Edit(int id, string nomparametro, string descripcion, string estadocab, List<Detalle> detalleparametros)
         {
             try
             {
@@ -148,8 +159,8 @@ namespace WebApplication.Controllers
                                 _detalle.estado_detalle = _item.ArryEstado;
                             }
                         }
-                        
-                        
+
+
                     }
                     _mensaje = new ParametroDTO().FunGrabarEditar(_cab);
                 }
@@ -163,19 +174,21 @@ namespace WebApplication.Controllers
                 else
                 {
                     return Json(new { success = false, miUrl = "ERROR" });
-                }         
+                }
 
             }
             catch (Exception ex)
             {
 
                 throw ex;
-            }                     
-              
-                           
-        }
+            }
 
-        // GET: CabeceraEquipos/Delete/5
+
+        }
+        #endregion
+
+
+        #region GET: CabeceraEquipos/Delete
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -189,13 +202,15 @@ namespace WebApplication.Controllers
             }
             return View(cabeceraEquipos);
         }
+        #endregion
 
-        // POST: CabeceraEquipos/Delete/5
+
+        #region POST: CabeceraEquipos/Delete
         [HttpPost, ActionName("Delete")]
-    
+
         public ActionResult DeleteConfirmed(int id)
         {
-            if(new ParametroDTO().FunGetParametro(id)==0)
+            if (new ParametroDTO().FunGetParametro(id) == 0)
             {
                 CabeceraEquipos cabeceraEquipos = db.CabeceraEquipos.Find(id);
                 db.CabeceraEquipos.Remove(cabeceraEquipos);
@@ -206,15 +221,18 @@ namespace WebApplication.Controllers
             {
                 return Json(new { success = false, mensaje = "no se puede eliminar existen detalles asociados..!!" });
             }
-   
-           
-        }
 
+
+        }
+        #endregion
+
+
+        #region POST: DeleteDetalle
         [HttpPost]
         public ActionResult DeleteDetalle(int idCab, int idDet)
         {
             var _eliminar = db.DetalleEquipos.SingleOrDefault(pd => pd.id_cabecera == idCab && pd.id_detalle == idDet);
-            if(_eliminar != null)
+            if (_eliminar != null)
             {
                 db.DetalleEquipos.Remove(_eliminar);
                 db.SaveChanges();
@@ -223,8 +241,9 @@ namespace WebApplication.Controllers
             else
             {
                 return Json(new { success = false, mensaje = "error" });
-            }       
-        }
+            }
+        } 
+        #endregion
 
 
         protected override void Dispose(bool disposing)

@@ -2,6 +2,11 @@
 
     var _id = 0;
     var txtEstado = '';
+    var _prov, _cuid, _cli, _ruc, _direc, _tel1, _tel2, _email, _web, _con1, _cel1, _con2, _cel2;
+    var _row,_fila, _data, _cliente, _checked;
+    var notification;
+
+
     _id = $('#IdCliente').val();
 
     $("#btnNuevo").click(function () {
@@ -32,40 +37,39 @@
 
         if (_prov == '') {
            
-            var notification = alertify.notify('seleccione provincia..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('seleccione provincia..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_cuid =='0') {
 
-            var notification = alertify.notify('seleccione cuidad..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('seleccione cuidad..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cli == '') {
 
            
-            var notification = alertify.notify('campo requerido: Cliente..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('campo requerido: Cliente..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_ruc != '') {
             if (_ruc.length < 13 || _ruc.length > 13) {
             
-                var notification = alertify.notify('Ruc incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
-                return;
+             notification = alertify.notify('Ruc incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+             return;
             }
         }
 
         if (_direc == '') {
 
-            var notification = alertify.notify('campo requerido: Direccion..!', 'warning ', 5, function () { console.log('dismissed'); });
-            
+            notification = alertify.notify('campo requerido: Direccion..!', 'warning ', 5, function () { console.log('dismissed'); });            
             return;
         }
       
         if (_tel1 == '') {
 
-            var notification = alertify.notify('campo requerido: Telefono 1..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('campo requerido: Telefono 1..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -73,22 +77,22 @@
 
         if (_tel1.length < 9 || _tel1.length > 9) {
  
-            var notification = alertify.notify('Telefono 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('Telefono 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_tel2 != '') {
 
             if (_tel2.length < 9 || _tel2.length > 9) {
-                var notification = alertify.notify('Telefono 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
-                return;
+             notification = alertify.notify('Telefono 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+             return;
             }
         }
 
         if (_email != '') {
 
             if ($("#txtEmail").val().indexOf('@', 0) == -1 || $("#txtEmail").val().indexOf('.', 0) == -1) {
-                var notification = alertify.notify('e-mail incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+              notification = alertify.notify('e-mail incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
                 
             }
@@ -96,25 +100,25 @@
     
         if (_con1 == '') {
 
-            var notification = alertify.notify('campo requerido: Contacto 1', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('campo requerido: Contacto 1', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_cel1 == '') {
 
-            var notification = alertify.notify('campo requerido: Celular 1', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('campo requerido: Celular 1', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cel1.length < 10 || _cel1.length > 10) {
 
-            var notification = alertify.notify('Celular 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('Celular 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cel2 != '') {
             if (_cel2.length < 10 || _cel1.length > 10) {
 
-                var notification = alertify.notify('Celular 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+             notification = alertify.notify('Celular 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
                 return;
             }
         }
@@ -227,40 +231,39 @@
 
         if (_prov == '') {
 
-            var notification = alertify.notify('seleccione provincia..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('seleccione provincia..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_cuid == '0') {
 
-            var notification = alertify.notify('seleccione cuidad..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('seleccione cuidad..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cli == '') {
 
 
-            var notification = alertify.notify('campo requerido: Cliente..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('campo requerido: Cliente..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_ruc != '') {
             if (_ruc.length < 13 || _ruc.length > 13) {
 
-                var notification = alertify.notify('Ruc incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
-                return;
+             notification = alertify.notify('Ruc incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+             return;
             }
         }
 
         if (_direc == '') {
 
-            var notification = alertify.notify('campo requerido: Direccion..!', 'warning ', 5, function () { console.log('dismissed'); });
-
+            notification = alertify.notify('campo requerido: Direccion..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_tel1 == '') {
 
-            var notification = alertify.notify('campo requerido: Telefono 1..!', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('campo requerido: Telefono 1..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -268,49 +271,49 @@
 
         if (_tel1.length < 9 || _tel1.length > 9) {
 
-            var notification = alertify.notify('Telefono 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('Telefono 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_tel2 != '') {
 
             if (_tel2.length < 9 || _tel2.length > 9) {
-                var notification = alertify.notify('Telefono 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
-                return;
+             notification = alertify.notify('Telefono 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+             return;
             }
         }
 
         if (_email != '') {
 
             if ($("#txtEmail").val().indexOf('@', 0) == -1 || $("#txtEmail").val().indexOf('.', 0) == -1) {
-                var notification = alertify.notify('e-mail incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
-                return;
+              notification = alertify.notify('e-mail incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+              return;
 
             }
         }
 
         if (_con1 == '') {
 
-            var notification = alertify.notify('campo requerido: Contacto 1', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('campo requerido: Contacto 1', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
         if (_cel1 == '') {
 
-            var notification = alertify.notify('campo requerido: Celular 1', 'warning ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('campo requerido: Celular 1', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cel1.length < 10 || _cel1.length > 10) {
 
-            var notification = alertify.notify('Celular 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+            notification = alertify.notify('Celular 1 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_cel2 != '') {
             if (_cel2.length < 10 || _cel1.length > 10) {
 
-                var notification = alertify.notify('Celular 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
-                return;
+             notification = alertify.notify('Celular 2 incorrecto..!', 'error ', 5, function () { console.log('dismissed'); });
+             return;
             }
         }
 

@@ -209,7 +209,6 @@ namespace WebApplication.Controllers.ConexionDTO
 
         #region FuncionObtenerEquipoClientes
 
-        
         public List<CabeceraDetalle> FunGetEquipoClientes(int clieid)
         {
             var _query = from equipos in _db.Equipos
@@ -249,6 +248,60 @@ namespace WebApplication.Controllers.ConexionDTO
             }
         }
 
+        #endregion
+
+        #region FuncionObtenerOrdenTrabajoCliente
+
+        public List<OrdenIndex> FunGetOrdenCliente()
+        {
+            var _query = from orden in _db.OrdenesTrabajo
+
+                         join equipo in _db.Equipos on orden.id_equipo equals equipo.id_equipo
+
+                         select new OrdenIndex
+
+                         {
+
+                             Cliente = (from cliente in _db.Clientes
+
+                                        where cliente.id_cliente == equipo.id_cliente
+
+                                        select cliente.nombre_cliente).FirstOrDefault(),
+
+                             Equipo = equipo.nombre_equipo,
+
+                             TipoTrabajo = (from detalle in _db.DetalleEquipos
+
+                                            join cabecera in _db.CabeceraEquipos on detalle.id_cabecera equals (cabecera.id_cabecera)
+
+                                            where cabecera.nombre_cabecera == "Tipo Trabajo" &&
+
+                                            detalle.valor_detalle == orden.orden_tipotrabajo
+
+                                            select detalle.nombre_detalle).FirstOrDefault(),
+
+                             Estado = (from detalle in _db.DetalleEquipos
+
+                                       join cabecera in _db.CabeceraEquipos on detalle.id_cabecera equals (cabecera.id_cabecera)
+
+                                       where cabecera.nombre_cabecera == "ESTADO ORDEN" &&
+
+                                       detalle.valor_detalle == orden.orden_estado
+
+                                       select detalle.nombre_detalle).FirstOrDefault(),
+
+                             Problema = orden.orden_problema,
+
+                             FechaInicio = orden.orden_fechainicio
+
+                         };
+
+
+
+            return _query.ToList();
+
+
+        }
         #endregion
     }
 }

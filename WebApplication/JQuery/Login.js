@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+
+    var _usuario, _password
+    var notification;
    
     $("#txtUsuario").val('');
     $("#txtPassword").val('');
@@ -7,22 +10,14 @@
         eve.preventDefault();
         _usuario = $("#txtUsuario").val();
         if (_usuario == "") {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'ingrese usuario',
-            });
        
+            notification = alertify.notify('ingrese usuario..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
         _password = $("#txtPassword").val();
         if (_password == "") {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'ingrese contraseña',
-            });
-        
+       
+            notification = alertify.notify('ingrese contraseña..!', 'warning ', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -36,12 +31,7 @@
                     window.location.href = datos.resul;
                 } else {
 
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Upss...',
-                        text: 'usuario y/o contraseña incorrecto',
-
-                    });
+                    notification = alertify.notify('usuario y/o contraseña incorrecto', 'danger ', 5, function () { console.log('dismissed'); });
                     $("#txtUsuario").val('');
                     $("#txtPassword").val('');
                     

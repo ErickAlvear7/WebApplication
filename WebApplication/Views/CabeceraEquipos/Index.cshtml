@@ -17,7 +17,7 @@
 
         <thead class="text-center">
             <tr>
-                <th>CabeceraId</th>
+                <th style="display:none;">CabeceraId</th>
                 <th>Parametro</th>
                 <th>Descripcion</th>
                 <th>Estado</th>
@@ -31,7 +31,7 @@
             @foreach (var item in Model)
             {
             <tr>
-                <td>
+                <td style="display:none;">
                     @Html.DisplayFor(modelItem => item.CabeceraId)
                 </td>
                 <td>

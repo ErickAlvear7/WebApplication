@@ -1,0 +1,131 @@
+﻿
+@model IEnumerable<WebApplication.Controllers.ConexionDTO.OrdenIndex>
+@{
+
+    ViewBag.Title = "OrdenIndex";
+}
+
+<div class="container">
+
+    <div class="well well-sm">
+
+        <a class="btn btn-outline-primary" href="OrdenesTrabajo" id="btnNuevo"><i class="fas fa-plus"></i></a>
+
+    </div>
+
+    <br />
+
+    <table id="tabla" class="table table-bordered table-hover" style="width:100%">
+
+        <thead class="text-center">
+
+            <tr>
+
+                <th>Cliente</th>
+
+                <th>Equipo</th>
+
+                <th>Tipo Trabajo</th>
+
+                <th>Estado</th>
+
+                <th>Problema</th>
+
+                <th>Fecha Inicio</th>
+
+            </tr>
+
+        </thead>
+
+
+
+        <tbody>
+
+            @foreach (var item in Model)
+
+            {
+                
+                <tr>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Cliente)
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Equipo)
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.TipoTrabajo)
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Estado)
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Problema)
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.FechaInicio)
+
+                    </td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+@section scripts{
+
+    <script src="~/JQuery/TablaIdioma.js"></script>
+
+
+
+    @{
+
+        if (@TempData["Mensaje"] != null)
+
+        {
+
+            <script>
+
+                $(document).ready(function () {
+
+                    $.notify("Grabado Correctamente", {
+
+                        globalPosition: "top center",
+
+                        className: "success"
+
+                    });
+
+                });
+
+            </script>
+
+        }
+
+    }
+
+
+  }

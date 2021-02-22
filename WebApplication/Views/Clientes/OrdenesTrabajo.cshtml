@@ -91,23 +91,24 @@
                                 <div class="form-row">
                                     <label for="fechaini" class="control-label col-md-2">Fecha Inicio:</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" id="txtFechaInicio" placeholder="dd/mm/yyyy" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask />
+                                        <input type="text" class="form-control formatofecha" id="txtFechaInicio" placeholder="dd/mm/yyyy" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask />
                                     </div>
                                     <label for="notas" class="control-label col-md-2">Hora Inicio:</label>
                                     <div class="col-md-4">
-                                        <div class="input-group date" id="txtHoraInicio" data-target-input="nearest">
+                                        @*<div class="input-group date" id="txtHoraInicio" data-target-input="nearest">
                                             <input type="text" id="txtHoraIni" class="form-control datetimepicker-input" data-target="#txtHoraInicio" />
                                             <div class="input-group-append" data-target="#txtHoraInicio" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="far fa-clock"></i></div>
                                             </div>
-                                        </div>
+                                        </div>*@
+                                        <input type="time" id="txtHoraIni" class="form-control" />
                                     </div>
                                 </div>
                                 <br />
                                 <div class="form-row">
                                     <label for="fechafin" class="control-label col-md-2">Fecha Fin:</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" id="txtFechaFin" placeholder="dd/mm/yyyy" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask />
+                                        <input type="text" class="form-control formatofecha" id="txtFechaFin" placeholder="dd/mm/yyyy" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask />
                                         @*<div class="input-group date" id="txtFechaFin" data-target-input="nearest">
                                                 <input type="text" id="txtFechaFi" class="form-control datetimepicker-input" data-target="#TxtFechaFin" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                                                 <input type="text" id="txtFechaFi" class="form-control datetimepicker-input" data-target="#txtFechaFin" />
@@ -118,12 +119,14 @@
                                     </div>
                                     <label for="horafin" class="control-label col-md-2">Hora Fin:</label>
                                     <div class="col-md-4">
-                                        <div class="input-group date" id="txtHoraFin" data-target-input="nearest">
+
+                                        @*<div class="input-group date" id="txtHoraFin" data-target-input="nearest">
                                             <input type="text"id="txtHoraFi" class="form-control datetimepicker-input" data-target="#txtHoraFin" />
                                             <div class="input-group-append" data-target="#txtHoraFin" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="far fa-clock"></i></div>
                                             </div>
-                                        </div>
+                                        </div>*@
+                                           <input type="time" id="txtHoraFi" class="form-control" />
                                     </div>
                                 </div>
                             </div>
