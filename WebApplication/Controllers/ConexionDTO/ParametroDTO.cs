@@ -72,8 +72,7 @@ namespace WebApplication.Controllers.ConexionDTO
         #endregion
 
         #region FuncionGrabarEditarCabecera
-
-      
+ 
         public string FunGrabarEditar(CabeceraEquipos _cabecera)
         {
             try
