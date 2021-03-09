@@ -32,6 +32,7 @@ namespace WebApplication.Controllers
             {
                 Session["_conexion"] = ConfigurationManager.AppSettings["SqlConn"];
                 Session["_UsuarioId"] = _usuario.id_usuario;
+                Session["_Perfil"] = _usuario.Perfiles.nombre_perfil;
                 Session["_Host"] = Request.UserHostName;
                 return RedirectToAction("Index", "Menu");
 

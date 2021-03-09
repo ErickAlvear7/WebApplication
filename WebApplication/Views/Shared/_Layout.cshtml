@@ -47,6 +47,12 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/Menu/Index" class="nav-link" style="font-size:medium">Inicio</a>
                 </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    @*<a data-toggle="modal" data-placement="top" data-target="#logoutModal" title="Cerrar Sesión" href="#">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    </a>*@
+                    <a href="/Login/Indexv1" class="nav-link" style="font-size:medium">Cerrar Sesión</a>
+                </li>
             </ul>
 
 
@@ -72,30 +78,35 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2 pace-loading-bar-gray-dark">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-user-lock" style="color:red; font-size:20px"></i>
-                                <p>
-                                    Seguridad
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
+                        @{
+                            if (Session["_Perfil"].ToString() == "Administrador")
+                            {
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-user-lock" style="color:red; font-size:20px"></i>
+                                        <p>
+                                            Seguridad
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
 
-                                <li class="nav-item">
-                                    <a href="/Perfiles/Index" class="nav-link">
-                                        <i class="fas fa-user-edit nav-icon"></i>
-                                        <p>Perfiles</p>
-                                    </a>
+                                        <li class="nav-item">
+                                            <a href="/Perfiles/Index" class="nav-link">
+                                                <i class="fas fa-user-edit nav-icon"></i>
+                                                <p>Perfiles</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="/Usuarios/Index" class="nav-link">
+                                                <i class="fas fa-users nav-icon"></i>
+                                                <p>Usuarios</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="/Usuarios/Index" class="nav-link">
-                                        <i class="fas fa-users nav-icon"></i>
-                                        <p>Usuarios</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                            }
+                        }
 
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link active">
@@ -115,7 +126,13 @@
                                 <li class="nav-item">
                                     <a href="/Clientes/OrdenIndex" class="nav-link">
                                         <i class="fas fa-boxes nav-icon"></i>
-                                        <p>Ordenes</p>
+                                        <p>Ordenes Nuevas</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Clientes/OrdenIndex" class="nav-link">
+                                        <i class="fas fa-boxes nav-icon"></i>
+                                        <p>Ordenes Finalizadas</p>
                                     </a>
                                 </li>
                             </ul>
@@ -143,7 +160,10 @@
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
+
         </aside>
+
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -154,10 +174,10 @@
             </div>
             <!-- /.content -->
         </div>
-   
+
         <aside class="control-sidebar control-sidebar-dark">
-        
-        </aside>  
+        </aside>
+
     </div>
 
 

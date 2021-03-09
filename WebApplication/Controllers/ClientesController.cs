@@ -146,9 +146,9 @@ namespace WebApplication.Controllers
             _listaClientes = new ClienteDTO().FunGetClientesEquipo(id);
             List<Equipo> _equipos = new ClienteDTO().FunGetEquipos(id);
 
-            List<CabeceraDetalle> _grupo = new ClienteDTO().FunGetCabDet("Grupo");
-            List<CabeceraDetalle> _marca = new ClienteDTO().FunGetCabDet("Marca");
-            List<CabeceraDetalle> _modelo = new ClienteDTO().FunGetCabDet("Modelo");
+            List<CabeceraDetalle> _grupo = new ClienteDTO().FunGetCabDet("GRUPO");
+            List<CabeceraDetalle> _marca = new ClienteDTO().FunGetCabDet("MARCA");
+            List<CabeceraDetalle> _modelo = new ClienteDTO().FunGetCabDet("MODELO");
             ViewBag.ClienteId = id;
             ViewBag.Equipos = _equipos;
             ViewBag.grupo_equipo = new SelectList(_grupo, "CodId", "Detalle", 0);
@@ -188,7 +188,7 @@ namespace WebApplication.Controllers
             List<SelectListItem> _equipos = new List<SelectListItem>() {
                 new SelectListItem() { Value="0", Text="--Seleccione Equipo--" },
            };
-            List<CabeceraDetalle> _trabajo = new ClienteDTO().FunGetCabDet("Tipo Trabajo");
+            List<CabeceraDetalle> _trabajo = new ClienteDTO().FunGetCabDet("TIPO TRABAJO");
             List<CabeceraDetalle> _tecnico = new ClienteDTO().FunGetTecnicos();
             ViewBag.Equipos = _equipos;
             ViewBag.TipoTrabajo = new SelectList(_trabajo, "CodId", "Detalle", 0);

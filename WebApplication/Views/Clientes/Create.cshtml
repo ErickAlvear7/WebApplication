@@ -40,19 +40,19 @@
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Direccion:</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.direccion_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtDirec", maxlength="200", style = "text-transform:uppercase;" } })
+                    @Html.EditorFor(model => model.direccion_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtDirec", @maxlength="200", style = "text-transform:uppercase;" } })
                 </div>
             </div>
             <hr />
             <div class="form-row">
                 <label for="direc" class="control-label col-md-2">Telefono 1:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.telefono1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtTel1" } })
+                    @Html.EditorFor(model => model.telefono1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtTel1" , @maxlength = "10" } })
                     @*<input type="number" class="form-control" id="txtTel1" />*@
                 </div>
                 <label for="direc" class="control-label col-md-2">Telefono 2:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.telefono2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtTel2" } })
+                    @Html.EditorFor(model => model.telefono2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtTel2", @maxlength = "10" } })
                 </div>
             </div>
             <hr />
@@ -74,7 +74,7 @@
                 </div>
                 <label for="direc" class="control-label col-md-2">Celular:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.celular1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtCel1" } })
+                    @Html.EditorFor(model => model.celular1_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtCel1", @maxlength = "10" } })
                 </div>
             </div>
             <hr />
@@ -85,7 +85,7 @@
                 </div>
                 <label for="direc" class="control-label col-md-2">Celular:</label>
                 <div class="col-md-2">
-                    @Html.EditorFor(model => model.celular2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtCel2" } })
+                    @Html.EditorFor(model => model.celular2_cliente, new { htmlAttributes = new { @class = "form-control", @id = "txtCel2", @maxlength = "10" } })
                 </div>
             </div>
         </form>

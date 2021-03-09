@@ -257,6 +257,7 @@ namespace WebApplication.Controllers.ConexionDTO
             var _query = from orden in _db.OrdenesTrabajo
 
                          join equipo in _db.Equipos on orden.id_equipo equals equipo.id_equipo
+                         where orden.orden_estado == "INI"
 
                          select new OrdenIndex
 
@@ -274,7 +275,7 @@ namespace WebApplication.Controllers.ConexionDTO
 
                                             join cabecera in _db.CabeceraEquipos on detalle.id_cabecera equals (cabecera.id_cabecera)
 
-                                            where cabecera.nombre_cabecera == "Tipo Trabajo" &&
+                                            where cabecera.nombre_cabecera == "TIPO TRABAJO" &&
 
                                             detalle.valor_detalle == orden.orden_tipotrabajo
 
