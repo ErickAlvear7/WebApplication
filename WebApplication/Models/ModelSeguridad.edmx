@@ -92,6 +92,13 @@
           <Property Name="usuariomod_equipo" Type="int" Nullable="false" />
           <Property Name="terminalmod_equipo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="ListaTrabajos">
+          <Key>
+            <PropertyRef Name="id_listatrabajo" />
+          </Key>
+          <Property Name="id_listatrabajo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="detalle_listatrabajo" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="OrdenesTrabajo">
           <Key>
             <PropertyRef Name="id_orden" />
@@ -105,8 +112,25 @@
           <Property Name="orden_notas" Type="varchar" MaxLength="500" />
           <Property Name="orden_fechainicio" Type="datetime" Nullable="false" />
           <Property Name="orden_fechafin" Type="datetime" Nullable="false" />
+          <Property Name="orden_fechainiciotr" Type="datetime" />
+          <Property Name="orden_fechafintr" Type="datetime" />
+          <Property Name="orden_observaciontr" Type="varchar" MaxLength="150" />
+          <Property Name="orden_imagentr" Type="varbinary(max)" />
+          <Property Name="orden_rutaimagen" Type="varchar" MaxLength="100" />
+          <Property Name="orden_longitud" Type="varchar" MaxLength="50" />
+          <Property Name="orden_latitud" Type="varchar" MaxLength="50" />
           <Property Name="orden_auxvar" Type="varchar" MaxLength="50" />
           <Property Name="orden_auxint" Type="int" />
+        </EntityType>
+        <EntityType Name="OrdenesTrabajoDetalle">
+          <Key>
+            <PropertyRef Name="id_ordendetalle" />
+          </Key>
+          <Property Name="id_ordendetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_orden" Type="int" Nullable="false" />
+          <Property Name="id_listatrabajo" Type="int" Nullable="false" />
+          <Property Name="auxv_ordendetalle" Type="varchar" MaxLength="50" />
+          <Property Name="auxi_ordendetalle" Type="int" />
         </EntityType>
         <EntityType Name="Perfiles">
           <Key>
@@ -139,6 +163,7 @@
           <Property Name="login_usuario" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="password_usuario" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="estado_usuario" Type="bit" Nullable="false" />
+          <Property Name="imagen_usuario" Type="varchar" MaxLength="100" />
           <Property Name="aux_usui" Type="int" />
           <Property Name="aux_usuii" Type="varchar" MaxLength="50" />
           <Property Name="creacion_usuario" Type="datetime" Nullable="false" />
@@ -191,6 +216,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrdenesTrabajoDetalle_OrdenesTrabajo">
+          <End Role="OrdenesTrabajo" Type="Self.OrdenesTrabajo" Multiplicity="1" />
+          <End Role="OrdenesTrabajoDetalle" Type="Self.OrdenesTrabajoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenesTrabajo">
+              <PropertyRef Name="id_orden" />
+            </Principal>
+            <Dependent Role="OrdenesTrabajoDetalle">
+              <PropertyRef Name="id_orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Perfiles">
           <End Role="Perfiles" Type="Self.Perfiles" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -209,7 +246,9 @@
           <EntitySet Name="CuidadClientes" EntityType="Self.CuidadClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleEquipos" EntityType="Self.DetalleEquipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaTrabajos" EntityType="Self.ListaTrabajos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenesTrabajo" EntityType="Self.OrdenesTrabajo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenesTrabajoDetalle" EntityType="Self.OrdenesTrabajoDetalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfiles" EntityType="Self.Perfiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProvinciaClientes" EntityType="Self.ProvinciaClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
@@ -228,6 +267,10 @@
           <AssociationSet Name="FK_OdenesTrabajo_Equipos" Association="Self.FK_OdenesTrabajo_Equipos">
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="OrdenesTrabajo" EntitySet="OrdenesTrabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesTrabajoDetalle_OrdenesTrabajo" Association="Self.FK_OrdenesTrabajoDetalle_OrdenesTrabajo">
+            <End Role="OrdenesTrabajo" EntitySet="OrdenesTrabajo" />
+            <End Role="OrdenesTrabajoDetalle" EntitySet="OrdenesTrabajoDetalle" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuarios_Perfiles" Association="Self.FK_Usuarios_Perfiles">
             <End Role="Perfiles" EntitySet="Perfiles" />
@@ -265,6 +308,7 @@
           <Property Name="aux_usuii" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="creacion_usuario" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Perfiles" Relationship="Self.FK_Usuarios_Perfiles" FromRole="Usuarios" ToRole="Perfiles" />
+          <Property Name="imagen_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Usuarios_Perfiles">
           <End Role="Perfiles" Type="Self.Perfiles" Multiplicity="1" />
@@ -307,6 +351,12 @@
           <AssociationSet Name="FK_OdenesTrabajo_Equipos" Association="BDD_HRVModel.FK_OdenesTrabajo_Equipos">
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="OrdenesTrabajo" EntitySet="OrdenesTrabajo" />
+          </AssociationSet>
+          <EntitySet Name="ListaTrabajos" EntityType="BDD_HRVModel.ListaTrabajos" />
+          <EntitySet Name="OrdenesTrabajoDetalle" EntityType="BDD_HRVModel.OrdenesTrabajoDetalle" />
+          <AssociationSet Name="FK_OrdenesTrabajoDetalle_OrdenesTrabajo" Association="BDD_HRVModel.FK_OrdenesTrabajoDetalle_OrdenesTrabajo">
+            <End Role="OrdenesTrabajo" EntitySet="OrdenesTrabajo" />
+            <End Role="OrdenesTrabajoDetalle" EntitySet="OrdenesTrabajoDetalle" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Clientes">
@@ -461,9 +511,17 @@
           <Property Name="orden_notas" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="orden_fechainicio" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="orden_fechafin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="orden_fechainiciotr" Type="DateTime" Precision="3" />
+          <Property Name="orden_fechafintr" Type="DateTime" Precision="3" />
+          <Property Name="orden_observaciontr" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="orden_imagentr" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="orden_rutaimagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="orden_longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="orden_latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="orden_auxvar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="orden_auxint" Type="Int32" />
           <NavigationProperty Name="Equipos" Relationship="BDD_HRVModel.FK_OdenesTrabajo_Equipos" FromRole="OrdenesTrabajo" ToRole="Equipos" />
+          <NavigationProperty Name="OrdenesTrabajoDetalle" Relationship="BDD_HRVModel.FK_OrdenesTrabajoDetalle_OrdenesTrabajo" FromRole="OrdenesTrabajo" ToRole="OrdenesTrabajoDetalle" />
         </EntityType>
         <Association Name="FK_OdenesTrabajo_Equipos">
           <End Type="BDD_HRVModel.Equipos" Role="Equipos" Multiplicity="1" />
@@ -474,6 +532,36 @@
             </Principal>
             <Dependent Role="OrdenesTrabajo">
               <PropertyRef Name="id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ListaTrabajos">
+          <Key>
+            <PropertyRef Name="id_listatrabajo" />
+          </Key>
+          <Property Name="id_listatrabajo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="detalle_listatrabajo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="OrdenesTrabajoDetalle">
+          <Key>
+            <PropertyRef Name="id_ordendetalle" />
+          </Key>
+          <Property Name="id_ordendetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_orden" Type="Int32" Nullable="false" />
+          <Property Name="id_listatrabajo" Type="Int32" Nullable="false" />
+          <Property Name="auxv_ordendetalle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="auxi_ordendetalle" Type="Int32" />
+          <NavigationProperty Name="OrdenesTrabajo" Relationship="BDD_HRVModel.FK_OrdenesTrabajoDetalle_OrdenesTrabajo" FromRole="OrdenesTrabajoDetalle" ToRole="OrdenesTrabajo" />
+        </EntityType>
+        <Association Name="FK_OrdenesTrabajoDetalle_OrdenesTrabajo">
+          <End Type="BDD_HRVModel.OrdenesTrabajo" Role="OrdenesTrabajo" Multiplicity="1" />
+          <End Type="BDD_HRVModel.OrdenesTrabajoDetalle" Role="OrdenesTrabajoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenesTrabajo">
+              <PropertyRef Name="id_orden" />
+            </Principal>
+            <Dependent Role="OrdenesTrabajoDetalle">
+              <PropertyRef Name="id_orden" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -498,6 +586,7 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="BDD_HRVModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="imagen_usuario" ColumnName="imagen_usuario" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
                 <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
@@ -618,6 +707,13 @@
               <MappingFragment StoreEntitySet="OrdenesTrabajo">
                 <ScalarProperty Name="orden_auxint" ColumnName="orden_auxint" />
                 <ScalarProperty Name="orden_auxvar" ColumnName="orden_auxvar" />
+                <ScalarProperty Name="orden_latitud" ColumnName="orden_latitud" />
+                <ScalarProperty Name="orden_longitud" ColumnName="orden_longitud" />
+                <ScalarProperty Name="orden_rutaimagen" ColumnName="orden_rutaimagen" />
+                <ScalarProperty Name="orden_imagentr" ColumnName="orden_imagentr" />
+                <ScalarProperty Name="orden_observaciontr" ColumnName="orden_observaciontr" />
+                <ScalarProperty Name="orden_fechafintr" ColumnName="orden_fechafintr" />
+                <ScalarProperty Name="orden_fechainiciotr" ColumnName="orden_fechainiciotr" />
                 <ScalarProperty Name="orden_fechafin" ColumnName="orden_fechafin" />
                 <ScalarProperty Name="orden_fechainicio" ColumnName="orden_fechainicio" />
                 <ScalarProperty Name="orden_notas" ColumnName="orden_notas" />
@@ -627,6 +723,25 @@
                 <ScalarProperty Name="orden_tipotrabajo" ColumnName="orden_tipotrabajo" />
                 <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
                 <ScalarProperty Name="id_orden" ColumnName="id_orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaTrabajos">
+            <EntityTypeMapping TypeName="BDD_HRVModel.ListaTrabajos">
+              <MappingFragment StoreEntitySet="ListaTrabajos">
+                <ScalarProperty Name="detalle_listatrabajo" ColumnName="detalle_listatrabajo" />
+                <ScalarProperty Name="id_listatrabajo" ColumnName="id_listatrabajo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenesTrabajoDetalle">
+            <EntityTypeMapping TypeName="BDD_HRVModel.OrdenesTrabajoDetalle">
+              <MappingFragment StoreEntitySet="OrdenesTrabajoDetalle">
+                <ScalarProperty Name="auxi_ordendetalle" ColumnName="auxi_ordendetalle" />
+                <ScalarProperty Name="auxv_ordendetalle" ColumnName="auxv_ordendetalle" />
+                <ScalarProperty Name="id_listatrabajo" ColumnName="id_listatrabajo" />
+                <ScalarProperty Name="id_orden" ColumnName="id_orden" />
+                <ScalarProperty Name="id_ordendetalle" ColumnName="id_ordendetalle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

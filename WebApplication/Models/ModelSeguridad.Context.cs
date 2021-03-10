@@ -34,5 +34,7 @@ namespace WebApplication.Models
         public virtual DbSet<DetalleEquipos> DetalleEquipos { get; set; }
         public virtual DbSet<Equipos> Equipos { get; set; }
         public virtual DbSet<OrdenesTrabajo> OrdenesTrabajo { get; set; }
+        public virtual DbSet<ListaTrabajos> ListaTrabajos { get; set; }
+        public virtual DbSet<OrdenesTrabajoDetalle> OrdenesTrabajoDetalle { get; set; }
     }
 }

@@ -19,8 +19,6 @@ namespace WebApplication.Controllers.ConexionDTO
         #endregion
 
         #region FuncionObtenerClientes
-
-
         public List<Catalogo> FunGetClientes()
         {
             try
@@ -89,9 +87,7 @@ namespace WebApplication.Controllers.ConexionDTO
         }
         #endregion
 
-        #region FuncionObtenerCabeceraDetalle
-
-       
+        #region FuncionObtenerCabeceraDetalle       
         public List<CabeceraDetalle> FunGetCabDet(string _nombre)
         {
 
@@ -303,6 +299,97 @@ namespace WebApplication.Controllers.ConexionDTO
 
 
         }
+        #endregion
+
+        #region FunGerOrdenFinalizadas
+        public List<OrdenFinalizadas> FunGetOrdenFinalizadas()
+        {
+            var _query = from orden in _db.OrdenesTrabajo
+
+                         join equipo in _db.Equipos on orden.id_equipo equals equipo.id_equipo
+
+                         where orden.orden_estado == "FIN"
+
+                         select new OrdenFinalizadas
+
+                         {
+                             IdOrden = orden.id_orden,
+                             Cliente = (from cliente in _db.Clientes
+
+                                        where cliente.id_cliente == equipo.id_cliente
+
+                                        select cliente.nombre_cliente).FirstOrDefault(),
+
+                             Equipo = equipo.nombre_equipo,
+                             Tecnico = (from usuario in _db.Usuarios
+                                        where usuario.id_usuario == orden.orden_tecnico
+                                        select usuario.nombre_usuario + " " + usuario.apellido_usuario).FirstOrDefault(),
+
+                             FechaInicioTr = orden.orden_fechainiciotr.ToString(),
+
+                             FechaFinTr = orden.orden_fechafintr.ToString()
+
+                         };
+
+            return _query.ToList();
+
+        }
+        #endregion
+
+        #region FunGerTrabajosRealizados
+        //public List<OrdenCabecera> FunGetTrabajoRealizados(int idorden)
+        //{
+        //    OrdenDetalle listatrabajo = new OrdenDetalle();
+
+        //    listatrabajo.OrdenDet = (from ordencab in _db.OrdenesTrabajo
+        //                             join ordendet in _db.OrdenesTrabajoDetalle on ordencab.id_orden equals ordendet.id_orden
+        //                             where ordencab.id_orden == idorden
+        //                             select new OrdenCabecera
+        //                             {
+        //                                 TipoTrabajo = (from cabecera in _db.CabeceraEquipos
+        //                                                join detalle in _db.DetalleEquipos on cabecera.id_cabecera equals detalle.id_cabecera
+        //                                                where cabecera.nombre_cabecera == "TIPO TRABAJO"
+        //                                                select detalle.nombre_detalle).FirstOrDefault(),
+        //                                 Imagen = ordencab.orden_rutaimagen,
+        //                                 TrabajosRealizados = (from ltrabajo in _db.ListaTrabajos
+        //                                                       where ltrabajo.id_listatrabajo==ordendet.id_listatrabajo
+        //                                                       select ltrabajo.detalle_listatrabajo).FirstOrDefault()
+        //                             }).ToList();
+
+        //    return listatrabajo.OrdenDet;
+        //}
+
+        public List<OrdenCabecera> FunGeOrdenCabecera(int idorden)
+        {
+            var _query = (from ordencab in _db.OrdenesTrabajo
+                          where ordencab.id_orden == idorden
+                          select new OrdenCabecera
+                          {
+                              TipoTrabajo = (from cabecera in _db.CabeceraEquipos
+                                             join detalle in _db.DetalleEquipos on cabecera.id_cabecera equals detalle.id_cabecera
+                                             where cabecera.nombre_cabecera == "TIPO TRABAJO"
+                                             select detalle.nombre_detalle).FirstOrDefault(),
+                              Imagen = ordencab.orden_rutaimagen
+                          });
+
+            return _query.ToList();
+        }
+
+        public List<OrdenesFinalizadas> FunGetOrdenDetalle(int idorden)
+        {
+            OrdenDetalle listatrabajo = new OrdenDetalle();
+
+            listatrabajo.OrdenDet = (from ordendet in _db.OrdenesTrabajoDetalle
+                                     where ordendet.id_orden == idorden
+                                     select new OrdenesFinalizadas
+                                     {
+                                         TrabajosRealizados = (from ltrabajo in _db.ListaTrabajos
+                                                               where ltrabajo.id_listatrabajo == ordendet.id_listatrabajo
+                                                               select ltrabajo.detalle_listatrabajo).FirstOrDefault()
+                                     }).ToList();
+
+            return listatrabajo.OrdenDet;
+        } 
         #endregion
 
     }

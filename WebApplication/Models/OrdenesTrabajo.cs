@@ -14,6 +14,12 @@ namespace WebApplication.Models
     
     public partial class OrdenesTrabajo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public OrdenesTrabajo()
+        {
+            this.OrdenesTrabajoDetalle = new HashSet<OrdenesTrabajoDetalle>();
+        }
+    
         public int id_orden { get; set; }
         public int id_equipo { get; set; }
         public string orden_tipotrabajo { get; set; }
@@ -23,9 +29,18 @@ namespace WebApplication.Models
         public string orden_notas { get; set; }
         public System.DateTime orden_fechainicio { get; set; }
         public System.DateTime orden_fechafin { get; set; }
+        public Nullable<System.DateTime> orden_fechainiciotr { get; set; }
+        public Nullable<System.DateTime> orden_fechafintr { get; set; }
+        public string orden_observaciontr { get; set; }
+        public byte[] orden_imagentr { get; set; }
+        public string orden_rutaimagen { get; set; }
+        public string orden_longitud { get; set; }
+        public string orden_latitud { get; set; }
         public string orden_auxvar { get; set; }
         public Nullable<int> orden_auxint { get; set; }
     
         public virtual Equipos Equipos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdenesTrabajoDetalle> OrdenesTrabajoDetalle { get; set; }
     }
 }

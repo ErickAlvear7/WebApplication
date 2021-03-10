@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace WebApplication.Controllers.ConexionDTO
 {
@@ -106,7 +104,6 @@ namespace WebApplication.Controllers.ConexionDTO
     public class OrdenIndex
 
     {
-
         public string Cliente { get; set; }
 
         public string Equipo { get; set; }
@@ -123,6 +120,42 @@ namespace WebApplication.Controllers.ConexionDTO
 
         public DateTime? FechaInicio { get; set; }
 
+    }
+    #endregion
+
+    #region OrdnesFinalizadas
+    public class OrdenFinalizadas
+
+    {
+        public int IdOrden { get; set; }
+        public string Cliente { get; set; }
+        public string Equipo { get; set; }
+        public string Tecnico { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
+        public string FechaInicioTr { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
+        public string FechaFinTr { get; set; }
+
+    }
+    #endregion
+
+    #region OrdenCabeceraDetalle
+    public class OrdenCabecera
+    {
+        public string TipoTrabajo { get; set; }
+        public string Imagen { get; set; }
+    }
+
+    public class OrdenesFinalizadas
+    {
+        public string TrabajosRealizados { get; set; }             
+    }
+
+    public class OrdenDetalle
+    {
+        public List<OrdenesFinalizadas> OrdenDet { get; set; }
     } 
     #endregion
 

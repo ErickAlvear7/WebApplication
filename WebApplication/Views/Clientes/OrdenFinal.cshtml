@@ -1,0 +1,138 @@
+﻿
+@model IEnumerable<WebApplication.Controllers.ConexionDTO.OrdenFinalizadas>
+
+@{
+
+    <title>@ViewBag.Title</title>
+}
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content" style="background-color: #F6F8FF">
+            @*Modal Header*@
+            <div class="modal-header" id="header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            @*Modal body*@
+            <div class="modal-body">
+                <div id="modal-content">
+                    cargando..
+                </div>
+            </div>
+            @*Modal footer*@
+            <div class="modal-footer">
+                <div class="container text-lg-center">
+                    <div class="btn-group btn-group-justified">
+                        <button type="button" class="btn btn-outline-primary btn-sm ml-1" data-dismiss="modal">Cerrar</button>                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="well well-sm">
+
+        <a class="btn btn-outline-primary" href="OrdenesTrabajo" id="btnNuevo"><i class="fas fa-plus"></i></a>
+
+    </div>
+
+    <br />
+
+    <table id="tabla" class="table table-bordered table-hover" style="width:100%">
+
+        <thead class="text-center">
+
+            <tr>
+                <th>IdOrden</th>
+
+                <th>Cliente</th>
+
+                <th>Equipo</th>
+
+                <th>Tecnico</th>
+
+                <th>FecIni_Trabajo</th>
+
+                <th>FecFin_Trabajo</th>
+
+                <th>Detalle</th>
+
+            </tr>
+
+        </thead>
+
+
+
+        <tbody>
+
+            @foreach (var item in Model)
+
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdOrden)
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Cliente)
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Equipo)
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Tecnico)
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.FechaInicioTr)
+
+                    </td>
+
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.FechaFinTr)
+
+                    </td>
+
+                    <td>
+
+                        <button id="btnDetalle" class="btn btn-outline-info btn-sm"><i class="fas fa-archive"></i></button>
+
+                    </td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+@section scripts{
+
+    <script src="~/JQuery/TablaIdioma.js"></script>
+    <script src="~/JQuery/Clientes.js"></script>
+
+
+}
+
+

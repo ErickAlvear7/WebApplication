@@ -351,4 +351,18 @@
 
     });
 
+    $(document).on("click", "#btnDetalle", function (eve) {
+        eve.preventDefault();
+        _fila = $(this).closest("tr");
+        _data = $('#tabla').dataTable().fnGetData(_fila);
+        _id = _data[0];
+        $("#modal-content").load("/Clientes/MostrarOrdenesFin/" + _id);
+        $(".modal-title").text("Trabajos Realizados");
+        $("#header").css("background-color", "#DEFAF9");
+        $("#header").css("color", "gray");
+        $("#myModal").modal("show");
+        //window.location.href = "/Clientes/MostrarOrdenesFin/" + _id;
+
+    });
+
 });

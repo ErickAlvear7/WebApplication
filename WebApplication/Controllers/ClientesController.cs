@@ -20,7 +20,6 @@ namespace WebApplication.Controllers
         #endregion
 
 
-
         #region GET: Clientes
         public ActionResult Index()
         {
@@ -159,7 +158,6 @@ namespace WebApplication.Controllers
         #endregion
 
 
-
         #region POST: GuardarEquipoCliente
         [HttpPost]
         public ActionResult GuardarEquipoCliente(int clienteId, List<Equipo> equipos)
@@ -266,10 +264,33 @@ namespace WebApplication.Controllers
             List<OrdenIndex> _orden = new ClienteDTO().FunGetOrdenCliente();
 
             return View(_orden);
-        } 
+        }
+
+        [HttpGet]
+        public ActionResult OrdenFinal()
+        {
+            ViewBag.Title = "ORDENES FINALIZADAS";
+            List<OrdenFinalizadas> _orden = new ClienteDTO().FunGetOrdenFinalizadas();
+            return View(_orden);
+        }
+        #endregion
+
+        #region MostrarOrdenesFin
+        [HttpGet]
+        public ActionResult MostrarOrdenesFin(int id)
+        {
+            List<OrdenCabecera> _ordencab = new ClienteDTO().FunGeOrdenCabecera(id);
+
+            ViewBag.TipoTrabajo = _ordencab.FirstOrDefault().TipoTrabajo;
+            ViewBag.Imagen = _ordencab.FirstOrDefault().Imagen;
+            List<OrdenesFinalizadas> _ordendetalle = new ClienteDTO().FunGetOrdenDetalle(id);
+
+            return View(_ordendetalle);
+        }
         #endregion
 
 
+        #region Disponse
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -277,6 +298,7 @@ namespace WebApplication.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        } 
+        #endregion
     }
 }

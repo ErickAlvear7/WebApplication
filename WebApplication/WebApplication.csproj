@@ -160,6 +160,9 @@
     <Compile Include="Models\Equipos.cs">
       <DependentUpon>ModelSeguridad.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ListaTrabajos.cs">
+      <DependentUpon>ModelSeguridad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModelSeguridad.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -176,6 +179,9 @@
       <DependentUpon>ModelSeguridad.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\OrdenesTrabajo.cs">
+      <DependentUpon>ModelSeguridad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrdenesTrabajoDetalle.cs">
       <DependentUpon>ModelSeguridad.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Perfiles.cs">
@@ -851,6 +857,8 @@
     <Content Include="VendorMenu\daterangepicker\bower.json" />
     <Content Include="VendorMenu\daterangepicker\example\browserify\README.md" />
     <Content Include="Views\Clientes\OrdenIndex.cshtml" />
+    <Content Include="Views\Clientes\OrdenFinal.cshtml" />
+    <Content Include="Views\Clientes\MostrarOrdenesFin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

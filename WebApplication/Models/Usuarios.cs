@@ -24,6 +24,7 @@ namespace WebApplication.Models
         public Nullable<int> aux_usui { get; set; }
         public string aux_usuii { get; set; }
         public System.DateTime creacion_usuario { get; set; }
+        public string imagen_usuario { get; set; }
     
         public virtual Perfiles Perfiles { get; set; }
     }
