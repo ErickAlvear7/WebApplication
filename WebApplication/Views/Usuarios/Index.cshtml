@@ -20,7 +20,7 @@
 </div>
  @*Modal body*@ 
 <div class="modal-body">
-    <div id="modal-content">
+    <div id="modal-content" data-url='@Url.Action("Create", "Usuarios")'>
         cargando..
     </div>
 </div>
@@ -33,6 +33,34 @@
                 </div>
             </div>
         </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalEdit" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content" style="background-color: #F6F8FF">
+            @*Modal Header*@
+            <div class="modal-header" id="header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            @*Modal body*@
+            <div class="modal-body">
+                <div id="modal-content" data-url='@Url.Action("Edit", "Usuarios")'>
+                    cargando..
+                </div>
+            </div>
+            @*Modal footer*@
+            <div class="modal-footer">
+                <div class="container text-lg-center">
+                    <div class="btn-group btn-group-justified">
+                        <button type="button" class="btn btn-outline-primary btn-sm ml-1" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-outline-success btn-sm ml-1" id="btnGuardarEdit">Guardar</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

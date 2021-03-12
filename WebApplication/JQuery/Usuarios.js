@@ -9,10 +9,19 @@ $(document).ready(function () {
 
     $("#btnNuevo").click(function (eve) {
         eve.preventDefault();
-        $("#modal-content").load("/Usuarios/Create");
-        $(".modal-title").text("Usuario");
+        //$("#modal-content").load("/Usuarios/Create");
+        //$(".modal-title").text("Usuario");
+        //$("#header").css("background-color", "#DEFAF9");
+        //$("#header").css("color", "gray");
+
+        var modal = $("#myModal #modal-content"); //Find the element
+        $(modal).load(modal.data('url')); //Fetch url and load partial view
+        $(".modal-title").text("Nuevo Usuario");
         $("#header").css("background-color", "#DEFAF9");
         $("#header").css("color", "gray");
+        $(this).attr('data-target', '#myModal');
+        $(this).attr('data-toggle', 'modal');        
+
         _opcion = 0, _estado = true;
         _id = 0;
  
@@ -63,17 +72,61 @@ $(document).ready(function () {
         }
     });
 
+    $("#btnGuardarEdit").click(function (eve) {
+        _perfil = $("#ddlPerfil").val().trim();
+        _nombres = $("#txtNombre").val().trim().toUpperCase();
+        _apellidos = $("#txtApellido").val().trim().toUpperCase();
+        _login = $("#txtLogin").val().trim();
+        _password = $("#txtPassword").val().trim();
+
+        if (_perfil == "") {
+
+            notification = alertify.notify('seleccione el perfil..!', 'warning', 5, function () { console.log('dismissed'); });
+            return;
+        }
+
+        if (_nombres == "") {
+
+            notification = alertify.notify('ingrese nombre..!', 'warning', 5, function () { console.log('dismissed'); });
+            return;
+        }
+        if (_apellidos == "") {
+            notification = alertify.notify('ingrese apellido..!', 'warning', 5, function () { console.log('dismissed'); });
+            return;
+        }
+        if (_login == "") {
+            notification = alertify.notify('ingrese un usuario..!', 'warning', 5, function () { console.log('dismissed'); });
+            return;
+        }
+        if (_password == "") {
+            notification = alertify.notify('ingrese una contraseña..!', 'warning', 5, function () { console.log('dismissed'); });
+            return;
+        }
+
+        FunEditarAjax();
+    });
+
     $(document).on("click", "#btnEditar", function (eve) {
         eve.preventDefault();
         _opcion = 1;
         _fila = $(this).closest("tr");
         _data = $('#tabla').dataTable().fnGetData(_fila);
         _loginAnt = _data[3];
-        $("#modal-content").load("/Usuarios/Edit/" + _loginAnt);
-        $(".modal-title").text("Editar Usuario");
+        txtEstado = _data[4];
+        //$("#modal-content").load("/Usuarios/Edit/" + _loginAnt);
+        //$(".modal-title").text("Editar Usuario");
+        //$("#header").css("background-color", "#DEFAF9");
+        //$("#header").css("color", "gray");
+        //$("#myModal").modal("show");
+
+        var modal = $("#myModalEdit #modal-content"); //Find the element
+        $(modal).load(modal.data('url') +"/"+ _loginAnt); //Fetch url and load partial view
+        $(".modal-title").text("Edit Usuario");
         $("#header").css("background-color", "#DEFAF9");
         $("#header").css("color", "gray");
-        $("#myModal").modal("show");
+        $(this).attr('data-target', '#myModalEdit');
+        $(this).attr('data-toggle', 'modal');
+        $("#myModalEdit").modal("show");
             
     });
 
@@ -105,7 +158,8 @@ $(document).ready(function () {
     function FunGrabarAjax() {
         $.ajax({
             type: 'POST',
-            url: '/Usuarios/Create',
+            //url: '/Usuarios/Create',
+            url: 'Create',
             dataType: 'json',
             data: {
                 id_usuario: _id, id_perfil: _perfil, nombre_usuario: _nombres, apellido_usuario: _apellidos,
@@ -150,7 +204,8 @@ $(document).ready(function () {
 
         $.ajax({
             type:'POST',
-            url: '/Usuarios/Edit',
+            url: 'Edit',
+            //url: '@Url.Action("Edit", "Usuarios")',
             dataType: 'json',
             data: {
                 login: _login, perfilId: _perfil, nombre: _nombres, apellido: _apellidos,
@@ -175,7 +230,7 @@ $(document).ready(function () {
                         globalPosition: "top-center",
                         className: datos.nameclass
                     });
-                    $("#myModal").modal("hide");
+                    $("#myModalEdit").modal("hide");
                     
                 } else {
 
@@ -198,7 +253,7 @@ $(document).ready(function () {
         alertify.confirm('desea eliminar el usuario ' + _usuario + '?', 'el registro se eliminara..!', function () {
             alertify.success('usuario eliminado')
             $.ajax({
-                url: "/Usuarios/Delete",
+                url: "Delete",
                 type: "POST",
                 dataType: "json",
                 data: { id: _login },

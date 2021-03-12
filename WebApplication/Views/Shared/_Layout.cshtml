@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/default.min.css">
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/semantic.min.css">
     <link rel="stylesheet" href="~/VendorMenu/alertify/css/themes/bootstrap.min.css">
-    <!--Select2-->  
+    <!--Select2-->
     <!-- Theme style -->
     <link rel="stylesheet" href="~/VendorMenu/dist/css/adminlte.min.css">
 
@@ -49,8 +49,8 @@
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     @*<a data-toggle="modal" data-placement="top" data-target="#logoutModal" title="Cerrar Sesión" href="#">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                    </a>*@
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>*@
                     <a href="/Login/Indexv1" class="nav-link" style="font-size:medium">Cerrar Sesión</a>
                 </li>
             </ul>
@@ -92,13 +92,17 @@
                                     <ul class="nav nav-treeview">
 
                                         <li class="nav-item">
-                                            <a href="/Perfiles/Index" class="nav-link">
+                                            @*<a href="/Perfiles/Index" class="nav-link">
+                                                <i class="fas fa-user-edit nav-icon"></i>
+                                                <p>Perfiles</p>
+                                            </a>*@
+                                            <a href='@Url.Action("Index","Perfiles")' class="nav-link">
                                                 <i class="fas fa-user-edit nav-icon"></i>
                                                 <p>Perfiles</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="/Usuarios/Index" class="nav-link">
+                                            <a href='@Url.Action("Index","Usuarios")' class="nav-link">
                                                 <i class="fas fa-users nav-icon"></i>
                                                 <p>Usuarios</p>
                                             </a>
@@ -208,9 +212,9 @@
     <script src="~/JQuery/notify.min.js"></script>
     <!--alertify-->
     <script src="~/VendorMenu/alertify/js/alertify.min.js"></script>
-   <!--Inputmask-->
+    <!--Inputmask-->
     <script src="~/VendorMenu/inputmask/jquery.inputmask.min.js"></script>
-   
+
 
 
     @RenderSection("scripts", required: false)

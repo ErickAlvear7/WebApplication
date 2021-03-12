@@ -3,12 +3,8 @@
 @{
     Layout = null;
 }
-
-
     @using (Html.BeginForm()) 
     {
-        @Html.AntiForgeryToken()
-
        <div class="container">
             <div class="row">
                  <div class="form-inline col-md-12">
@@ -20,9 +16,6 @@
             </div>
            <hr/>  
        </div>
-        
-       
-
     }
     
  

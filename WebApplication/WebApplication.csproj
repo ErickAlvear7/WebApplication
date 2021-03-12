@@ -243,6 +243,7 @@
     <Content Include="Models\ModelSeguridad.edmx.diagram">
       <DependentUpon>ModelSeguridad.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\TitulacionWeb.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

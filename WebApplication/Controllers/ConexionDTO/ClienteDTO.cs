@@ -54,16 +54,13 @@ namespace WebApplication.Controllers.ConexionDTO
         }
         #endregion
 
-        #region FuncionObtenerClienteEquipo
-
-        
+        #region FuncionObtenerClienteEquipo        
         public List<Catalogo> FunGetClientesEquipo(int id)
         {
             try
             {
                 var __cliente = from cliente in _db.Clientes
-                                where cliente.id_cliente == id
-                               
+                                where cliente.id_cliente == id && cliente.estado_cliente                               
                                 select new Catalogo
                                 {
                                     ClienteId = cliente.id_cliente,
@@ -73,11 +70,7 @@ namespace WebApplication.Controllers.ConexionDTO
                                     Contacto = cliente.contacto1_cliente,
                                     Direccion = cliente.direccion_cliente
                                 };
-
-
                 return __cliente.ToList();
-
-
             }
             catch (Exception ex)
             {

@@ -4,12 +4,20 @@
     var notification;
     var _fila, _row, _datSet, _perfil, _button;
 
-    $("#btnNuevo").click(function (eve) {
-        eve.preventDefault();
-        $("#modal-content").load("/Perfiles/Create");
-        $(".modal-title").text("Perfil");
+    $("#btnNuevo").click(function (e) {
+        e.preventDefault();
+        //$("#modal-content").load("/Perfiles/Create");
+        //$(".modal-title").text("Perfil");
+        //$("#header").css("background-color", "#DEFAF9");
+        //$("#header").css("color", "gray");
+
+        var modal = $("#myModal #modal-content"); //Find the element
+        $(modal).load(modal.data('url')); //Fetch url and load partial view
+        $(".modal-title").text("Nuevo Perfil");
         $("#header").css("background-color", "#DEFAF9");
         $("#header").css("color", "gray");
+        $(this).attr('data-target', '#myModal');
+        $(this).attr('data-toggle', 'modal');
         _opcion = 0, _estado = true;
         _id = 0;
     });

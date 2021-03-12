@@ -19,7 +19,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+    @*@Html.AntiForgeryToken()*@
     @Html.HiddenFor(model => model.login_usuario)
 
     <div class="container">
