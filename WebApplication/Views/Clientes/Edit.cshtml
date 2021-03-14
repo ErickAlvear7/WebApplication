@@ -20,7 +20,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+    
     @Html.HiddenFor(model => model.id_cliente,new { @id="IdCliente"})
 
 
@@ -104,7 +104,7 @@
             <div class="form-row">
                 <label for="estado" class="control-label col-md-2">Estado:</label>
                 <div class="checkbox col-md-1">
-                    <label for="estado" class="control-label col-md-2" , id="LblEstado">@LblEstado</label>
+                    <label for="estado" class="control-label col-md-2"  id="LblEstado">@LblEstado</label>
                     @Html.CheckBox("Estado", @estado, htmlAttributes: new { @class = "form-check-input", @id = "ChkEstado" })
                 </div>
             </div>
@@ -114,7 +114,7 @@
 
         <div class="container text-center">
             <div class="btn-group btn-group-justified">      
-                <button type="button" class="btn btn-outline-primary btn-sm ml-1" id="btnRegresar">Regresar</button>
+                <button type="button" class="btn btn-outline-primary btn-sm ml-1" id="btnRegresarEdit">Regresar</button>
                 <button type="button" class="btn btn-outline-success btn-sm ml-1" id="btnModificar">Modificar</button>
             </div>
 

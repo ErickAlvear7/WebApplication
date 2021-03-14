@@ -45,13 +45,13 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-angle-double-left" style="font-size:30px;"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="/Menu/Index" class="nav-link" style="font-size:medium">Inicio</a>
+                    <a href="~/Menu/Index" class="nav-link" style="font-size:medium">Inicio</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     @*<a data-toggle="modal" data-placement="top" data-target="#logoutModal" title="Cerrar Sesión" href="#">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>*@
-                    <a href="/Login/Indexv1" class="nav-link" style="font-size:medium">Cerrar Sesión</a>
+                    <a href="~/Login/Indexv1" class="nav-link" style="font-size:medium">Cerrar Sesión</a>
                 </li>
             </ul>
 
@@ -92,17 +92,17 @@
                                     <ul class="nav nav-treeview">
 
                                         <li class="nav-item">
-                                            @*<a href="/Perfiles/Index" class="nav-link">
-                                                <i class="fas fa-user-edit nav-icon"></i>
-                                                <p>Perfiles</p>
-                                            </a>*@
-                                            <a href='@Url.Action("Index","Perfiles")' class="nav-link">
+                                            <a href="~/Perfiles/Index" class="nav-link">
                                                 <i class="fas fa-user-edit nav-icon"></i>
                                                 <p>Perfiles</p>
                                             </a>
+                                            @*<a href='@Url.Action("Index","Perfiles")' class="nav-link">
+                                                <i class="fas fa-user-edit nav-icon"></i>
+                                                <p>Perfiles</p>
+                                            </a>*@
                                         </li>
                                         <li class="nav-item">
-                                            <a href='@Url.Action("Index","Usuarios")' class="nav-link">
+                                            <a href='~/Usuarios/Index' class="nav-link">
                                                 <i class="fas fa-users nav-icon"></i>
                                                 <p>Usuarios</p>
                                             </a>
@@ -122,19 +122,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/Clientes/Index" class="nav-link">
+                                    <a href="~/Clientes/Index" class="nav-link">
                                         <i class="fas fa-street-view nav-icon"></i>
                                         <p>Cliente</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Clientes/OrdenIndex" class="nav-link">
+                                    <a href="~/Clientes/OrdenIndex" class="nav-link">
                                         <i class="fas fa-boxes nav-icon"></i>
                                         <p>Ordenes Nuevas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/Clientes/OrdenFinal" class="nav-link">
+                                    <a href="~/Clientes/OrdenFinal" class="nav-link">
                                         <i class="fas fa-archive nav-icon"></i>
                                         <p>Ordenes Finalizadas</p>
                                     </a>
@@ -151,7 +151,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/CabeceraEquipos/Index" class="nav-link">
+                                    <a href="~/CabeceraEquipos/Index" class="nav-link">
                                         <i class="fas fa-sitemap nav-icon"></i>
                                         <p>Parametro</p>
                                     </a>

@@ -2,18 +2,25 @@
 
     var _id = 0;
     var _prov, _cuid, _cli, _ruc, _direc, _tel1, _tel2, _email, _web, _con1, _cel1, _con2, _cel2;
-    var _row,_fila, _data, _cliente, _checked;
+    var _row, _fila, _data, _cliente, _checked, _estado;
 
     _id = $('#IdCliente').val();
 
+    if ($("#LblEstado").text() == 'Activo') {
+        _estado = true;
+    } else _estado = false;
+
     $("#btnNuevo").click(function () {
-        window.location.href = "/Clientes/Create";
+        window.location.href = "Create";
       
     });
 
     $("#btnRegresar").click(function () {
-        window.location.href = "/Clientes/Index";
+        window.location.href = "Index";
+    });
 
+    $("#btnRegresarEdit").click(function () {
+        window.location.href = "../Index";
     });
 
     $("#btnGuardar").click(function () {
@@ -30,7 +37,7 @@
         _cel1 = $('#txtCel1').val().trim();
         _con2 = $('#txtContac2').val().trim().toUpperCase();
         _cel2 = $('#txtCel2').val().trim();
-
+        
         notification = '';
 
         if (_prov == '') {
@@ -121,7 +128,7 @@
 
         $.ajax({
 
-            url: '/Clientes/Create',
+            url: 'Create',
             type: 'POST',
             dataType: 'JSON',
             data: {
@@ -134,7 +141,7 @@
             success: function (result) {
 
                 if (result.success) {
-                    window.location.href = "/Clientes/Index";
+                    window.location.href = result.redirectToUrl;
 
                 }           
              
@@ -164,7 +171,7 @@
         alertify.confirm('desea eliminar el cliente ' + _cliente + '?', 'cliente sera eliminado..!', function () {
             alertify.success('cliente eliminado')
             $.ajax({
-                url: "/Clientes/Delete",
+                url: "Delete",
                 type: "POST",
                 dataType: "json",
                 data: { id: _id },
@@ -203,7 +210,8 @@
         _fila = $(this).closest("tr");
         _data = $('#tabla').dataTable().fnGetData(_fila);
         _id = _data[0];
-        window.location.href = "/Clientes/Edit/" + _id;
+        //window.location.href = "/Clientes/Edit/" + _id;
+        window.location.href = "Edit/" + _id;
 
     });
 
@@ -313,7 +321,7 @@
 
         $.ajax({
 
-            url: '/Clientes/Edit',
+            url: '../Edit',
             type: 'POST',
             dataType: 'JSON',
             data: {
@@ -326,7 +334,7 @@
             success: function (result) {
 
                 if (result.success) {
-                    window.location.href = "/Clientes/Index";
+                    window.location.href = result.redirectToUrl;
 
                 }
 
@@ -347,7 +355,7 @@
         _fila = $(this).closest("tr");
         _data = $('#tabla').dataTable().fnGetData(_fila);
         _id = _data[0];
-        window.location.href = "/Clientes/EquipoCliente/" + _id;
+        window.location.href = "EquipoCliente/" + _id;
 
     });
 
@@ -356,7 +364,7 @@
         _fila = $(this).closest("tr");
         _data = $('#tabla').dataTable().fnGetData(_fila);
         _id = _data[0];
-        $("#modal-content").load("/Clientes/MostrarOrdenesFin/" + _id);
+        $("#modal-content").load("../MostrarOrdenesFin/" + _id);
         $(".modal-title").text("Trabajos Realizados");
         $("#header").css("background-color", "#DEFAF9");
         $("#header").css("color", "gray");

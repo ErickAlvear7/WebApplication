@@ -2,7 +2,7 @@
     var _equipo, _grupo, _marca, _modelo, _result = [], _continuar = true, _output, _count = 0, _grupoid, _marcaid, _modeloid, _estado = 'Activo',
         _objeto, _serie, _voltaje, _amperaje, _presion, _tipoSave = 'add', _checked, _estadoold, _equipoold, _seguir = false, _objIndex,
         _clieid, _equipoid, _disabled, _rowid;
-    var notification;
+    
 
     _clieid = $('#clienteid').val();
 
@@ -65,7 +65,7 @@
     });
 
     $('#btnRegresar').click(function () {
-        window.location.href = '/Clientes/Index';
+        window.location.href = '../Index';
     });
 
 
@@ -86,23 +86,23 @@
         _presion = $('#txtPresion').val();
 
         if (_equipo.length == 0) {
-            notification = alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
+            alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
             
         }
 
         if (_grupoid == '') {
-            notification = alertify.notify('seleccione grupo..!', 'warning', 5, function () { console.log('dismissed'); });
+            alertify.notify('seleccione grupo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_marcaid == '') {
-            notification = alertify.notify('seleccione marca..!', 'warning', 5, function () { console.log('dismissed'); });
+            alertify.notify('seleccione marca..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         if (_modeloid == '') {
-            notification = alertify.notify('seleccione modelo..!', 'warning', 5, function () { console.log('dismissed'); });
+            alertify.notify('seleccione modelo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
@@ -111,7 +111,7 @@
 
             $.each(_result, function (i, item) {
                 if (item.ArryEquipo.toUpperCase() == _equipo.toUpperCase()) {
-                    var notification = alertify.notify('equipo existe..!', 'warning', 5, function () { console.log('dismissed'); });
+                    alertify.notify('equipo existe..!', 'warning', 5, function () { console.log('dismissed'); });
                     _continuar = false;
                     return false;
                 }
@@ -167,7 +167,7 @@
             if (_equipoold.toUpperCase() != _equipo.toUpperCase()) {
                 $.each(_result, function (i, _item) {
                     if (_item.ArryEquipo.toUpperCase() == _equipo.toUpperCase()) {
-                        var notification = alertify.notify('equipo existe..!', 'warning', 5, function () { console.log('dismissed'); });
+                        alertify.notify('equipo existe..!', 'warning', 5, function () { console.log('dismissed'); });
                         _seguir = false;
                         return false;
                     } else {
@@ -322,12 +322,12 @@
 
     $('#btnGuardar').click(function () {
         if (_result.length == 0) {
-            notification = alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
+            alertify.notify('ingrese equipo..!', 'warning', 5, function () { console.log('dismissed'); });
             return;
         }
 
         $.ajax({
-            url: "/Clientes/GuardarEquipoCliente",
+            url: "../GuardarEquipoCliente",
             type: "POST",
             dataType: "json",
             data: { clienteId: _clieid, equipos: _result },
