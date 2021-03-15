@@ -181,7 +181,7 @@ namespace WebApplication.Controllers
         public ActionResult OrdenesTrabajo()
         {
 
-            List<Catalogo> _cliente = new ClienteDTO().FunGetClientes();
+            List<Catalogo> _cliente = new ClienteDTO().FunLLenarDropClientes();
             ViewBag.Cliente = new SelectList(_cliente, "ClienteId", "Cliente", 0);
             List<SelectListItem> _equipos = new List<SelectListItem>() {
                 new SelectListItem() { Value="0", Text="--Seleccione Equipo--" },

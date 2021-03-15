@@ -120,7 +120,7 @@ $(document).ready(function () {
         //$("#myModal").modal("show");
 
         var modal = $("#myModalEdit #modal-content"); //Find the element
-        $(modal).load(modal.data('url') +"/"+ _loginAnt); //Fetch url and load partial view
+        $(modal).load(modal.data('url') + "/" + _loginAnt); //Fetch url and load partial view
         $(".modal-title").text("Edit Usuario");
         $("#header").css("background-color", "#DEFAF9");
         $("#header").css("color", "gray");

@@ -52,6 +52,31 @@ namespace WebApplication.Controllers.ConexionDTO
                 throw ex;
             }
         }
+
+        public List<Catalogo> FunLLenarDropClientes()
+        {
+            try
+            {
+                var __cliente = from cliente in _db.Clientes
+                                where cliente.estado_cliente
+                                orderby cliente.cuidad_cliente
+                                select new Catalogo
+                                {
+                                    ClienteId = cliente.id_cliente,
+                                    Cliente = cliente.nombre_cliente
+                                };
+
+
+                return __cliente.ToList();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         #endregion
 
         #region FuncionObtenerClienteEquipo        
@@ -216,7 +241,7 @@ namespace WebApplication.Controllers.ConexionDTO
         {
             var _query = from user in _db.Usuarios
                          join perfil in _db.Perfiles on user.id_perfil equals perfil.id_perfil
-                         where perfil.nombre_perfil == "Tecnico"
+                         where perfil.nombre_perfil == "Tecnico" && user.estado_usuario
                          select new CabeceraDetalle
                          {
                              CodId = user.id_usuario.ToString(),
